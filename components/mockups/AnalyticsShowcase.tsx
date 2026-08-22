@@ -13,7 +13,6 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { Sparkline } from "@/components/ui/Sparkline";
-import { PlayDemoButton } from "@/components/ui/PlayDemoButton";
 import { useInView, useReducedMotion } from "@/lib/hooks";
 import { cn } from "@/lib/cn";
 
@@ -72,7 +71,6 @@ export function AnalyticsShowcase() {
   const { ref, inView } = useInView<HTMLDivElement>(0.3);
   const reducedMotion = useReducedMotion();
   const [visibleRows, setVisibleRows] = useState(1);
-  const [playKey, setPlayKey] = useState(0);
 
   useEffect(() => {
     if (!inView || reducedMotion) return;
@@ -82,7 +80,7 @@ export function AnalyticsShowcase() {
       );
     }, 950);
     return () => window.clearInterval(timer);
-  }, [inView, reducedMotion, playKey]);
+  }, [inView, reducedMotion]);
 
   const shownRows = reducedMotion
     ? feed.length
@@ -90,12 +88,6 @@ export function AnalyticsShowcase() {
 
   return (
     <div ref={ref} className="relative mx-auto max-w-3xl">
-      <PlayDemoButton
-        onClick={() => {
-          setVisibleRows(1);
-          setPlayKey((key) => key + 1);
-        }}
-      />
 
       <div
         role="img"
@@ -194,7 +186,7 @@ export function AnalyticsShowcase() {
         <ul className="mask-fade-bottom mt-4 h-80 space-y-2 overflow-hidden">
           {feed.slice(0, shownRows).map((row, index) => (
             <li
-              key={`${playKey}-${row.event}-${row.topic}`}
+              key={`${row.event}-${row.topic}`}
               className={cn(
                 "animate-view-swap grid grid-cols-[1fr_auto] items-center gap-3 rounded-cards border border-ash bg-white px-4 py-3 text-[13px] shadow-subtle sm:grid-cols-[1.2fr_1.1fr_0.8fr]",
                 index === feed.length - 1 && "opacity-50",

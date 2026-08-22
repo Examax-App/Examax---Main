@@ -25,9 +25,10 @@ const accentBg: Record<Accent, string> = {
 };
 
 /**
- * The three-column feature row under each demo. Exactly one column is at
- * full contrast; the accent bar slides to it. Follows hover, auto-advances
- * while in view, and holds still under prefers-reduced-motion.
+ * The three-column feature row under each demo. Every column renders at full
+ * contrast; the accent bar and colored icon mark the active column, following
+ * hover and auto-advancing gently while in view. Never dims siblings —
+ * emphasis is additive, not subtractive.
  */
 export function FeatureTriad({
   accent,
@@ -57,7 +58,7 @@ export function FeatureTriad({
     return () => observer.disconnect();
   }, []);
 
-  // Auto-advance the focus while the row is on screen and not hovered.
+  // Auto-advance the accent while the row is on screen and not hovered.
   useEffect(() => {
     if (!inView || hovered || reducedMotion) return;
     const timer = window.setInterval(
@@ -113,10 +114,7 @@ export function FeatureTriad({
               setActive(index);
             }}
             onFocus={() => setActive(index)}
-            className={cn(
-              "h-full border-l border-ash pl-5 transition-opacity duration-300",
-              isActive ? "opacity-100" : "opacity-45",
-            )}
+            className="h-full border-l border-ash pl-5"
           >
             <span
               aria-hidden
@@ -135,7 +133,7 @@ export function FeatureTriad({
               href="#cennik"
               className={cn(
                 "link-underline mt-4 inline-flex items-center gap-1 text-body-lg font-medium transition-colors duration-300",
-                isActive ? accentStyles[accent].text : "text-fog",
+                isActive ? accentStyles[accent].text : "text-slate",
               )}
             >
               Dowiedz się więcej

@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { Bot, Check, Paperclip, Send, Sparkles, X } from "lucide-react";
-import { PlayDemoButton } from "@/components/ui/PlayDemoButton";
 import { useInView, useReducedMotion } from "@/lib/hooks";
 import { cn } from "@/lib/cn";
 
@@ -35,7 +34,6 @@ export function AgentShowcase() {
   const { ref, inView } = useInView<HTMLDivElement>(0.3);
   const reducedMotion = useReducedMotion();
   const [step, setStep] = useState(0);
-  const [playKey, setPlayKey] = useState(0);
 
   // 0 typing → 1..3 explanation steps → 4 chips → hold → loop.
   useEffect(() => {
@@ -44,7 +42,7 @@ export function AgentShowcase() {
       setStep((current) => (current >= agentSteps.length + 2 ? 0 : current + 1));
     }, 1500);
     return () => window.clearInterval(timer);
-  }, [inView, reducedMotion, playKey]);
+  }, [inView, reducedMotion]);
 
   const shownSteps = reducedMotion
     ? agentSteps.length
@@ -52,14 +50,9 @@ export function AgentShowcase() {
   const typing = !reducedMotion && step < agentSteps.length;
   const chipsVisible = reducedMotion || step > agentSteps.length;
 
-  const replay = () => {
-    setStep(0);
-    setPlayKey((key) => key + 1);
-  };
 
   return (
     <div ref={ref} className="relative mx-auto max-w-3xl lg:pr-40">
-      <PlayDemoButton onClick={replay} />
 
       <div
         role="img"
@@ -67,7 +60,6 @@ export function AgentShowcase() {
       >
         {/* Browser frame */}
         <div
-          key={`frame-${playKey}`}
           className="animate-view-swap overflow-hidden rounded-largecards border border-ash bg-white shadow-ring"
         >
           <div className="flex items-center gap-3 border-b border-ash px-4 py-2.5">
@@ -103,7 +95,7 @@ export function AgentShowcase() {
 
               {agentSteps.slice(0, shownSteps).map((content, index) => (
                 <div
-                  key={`${playKey}-${index}`}
+                  key={index}
                   className="animate-view-swap flex max-w-[92%] items-start gap-2.5"
                 >
                   <span
@@ -176,7 +168,6 @@ export function AgentShowcase() {
 
         {/* Floating context card — the exercise the agent is explaining */}
         <div
-          key={`panel-${playKey}`}
           className="animate-view-swap mt-6 lg:absolute lg:-right-2 lg:top-1/2 lg:mt-0 lg:w-80 lg:-translate-y-1/2"
           style={{ animationDelay: "120ms" }}
         >

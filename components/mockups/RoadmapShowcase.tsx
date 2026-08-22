@@ -11,7 +11,6 @@ import {
   RefreshCcw,
   Sparkles,
 } from "lucide-react";
-import { PlayDemoButton } from "@/components/ui/PlayDemoButton";
 import { useInView, useReducedMotion } from "@/lib/hooks";
 import { cn } from "@/lib/cn";
 
@@ -61,14 +60,13 @@ const MASTERY_END = 78;
 /**
  * Roadmap showcase — a browser-framed learning path whose active topic's
  * mastery ticks upward live, with a floating "next step" panel cycling
- * through the recommended lesson, quiz, and review. "Play demo" replays.
+ * through the recommended lesson, quiz, and review.
  */
 export function RoadmapShowcase() {
   const { ref, inView } = useInView<HTMLDivElement>(0.3);
   const reducedMotion = useReducedMotion();
   const [mastery, setMastery] = useState(MASTERY_START);
   const [stepIndex, setStepIndex] = useState(0);
-  const [playKey, setPlayKey] = useState(0);
 
   // The active topic's mastery drifts upward while on screen.
   useEffect(() => {
@@ -79,7 +77,7 @@ export function RoadmapShowcase() {
       );
     }, 1200);
     return () => window.clearInterval(timer);
-  }, [inView, reducedMotion, playKey]);
+  }, [inView, reducedMotion]);
 
   // The recommended next step cycles on its own.
   useEffect(() => {
@@ -89,20 +87,14 @@ export function RoadmapShowcase() {
       3400,
     );
     return () => window.clearInterval(timer);
-  }, [inView, reducedMotion, playKey]);
+  }, [inView, reducedMotion]);
 
-  const replay = () => {
-    setMastery(MASTERY_START);
-    setStepIndex(0);
-    setPlayKey((key) => key + 1);
-  };
 
   const activeStep = nextSteps[stepIndex];
   const overall = 38 + Math.round((mastery - MASTERY_START) / 4);
 
   return (
     <div ref={ref} className="relative mx-auto max-w-3xl lg:pr-40">
-      <PlayDemoButton onClick={replay} />
 
       <div
         role="img"
@@ -110,7 +102,6 @@ export function RoadmapShowcase() {
       >
         {/* Browser frame */}
         <div
-          key={`frame-${playKey}`}
           className="animate-view-swap overflow-hidden rounded-largecards border border-ash bg-white shadow-ring"
         >
           <div className="flex items-center gap-3 border-b border-ash px-4 py-2.5">
@@ -217,7 +208,6 @@ export function RoadmapShowcase() {
 
         {/* Floating "next step" panel */}
         <div
-          key={`panel-${playKey}`}
           className="animate-view-swap mt-6 lg:absolute lg:-right-2 lg:top-1/2 lg:mt-0 lg:w-80 lg:-translate-y-1/2"
           style={{ animationDelay: "120ms" }}
         >

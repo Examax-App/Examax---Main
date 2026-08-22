@@ -3,10 +3,16 @@
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/cn";
 
+type RevealState = "static" | "hidden" | "visible";
+
 /**
- * Fades content in with a slight upward drift once it enters the viewport.
- * Purely presentational: content is fully visible without JS or with
- * prefers-reduced-motion (handled in globals.css).
+ * Fades content in with a slight upward drift as it enters the viewport.
+ *
+ * Fail-safe by construction: the server renders children fully visible, and
+ * the pre-reveal (hidden) state is applied on mount ONLY to elements still
+ * below the current viewport. Deep links (#cennik), restored scroll
+ * positions, above-fold content, disabled JS, and prefers-reduced-motion all
+ * see finished, fully-opaque content — never a blank region.
  */
 export function Reveal({
   delay = 0,
@@ -19,15 +25,23 @@ export function Reveal({
   children: React.ReactNode;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
+  const [state, setState] = useState<RevealState>("static");
 
   useEffect(() => {
     const node = ref.current;
     if (!node) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    // Anything at or above the current viewport stays static — hiding it
+    // after paint would flash, and elements above a restored scroll position
+    // would otherwise never intersect and stay invisible forever.
+    if (node.getBoundingClientRect().top < window.innerHeight * 0.95) return;
+
+    setState("hidden");
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setVisible(true);
+          setState("visible");
           observer.disconnect();
         }
       },
@@ -40,7 +54,11 @@ export function Reveal({
   return (
     <div
       ref={ref}
-      className={cn("reveal", visible && "is-visible", className)}
+      className={cn(
+        state !== "static" && "reveal",
+        state === "visible" && "is-visible",
+        className,
+      )}
       style={{ "--reveal-delay": `${delay}ms` } as React.CSSProperties}
     >
       {children}

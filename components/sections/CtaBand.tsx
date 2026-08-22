@@ -28,12 +28,6 @@ export function CtaBand() {
             "radial-gradient(ellipse 60% 80% at 30% 20%, rgba(58,139,253,0.08), transparent 60%), radial-gradient(ellipse 60% 80% at 75% 80%, rgba(92,255,128,0.05), transparent 60%)",
         }}
       />
-      {/* White shelf notch carried down from the section above */}
-      <div
-        aria-hidden
-        className="absolute inset-x-0 top-0 mx-auto h-10 max-w-2xl rounded-b-[32px] bg-white"
-      />
-
       <Container className="relative flex flex-col items-center py-24 text-center sm:py-28">
         <Reveal>
           <h2

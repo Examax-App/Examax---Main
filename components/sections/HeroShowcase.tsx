@@ -139,7 +139,7 @@ export function HeroShowcase() {
           {indicator ? (
             <span
               aria-hidden
-              className="absolute rounded-full border bg-white shadow-subtle transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
+              className="absolute rounded-full border bg-white shadow-subtle transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)]"
               style={{
                 left: indicator.left,
                 top: indicator.top,
@@ -177,20 +177,20 @@ export function HeroShowcase() {
         </div>
       </div>
 
-      {/* Product shot */}
-      <Container className="relative pt-12">
+      {/* Product shot — fully contained in the stage; the contextual card
+          overlaps the mockup, never the section seam below */}
+      <Container className="relative pb-20 pt-12 sm:pb-24">
         <div
           role="tabpanel"
           id="hero-panel"
           aria-labelledby={`hero-tab-${active}`}
-          className="-mb-12 sm:-mb-20"
         >
           <HeroDashboard view={active} />
         </div>
       </Container>
 
       {/* Dark contextual card pinned to the bottom edge of the stage */}
-      <div className="pointer-events-none absolute inset-x-4 bottom-5 z-20 sm:inset-x-auto sm:left-1/2 sm:w-full sm:max-w-2xl sm:-translate-x-1/2">
+      <div className="pointer-events-none absolute inset-x-4 bottom-6 z-20 sm:inset-x-auto sm:left-1/2 sm:w-full sm:max-w-2xl sm:-translate-x-1/2">
         <div
           key={active}
           className="animate-view-swap pointer-events-auto flex items-center gap-4 rounded-largecards bg-midnight-ink/95 p-3.5 pl-5 text-white shadow-md backdrop-blur"

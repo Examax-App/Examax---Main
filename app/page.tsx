@@ -86,6 +86,7 @@ export default function Home() {
             ]}
           />
 
+          {/* TODO: replace with a real, consented beta-user quote */}
           <Testimonial
             quote={
               <>
@@ -94,10 +95,8 @@ export default function Home() {
                 prostu go robię — bez godziny szukania materiałów.
               </>
             }
-            name="Ola Nowicka"
-            role="Maturzystka · profil biologiczno-chemiczny"
-            org="horyzont"
-            avatarClassName="bg-gradient-to-br from-[#dbeaff] to-[#dcfce7]"
+            attribution="Uczennica, klasa maturalna"
+            context="opinia z testów bety"
           />
 
           <FeatureSection
@@ -164,19 +163,17 @@ export default function Home() {
             ]}
           />
 
+          {/* TODO: replace with a real, consented tutor quote */}
           <Testimonial
             quote={
               <>
-                Prowadzę korepetycje z matematyki od dziesięciu lat. Examax to
-                pierwsze narzędzie, które pokazuje uczniom egzamin jako plan, a
-                nie stos zadań — a agent tłumaczy dokładnie tak, jak sam bym to
-                zrobił.
+                Pierwsze narzędzie, które pokazuje uczniom egzamin jako plan, a
+                nie stos zadań. Uczniowie w końcu wiedzą, po co robią kolejne
+                zadanie.
               </>
             }
-            name="Marek Zawadzki"
-            role="Korepetytor matematyki"
-            org="strefa"
-            avatarClassName="bg-gradient-to-br from-[#fde8d8] to-[#ece2fb]"
+            attribution="Korepetytor matematyki"
+            context="opinia z testów bety"
           />
 
           <FeatureSection

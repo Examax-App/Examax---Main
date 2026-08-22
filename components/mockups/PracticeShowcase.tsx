@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { Check, Download, Flag, HelpCircle, Timer } from "lucide-react";
-import { PlayDemoButton } from "@/components/ui/PlayDemoButton";
 import { useInView, useReducedMotion } from "@/lib/hooks";
 import { cn } from "@/lib/cn";
 
@@ -31,14 +30,13 @@ function formatClock(totalSeconds: number) {
 /**
  * Practice showcase — a browser-framed timed question card (the exam clock
  * ticks down live) with a floating quiz-builder panel whose difficulty
- * selection cycles. "Play demo" replays the sequence.
+ * selection cycles.
  */
 export function PracticeShowcase() {
   const { ref, inView } = useInView<HTMLDivElement>(0.3);
   const reducedMotion = useReducedMotion();
   const [seconds, setSeconds] = useState(START_SECONDS);
   const [difficulty, setDifficulty] = useState(2);
-  const [playKey, setPlayKey] = useState(0);
 
   // Live exam clock.
   useEffect(() => {
@@ -47,7 +45,7 @@ export function PracticeShowcase() {
       setSeconds((current) => (current <= 20 * 60 ? START_SECONDS : current - 1));
     }, 1000);
     return () => window.clearInterval(timer);
-  }, [inView, reducedMotion, playKey]);
+  }, [inView, reducedMotion]);
 
   // The builder's difficulty selection drifts on its own.
   useEffect(() => {
@@ -57,17 +55,11 @@ export function PracticeShowcase() {
       3200,
     );
     return () => window.clearInterval(timer);
-  }, [inView, reducedMotion, playKey]);
+  }, [inView, reducedMotion]);
 
-  const replay = () => {
-    setSeconds(START_SECONDS);
-    setDifficulty(2);
-    setPlayKey((key) => key + 1);
-  };
 
   return (
     <div ref={ref} className="relative mx-auto max-w-3xl lg:pr-40">
-      <PlayDemoButton onClick={replay} />
 
       <div
         role="img"
@@ -75,7 +67,6 @@ export function PracticeShowcase() {
       >
         {/* Browser frame */}
         <div
-          key={`frame-${playKey}`}
           className="animate-view-swap overflow-hidden rounded-largecards border border-ash bg-white shadow-ring"
         >
           <div className="flex items-center gap-3 border-b border-ash px-4 py-2.5">
@@ -146,7 +137,6 @@ export function PracticeShowcase() {
 
         {/* Floating builder panel */}
         <div
-          key={`panel-${playKey}`}
           className="animate-view-swap mt-6 lg:absolute lg:-right-2 lg:top-1/2 lg:mt-0 lg:w-80 lg:-translate-y-1/2"
           style={{ animationDelay: "120ms" }}
         >
