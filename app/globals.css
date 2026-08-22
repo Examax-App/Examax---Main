@@ -21,7 +21,7 @@
   --color-tangerine: #ea580c;
   --color-lavender: #7c3aed;
   --color-primary-action-fill: #000000;
-  --color-sidebar-active: #dbeaff;
+  --color-sidebar-active: #ece2fb;
 
   /* Typography */
   --font-satoshi: var(--font-satoshi-local), var(--font-inter-local),
@@ -94,7 +94,7 @@ body {
 }
 
 ::selection {
-  background: var(--color-electric-blue);
+  background: var(--color-lavender);
   color: #ffffff;
 }
 
@@ -125,11 +125,6 @@ body {
   background-size: 15px 15px;
 }
 
-/* Quieter dot texture for the page gutters outside the rails */
-.bg-dots-gutter {
-  background-image: radial-gradient(rgba(23, 23, 23, 0.09) 1px, transparent 1px);
-  background-size: 14px 14px;
-}
 
 /* Fixed header — keep anchored sections clear of it */
 [id] {

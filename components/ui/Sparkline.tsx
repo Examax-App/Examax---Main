@@ -1,8 +1,8 @@
 import { useId } from "react";
 
 /**
- * Small decorative trend line with the purple→pink gradient used on the
- * reference stat cards. Purely presentational.
+ * Small decorative trend line with the brand-accent gradient used on the
+ * stat cards. Purely presentational.
  */
 export function Sparkline({ className }: { className?: string }) {
   const id = useId();
@@ -16,12 +16,12 @@ export function Sparkline({ className }: { className?: string }) {
     >
       <defs>
         <linearGradient id={`${id}-stroke`} x1="0" y1="0" x2="96" y2="0" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stopColor="#7c3aed" />
-          <stop offset="1" stopColor="#ec4899" />
+          <stop offset="0" stopColor="#6d28d9" />
+          <stop offset="1" stopColor="#a78bfa" />
         </linearGradient>
         <linearGradient id={`${id}-fill`} x1="0" y1="0" x2="0" y2="32" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stopColor="#ec4899" stopOpacity="0.25" />
-          <stop offset="1" stopColor="#ec4899" stopOpacity="0" />
+          <stop offset="0" stopColor="#a78bfa" stopOpacity="0.25" />
+          <stop offset="1" stopColor="#a78bfa" stopOpacity="0" />
         </linearGradient>
       </defs>
       <path

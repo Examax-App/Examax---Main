@@ -102,18 +102,8 @@ export function RoadmapShowcase() {
       >
         {/* Browser frame */}
         <div
-          className="animate-view-swap overflow-hidden rounded-largecards border border-ash bg-white shadow-ring"
+          className="animate-view-swap overflow-hidden rounded-largecards border border-ash bg-white [box-shadow:var(--shadow-ring),var(--shadow-lg)]"
         >
-          <div className="flex items-center gap-3 border-b border-ash px-4 py-2.5">
-            <span className="flex gap-1.5" aria-hidden>
-              <span className="size-2.5 rounded-full bg-[#f87171]" />
-              <span className="size-2.5 rounded-full bg-[#fde047]" />
-              <span className="size-2.5 rounded-full bg-[#86efac]" />
-            </span>
-            <span className="mx-auto rounded-inputs bg-paper-mist px-8 py-1 text-[12px] text-fog">
-              examax.app/roadmapa
-            </span>
-          </div>
 
           <div className="p-6 sm:p-8 lg:pr-44">
             <div className="flex flex-wrap items-center justify-between gap-3">

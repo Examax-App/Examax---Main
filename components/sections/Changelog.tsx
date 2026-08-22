@@ -9,14 +9,14 @@ const releases = [
     title: "Agent Examax 2.0",
     description:
       "Wyjaśnienia krok po kroku z odwołaniem do Twoich wcześniejszych błędów.",
-    accent: "bg-electric-blue",
+    accent: "bg-lavender",
   },
   {
     date: "4 sie 2026",
     title: "Arkusze CKE 2026",
     description:
       "Tegoroczne zadania z egzaminu ósmoklasisty i matury już w bazie treningu.",
-    accent: "bg-tangerine",
+    accent: "bg-lavender",
   },
   {
     date: "21 lip 2026",
@@ -29,7 +29,7 @@ const releases = [
     title: "Wskaźnik gotowości",
     description:
       "Jeden wynik, który pokazuje, jak blisko jesteś egzaminacyjnej formy.",
-    accent: "bg-vivid-green",
+    accent: "bg-lavender",
   },
   {
     date: "24 cze 2026",
@@ -41,8 +41,8 @@ const releases = [
 ];
 
 /**
- * "We ship fast" — italic display heading beside a vertical dated release
- * timeline that fades out at the bottom, like the reference changelog block.
+ * Release timeline — display heading beside a vertical dated list that
+ * fades out at the bottom.
  */
 export function Changelog() {
   return (
@@ -50,14 +50,14 @@ export function Changelog() {
       aria-labelledby="changelog-heading"
       className="border-t border-ash bg-[#fafafa]"
     >
-      <Container className="py-16 sm:py-20">
+      <Container className="py-24">
         <div className="grid gap-12 lg:grid-cols-[1fr_1.2fr]">
           <Reveal>
             <h2
               id="changelog-heading"
-              className="font-satoshi text-heading-lg font-medium italic leading-[1.11] text-charcoal sm:text-display sm:leading-none"
+              className="font-satoshi text-heading-lg font-medium leading-[1.11] text-charcoal sm:text-display sm:leading-none"
             >
-              Działamy szybko
+              Co nowego w Examax
             </h2>
             <p className="mt-5 max-w-sm text-body-xl text-fog">
               Nowe arkusze, mądrzejsza roadmapa i lepszy agent — co kilka

@@ -1,15 +1,7 @@
-import {
-  Bot,
-  LineChart,
-  PencilLine,
-  Route,
-  ScanFace,
-  Table2,
-} from "lucide-react";
+import { LineChart, ScanFace, Table2 } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { Avatar } from "@/components/ui/Avatar";
-import { AccentTile } from "@/components/ui/FeaturePill";
 import { Sparkline } from "@/components/ui/Sparkline";
 
 function StudentCard() {
@@ -19,9 +11,9 @@ function StudentCard() {
         <p className="text-[12px] font-medium text-fog">Marzec 2027</p>
         <dl className="mt-3 space-y-1.5 text-[13px]">
           {[
-            { dot: "bg-electric-blue", label: "Zadania", value: "3 214" },
-            { dot: "bg-lavender", label: "Poprawne", value: "2 705" },
-            { dot: "bg-vivid-green", label: "Opanowane", value: "38 tematów" },
+            { dot: "bg-lavender", label: "Zadania", value: "3 214" },
+            { dot: "bg-[#a78bfa]", label: "Poprawne", value: "2 705" },
+            { dot: "bg-[#c4b5fd]", label: "Opanowane", value: "38 tematów" },
           ].map((row) => (
             <div key={row.label} className="flex items-center gap-2">
               <span className={`size-2 rounded-[3px] ${row.dot}`} aria-hidden />
@@ -91,7 +83,7 @@ export function Editorial() {
       className="relative overflow-hidden bg-white"
     >
       <div className="bg-dots mask-fade-edges absolute inset-0" aria-hidden />
-      <Container className="relative py-16 sm:py-20">
+      <Container className="relative py-24">
         {/* Floating outline icon tiles */}
         <div aria-hidden className="pointer-events-none absolute inset-0 hidden lg:block">
           <span className="absolute left-16 top-20 grid size-12 -rotate-6 place-items-center rounded-cards border border-ash bg-white text-steel shadow-subtle">
@@ -121,34 +113,11 @@ export function Editorial() {
               </p>
               <p>
                 Examax łączy{" "}
-                <span className="whitespace-nowrap">
-                  roadmapę{" "}
-                  <AccentTile
-                    icon={Route}
-                    accent="lavender"
-                    className="inline-grid translate-y-[-2px] align-middle"
-                  />
-                  ,
-                </span>{" "}
-                zadania{" "}
-                <span className="whitespace-nowrap">
-                  CKE{" "}
-                  <AccentTile
-                    icon={PencilLine}
-                    accent="tangerine"
-                    className="inline-grid translate-y-[-2px] align-middle"
-                  />
-                </span>{" "}
-                i agenta{" "}
-                <span className="whitespace-nowrap">
-                  AI{" "}
-                  <AccentTile
-                    icon={Bot}
-                    accent="blue"
-                    className="inline-grid translate-y-[-2px] align-middle"
-                  />
-                </span>{" "}
-                — w jeden system przygotowań.
+                <span className="font-medium text-lavender">roadmapę</span>,{" "}
+                <span className="font-medium text-lavender">zadania CKE</span>{" "}
+                i{" "}
+                <span className="font-medium text-lavender">agenta AI</span> —
+                w jeden system przygotowań.
               </p>
               <p>
                 Od zrozumienia egzaminu do pełnej gotowości. Krok po kroku,

@@ -29,7 +29,7 @@ export function Hero() {
 
           <h1
             id="hero-heading"
-            className="mt-8 max-w-3xl font-satoshi text-[40px] font-medium leading-none text-charcoal sm:text-display"
+            className="mt-8 max-w-3xl font-satoshi text-[38px] font-medium leading-[1.02] tracking-[-0.01em] text-charcoal sm:text-[56px]"
           >
             Zamień naukę w wyniki
           </h1>

@@ -65,7 +65,7 @@ export function Faq() {
       aria-labelledby="faq-heading"
       className="border-t border-ash bg-white"
     >
-      <Container className="py-16 sm:py-20">
+      <Container className="py-24">
         <div className="mx-auto max-w-3xl">
           <Reveal>
             <h2

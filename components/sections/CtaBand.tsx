@@ -25,10 +25,10 @@ export function CtaBand() {
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 60% 80% at 30% 20%, rgba(58,139,253,0.08), transparent 60%), radial-gradient(ellipse 60% 80% at 75% 80%, rgba(92,255,128,0.05), transparent 60%)",
+            "radial-gradient(ellipse 55% 70% at 50% 30%, rgba(124,58,237,0.16), transparent 65%), radial-gradient(ellipse 60% 80% at 75% 85%, rgba(124,58,237,0.06), transparent 60%)",
         }}
       />
-      <Container className="relative flex flex-col items-center py-24 text-center sm:py-28">
+      <Container className="relative flex flex-col items-center py-24 text-center">
         <Reveal>
           <h2
             id="cta-heading"

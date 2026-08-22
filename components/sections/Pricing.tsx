@@ -75,7 +75,7 @@ export function Pricing() {
       aria-labelledby="pricing-heading"
       className="border-t border-ash bg-white"
     >
-      <Container className="py-16 sm:py-20">
+      <Container className="py-24">
         <Reveal>
           <h2
             id="pricing-heading"
@@ -121,7 +121,7 @@ export function Pricing() {
                 )}
               >
                 Rocznie
-                <span className="rounded-full bg-sidebar-active px-2 py-0.5 text-[11px] font-medium text-deep-sapphire">
+                <span className="rounded-full bg-sidebar-active px-2 py-0.5 text-[11px] font-medium text-lavender">
                   2 miesiące gratis
                 </span>
               </button>

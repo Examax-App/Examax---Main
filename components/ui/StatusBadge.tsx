@@ -3,13 +3,13 @@ import { cn } from "@/lib/cn";
 const styles = {
   completed: "bg-soft-mint text-[#166534]",
   pending: "bg-[#fef3c7] text-[#92400e]",
-  active: "bg-sidebar-active text-deep-sapphire",
+  active: "bg-sidebar-active text-lavender",
 } as const;
 
 const dots = {
   completed: "bg-vivid-green",
   pending: "bg-[#d97706]",
-  active: "bg-electric-blue",
+  active: "bg-lavender",
 } as const;
 
 /** Row-level state pill — tinted wash, colored dot, 9999px radius. */

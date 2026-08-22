@@ -23,7 +23,7 @@ type WallCell = {
 const cells: WallCell[] = [
   {
     icon: Backpack,
-    iconClass: "bg-[#fde8d8] text-tangerine",
+    iconClass: "bg-sidebar-active text-lavender",
     title: "Ósmoklasista",
     description:
       "Trzy przedmioty, jedna roadmapa. Matematyka, polski i angielski rozpisane od września do maja — bez paniki w kwietniu.",
@@ -31,31 +31,31 @@ const cells: WallCell[] = [
   },
   {
     icon: GraduationCap,
-    iconClass: "bg-sidebar-active text-deep-sapphire",
+    iconClass: "bg-sidebar-active text-lavender",
     title: "Matura podstawowa",
     description: "Pewny wynik z przedmiotów obowiązkowych, temat po temacie.",
   },
   {
     icon: TrendingUp,
-    iconClass: "bg-[#ece2fb] text-lavender",
+    iconClass: "bg-sidebar-active text-lavender",
     title: "Matura rozszerzona",
     description: "Trening na poziomie, którego wymaga rekrutacja na studia.",
   },
   {
     icon: RefreshCcw,
-    iconClass: "bg-soft-mint text-vivid-green",
+    iconClass: "bg-sidebar-active text-lavender",
     title: "Poprawiasz wynik",
     description: "Zaczynasz od diagnozy, nie od zera — system wskaże braki.",
   },
   {
     icon: Bot,
-    iconClass: "bg-paper-mist text-charcoal",
+    iconClass: "bg-sidebar-active text-lavender",
     title: "Uczysz się bez korepetycji",
     description: "Agent tłumaczy i pilnuje planu — jak dobry korepetytor.",
   },
   {
     icon: Users,
-    iconClass: "bg-[#fef3c7] text-[#92400e]",
+    iconClass: "bg-sidebar-active text-lavender",
     title: "Rodzice i korepetytorzy",
     description:
       "Realny obraz postępów zamiast „będzie dobrze”. Widać, co zrobione, co opanowane i nad czym trzeba jeszcze usiąść.",
@@ -74,7 +74,7 @@ export function AudienceWall() {
       aria-labelledby="audience-heading"
       className="border-t border-ash bg-white"
     >
-      <Container className="py-16 sm:py-20">
+      <Container className="py-24">
         <Reveal>
           <div className="flex flex-wrap items-end justify-between gap-6">
             <h2

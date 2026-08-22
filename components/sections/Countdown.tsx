@@ -124,9 +124,9 @@ function CalendarCard({
                 key={day}
                 className={cn(
                   "relative grid aspect-square place-items-center rounded-buttons text-[12px] tabular-nums",
-                  kind === "matura" &&
-                    "bg-sidebar-active font-semibold text-deep-sapphire",
-                  kind === "e8" && "bg-soft-mint font-semibold text-[#166534]",
+                  kind === "matura" && "bg-lavender font-semibold text-white",
+                  kind === "e8" &&
+                    "bg-sidebar-active font-semibold text-lavender",
                   kind === "holiday" && "text-silver",
                   kind === "plain" && (weekend ? "text-silver" : "text-steel"),
                 )}
@@ -145,11 +145,11 @@ function CalendarCard({
 
         <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1.5 border-t border-ash pt-3.5 text-[11px] text-steel">
           <span className="inline-flex items-center gap-1.5">
-            <span className="size-2 rounded-[3px] bg-sidebar-active ring-1 ring-inset ring-deep-sapphire/30" aria-hidden />
+            <span className="size-2 rounded-[3px] bg-lavender" aria-hidden />
             Matura — start sesji
           </span>
           <span className="inline-flex items-center gap-1.5">
-            <span className="size-2 rounded-[3px] bg-soft-mint ring-1 ring-inset ring-vivid-green/40" aria-hidden />
+            <span className="size-2 rounded-[3px] bg-sidebar-active ring-1 ring-inset ring-lavender/40" aria-hidden />
             Egzamin ósmoklasisty
           </span>
         </div>
@@ -158,7 +158,7 @@ function CalendarCard({
       {/* Floating countdown chips */}
       <div className="animate-float absolute -left-4 -top-4 sm:-left-10">
         <span className="inline-flex items-center gap-2 rounded-full border border-ash bg-white px-3.5 py-2 text-[12px] font-medium text-charcoal shadow-md">
-          <span className="size-2 rounded-full bg-electric-blue" aria-hidden />
+          <span className="size-2 rounded-full bg-lavender" aria-hidden />
           Matura ·{" "}
           <span className="font-geist-mono tabular-nums">
             {maturaDays === null ? "—" : `za ${maturaDays} dni`}
@@ -167,7 +167,7 @@ function CalendarCard({
       </div>
       <div className="animate-float-delayed absolute -bottom-4 -right-3 sm:-right-8">
         <span className="inline-flex items-center gap-2 rounded-full border border-ash bg-white px-3.5 py-2 text-[12px] font-medium text-charcoal shadow-md">
-          <span className="size-2 rounded-full bg-vivid-green" aria-hidden />
+          <span className="size-2 rounded-full bg-[#a78bfa]" aria-hidden />
           E8 ·{" "}
           <span className="font-geist-mono tabular-nums">
             {e8Days === null ? "—" : `za ${e8Days} dni`}
@@ -193,7 +193,7 @@ export function Countdown() {
       aria-labelledby="terminy-heading"
       className="relative overflow-hidden border-t border-ash bg-paper-mist"
     >
-      <Container className="relative py-16 sm:py-20">
+      <Container className="relative py-24">
         <div className="grid items-center gap-14 lg:grid-cols-[1.1fr_1fr]">
           <Reveal>
             <h2
@@ -212,7 +212,7 @@ export function Countdown() {
                 <dt className="text-[12px] font-medium uppercase tracking-[0.14em] text-steel">
                   Dni do matury
                 </dt>
-                <dd className="mt-2 font-geist-mono text-heading font-medium leading-none text-tangerine sm:text-heading-lg">
+                <dd className="mt-2 font-geist-mono text-heading font-medium leading-none text-lavender sm:text-heading-lg">
                   {maturaDays === null ? "—" : <AnimatedDays value={maturaDays} />}
                 </dd>
               </div>
@@ -220,7 +220,7 @@ export function Countdown() {
                 <dt className="text-[12px] font-medium uppercase tracking-[0.14em] text-steel">
                   Dni do egzaminu ósmoklasisty
                 </dt>
-                <dd className="mt-2 font-geist-mono text-heading font-medium leading-none text-tangerine sm:text-heading-lg">
+                <dd className="mt-2 font-geist-mono text-heading font-medium leading-none text-lavender sm:text-heading-lg">
                   {e8Days === null ? "—" : <AnimatedDays value={e8Days} />}
                 </dd>
               </div>

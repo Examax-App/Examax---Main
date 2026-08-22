@@ -14,9 +14,9 @@ import { AccentTile } from "@/components/ui/FeaturePill";
 
 const productLinks = [
   { label: "Roadmapa nauki", href: "#roadmapa", icon: Route, accent: "lavender" as const },
-  { label: "Trening zadań", href: "#trening", icon: PencilLine, accent: "tangerine" as const },
-  { label: "Agent Examax", href: "#agent", icon: Bot, accent: "blue" as const },
-  { label: "Śledzenie postępów", href: "#postepy", icon: BarChart3, accent: "green" as const },
+  { label: "Trening zadań", href: "#trening", icon: PencilLine, accent: "lavender" as const },
+  { label: "Agent Examax", href: "#agent", icon: Bot, accent: "lavender" as const },
+  { label: "Śledzenie postępów", href: "#postepy", icon: BarChart3, accent: "lavender" as const },
 ];
 
 const columns = [
@@ -202,7 +202,7 @@ export function Footer() {
         <div className="mt-16 flex flex-col items-center justify-between gap-6 border-t border-ash pt-8 sm:flex-row">
           <span className="inline-flex items-center gap-2 rounded-full border border-ash px-3.5 py-2 text-body text-charcoal">
             <span className="size-2 rounded-full bg-vivid-green" aria-hidden />
-            Wszystkie systemy działają
+            Serwis działa bez zakłóceń
           </span>
           <p className="text-body text-fog">© 2026 Examax</p>
         </div>

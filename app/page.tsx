@@ -13,7 +13,9 @@ import {
   PencilLine,
   Route,
   ScanSearch,
+  Sparkles,
   Target,
+  Timer,
 } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -25,15 +27,91 @@ import { Testimonial } from "@/components/sections/Testimonial";
 import { Simulation } from "@/components/sections/Simulation";
 import { Countdown } from "@/components/sections/Countdown";
 import { AudienceWall } from "@/components/sections/AudienceWall";
-import { AllInOne } from "@/components/sections/AllInOne";
 import { Changelog } from "@/components/sections/Changelog";
 import { Pricing } from "@/components/sections/Pricing";
 import { Faq } from "@/components/sections/Faq";
 import { CtaBand } from "@/components/sections/CtaBand";
+import { Sparkline } from "@/components/ui/Sparkline";
 import { RoadmapShowcase } from "@/components/mockups/RoadmapShowcase";
 import { PracticeShowcase } from "@/components/mockups/PracticeShowcase";
 import { AgentShowcase } from "@/components/mockups/AgentShowcase";
 import { AnalyticsShowcase } from "@/components/mockups/AnalyticsShowcase";
+
+/* Right-hand header payloads — compact mini-visuals so no section header
+   leaves a dead column. Content is illustrative product-mock data. */
+
+function RoadmapAside() {
+  return (
+    <div className="w-64 -rotate-2 rounded-cards border border-ash bg-white p-4 shadow-md">
+      <p className="text-[11px] font-medium uppercase tracking-[0.1em] text-fog">
+        Twój następny temat
+      </p>
+      <p className="mt-2 text-body-lg font-semibold text-charcoal">Procenty</p>
+      <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-paper-mist">
+        <div className="h-full w-[68%] rounded-full bg-lavender" />
+      </div>
+      <p className="mt-2 text-[12px] text-fog">
+        68% opanowania · potem: Równania
+      </p>
+    </div>
+  );
+}
+
+function TreningAside() {
+  return (
+    <div className="w-64 rotate-2 rounded-cards border border-ash bg-white p-4 shadow-md">
+      <div className="flex items-center justify-between">
+        <p className="text-[11px] font-medium uppercase tracking-[0.1em] text-fog">
+          Zadanie 14 z 19
+        </p>
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-ash px-2 py-1 text-[11px] font-medium text-charcoal">
+          <Timer className="size-3 text-lavender" aria-hidden />
+          <span className="font-geist-mono tabular-nums">24:36</span>
+        </span>
+      </div>
+      <p className="mt-2.5 text-body font-medium text-charcoal">
+        Cena biletu wzrosła o 20%…
+      </p>
+      <p className="mt-1.5 text-[12px] text-fog">Arkusz CKE 2024 · Matematyka</p>
+    </div>
+  );
+}
+
+function AgentAside() {
+  return (
+    <div className="w-64 -rotate-2 rounded-cards border border-ash bg-white p-4 shadow-md">
+      <p className="ml-auto w-fit max-w-full rounded-cards rounded-br-[4px] bg-midnight-ink px-3 py-1.5 text-[12px] text-white">
+        Dlaczego 36, a nie 24?
+      </p>
+      <p className="mt-2 flex w-fit items-center gap-1.5 rounded-cards rounded-tl-[4px] border border-ash px-3 py-1.5 text-[12px] text-slate">
+        <Sparkles className="size-3 text-lavender" aria-hidden />
+        Wyjaśnienie w 3 krokach…
+      </p>
+      <p className="mt-2.5 text-[12px] text-fog">
+        Agent zna Twoje wcześniejsze błędy
+      </p>
+    </div>
+  );
+}
+
+function PostepyAside() {
+  return (
+    <div className="w-64 rotate-2 rounded-cards border border-ash bg-white p-4 shadow-md">
+      <div className="flex items-center justify-between gap-3">
+        <div>
+          <p className="text-[11px] font-medium uppercase tracking-[0.1em] text-fog">
+            Gotowość do egzaminu
+          </p>
+          <p className="mt-1 font-geist-mono text-heading-sm font-medium leading-none text-charcoal">
+            76%
+          </p>
+        </div>
+        <Sparkline className="h-10 w-20" />
+      </div>
+      <p className="mt-2.5 text-[12px] text-fog">+9 p.p. w ostatnim miesiącu</p>
+    </div>
+  );
+}
 
 export default function Home() {
   return (
@@ -44,12 +122,9 @@ export default function Home() {
       >
         Przejdź do treści
       </a>
-      {/* Dotted texture in the gutters outside the vertical rails */}
-      <div aria-hidden className="bg-dots-gutter fixed inset-0 -z-10" />
       <Navbar />
       <main id="main" className="flex-1 pt-[72px]">
-        {/* Ruled content column: 1px rails running from hero to footer */}
-        <div className="relative mx-auto w-full max-w-[1200px] bg-white md:border-x md:border-ash">
+        <div className="relative mx-auto w-full max-w-[1200px] bg-white">
           <Hero />
           <LogoCloud />
           <Editorial />
@@ -64,6 +139,7 @@ export default function Home() {
             ctaLabel="Zobacz roadmapę"
             showcase={<RoadmapShowcase />}
             highlightIndex={0}
+            aside={<RoadmapAside />}
             subFeatures={[
               {
                 icon: Map,
@@ -101,7 +177,7 @@ export default function Home() {
 
           <FeatureSection
             id="trening"
-            accent="tangerine"
+            accent="lavender"
             eyebrowIcon={PencilLine}
             eyebrowLabel="Inteligentny trening"
             heading="Ćwicz na zadaniach z arkuszy CKE"
@@ -109,6 +185,7 @@ export default function Home() {
             ctaLabel="Wypróbuj trening"
             showcase={<PracticeShowcase />}
             highlightIndex={1}
+            aside={<TreningAside />}
             subFeatures={[
               {
                 icon: ScanSearch,
@@ -133,7 +210,7 @@ export default function Home() {
 
           <FeatureSection
             id="agent"
-            accent="blue"
+            accent="lavender"
             eyebrowIcon={Bot}
             eyebrowLabel="Agent Examax"
             heading="Zrozum błędy i ucz się szybciej"
@@ -141,6 +218,7 @@ export default function Home() {
             ctaLabel="Poznaj Agenta"
             showcase={<AgentShowcase />}
             highlightIndex={0}
+            aside={<AgentAside />}
             subFeatures={[
               {
                 icon: MessagesSquare,
@@ -178,7 +256,7 @@ export default function Home() {
 
           <FeatureSection
             id="postepy"
-            accent="green"
+            accent="lavender"
             eyebrowIcon={LineChart}
             eyebrowLabel="Śledzenie postępów"
             heading="Wiedz, na czym stoisz"
@@ -186,6 +264,7 @@ export default function Home() {
             ctaLabel="Zobacz analitykę"
             showcase={<AnalyticsShowcase />}
             highlightIndex={1}
+            aside={<PostepyAside />}
             subFeatures={[
               {
                 icon: LineChart,
@@ -211,7 +290,6 @@ export default function Home() {
           <Simulation />
           <Countdown />
           <AudienceWall />
-          <AllInOne />
           <Changelog />
           <Pricing />
           <Faq />

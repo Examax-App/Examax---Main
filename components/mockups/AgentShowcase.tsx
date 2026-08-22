@@ -60,28 +60,18 @@ export function AgentShowcase() {
       >
         {/* Browser frame */}
         <div
-          className="animate-view-swap overflow-hidden rounded-largecards border border-ash bg-white shadow-ring"
+          className="animate-view-swap overflow-hidden rounded-largecards border border-ash bg-white [box-shadow:var(--shadow-ring),var(--shadow-lg)]"
         >
-          <div className="flex items-center gap-3 border-b border-ash px-4 py-2.5">
-            <span className="flex gap-1.5" aria-hidden>
-              <span className="size-2.5 rounded-full bg-[#f87171]" />
-              <span className="size-2.5 rounded-full bg-[#fde047]" />
-              <span className="size-2.5 rounded-full bg-[#86efac]" />
-            </span>
-            <span className="mx-auto rounded-inputs bg-paper-mist px-8 py-1 text-[12px] text-fog">
-              examax.app/agent
-            </span>
-          </div>
 
           <div className="p-6 sm:p-8 lg:pr-44">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <p className="flex items-center gap-2.5 text-body font-semibold text-charcoal">
-                <span className="grid size-7 place-items-center rounded-full bg-electric-blue text-white">
+                <span className="grid size-7 place-items-center rounded-full bg-lavender text-white">
                   <Bot className="size-4" aria-hidden />
                 </span>
                 Agent Examax
               </p>
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-sidebar-active px-3 py-1.5 text-[12px] font-medium leading-none text-deep-sapphire">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-sidebar-active px-3 py-1.5 text-[12px] font-medium leading-none text-lavender">
                 <Sparkles className="size-3.5" aria-hidden />
                 Widzi Twoje odpowiedzi
               </span>
@@ -100,7 +90,7 @@ export function AgentShowcase() {
                 >
                   <span
                     className={cn(
-                      "grid size-6 shrink-0 place-items-center rounded-full bg-electric-blue text-white",
+                      "grid size-6 shrink-0 place-items-center rounded-full bg-lavender text-white",
                       index > 0 && "invisible",
                     )}
                     aria-hidden
@@ -117,7 +107,7 @@ export function AgentShowcase() {
                 <div className="flex max-w-[92%] items-start gap-2.5">
                   <span
                     className={cn(
-                      "grid size-6 shrink-0 place-items-center rounded-full bg-electric-blue text-white",
+                      "grid size-6 shrink-0 place-items-center rounded-full bg-lavender text-white",
                       shownSteps > 0 && "invisible",
                     )}
                     aria-hidden

@@ -12,9 +12,9 @@ export type SubFeature = {
 };
 
 /**
- * The reference's product-feature block: a tight left-aligned intro, a
- * showcase panel on the paper surface, then the interactive three-column
- * feature row (see FeatureTriad).
+ * The reference's product-feature block: a tight left-aligned intro with a
+ * right-hand payload card (no dead columns), a showcase panel on the paper
+ * surface, then the interactive three-column feature row (see FeatureTriad).
  */
 export function FeatureSection({
   id,
@@ -27,6 +27,7 @@ export function FeatureSection({
   showcase,
   subFeatures,
   highlightIndex,
+  aside,
 }: {
   id: string;
   accent: Accent;
@@ -38,6 +39,8 @@ export function FeatureSection({
   showcase: React.ReactNode;
   subFeatures: [SubFeature, SubFeature, SubFeature];
   highlightIndex: 0 | 1 | 2;
+  /** Right-hand header payload — a compact metric/mini-visual card. */
+  aside?: React.ReactNode;
 }) {
   return (
     <section
@@ -45,27 +48,34 @@ export function FeatureSection({
       aria-labelledby={`${id}-heading`}
       className="border-t border-ash bg-white"
     >
-      <Container className="pb-10 pt-14 sm:pt-16">
-        <Reveal>
-          <p className="flex items-center gap-2 text-body font-semibold text-charcoal">
-            <AccentTile icon={eyebrowIcon} accent={accent} />
-            {eyebrowLabel}
-          </p>
-          <h2
-            id={`${id}-heading`}
-            className="mt-5 max-w-2xl font-satoshi text-heading-lg font-medium leading-[1.11] text-charcoal sm:text-display sm:leading-none"
-          >
-            {heading}
-          </h2>
-          <p className="mt-5 max-w-xl text-body-xl text-fog">{sub}</p>
-          <Button href="#pricing" variant="outline" className="mt-7">
-            {ctaLabel}
-          </Button>
-        </Reveal>
+      <Container className="pb-12 pt-24">
+        <div className="grid items-center gap-10 lg:grid-cols-[1fr_auto]">
+          <Reveal>
+            <p className="flex items-center gap-2 text-body font-semibold text-charcoal">
+              <AccentTile icon={eyebrowIcon} accent={accent} />
+              {eyebrowLabel}
+            </p>
+            <h2
+              id={`${id}-heading`}
+              className="mt-5 max-w-2xl font-satoshi text-heading-lg font-medium leading-[1.11] text-charcoal sm:text-display sm:leading-none"
+            >
+              {heading}
+            </h2>
+            <p className="mt-5 max-w-xl text-body-xl text-fog">{sub}</p>
+            <Button href="#cennik" variant="outline" className="mt-7">
+              {ctaLabel}
+            </Button>
+          </Reveal>
+          {aside ? (
+            <Reveal delay={120} className="hidden lg:block">
+              {aside}
+            </Reveal>
+          ) : null}
+        </div>
       </Container>
 
       <div className="border-t border-ash bg-[#fafafa]">
-        <Container className="py-10 sm:py-14">
+        <Container className="py-16">
           <Reveal>{showcase}</Reveal>
           <FeatureTriad
             accent={accent}

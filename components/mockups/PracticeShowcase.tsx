@@ -67,18 +67,8 @@ export function PracticeShowcase() {
       >
         {/* Browser frame */}
         <div
-          className="animate-view-swap overflow-hidden rounded-largecards border border-ash bg-white shadow-ring"
+          className="animate-view-swap overflow-hidden rounded-largecards border border-ash bg-white [box-shadow:var(--shadow-ring),var(--shadow-lg)]"
         >
-          <div className="flex items-center gap-3 border-b border-ash px-4 py-2.5">
-            <span className="flex gap-1.5" aria-hidden>
-              <span className="size-2.5 rounded-full bg-[#f87171]" />
-              <span className="size-2.5 rounded-full bg-[#fde047]" />
-              <span className="size-2.5 rounded-full bg-[#86efac]" />
-            </span>
-            <span className="mx-auto rounded-inputs bg-paper-mist px-8 py-1 text-[12px] text-fog">
-              examax.app/trening
-            </span>
-          </div>
 
           <div className="p-6 sm:p-8 lg:pr-44">
             <div className="flex flex-wrap items-center justify-between gap-3">
@@ -86,7 +76,7 @@ export function PracticeShowcase() {
                 Matematyka · E8
               </p>
               <span className="inline-flex items-center gap-1.5 rounded-full border border-ash px-3 py-1.5 text-[12px] font-medium text-charcoal">
-                <Timer className="size-3.5 text-tangerine" aria-hidden />
+                <Timer className="size-3.5 text-lavender" aria-hidden />
                 <span className="font-geist-mono tabular-nums">
                   {formatClock(seconds)}
                 </span>{" "}
@@ -161,7 +151,7 @@ export function PracticeShowcase() {
             <div className="mt-4 flex items-center justify-between">
               <p className="text-[12px] font-medium text-fog">Tryb na czas</p>
               <span
-                className="relative inline-flex h-5 w-9 items-center rounded-full bg-electric-blue"
+                className="relative inline-flex h-5 w-9 items-center rounded-full bg-lavender"
                 aria-hidden
               >
                 <span className="absolute right-0.5 size-4 rounded-full bg-white shadow-subtle" />

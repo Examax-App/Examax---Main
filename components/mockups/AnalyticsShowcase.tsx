@@ -70,13 +70,13 @@ const funnelChips = [
 export function AnalyticsShowcase() {
   const { ref, inView } = useInView<HTMLDivElement>(0.3);
   const reducedMotion = useReducedMotion();
-  const [visibleRows, setVisibleRows] = useState(1);
+  const [visibleRows, setVisibleRows] = useState(3);
 
   useEffect(() => {
     if (!inView || reducedMotion) return;
     const timer = window.setInterval(() => {
       setVisibleRows((current) =>
-        current >= feed.length + 2 ? 1 : current + 1,
+        current >= feed.length + 2 ? 3 : current + 1,
       );
     }, 950);
     return () => window.clearInterval(timer);
@@ -116,16 +116,16 @@ export function AnalyticsShowcase() {
             <svg viewBox="0 0 640 170" className="w-full" aria-hidden>
               <defs>
                 <linearGradient id="funnel-1" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0" stopColor="#2563eb" />
-                  <stop offset="1" stopColor="#4f46e5" />
+                  <stop offset="0" stopColor="#6d28d9" />
+                  <stop offset="1" stopColor="#7c3aed" />
                 </linearGradient>
                 <linearGradient id="funnel-2" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0" stopColor="#7c3aed" />
-                  <stop offset="1" stopColor="#9333ea" />
+                  <stop offset="0" stopColor="#8b5cf6" />
+                  <stop offset="1" stopColor="#a78bfa" />
                 </linearGradient>
                 <linearGradient id="funnel-3" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0" stopColor="#16a34a" />
-                  <stop offset="1" stopColor="#14b8a6" />
+                  <stop offset="0" stopColor="#c4b5fd" />
+                  <stop offset="1" stopColor="#ddd6fe" />
                 </linearGradient>
                 <linearGradient id="funnel-sheen-fill" x1="0" y1="0" x2="1" y2="0">
                   <stop offset="0" stopColor="#fff" stopOpacity="0" />
@@ -183,7 +183,7 @@ export function AnalyticsShowcase() {
         </div>
 
         {/* Streaming event feed */}
-        <ul className="mask-fade-bottom mt-4 h-80 space-y-2 overflow-hidden">
+        <ul className="mask-fade-bottom mt-4 h-56 space-y-2 overflow-hidden">
           {feed.slice(0, shownRows).map((row, index) => (
             <li
               key={`${row.event}-${row.topic}`}
