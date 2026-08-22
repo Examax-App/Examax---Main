@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Examax
+
+The Examax marketing site — a Next.js 16 (App Router) app styled with Tailwind CSS v4.
 
 ## Getting Started
 
-First, run the development server:
+This project uses **pnpm**. Install it once with `brew install pnpm` (or `corepack enable pnpm`), then:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to see the site. The page auto-updates as you edit.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command          | What it does                              |
+| ---------------- | ----------------------------------------- |
+| `pnpm dev`       | Start the dev server (Turbopack)          |
+| `pnpm build`     | Production build                          |
+| `pnpm start`     | Serve the production build                |
+| `pnpm lint`      | ESLint                                    |
+| `pnpm typecheck` | `tsc --noEmit`                            |
 
-## Learn More
+## Project structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+app/          Routes — root layout, landing page, global styles, icon
+components/
+  layout/     Navbar, Footer
+  sections/   Landing-page sections (Hero, Pricing, Faq, …)
+  mockups/    Product UI mockups rendered inside feature sections
+  ui/         Primitives (Button, Container, Logo, Reveal, …)
+lib/          cn() class helper and shared React hooks
+fonts/        Self-hosted Satoshi woff2 files (loaded via next/font/local)
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+`@/*` is aliased to the repo root, so imports look like `@/components/ui/Button`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Design system
 
-## Deploy on Vercel
+Design tokens (colors, type scale, radii, shadows) live in the `@theme` block of
+`app/globals.css` and are consumed as Tailwind utilities — e.g. `text-charcoal`,
+`rounded-cards`, `shadow-subtle`, `text-heading-lg`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Typography: **Satoshi** (display, local) with **Inter** and **Geist Mono** from
+`next/font/google`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deploy
+
+Deploy on [Vercel](https://vercel.com/new). See the
+[Next.js deployment docs](https://nextjs.org/docs/app/getting-started/deploying) for details.
