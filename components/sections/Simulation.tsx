@@ -17,8 +17,8 @@ const pillars = [
 export function Simulation() {
   return (
     <section
-      id="symulacja"
-      aria-labelledby="symulacja-heading"
+      id="simulation"
+      aria-labelledby="simulation-heading"
       className="col-rules border-t border-ash bg-white"
     >
       <Container className="py-20">
@@ -30,7 +30,7 @@ export function Simulation() {
                 <span className="text-lavender">Wkrótce · Examax Premium</span>
               </p>
               <h2
-                id="symulacja-heading"
+                id="simulation-heading"
                 className={cn("mt-5 max-w-lg text-charcoal", SECTION_H2)}
               >
                 Symulacja egzaminu — przećwicz, zanim będzie się liczył

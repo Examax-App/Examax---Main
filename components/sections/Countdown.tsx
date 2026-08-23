@@ -128,15 +128,15 @@ export function Countdown() {
 
   return (
     <section
-      id="terminy"
-      aria-labelledby="terminy-heading"
+      id="exam-dates"
+      aria-labelledby="exam-dates-heading"
       className="col-rules relative overflow-hidden border-t border-ash bg-paper-mist"
     >
       <Container className="relative py-20">
         <div className="grid items-center gap-14 lg:grid-cols-[1.1fr_1fr]">
           <Reveal>
             <h2
-              id="terminy-heading"
+              id="exam-dates-heading"
               className={cn("max-w-md text-charcoal", SECTION_H2)}
             >
               Do egzaminu liczy się każdy dzień
@@ -150,7 +150,7 @@ export function Countdown() {
               Terminy orientacyjne — oficjalny harmonogram ogłasza CKE.
             </p>
 
-            <Button href="#cennik" variant="primary" className="mt-6">
+            <Button href="#pricing" variant="primary" className="mt-6">
               Zacznij dziś
             </Button>
           </Reveal>

@@ -64,7 +64,7 @@ export function FeatureSection({
             <p className="mt-3 max-w-xl text-pretty text-body-xl text-fog">
               {sub}
             </p>
-            <Button href="#cennik" variant="outline" size="lg" className="mt-8">
+            <Button href="#pricing" variant="outline" size="lg" className="mt-8">
               {ctaLabel}
             </Button>
           </Reveal>

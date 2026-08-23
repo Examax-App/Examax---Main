@@ -22,7 +22,7 @@ export function AppShell({
         <main className="relative flex h-full flex-col overflow-y-auto rounded-largecards border border-ash bg-white shadow-subtle">
           {/* Compact bar for viewports without the sidebar */}
           <div className="flex items-center justify-between border-b border-ash px-4 py-3 lg:hidden">
-            <Link href="/app" aria-label="Panel Examax">
+            <Link href="/dashboard" aria-label="Panel Examax">
               <Logo />
             </Link>
             <Link

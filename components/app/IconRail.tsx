@@ -18,18 +18,18 @@ export function IconRail() {
         <BrandMark className="size-4 text-white" />
       </Link>
 
-      <RailIcon href="/app" label="Nauka" active>
+      <RailIcon href="/dashboard" label="Nauka" active>
         <Compass className="size-4.5" strokeWidth={1.8} />
       </RailIcon>
-      <RailIcon href="/app" label="Agent">
+      <RailIcon href="/dashboard" label="Agent">
         <Bot className="size-4.5" strokeWidth={1.8} />
       </RailIcon>
 
       <div className="mt-auto flex flex-col items-center gap-3">
-        <RailIcon href="/#cennik" label="Poleć Examax">
+        <RailIcon href="/#pricing" label="Poleć Examax">
           <Gift className="size-4.5" strokeWidth={1.8} />
         </RailIcon>
-        <RailIcon href="/pomoc" label="Pomoc">
+        <RailIcon href="/help" label="Pomoc">
           <CircleHelp className="size-4.5" strokeWidth={1.8} />
         </RailIcon>
       </div>

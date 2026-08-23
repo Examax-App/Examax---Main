@@ -84,7 +84,7 @@ export function AudienceWall() {
             >
               Dla każdego, kto ma egzamin przed sobą
             </h2>
-            <Button href="#cennik" variant="outline">
+            <Button href="#pricing" variant="outline">
               Zacznij za darmo
             </Button>
           </div>

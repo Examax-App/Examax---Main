@@ -27,7 +27,7 @@ const tabs: HeroTab[] = [
     accent: "tangerine",
     title: "Roadmapa nauki",
     description: "Cały egzamin rozpisany na kroki — zawsze wiesz, co dalej",
-    href: "#roadmapa",
+    href: "#roadmap",
   },
   {
     key: "practice",
@@ -36,7 +36,7 @@ const tabs: HeroTab[] = [
     accent: "green",
     title: "Trening zadań",
     description: "Zadania z arkuszy CKE z natychmiastowym sprawdzaniem",
-    href: "#trening",
+    href: "#practice",
   },
   {
     key: "agent",
@@ -54,7 +54,7 @@ const tabs: HeroTab[] = [
     accent: "blue",
     title: "Śledzenie postępów",
     description: "Opanowanie tematów i gotowość do egzaminu na bieżąco",
-    href: "#postepy",
+    href: "#progress",
   },
 ];
 

@@ -20,19 +20,19 @@ const figures = [
 export function Stats() {
   return (
     <section
-      aria-labelledby="skala-heading"
+      aria-labelledby="scale-heading"
       className="col-rules border-t border-ash bg-canvas-muted"
     >
       <Container className="grid gap-12 py-20 lg:grid-cols-2 lg:gap-16">
         <Reveal>
-          <h2 id="skala-heading" className={cn("max-w-sm text-charcoal", SECTION_H2)}>
+          <h2 id="scale-heading" className={cn("max-w-sm text-charcoal", SECTION_H2)}>
             Zbudowane na prawdziwym materiale
           </h2>
           <p className="mt-3 max-w-sm text-body-lg text-fog">
             Każde zadanie w Examax pochodzi z arkuszy i wymagań CKE — nie z
             generatora. Baza rośnie z każdą sesją egzaminacyjną.
           </p>
-          <Button href="#cennik" variant="outline" className="mt-8">
+          <Button href="#pricing" variant="outline" className="mt-8">
             Zacznij za darmo
           </Button>
         </Reveal>

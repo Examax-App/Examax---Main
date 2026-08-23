@@ -25,7 +25,7 @@ export default function StartPage() {
         </h1>
         <p className="mt-2 text-center text-body-lg text-steel">
           Miejsce, w którym planujesz naukę i śledzisz postępy do egzaminu.{" "}
-          <Link href="/#metoda" className="underline">
+          <Link href="/#method" className="underline">
             Dowiedz się więcej.
           </Link>
         </p>
@@ -74,7 +74,7 @@ export default function StartPage() {
           </div>
 
           <Link
-            href="/app"
+            href="/dashboard"
             className="mt-8 flex h-11 w-full items-center justify-center rounded-buttons bg-primary-action-fill text-body font-medium text-white shadow-subtle transition-colors hover:bg-graphite"
           >
             Utwórz profil

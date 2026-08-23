@@ -43,24 +43,24 @@ export const mainNav: NavGroup[] = [
   {
     heading: "",
     items: [
-      { label: "Zadania", href: "/app", icon: PencilLine },
-      { label: "Przedmioty", href: "/app/przedmioty", icon: BookOpen },
+      { label: "Zadania", href: "/dashboard", icon: PencilLine },
+      { label: "Przedmioty", href: "/dashboard/subjects", icon: BookOpen },
     ],
   },
   {
     heading: "Wgląd",
     items: [
-      { label: "Analityka", href: "/app/analityka", icon: BarChart3 },
-      { label: "Aktywność", href: "/app/aktywnosc", icon: MousePointerClick },
-      { label: "Wyniki", href: "/app/wyniki", icon: Users },
+      { label: "Analityka", href: "/dashboard/analytics", icon: BarChart3 },
+      { label: "Aktywność", href: "/dashboard/activity", icon: MousePointerClick },
+      { label: "Wyniki", href: "/dashboard/results", icon: Users },
     ],
   },
   {
     heading: "Biblioteka",
     items: [
-      { label: "Foldery", href: "/app/foldery", icon: FolderOpen },
-      { label: "Etykiety", href: "/app/etykiety", icon: Tag },
-      { label: "Szablony", href: "/app/szablony", icon: Layers },
+      { label: "Foldery", href: "/dashboard/folders", icon: FolderOpen },
+      { label: "Etykiety", href: "/dashboard/labels", icon: Tag },
+      { label: "Szablony", href: "/dashboard/templates", icon: Layers },
     ],
   },
 ];
@@ -69,26 +69,26 @@ export const settingsNav: NavGroup[] = [
   {
     heading: "Profil",
     items: [
-      { label: "Ogólne", href: "/app/ustawienia", icon: Settings2 },
-      { label: "Subskrypcja", href: "/app/ustawienia/subskrypcja", icon: CreditCard },
-      { label: "Opiekunowie", href: "/app/ustawienia/opiekunowie", icon: Users },
-      { label: "Integracje", href: "/app/ustawienia/integracje", icon: Blocks },
-      { label: "Bezpieczeństwo", href: "/app/ustawienia/bezpieczenstwo", icon: Shield },
+      { label: "Ogólne", href: "/dashboard/settings", icon: Settings2 },
+      { label: "Subskrypcja", href: "/dashboard/settings/subscription", icon: CreditCard },
+      { label: "Opiekunowie", href: "/dashboard/settings/guardians", icon: Users },
+      { label: "Integracje", href: "/dashboard/settings/integrations", icon: Blocks },
+      { label: "Bezpieczeństwo", href: "/dashboard/settings/security", icon: Shield },
     ],
   },
   {
     heading: "Deweloper",
     items: [
-      { label: "Klucze API", href: "/app/ustawienia/klucze-api", icon: KeyRound },
-      { label: "Logi", href: "/app/ustawienia/logi", icon: FileClock },
-      { label: "Webhooki", href: "/app/ustawienia/webhooks", icon: Webhook },
+      { label: "Klucze API", href: "/dashboard/settings/api-keys", icon: KeyRound },
+      { label: "Logi", href: "/dashboard/settings/logs", icon: FileClock },
+      { label: "Webhooki", href: "/dashboard/settings/webhooks", icon: Webhook },
     ],
   },
   {
     heading: "Konto",
     items: [
-      { label: "Twoje konto", href: "/app/konto", icon: UserRound },
-      { label: "Powiadomienia", href: "/app/ustawienia/powiadomienia", icon: Bell },
+      { label: "Twoje konto", href: "/dashboard/account", icon: UserRound },
+      { label: "Powiadomienia", href: "/dashboard/settings/notifications", icon: Bell },
     ],
   },
 ];

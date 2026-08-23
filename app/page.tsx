@@ -57,7 +57,7 @@ export default function Home() {
         <Editorial />
 
         <FeatureSection
-          id="roadmapa"
+          id="roadmap"
           accent="tangerine"
           eyebrowIcon={Route}
           eyebrowLabel="Roadmapa nauki"
@@ -88,10 +88,10 @@ export default function Home() {
           ]}
         />
 
-        <Testimonial {...PLACEHOLDER_QUOTES.roadmapa} />
+        <Testimonial {...PLACEHOLDER_QUOTES.roadmap} />
 
         <FeatureSection
-          id="trening"
+          id="practice"
           accent="green"
           eyebrowIcon={PencilLine}
           eyebrowLabel="Inteligentny trening"
@@ -122,7 +122,7 @@ export default function Home() {
           ]}
         />
 
-        <Testimonial {...PLACEHOLDER_QUOTES.trening} />
+        <Testimonial {...PLACEHOLDER_QUOTES.practice} />
 
         <FeatureSection
           id="agent"
@@ -159,7 +159,7 @@ export default function Home() {
         <Testimonial {...PLACEHOLDER_QUOTES.agent} />
 
         <FeatureSection
-          id="postepy"
+          id="progress"
           accent="blue"
           eyebrowIcon={LineChart}
           eyebrowLabel="Śledzenie postępów"
@@ -190,7 +190,7 @@ export default function Home() {
           ]}
         />
 
-        <Testimonial {...PLACEHOLDER_QUOTES.postepy} />
+        <Testimonial {...PLACEHOLDER_QUOTES.progress} />
 
         <Integrations />
         <Simulation />

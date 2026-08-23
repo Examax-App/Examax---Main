@@ -84,7 +84,7 @@ export function AuthShell({ children }: { children: React.ReactNode }) {
             Zobacz, jak uczniowie zamieniają plan w wyniki z Examax
           </h2>
           <Link
-            href="/#metoda"
+            href="/#method"
             className="mt-3 inline-flex items-center gap-1 rounded-buttons border border-ash bg-white px-4 py-2 text-body font-medium text-charcoal transition-colors hover:bg-paper-mist"
           >
             Czytaj więcej

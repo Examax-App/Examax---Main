@@ -19,15 +19,15 @@ export type Quote = {
  * Swap the strings for real quotes before launch; the layout needs no changes.
  * ------------------------------------------------------------------------- */
 export const PLACEHOLDER_QUOTES: Record<string, Quote> = {
-  roadmapa: {
+  roadmap: {
     quote:
       "Pierwszy raz widziałam cały materiał w jednym miejscu i wiedziałam, od czego zacząć. Wcześniej otwierałam zbiór zadań i zamykałam go po dziesięciu minutach.",
     name: "Zofia Lewandowska",
     role: "Maturzystka · LO nr 4, Wrocław",
     mark: "LO IV",
-    story: "#metoda",
+    story: "#method",
   },
-  trening: {
+  practice: {
     quote:
       "Zadania są dokładnie takie jak na arkuszu, więc na egzaminie próbnym nic mnie nie zaskoczyło. Po prostu robiłem to, co codziennie.",
     name: "Kacper Nowicki",
@@ -42,7 +42,7 @@ export const PLACEHOLDER_QUOTES: Record<string, Quote> = {
     mark: "Korepetycje ZM",
     story: "#agent",
   },
-  postepy: {
+  progress: {
     quote:
       "Zamiast pytać córkę, czy się uczyła, po prostu patrzę na wskaźnik gotowości. Skończyły się kłótnie przy kolacji.",
     name: "Paweł Adamczyk",

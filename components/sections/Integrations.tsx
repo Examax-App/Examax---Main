@@ -29,14 +29,14 @@ const rows: Array<{ offset: boolean; cells: Array<keyof typeof marks | null> }> 
 export function Integrations() {
   return (
     <section
-      id="przedmioty"
-      aria-labelledby="przedmioty-heading"
+      id="subjects"
+      aria-labelledby="subjects-heading"
       className="col-rules relative overflow-hidden border-t border-ash bg-[#fafafa]"
     >
       <Container className="relative grid items-center gap-12 py-24 lg:grid-cols-2">
         <Reveal>
           <h2
-            id="przedmioty-heading"
+            id="subjects-heading"
             className={cn("max-w-sm text-charcoal", SECTION_H2)}
           >
             Wszystkie przedmioty w jednym miejscu
@@ -45,7 +45,7 @@ export function Integrations() {
             Matematyka, polski i angielski są gotowe — z roadmapą, arkuszami i
             agentem. Kolejne przedmioty dokładamy przed każdą sesją.
           </p>
-          <Button href="#cennik" variant="outline" size="lg" className="mt-8">
+          <Button href="#pricing" variant="outline" size="lg" className="mt-8">
             Zobacz przedmioty
           </Button>
         </Reveal>

@@ -32,7 +32,7 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { cn } from "@/lib/cn";
 
-type MenuKey = "produkt" | "egzaminy";
+type MenuKey = "product" | "exams";
 
 type MenuItem = {
   icon: LucideIcon;
@@ -44,7 +44,7 @@ type MenuItem = {
 type MenuColumn = { heading: string; items: MenuItem[] };
 
 const menus: Record<MenuKey, { label: string; columns: MenuColumn[] }> = {
-  produkt: {
+  product: {
     label: "Produkt",
     columns: [
       {
@@ -54,13 +54,13 @@ const menus: Record<MenuKey, { label: string; columns: MenuColumn[] }> = {
             icon: Route,
             title: "Roadmapa nauki",
             description: "Cały egzamin rozpisany na kroki",
-            href: "#roadmapa",
+            href: "#roadmap",
           },
           {
             icon: PencilLine,
             title: "Trening zadań",
             description: "Zadania z arkuszy CKE i quizy",
-            href: "#trening",
+            href: "#practice",
           },
           {
             icon: Bot,
@@ -77,25 +77,25 @@ const menus: Record<MenuKey, { label: string; columns: MenuColumn[] }> = {
             icon: BarChart3,
             title: "Śledzenie postępów",
             description: "Opanowanie i skuteczność na żywo",
-            href: "#postepy",
+            href: "#progress",
           },
           {
             icon: Gauge,
             title: "Wskaźnik gotowości",
             description: "Wiesz, ile brakuje do celu",
-            href: "#postepy",
+            href: "#progress",
           },
           {
             icon: Timer,
             title: "Symulacje egzaminu",
             description: "Wkrótce w Examax Premium",
-            href: "#symulacja",
+            href: "#simulation",
           },
         ],
       },
     ],
   },
-  egzaminy: {
+  exams: {
     label: "Egzaminy",
     columns: [
       {
@@ -105,19 +105,19 @@ const menus: Record<MenuKey, { label: string; columns: MenuColumn[] }> = {
             icon: Sigma,
             title: "Matematyka",
             description: "Zadania, roadmapa i powtórki",
-            href: "#trening",
+            href: "#practice",
           },
           {
             icon: BookMarked,
             title: "Język polski",
             description: "Lektury i arkusze egzaminacyjne",
-            href: "#trening",
+            href: "#practice",
           },
           {
             icon: Languages,
             title: "Język angielski",
             description: "Słówka i środki językowe",
-            href: "#trening",
+            href: "#practice",
           },
         ],
       },
@@ -128,19 +128,19 @@ const menus: Record<MenuKey, { label: string; columns: MenuColumn[] }> = {
             icon: GraduationCap,
             title: "Poziom podstawowy",
             description: "Wymagania podstawy krok po kroku",
-            href: "#roadmapa",
+            href: "#roadmap",
           },
           {
             icon: TrendingUp,
             title: "Poziom rozszerzony",
             description: "Trening pod rekrutację na studia",
-            href: "#roadmapa",
+            href: "#roadmap",
           },
           {
             icon: CalendarDays,
             title: "Terminy 2027",
             description: "Ile zostało do egzaminu",
-            href: "#terminy",
+            href: "#exam-dates",
           },
         ],
       },
@@ -151,7 +151,7 @@ const menus: Record<MenuKey, { label: string; columns: MenuColumn[] }> = {
 const menuKeys = Object.keys(menus) as MenuKey[];
 
 const plainLinks = [
-  { label: "Cennik", href: "#cennik" },
+  { label: "Cennik", href: "#pricing" },
   { label: "FAQ", href: "#faq" },
 ];
 
@@ -362,10 +362,10 @@ export function Navbar() {
         </nav>
 
         <div className="hidden items-center gap-2 lg:flex">
-          <Button href="/logowanie" variant="outline" size="nav">
+          <Button href="/login" variant="outline" size="nav">
             Zaloguj się
           </Button>
-          <Button href="/rejestracja" variant="primary" size="nav">
+          <Button href="/signup" variant="primary" size="nav">
             Załóż konto
           </Button>
         </div>
@@ -420,10 +420,10 @@ export function Navbar() {
             </Link>
           ))}
           <div className="mt-3 flex gap-2 border-t border-ash pt-4">
-            <Button href="/logowanie" variant="outline" className="flex-1">
+            <Button href="/login" variant="outline" className="flex-1">
               Zaloguj się
             </Button>
-            <Button href="/rejestracja" variant="primary" className="flex-1">
+            <Button href="/signup" variant="primary" className="flex-1">
               Załóż konto
             </Button>
           </div>

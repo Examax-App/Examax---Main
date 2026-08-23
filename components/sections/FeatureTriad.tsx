@@ -118,7 +118,7 @@ export function FeatureTriad({
               {item.description}
             </p>
             <a
-              href="#cennik"
+              href="#pricing"
               className={cn(
                 "focus-ring group/link mt-3.5 inline-flex items-center gap-1 rounded-[4px] text-body font-medium transition-colors duration-300",
                 isActive ? "text-charcoal" : "text-smoke",

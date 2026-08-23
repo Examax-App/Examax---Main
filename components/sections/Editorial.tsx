@@ -78,7 +78,7 @@ function FunnelCard() {
 export function Editorial() {
   return (
     <section
-      id="metoda"
+      id="method"
       aria-label="Dlaczego Examax"
       className="col-rules relative overflow-hidden border-t border-ash bg-white"
     >

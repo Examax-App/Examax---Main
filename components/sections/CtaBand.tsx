@@ -75,10 +75,10 @@ export function CtaBand() {
         </Reveal>
         <Reveal delay={200}>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-            <Button href="#cennik" variant="inverted" size="lg">
+            <Button href="#pricing" variant="inverted" size="lg">
               Zacznij za darmo
             </Button>
-            <Button href="#cennik" variant="translucent" size="lg">
+            <Button href="#pricing" variant="translucent" size="lg">
               Zobacz cennik
             </Button>
           </div>

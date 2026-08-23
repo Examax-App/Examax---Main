@@ -21,7 +21,7 @@ const releases = [
 export function Changelog() {
   return (
     <section
-      id="co-nowego"
+      id="changelog"
       aria-labelledby="changelog-heading"
       className="col-rules border-t border-ash bg-white"
     >

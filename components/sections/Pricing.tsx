@@ -72,7 +72,7 @@ export function Pricing() {
 
   return (
     <section
-      id="cennik"
+      id="pricing"
       aria-labelledby="pricing-heading"
       className="col-rules border-t border-ash bg-white"
     >

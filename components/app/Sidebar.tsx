@@ -123,7 +123,7 @@ export function Sidebar({
           </ul>
           <p className="mt-2 px-1 text-[12px] text-fog">{USAGE_RESET_NOTE}</p>
           <Link
-            href="/#cennik"
+            href="/#pricing"
             className="mt-3 block rounded-buttons bg-primary-action-fill py-2 text-center text-body font-medium text-white shadow-subtle transition-colors hover:bg-graphite"
           >
             Ulepsz plan

@@ -54,10 +54,10 @@ export function Hero() {
               style={{ "--delay": "300ms", "--offset": "20px" } as React.CSSProperties}
               className="animate-slide-up-fade mt-8 flex flex-wrap items-center justify-center gap-3"
             >
-              <Button href="#cennik" variant="primary">
+              <Button href="#pricing" variant="primary">
                 Zacznij za darmo
               </Button>
-              <Button href="#roadmapa" variant="outline">
+              <Button href="#roadmap" variant="outline">
                 Zobacz, jak działa
               </Button>
             </div>

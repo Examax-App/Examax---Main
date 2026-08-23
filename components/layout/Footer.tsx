@@ -13,17 +13,17 @@ import { Logo } from "@/components/ui/Logo";
 import { AccentTile } from "@/components/ui/FeaturePill";
 
 const productLinks = [
-  { label: "Roadmapa nauki", href: "#roadmapa", icon: Route, accent: "tangerine" as const },
-  { label: "Trening zadań", href: "#trening", icon: PencilLine, accent: "green" as const },
+  { label: "Roadmapa nauki", href: "#roadmap", icon: Route, accent: "tangerine" as const },
+  { label: "Trening zadań", href: "#practice", icon: PencilLine, accent: "green" as const },
   { label: "Agent Examax", href: "#agent", icon: Bot, accent: "lavender" as const },
-  { label: "Śledzenie postępów", href: "#postepy", icon: BarChart3, accent: "blue" as const },
+  { label: "Śledzenie postępów", href: "#progress", icon: BarChart3, accent: "blue" as const },
 ];
 
 const footerHrefs: Record<string, string> = {
-  Kontakt: "/kontakt",
-  "Centrum pomocy": "/pomoc",
-  "Co nowego": "/#co-nowego",
-  Cennik: "/#cennik",
+  Kontakt: "/contact",
+  "Centrum pomocy": "/help",
+  "Co nowego": "/#changelog",
+  Cennik: "/#pricing",
   FAQ: "/#faq",
 };
 
@@ -167,7 +167,7 @@ export function Footer() {
                 ))}
                 <li>
                   <Link
-                    href="#symulacja"
+                    href="#simulation"
                     className="inline-flex items-center gap-2 text-body text-fog transition-colors hover:text-charcoal"
                   >
                     <span
