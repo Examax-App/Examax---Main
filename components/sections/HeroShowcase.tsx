@@ -118,22 +118,27 @@ export function HeroShowcase() {
 
   return (
     <div className="col-rules relative overflow-hidden bg-paper-mist">
-      {/* White notch — the hero plane extends down as a rounded tab that hugs
-          the tab row. The transition is two arcs, as in the reference: an
-          88x42 concave fillet that leaves the band edge horizontally and
-          arrives vertically, handing off to the tab's own 30px bottom corner,
-          which flattens back out along the tab's base. Both joins are
-          tangent, so the whole run reads as one long shallow S — 118px of
-          horizontal travel over the notch's 72px depth. */}
+      {/* White notch. Measured off the reference: the boundary drops 82px over
+          a 100px run as a SYMMETRIC S — steepest dead-centre, easing out at
+          both ends. That means the two halves must match, so the concave
+          fillet (50x41) and the tab's own bottom corner are the same ellipse,
+          the corner just mirrored. An asymmetric pair reads as a slope hitting
+          a bump, which is exactly what it looked like before. */}
       <div className="relative z-[2] flex justify-center">
-        <div className="relative rounded-b-[30px] bg-white px-10 pb-3 pt-[22px]">
+        <div
+          className="relative bg-white px-10 pb-5 pt-6"
+          style={{
+            borderBottomLeftRadius: "50px 41px",
+            borderBottomRightRadius: "50px 41px",
+          }}
+        >
           <span
             aria-hidden
-            className="absolute right-full top-0 h-[42px] w-[88px] bg-[radial-gradient(88px_42px_at_0_100%,transparent_99.2%,#fff_99.6%)]"
+            className="absolute right-full top-0 h-[41px] w-[50px] bg-[radial-gradient(50px_41px_at_0_100%,transparent_99.2%,#fff_99.6%)]"
           />
           <span
             aria-hidden
-            className="absolute left-full top-0 h-[42px] w-[88px] bg-[radial-gradient(88px_42px_at_100%_100%,transparent_99.2%,#fff_99.6%)]"
+            className="absolute left-full top-0 h-[41px] w-[50px] bg-[radial-gradient(50px_41px_at_100%_100%,transparent_99.2%,#fff_99.6%)]"
           />
           <div
             ref={listRef}

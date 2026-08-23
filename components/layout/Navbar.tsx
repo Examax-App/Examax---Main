@@ -164,7 +164,7 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const scrolled = useSyncExternalStore(
     subscribeScroll,
-    () => window.scrollY > 8,
+    () => window.scrollY > 120,
     () => false,
   );
   const [openMenu, setOpenMenu] = useState<MenuKey | null>(null);
@@ -220,16 +220,16 @@ export function Navbar() {
       className="sticky inset-x-0 top-0 z-30 w-full transition-all"
       onMouseLeave={scheduleClose}
     >
-      {/* The surface is a separate absolutely-positioned layer. At rest it is
-          solid white — flush with the hero behind it, so no band of the page
-          surface shows through. On scroll it thins to a glassy tint and picks
-          up the hairline. */}
+      {/* The surface is a separate absolutely-positioned layer. It stays solid
+          white — flush with the hero behind it — through the first 120px of
+          scroll, then frosts to a translucent pane with the hairline, so the
+          glass only appears once there is content passing under it. */}
       <div
         aria-hidden
         className={cn(
           "absolute inset-0 block border-b transition-all duration-300",
           scrolled
-            ? "border-ash bg-white/70 backdrop-blur-md"
+            ? "border-ash bg-white/65 backdrop-blur-xl"
             : "border-transparent bg-white",
         )}
       />
