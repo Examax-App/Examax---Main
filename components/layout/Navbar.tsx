@@ -217,23 +217,29 @@ export function Navbar() {
   return (
     <header
       ref={navRef}
-      className={cn(
-        "fixed inset-x-0 top-0 z-40 border-b transition-[background-color,border-color,box-shadow] duration-300",
-        scrolled
-          ? "border-ash/80 bg-white/85 shadow-subtle backdrop-blur-md"
-          : "border-transparent bg-white",
-      )}
+      className="sticky inset-x-0 top-0 z-30 w-full transition-all"
       onMouseLeave={scheduleClose}
     >
-      {/* Full-width bar: the reference sets its logo against the viewport
-          edge, not the 1080px content column. */}
-      <div className="mx-auto flex h-[72px] w-full max-w-[1600px] items-center justify-between px-5 sm:px-8">
+      {/* The surface is a separate absolutely-positioned layer that fades in
+          on scroll — at scroll-top the bar is fully transparent, exactly as
+          in the reference. */}
+      <div
+        aria-hidden
+        className={cn(
+          "absolute inset-0 block border-b transition-all duration-200",
+          scrolled ? "border-ash bg-white" : "border-transparent bg-transparent",
+        )}
+      />
+      {/* Inner container is max-w-screen-lg (1024px), narrower than the
+          1080px content column. */}
+      <div className="relative mx-auto w-full max-w-screen-lg px-3 lg:px-4 xl:px-0">
+        <div className="flex h-14 items-center justify-between">
         <Link
           href="/"
           aria-label="Examax — strona główna"
           className="focus-ring rounded-buttons"
         >
-          <Logo />
+          <Logo mark={false} />
         </Link>
 
         <nav aria-label="Główna nawigacja" className="relative hidden lg:block">
@@ -250,10 +256,10 @@ export function Navbar() {
                     setOpenMenu((current) => (current === key ? null : key))
                   }
                   className={cn(
-                    "focus-ring inline-flex h-8 items-center gap-1 rounded-buttons px-3 text-[13px] transition-colors duration-150",
+                    "focus-ring inline-flex h-8 items-center gap-1 rounded-buttons px-3 text-body font-medium transition-colors duration-150",
                     openMenu === key
                       ? "bg-paper-mist text-charcoal"
-                      : "text-charcoal hover:text-steel",
+                      : "text-slate hover:text-charcoal",
                   )}
                 >
                   {menus[key].label}
@@ -272,7 +278,7 @@ export function Navbar() {
                 <Link
                   href={link.href}
                   onMouseEnter={scheduleClose}
-                  className="focus-ring inline-flex h-8 items-center rounded-buttons px-3 text-[13px] text-charcoal transition-colors duration-150 hover:text-steel"
+                  className="focus-ring inline-flex h-8 items-center rounded-buttons px-3 text-body font-medium text-slate transition-colors duration-150 hover:text-charcoal"
                 >
                   {link.label}
                 </Link>
@@ -353,10 +359,10 @@ export function Navbar() {
         </nav>
 
         <div className="hidden items-center gap-2 lg:flex">
-          <Button href="/logowanie" variant="outline" size="sm">
+          <Button href="/logowanie" variant="outline" size="nav">
             Zaloguj się
           </Button>
-          <Button href="/rejestracja" variant="primary" size="sm">
+          <Button href="/rejestracja" variant="primary" size="nav">
             Załóż konto
           </Button>
         </div>
@@ -367,16 +373,17 @@ export function Navbar() {
           aria-expanded={mobileOpen}
           aria-controls="mobile-menu"
           aria-label={mobileOpen ? "Zamknij menu" : "Otwórz menu"}
-          className="focus-ring grid size-10 place-items-center rounded-buttons border border-ash text-charcoal transition-colors duration-150 hover:bg-paper-mist lg:hidden"
+          className="focus-ring grid size-8 place-items-center rounded-buttons border border-ash text-charcoal transition-colors duration-150 hover:bg-paper-mist lg:hidden"
         >
-          {mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}
-        </button>
+          {mobileOpen ? <X className="size-4" /> : <Menu className="size-4" />}
+          </button>
+        </div>
       </div>
 
       <div
         id="mobile-menu"
         className={cn(
-          "absolute inset-x-0 top-full max-h-[calc(100vh-72px)] overflow-y-auto border-b border-ash bg-white shadow-md lg:hidden",
+          "absolute inset-x-0 top-full max-h-[calc(100vh-56px)] overflow-y-auto border-b border-ash bg-white shadow-md lg:hidden",
           mobileOpen ? "block" : "hidden",
         )}
       >

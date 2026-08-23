@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { cn } from "@/lib/cn";
+import { SECTION_H2 } from "@/lib/type";
 
 /** Subject glyphs — drawn, not iconified, so they read as product marks. */
 const marks: Record<string, React.ReactNode> = {
@@ -36,7 +37,7 @@ export function Integrations() {
         <Reveal>
           <h2
             id="przedmioty-heading"
-            className="max-w-sm font-satoshi text-heading-lg font-medium leading-[1.1] text-charcoal"
+            className={cn("max-w-sm text-charcoal", SECTION_H2)}
           >
             Wszystkie przedmioty w jednym miejscu
           </h2>

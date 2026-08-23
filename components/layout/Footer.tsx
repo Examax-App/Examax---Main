@@ -92,9 +92,9 @@ const socials = [
 
 export function Footer() {
   return (
-    <footer className="col-rules border-t border-ash bg-white">
-      <Container className="py-16">
-        <div className="grid gap-12 lg:grid-cols-[1.1fr_2.2fr]">
+    <footer className="col-rules border-t border-ash bg-canvas-muted">
+      <Container className="py-14">
+        <div className="grid gap-12 lg:grid-cols-[1fr_2fr]">
           <div className="flex flex-col gap-7">
             <Logo />
             <p className="max-w-xs text-body text-steel">
@@ -118,7 +118,7 @@ export function Footer() {
                 />
                 <button
                   type="button"
-                  className="focus-ring h-[38px] shrink-0 rounded-buttons border border-midnight-ink bg-primary-action-fill px-4 text-body font-medium text-white shadow-subtle transition-all duration-150 hover:bg-graphite hover:shadow-sm"
+                  className="focus-ring shrink-0 rounded-buttons border border-midnight-ink bg-primary-action-fill px-5 py-2 text-body font-medium leading-5 text-white shadow-subtle transition-all duration-150 hover:ring-4 hover:ring-ash"
                 >
                   Zapisz się
                 </button>
@@ -152,13 +152,13 @@ export function Footer() {
 
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
             <nav aria-label="Produkt">
-              <h3 className="text-body-lg font-semibold text-charcoal">Produkt</h3>
+              <h3 className="text-body font-medium text-charcoal">Produkt</h3>
               <ul className="mt-4 space-y-3">
                 {productLinks.map((link) => (
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="focus-ring inline-flex items-center gap-2 rounded-[4px] text-body text-steel transition-colors duration-150 hover:text-charcoal"
+                      className="focus-ring inline-flex items-center gap-2 rounded-[4px] text-body text-fog transition-colors duration-150 hover:text-charcoal"
                     >
                       <AccentTile icon={link.icon} accent={link.accent} size="sm" />
                       {link.label}
@@ -168,7 +168,7 @@ export function Footer() {
                 <li>
                   <Link
                     href="#symulacja"
-                    className="inline-flex items-center gap-2 text-body text-steel transition-colors hover:text-charcoal"
+                    className="inline-flex items-center gap-2 text-body text-fog transition-colors hover:text-charcoal"
                   >
                     <span
                       aria-hidden
@@ -187,7 +187,7 @@ export function Footer() {
 
             {columns.map((column) => (
               <nav key={column.heading} aria-label={column.heading}>
-                <h3 className="text-body-lg font-semibold text-charcoal">
+                <h3 className="text-body font-medium text-charcoal">
                   {column.heading}
                 </h3>
                 <ul className="mt-4 space-y-3">
@@ -195,7 +195,7 @@ export function Footer() {
                     <li key={label}>
                       <a
                         href={footerHrefs[label] ?? "#"}
-                        className="focus-ring link-underline rounded-[4px] text-body text-steel transition-colors duration-150 hover:text-charcoal"
+                        className="focus-ring link-underline rounded-[4px] text-body text-fog transition-colors duration-150 hover:text-charcoal"
                       >
                         {label}
                       </a>
@@ -207,7 +207,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col items-center justify-between gap-6 border-t border-ash pt-8 sm:flex-row">
+        <div className="mt-12 flex flex-col items-center justify-between gap-6 border-t border-ash pt-8 sm:flex-row">
           <span className="inline-flex h-8 items-center gap-2 rounded-full border border-ash px-3.5 text-[13px] text-charcoal">
             <span className="size-2 rounded-full bg-vivid-green" aria-hidden />
             Serwis działa bez zakłóceń

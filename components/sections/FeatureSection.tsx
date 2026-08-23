@@ -1,6 +1,8 @@
 import type { LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { cn } from "@/lib/cn";
+import { SECTION_H2 } from "@/lib/type";
 import { Reveal } from "@/components/ui/Reveal";
 import { AccentTile, type Accent } from "@/components/ui/FeaturePill";
 import { FeatureTriad } from "@/components/sections/FeatureTriad";
@@ -55,7 +57,7 @@ export function FeatureSection({
             </p>
             <h2
               id={`${id}-heading`}
-              className="mt-3 max-w-lg text-pretty font-satoshi text-[36px] font-medium leading-[1.1] text-charcoal sm:text-[48px] sm:leading-none"
+              className={cn("mt-3 max-w-lg text-charcoal", SECTION_H2)}
             >
               {heading}
             </h2>
@@ -77,7 +79,6 @@ export function FeatureSection({
           <Reveal className="w-full">{showcase}</Reveal>
         </div>
         <FeatureTriad
-          accent={accent}
           initialIndex={highlightIndex}
           items={subFeatures.map((feature) => ({
             title: feature.title,

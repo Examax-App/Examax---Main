@@ -1,6 +1,8 @@
 import { Bot, FileText, Gauge, RefreshCcw, Route } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { cn } from "@/lib/cn";
+import { SECTION_H2 } from "@/lib/type";
 import { Reveal } from "@/components/ui/Reveal";
 
 const releases = [
@@ -28,7 +30,7 @@ export function Changelog() {
           <Reveal>
             <h2
               id="changelog-heading"
-              className="max-w-md font-satoshi text-heading-lg font-medium leading-[1.15] text-charcoal sm:text-display sm:leading-[1.15]"
+              className={cn("max-w-md text-charcoal", SECTION_H2)}
             >
               Co nowego w Examax
             </h2>

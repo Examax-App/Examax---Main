@@ -1,5 +1,7 @@
 import { AlarmClock, ChevronRight, FileText, Flag, Gauge } from "lucide-react";
 import { Container } from "@/components/ui/Container";
+import { cn } from "@/lib/cn";
+import { SECTION_H2 } from "@/lib/type";
 import { Reveal } from "@/components/ui/Reveal";
 
 const pillars = [
@@ -29,7 +31,7 @@ export function Simulation() {
               </p>
               <h2
                 id="symulacja-heading"
-                className="mt-5 max-w-lg font-satoshi text-heading-sm font-medium leading-[1.2] text-charcoal sm:text-heading"
+                className={cn("mt-5 max-w-lg text-charcoal", SECTION_H2)}
               >
                 Symulacja egzaminu — przećwicz, zanim będzie się liczył
               </h2>

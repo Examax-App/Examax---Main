@@ -3,6 +3,8 @@
 @theme {
   /* Colors — design-examax/themeTailwind.css */
   --color-canvas-white: #ffffff;
+  /* bg-muted — the reference's alt surface, one step above paper-mist */
+  --color-canvas-muted: #fafafa;
   --color-paper-mist: #f5f5f5;
   --color-ash: #e5e5e5;
   --color-smoke: #d4d4d4;
@@ -91,7 +93,7 @@
 }
 
 body {
-  background: var(--color-canvas-white);
+  background: var(--color-canvas-muted);
   color: var(--color-charcoal);
   font-family: var(--font-inter);
   font-size: 16px;
@@ -138,6 +140,28 @@ body {
 
 .col-rules::after {
   right: max(0px, calc(50% - var(--page-max-width) / 2));
+}
+
+/* Hero grid — the reference's square rule field, faint enough to read as
+   paper texture rather than a blueprint. */
+.bg-hero-grid {
+  background-image: linear-gradient(
+      to right,
+      rgba(229, 229, 229, 0.45) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgba(229, 229, 229, 0.45) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(
+    ellipse 62% 66% at 50% 42%,
+    black 10%,
+    transparent 78%
+  );
+  mask-image: radial-gradient(
+    ellipse 62% 66% at 50% 42%,
+    black 10%,
+    transparent 78%
+  );
 }
 
 /* Fine blueprint grid — app surfaces only (auth shell, integrations tile).
@@ -200,21 +224,46 @@ body {
   );
 }
 
-/* Viewport reveal — driven by the <Reveal /> component. The hidden state is
-   only ever applied by JS to elements below the current viewport, so content
-   is always readable without it (deep links, restored scroll, no JS). */
+/* Entrance animation — the reference's slide-up-fade. Used two ways:
+   directly (above the fold, no observer, staggered by animation-delay) and
+   through <Reveal /> (below the fold, gated on an IntersectionObserver).
+   animation-fill-mode: both is what guarantees a missed observer can never
+   strand content at opacity 0. */
+@keyframes slide-up-fade {
+  from {
+    opacity: 0;
+    transform: translateY(var(--offset, 10px));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-slide-up-fade {
+  animation: slide-up-fade 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--delay, 0ms);
+}
+
+/* <Reveal />: hidden only once the observer has confirmed the element is
+   still below the fold; `is-visible` (or the safety timeout) plays it. */
 .reveal {
   opacity: 0;
-  transform: translateY(12px);
-  transition:
-    opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  transition-delay: var(--reveal-delay, 0ms);
 }
 
 .reveal.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  animation: slide-up-fade 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--delay, 0ms);
 }
 
 /* Feature-strip active-column progress fill: a full-height accent bar sliding
@@ -304,10 +353,12 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
+  .reveal,
+  .reveal.is-visible,
+  .animate-slide-up-fade {
     opacity: 1;
     transform: none;
-    transition: none;
+    animation: none;
   }
   .animate-float,
   .animate-float-delayed,
@@ -320,13 +371,6 @@ body {
   .demo-cursor {
     transition: none;
   }
-  html {
-    scroll-behavior: auto;
-  }
-}
-
-html {
-  scroll-behavior: smooth;
 }
 
 /* Animated underline for text links */

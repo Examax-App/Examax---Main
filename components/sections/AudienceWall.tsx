@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { cn } from "@/lib/cn";
+import { SECTION_H2 } from "@/lib/type";
 
 type WallCell = {
   icon: LucideIcon;
@@ -79,7 +80,7 @@ export function AudienceWall() {
           <div className="flex flex-wrap items-end justify-between gap-6">
             <h2
               id="audience-heading"
-              className="max-w-lg font-satoshi text-heading-lg font-medium leading-[1.15] text-charcoal sm:text-display sm:leading-[1.15]"
+              className={cn("max-w-lg text-charcoal", SECTION_H2)}
             >
               Dla każdego, kto ma egzamin przed sobą
             </h2>

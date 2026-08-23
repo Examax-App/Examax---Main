@@ -53,15 +53,15 @@ export function AnimatedDays({ value }: { value: number }) {
 }
 
 /**
- * The live exam countdown for the hero — the page's strongest emotional
- * asset, kept above the fold.
+ * The live exam countdown — the page's strongest emotional asset. It sits in
+ * the trust band directly under the hero, not beneath the hero CTAs.
  */
 export function HeroCountdown() {
   const matura = useDaysUntil(MATURA_DATE);
   const e8 = useDaysUntil(E8_DATE);
 
   return (
-    <p className="mt-9 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[13px] text-fog">
+    <p className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[13px] text-fog">
       Do matury zostało{" "}
       <span className="font-medium tabular-nums text-charcoal">
         {matura === null ? "—" : <AnimatedDays value={matura} />} dni

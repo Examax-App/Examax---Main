@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { ChevronRight } from "lucide-react";
-import { accentStyles, type Accent } from "@/components/ui/FeaturePill";
 import { useReducedMotion } from "@/lib/hooks";
 import { cn } from "@/lib/cn";
 
@@ -17,33 +16,16 @@ export type TriadItem = {
   description: string;
 };
 
-const accentBg: Record<Accent, string> = {
-  tangerine: "bg-tangerine",
-  green: "bg-vivid-green",
-  lavender: "bg-lavender",
-  blue: "bg-electric-blue",
-};
-
-/* Stacked layout (<md): the accent moves from a left track to a top border. */
-const accentTopBorder: Record<Accent, string> = {
-  tangerine: "max-md:border-t-2 max-md:border-t-tangerine",
-  green: "max-md:border-t-2 max-md:border-t-vivid-green",
-  lavender: "max-md:border-t-2 max-md:border-t-lavender",
-  blue: "max-md:border-t-2 max-md:border-t-electric-blue",
-};
-
 /**
- * The reference feature strip: an 800px-wide 3-column tab row on white below
- * the demo band. Every column carries a 1px grey track on its left edge; the
- * active column's track fills with the accent as a 4s progress indicator,
- * and the two inactive columns genuinely recede.
+ * The reference feature strip: an 800px-wide 3-column row below the demo
+ * band. The divider system is deliberately neutral — a 1px #e5e5e5 rule on
+ * every column, and a #171717 fill sliding down the active column's rule as a
+ * 4s progress indicator. Colour lives in the section eyebrow, not here.
  */
 export function FeatureTriad({
-  accent,
   items,
   initialIndex,
 }: {
-  accent: Accent;
   items: TriadItem[];
   initialIndex: number;
 }) {
@@ -92,7 +74,7 @@ export function FeatureTriad({
             onFocus={() => setActive(index)}
             className={cn(
               "relative h-full border-t border-ash pt-4 md:border-t-0 md:pl-6 md:pr-2 md:pt-0",
-              isActive && accentTopBorder[accent],
+              isActive && "max-md:border-t-2 max-md:border-t-charcoal",
             )}
           >
             <span
@@ -103,8 +85,7 @@ export function FeatureTriad({
                 <span
                   key={`${active}-${hovered}`}
                   className={cn(
-                    "block h-full w-px",
-                    accentBg[accent],
+                    "block h-full w-px bg-charcoal",
                     !hovered && !reducedMotion && "animate-triad-progress",
                   )}
                 />
@@ -114,14 +95,14 @@ export function FeatureTriad({
               aria-hidden
               className={cn(
                 "block w-fit transition-colors duration-300",
-                isActive ? accentStyles[accent].text : "text-silver",
+                isActive ? "text-silver" : "text-smoke",
               )}
             >
               {item.iconNode}
             </span>
             <h3
               className={cn(
-                "mt-2 text-body-lg font-medium transition-colors duration-300",
+                "mt-2 text-body font-medium transition-colors duration-300",
                 isActive ? "text-charcoal" : "text-silver",
               )}
             >
@@ -139,7 +120,7 @@ export function FeatureTriad({
               href="#cennik"
               className={cn(
                 "focus-ring group/link mt-3.5 inline-flex items-center gap-1 rounded-[4px] text-body font-medium transition-colors duration-300",
-                isActive ? accentStyles[accent].text : "text-smoke",
+                isActive ? "text-charcoal" : "text-smoke",
               )}
             >
               Dowiedz się więcej

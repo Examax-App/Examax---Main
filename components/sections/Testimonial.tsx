@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { BookOpen } from "lucide-react";
 import { Avatar } from "@/components/ui/Avatar";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
@@ -8,6 +10,8 @@ export type Quote = {
   role: string;
   /** Short wordmark shown in place of a customer logo. */
   mark: string;
+  /** Optional "read the story" pill link. */
+  story?: string;
 };
 
 /* ---------------------------------------------------------------------------
@@ -21,6 +25,7 @@ export const PLACEHOLDER_QUOTES: Record<string, Quote> = {
     name: "Zofia Lewandowska",
     role: "Maturzystka · LO nr 4, Wrocław",
     mark: "LO IV",
+    story: "#metoda",
   },
   trening: {
     quote:
@@ -35,6 +40,7 @@ export const PLACEHOLDER_QUOTES: Record<string, Quote> = {
     name: "Marta Zielińska",
     role: "Nauczycielka matematyki",
     mark: "Korepetycje ZM",
+    story: "#agent",
   },
   postepy: {
     quote:
@@ -46,19 +52,31 @@ export const PLACEHOLDER_QUOTES: Record<string, Quote> = {
 };
 
 /**
- * Customer quote row — the reference closes every product section with one of
- * these: quote left at heading-sm, wordmark + attribution + avatar right, on
- * white between two hairlines.
+ * Customer quote band — the reference closes every product section with one
+ * of these, on the dotted design-system texture: quote at 20px/28px, wordmark
+ * top-right, 40px avatar, and an optional story pill.
  */
-export function Testimonial({ quote, name, role, mark }: Quote) {
+export function Testimonial({ quote, name, role, mark, story }: Quote) {
   return (
-    <section className="col-rules border-t border-ash bg-white">
-      <Container className="py-14">
+    <section className="col-rules relative overflow-hidden border-t border-ash bg-white">
+      <div className="bg-dots mask-fade-edges absolute inset-0 opacity-60" aria-hidden />
+      <Container className="relative py-12">
         <Reveal>
-          <figure className="grid gap-8 lg:grid-cols-[1fr_auto] lg:gap-16">
-            <blockquote className="max-w-2xl text-pretty text-heading-sm font-normal leading-[1.35] text-charcoal">
-              „{quote}”
-            </blockquote>
+          <figure className="grid gap-6 lg:grid-cols-[1fr_auto] lg:gap-16">
+            <div>
+              <blockquote className="max-w-2xl text-pretty text-xl leading-7 text-charcoal">
+                „{quote}”
+              </blockquote>
+              {story ? (
+                <Link
+                  href={story}
+                  className="focus-ring mt-5 inline-flex items-center gap-1.5 rounded-full border border-ash bg-white px-3 py-1.5 text-[13px] font-medium text-charcoal shadow-subtle transition-all hover:ring-4 hover:ring-ash"
+                >
+                  <BookOpen className="size-3.5 text-fog" aria-hidden />
+                  Przeczytaj historię
+                </Link>
+              ) : null}
+            </div>
             <figcaption className="flex items-center gap-3 lg:flex-col lg:items-end lg:gap-3 lg:text-right">
               <div className="order-2 lg:order-1">
                 <p className="text-body font-semibold tracking-tight text-charcoal">
@@ -67,7 +85,7 @@ export function Testimonial({ quote, name, role, mark }: Quote) {
                 <p className="mt-1.5 text-body font-medium text-charcoal">
                   {name}
                 </p>
-                <p className="text-[13px] text-fog">{role}</p>
+                <p className="text-body text-fog">{role}</p>
               </div>
               <Avatar name={name} size="lg" className="order-1 lg:order-2" />
             </figcaption>

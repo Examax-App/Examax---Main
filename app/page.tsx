@@ -19,6 +19,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
 import { ProofBar } from "@/components/sections/ProofBar";
+import { LogoWall } from "@/components/sections/LogoWall";
 import { Editorial } from "@/components/sections/Editorial";
 import { FeatureSection } from "@/components/sections/FeatureSection";
 import {
@@ -49,9 +50,10 @@ export default function Home() {
         Przejdź do treści
       </a>
       <Navbar />
-      <main id="main" className="flex-1 pt-[72px]">
+      <main id="main" className="flex-1">
         <Hero />
         <ProofBar />
+        <LogoWall />
         <Editorial />
 
         <FeatureSection

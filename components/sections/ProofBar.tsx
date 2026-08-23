@@ -1,5 +1,6 @@
 import { BookMarked, FileText, GraduationCap } from "lucide-react";
 import { Container } from "@/components/ui/Container";
+import { HeroCountdown } from "@/components/ui/ExamCountdown";
 import type { LucideIcon } from "lucide-react";
 
 const cells: Array<{ icon: LucideIcon; label: string; sub: string }> = [
@@ -28,6 +29,11 @@ export function ProofBar() {
   return (
     <section aria-label="Zakres materiału" className="col-rules border-t border-ash bg-white">
       <Container>
+        {/* The live countdown lives here rather than under the hero CTAs —
+            the reference never puts a fourth text row below its buttons. */}
+        <div className="flex justify-center border-b border-ash py-4">
+          <HeroCountdown />
+        </div>
         <div className="grid divide-y divide-ash sm:grid-cols-3 sm:divide-x sm:divide-y-0">
       {cells.map((cell) => (
         <div

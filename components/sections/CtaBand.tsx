@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { cn } from "@/lib/cn";
+import { SECTION_H2 } from "@/lib/type";
 import { Reveal } from "@/components/ui/Reveal";
 
 /* PLACEHOLDER RATINGS — swap for real store/review figures before launch. */
@@ -60,7 +62,7 @@ export function CtaBand() {
         <Reveal>
           <h2
             id="cta-heading"
-            className="max-w-2xl font-satoshi text-heading-lg font-medium leading-[1.1] text-white sm:text-display"
+            className={cn("max-w-2xl text-white", SECTION_H2)}
           >
             Wejdź na salę ze spokojną głową
           </h2>

@@ -7,35 +7,36 @@ type ButtonVariant =
   | "ghost"
   | "inverted"
   | "translucent";
-type ButtonSize = "sm" | "md" | "lg";
+type ButtonSize = "nav" | "md" | "lg";
 
 /**
- * Reference metrics: primary/secondary 38px tall, 14px/500, 8px radius,
- * 1px border on BOTH variants, 0 1px 2px shadow that grows on hover.
- * "sm" is the 32px / 13px / 400 nav size.
+ * Reference metrics: `px-5 py-2 text-sm font-medium rounded-lg shadow-sm`
+ * computes to a 38px-tall control, and every variant grows a 4px neutral ring
+ * on hover. The nav uses the same type at a 32px height.
  */
 const variantClasses: Record<ButtonVariant, string> = {
   // Filled dark CTA — the single committed action per surface
   primary:
-    "border border-midnight-ink bg-primary-action-fill text-white shadow-subtle hover:bg-graphite hover:shadow-sm",
+    "border border-midnight-ink bg-primary-action-fill text-white shadow-subtle hover:ring-4 hover:ring-ash",
   // Outlined action button — the workhorse secondary
   outline:
-    "border border-ash bg-white text-charcoal shadow-subtle hover:bg-[#fafafa] hover:shadow-sm",
+    "border border-ash bg-white text-charcoal shadow-subtle hover:ring-4 hover:ring-ash",
   // Ghost nav button — transparent until hover
-  ghost: "bg-transparent text-charcoal hover:text-steel",
+  ghost: "bg-transparent text-slate hover:text-charcoal",
   // White-on-dark, for the dark CTA band
-  inverted: "border border-white bg-white text-charcoal hover:bg-ash",
+  inverted:
+    "border border-white bg-white text-charcoal hover:ring-4 hover:ring-white/20",
   // Secondary on dark — translucent, never a solid slab. Must be a variant:
   // cn() is a plain join, so a bg-* passed via className cannot beat one
   // already set by another variant.
   translucent:
-    "border border-white/20 bg-white/10 text-white hover:bg-white/20",
+    "border border-white/20 bg-white/10 text-white hover:bg-white/20 hover:ring-4 hover:ring-white/10",
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
-  sm: "h-8 px-3 text-[13px] font-normal",
-  md: "h-[38px] px-3.5 text-body font-medium",
-  lg: "h-[38px] px-4 text-body font-medium",
+  nav: "h-8 px-4 text-body font-medium",
+  md: "px-5 py-2 text-body font-medium",
+  lg: "px-5 py-2 text-body font-medium",
 };
 
 export function Button({
@@ -55,7 +56,7 @@ export function Button({
     <Link
       href={href}
       className={cn(
-        "focus-ring inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-buttons transition-all duration-150",
+        "focus-ring inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-buttons leading-5 transition-all duration-150",
         variantClasses[variant],
         sizeClasses[size],
         className,

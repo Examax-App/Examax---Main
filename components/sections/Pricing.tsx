@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { cn } from "@/lib/cn";
+import { SECTION_H2 } from "@/lib/type";
 
 type Plan = {
   name: string;
@@ -79,7 +80,7 @@ export function Pricing() {
         <Reveal>
           <h2
             id="pricing-heading"
-            className="max-w-md font-satoshi text-heading-lg font-medium leading-[1.15] text-charcoal sm:text-display sm:leading-[1.15]"
+            className={cn("max-w-md text-charcoal", SECTION_H2)}
           >
             Prosty cennik na cały rok szkolny
           </h2>

@@ -15,7 +15,7 @@ export default function PomocPage() {
   return (
     <>
       <Navbar />
-      <main className="flex-1 pt-[72px]">
+      <main className="flex-1">
         <div className="mx-auto w-full max-w-[1200px] border-x border-ash/60 bg-white">
           <section className="border-b border-ash px-5 py-16 text-center sm:py-20">
             <span

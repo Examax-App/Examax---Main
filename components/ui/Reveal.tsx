@@ -5,14 +5,21 @@ import { cn } from "@/lib/cn";
 
 type RevealState = "static" | "hidden" | "visible";
 
+/** Safety net: if the observer never fires, play the animation anyway. */
+const FALLBACK_MS = 1200;
+
 /**
- * Fades content in with a slight upward drift as it enters the viewport.
+ * Plays the reference's slide-up-fade as content enters the viewport.
  *
- * Fail-safe by construction: the server renders children fully visible, and
- * the pre-reveal (hidden) state is applied on mount ONLY to elements still
- * below the current viewport. Deep links (#cennik), restored scroll
- * positions, above-fold content, disabled JS, and prefers-reduced-motion all
- * see finished, fully-opaque content — never a blank region.
+ * Fail-safe by construction, in four ways:
+ *  1. the server renders children fully visible;
+ *  2. the hidden state is applied on mount ONLY to elements still below the
+ *     current viewport, so deep links and restored scroll positions are safe;
+ *  3. the observer uses a generous rootMargin and a zero threshold, so tall
+ *     sections and fast scrolling still trigger it;
+ *  4. a timeout reveals the element regardless if the observer never fires.
+ *
+ * prefers-reduced-motion opts out entirely — see globals.css.
  */
 export function Reveal({
   delay = 0,
@@ -38,17 +45,22 @@ export function Reveal({
     if (node.getBoundingClientRect().top < window.innerHeight * 0.95) return;
 
     setState("hidden");
+    const reveal = () => setState("visible");
+    const timer = window.setTimeout(reveal, FALLBACK_MS);
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setState("visible");
-          observer.disconnect();
-        }
+        if (!entry.isIntersecting) return;
+        window.clearTimeout(timer);
+        reveal();
+        observer.disconnect();
       },
-      { threshold: 0.15, rootMargin: "0px 0px -10% 0px" },
+      { threshold: 0, rootMargin: "200px 0px 200px 0px" },
     );
     observer.observe(node);
-    return () => observer.disconnect();
+    return () => {
+      window.clearTimeout(timer);
+      observer.disconnect();
+    };
   }, []);
 
   return (
@@ -59,7 +71,7 @@ export function Reveal({
         state === "visible" && "is-visible",
         className,
       )}
-      style={{ "--reveal-delay": `${delay}ms` } as React.CSSProperties}
+      style={{ "--delay": `${delay}ms` } as React.CSSProperties}
     >
       {children}
     </div>

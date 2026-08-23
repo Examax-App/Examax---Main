@@ -6,6 +6,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { useDaysUntil } from "@/components/ui/ExamCountdown";
 import { E8_DATE, MATURA_DATE } from "@/lib/examDates";
 import { cn } from "@/lib/cn";
+import { SECTION_H2 } from "@/lib/type";
 
 /* May 2027: May 1st is a Saturday → 5 leading blanks in a Monday-first grid. */
 const MAY_OFFSET = 5;
@@ -136,7 +137,7 @@ export function Countdown() {
           <Reveal>
             <h2
               id="terminy-heading"
-              className="font-satoshi text-heading-lg font-medium leading-[1.15] text-charcoal sm:text-display sm:leading-[1.15]"
+              className={cn("max-w-md text-charcoal", SECTION_H2)}
             >
               Do egzaminu liczy się każdy dzień
             </h2>

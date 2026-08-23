@@ -82,7 +82,7 @@ export function Editorial() {
       aria-label="Dlaczego Examax"
       className="col-rules relative overflow-hidden border-t border-ash bg-white"
     >
-      <Container className="relative py-20">
+      <Container className="relative py-16">
         {/* Floating outline icon tiles */}
         <div aria-hidden className="pointer-events-none absolute inset-0 hidden lg:block">
           <span className="absolute left-16 top-20 grid size-12 -rotate-6 place-items-center rounded-cards border border-ash bg-white text-steel shadow-subtle">
@@ -96,7 +96,7 @@ export function Editorial() {
           </span>
         </div>
 
-        <div className="grid items-center gap-14 lg:grid-cols-[auto_1fr_auto]">
+        <div className="grid items-center gap-10 lg:grid-cols-[auto_1fr_auto]">
           <Reveal className="hidden lg:block">
             <div className="animate-float">
               <StudentCard />
@@ -104,7 +104,7 @@ export function Editorial() {
           </Reveal>
 
           <Reveal delay={100}>
-            <div className="mx-auto max-w-2xl space-y-8 text-heading font-normal text-charcoal">
+            <div className="mx-auto max-w-2xl space-y-6 text-heading font-normal text-charcoal">
               <p>
                 Quiz sprawdza, co umiesz.
                 <br />

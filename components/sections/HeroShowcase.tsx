@@ -215,7 +215,7 @@ export function HeroShowcase() {
           </div>
           <Link
             href={activeTab.href}
-            className="shrink-0 rounded-buttons bg-white px-4 py-2 text-body font-medium text-charcoal transition-all duration-200 hover:bg-ash hover:shadow-subtle"
+            className="focus-ring shrink-0 rounded-buttons bg-white px-5 py-2 text-body font-medium leading-5 text-charcoal transition-all duration-200 hover:ring-4 hover:ring-white/20"
           >
             Zobacz więcej
           </Link>

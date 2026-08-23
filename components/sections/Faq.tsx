@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/cn";
+import { SECTION_H2 } from "@/lib/type";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 
@@ -66,22 +67,24 @@ export function Faq() {
       aria-labelledby="faq-heading"
       className="col-rules border-t border-ash bg-white"
     >
-      <Container className="py-20">
-        <div className="mx-auto max-w-3xl">
-          <Reveal>
-            <h2
-              id="faq-heading"
-              className="font-satoshi text-heading-lg font-medium leading-[1.15] text-charcoal sm:text-display sm:leading-[1.15]"
-            >
-              Częste pytania
-            </h2>
-          </Reveal>
+      {/* Two columns: the heading holds the left rail so the accordion never
+          leaves a dead half-width column beside it. */}
+      <Container className="grid gap-10 py-20 lg:grid-cols-[minmax(0,20rem)_1fr] lg:gap-16">
+        <Reveal>
+          <h2
+            id="faq-heading"
+            className={cn("text-charcoal lg:sticky lg:top-20", SECTION_H2)}
+          >
+            Częste pytania
+          </h2>
+        </Reveal>
 
-          <div className="mt-12">
+        <div>
+          <div className="border-t border-ash">
             {faqs.map((faq, index) => {
               const open = openIndex === index;
               return (
-                <Reveal key={faq.question} delay={index * 60}>
+                <Reveal key={faq.question} delay={index * 40}>
                   <div className="border-b border-ash">
                     <h3>
                       <button
@@ -90,7 +93,7 @@ export function Faq() {
                         aria-expanded={open}
                         aria-controls={`faq-panel-${index}`}
                         id={`faq-button-${index}`}
-                        className="focus-ring flex w-full items-center justify-between gap-6 py-6 text-left text-body-xl font-semibold text-charcoal transition-colors duration-150 hover:text-steel"
+                        className="focus-ring flex w-full items-center justify-between gap-6 py-5 text-left text-body-lg font-medium text-charcoal transition-colors duration-150 hover:text-steel"
                       >
                         {faq.question}
                         <ChevronDown
@@ -107,9 +110,9 @@ export function Faq() {
                       role="region"
                       aria-labelledby={`faq-button-${index}`}
                       hidden={!open}
-                      className="pb-6"
+                      className="pb-5"
                     >
-                      <p className="max-w-2xl text-body-lg text-steel">
+                      <p className="max-w-2xl text-body text-fog">
                         {faq.answer}
                       </p>
                     </div>

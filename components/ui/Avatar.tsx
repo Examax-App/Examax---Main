@@ -28,7 +28,7 @@ export function Avatar({
     xs: "size-5 text-[8px]",
     sm: "size-6 text-[9px]",
     md: "size-8 text-[11px]",
-    lg: "size-12 text-body",
+    lg: "size-10 text-[13px]",
   } as const;
 
   return (
