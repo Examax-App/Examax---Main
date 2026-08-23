@@ -388,9 +388,9 @@ function AgentView() {
 
 function AnalyticsView() {
   const funnel = [
-    { label: "Przerobione", value: "1 246", pct: 100, className: "bg-electric-blue" },
-    { label: "Poprawne", value: "1 047", pct: 84, className: "bg-[#60a5fa]" },
-    { label: "Opanowane", value: "38 tematów", pct: 38, className: "bg-[#93c5fd]" },
+    { label: "Przerobione", value: "1 246", pct: 100, className: "bg-tangerine" },
+    { label: "Poprawne", value: "1 047", pct: 84, className: "bg-[#fb923c]" },
+    { label: "Opanowane", value: "38 tematów", pct: 38, className: "bg-[#fed7aa]" },
   ];
   return (
     <div className="animate-view-swap">
@@ -512,16 +512,16 @@ export function HeroDashboard({ view }: { view: HeroView }) {
         {/* Icon rail */}
         <div
           aria-hidden
-          className="hidden w-14 shrink-0 flex-col items-center gap-4 border-r border-ash bg-paper-mist py-4 sm:flex"
+          className="hidden w-12 shrink-0 flex-col items-center gap-3 border-r border-ash bg-paper-mist py-3 sm:flex"
         >
-          <span className="grid size-8 place-items-center rounded-buttons bg-midnight-ink">
-            <BrandMark className="size-4 text-white" />
+          <span className="grid size-7 place-items-center rounded-buttons bg-midnight-ink">
+            <BrandMark className="size-3.5 text-white" />
           </span>
-          <span className="grid size-8 place-items-center rounded-buttons bg-white text-charcoal shadow-subtle">
-            <Compass className="size-4" />
+          <span className="grid size-7 place-items-center rounded-buttons bg-white text-charcoal shadow-subtle">
+            <Compass className="size-3.5" />
           </span>
-          <span className="grid size-8 place-items-center text-fog">
-            <Settings className="size-4" />
+          <span className="grid size-7 place-items-center text-fog">
+            <Settings className="size-3.5" />
           </span>
           <span className="mt-auto">
             <Avatar name="Ala Wiśniewska" size="sm" />
@@ -531,16 +531,16 @@ export function HeroDashboard({ view }: { view: HeroView }) {
         {/* Sidebar */}
         <div
           aria-hidden
-          className="hidden w-52 shrink-0 border-r border-ash bg-paper-mist/60 px-3 py-4 md:block"
+          className="hidden w-48 shrink-0 border-r border-ash bg-paper-mist/60 px-2.5 py-3 md:block"
         >
-          <p className="px-2 text-body font-semibold text-charcoal">
+          <p className="px-2 text-[13px] font-semibold text-charcoal">
             Egzamin ósmoklasisty
           </p>
-          <div className="mt-4 space-y-5">
+          <div className="mt-3 space-y-3.5">
             {sidebarGroups.map((group) => (
               <div key={group.heading ?? "main"}>
                 {group.heading ? (
-                  <p className="px-2 pb-1.5 text-[11px] font-medium text-fog">
+                  <p className="px-2 pb-1 text-[10px] font-medium uppercase tracking-[0.06em] text-fog">
                     {group.heading}
                   </p>
                 ) : null}
@@ -551,20 +551,20 @@ export function HeroDashboard({ view }: { view: HeroView }) {
                       <li key={item.label}>
                         <span
                           className={cn(
-                            "flex items-center gap-2 rounded-buttons px-2 py-1.5 text-[13px] transition-colors duration-300",
+                            "flex items-center gap-2 rounded-buttons px-2 py-1 text-[12px] transition-colors duration-300",
                             active
-                              ? "bg-sidebar-active font-medium text-electric-blue"
+                              ? "bg-soft-peach font-medium text-tangerine"
                               : "text-slate",
                           )}
                         >
-                          <item.icon className="size-3.5" strokeWidth={2} />
+                          <item.icon className="size-3" strokeWidth={2} />
                           {item.label}
                           {item.badge ? (
                             <span
                               className={cn(
                                 "ml-auto rounded-full px-1.5 py-0.5 text-[10px] font-medium leading-none transition-colors duration-300",
                                 active
-                                  ? "bg-electric-blue text-white"
+                                  ? "bg-tangerine text-white"
                                   : "bg-ash text-steel",
                               )}
                             >
@@ -583,19 +583,19 @@ export function HeroDashboard({ view }: { view: HeroView }) {
 
         {/* Content */}
         <div aria-hidden className="min-w-0 flex-1 bg-white">
-          <div className="flex items-center justify-between border-b border-ash px-5 py-3.5">
+          <div className="flex items-center justify-between border-b border-ash px-4 py-2.5">
             <p
               key={contentTitle}
-              className="animate-view-swap text-body font-semibold text-charcoal"
+              className="animate-view-swap text-[13px] font-semibold text-charcoal"
             >
               {contentTitle}
             </p>
-            <span className="hidden rounded-buttons bg-midnight-ink px-3 py-1.5 text-[12px] font-medium text-white sm:inline-block">
+            <span className="hidden rounded-buttons bg-midnight-ink px-2.5 py-1 text-[11px] font-medium text-white sm:inline-block">
               {topBarActions[view]}
             </span>
           </div>
 
-          <div className="min-h-[420px] p-5">
+          <div className="min-h-0 p-4">
             {view === "analytics" ? (
               <AnalyticsView />
             ) : view === "roadmap" ? (
@@ -629,7 +629,7 @@ export function HeroDashboard({ view }: { view: HeroView }) {
             {showRipple ? (
               <span
                 key={step}
-                className="animate-demo-ripple absolute -left-3 -top-3 size-8 rounded-full bg-electric-blue/50"
+                className="animate-demo-ripple absolute -left-3 -top-3 size-8 rounded-full bg-tangerine/50"
               />
             ) : null}
             <svg
