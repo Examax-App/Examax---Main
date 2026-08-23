@@ -1,19 +1,19 @@
-import { CalendarDays } from "lucide-react";
+import { Bot, FileText, Gauge, RefreshCcw, Route } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 
 const releases = [
-  { date: "18 sie 2026", title: "Agent Examax 2.0" },
-  { date: "4 sie 2026", title: "Arkusze CKE 2026" },
-  { date: "21 lip 2026", title: "Roadmapa matury rozszerzonej" },
-  { date: "8 lip 2026", title: "Wskaźnik gotowości" },
-  { date: "24 cze 2026", title: "Tryb powtórek" },
+  { date: "18 sie 2026", title: "Agent Examax 2.0", icon: Bot },
+  { date: "4 sie 2026", title: "Arkusze CKE 2026", icon: FileText },
+  { date: "21 lip 2026", title: "Roadmapa matury rozszerzonej", icon: Route },
+  { date: "8 lip 2026", title: "Wskaźnik gotowości", icon: Gauge },
+  { date: "24 cze 2026", title: "Tryb powtórek", icon: RefreshCcw },
 ];
 
 /**
  * Release timeline in the reference's two-column layout: heading + outline
- * button on the left, dated entries with 32px circled calendar icons on the
+ * button on the left, dated entries with 32px circled release icons on the
  * right, the last item fading out.
  */
 export function Changelog() {
@@ -21,7 +21,7 @@ export function Changelog() {
     <section
       id="co-nowego"
       aria-labelledby="changelog-heading"
-      className="border-t border-ash bg-white"
+      className="col-rules border-t border-ash bg-white"
     >
       <Container className="py-20">
         <div className="grid gap-12 lg:grid-cols-[1.1fr_1fr]">
@@ -49,7 +49,7 @@ export function Changelog() {
                     aria-hidden
                     className="grid size-8 shrink-0 place-items-center rounded-full border border-ash bg-white text-steel shadow-subtle"
                   >
-                    <CalendarDays className="size-4" strokeWidth={1.6} />
+                    <release.icon className="size-4" strokeWidth={1.6} />
                   </span>
                   <div>
                     <p className="text-body font-medium text-charcoal">

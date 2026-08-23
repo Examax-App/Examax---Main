@@ -65,17 +65,10 @@ const accentText: Record<Accent, string> = {
   blue: "text-electric-blue",
 };
 
-const accentBorder: Record<Accent, string> = {
-  tangerine: "rgba(234, 88, 12, 0.35)",
-  green: "rgba(22, 163, 74, 0.35)",
-  lavender: "rgba(124, 58, 237, 0.35)",
-  blue: "rgba(37, 99, 235, 0.35)",
-};
-
 /**
- * The hero product stage: the white shelf with real feature tabs (sliding
- * active-pill indicator, keyboard support), the swappable dashboard shot,
- * and the dark contextual card pinned to the bottom edge of the stage.
+ * The hero product stage: the white notch carrying the feature tabs (sliding
+ * active-pill indicator, keyboard support), the framed dashboard window whose
+ * bottom edge is cut by the band, and the dark contextual card.
  */
 export function HeroShowcase() {
   const [active, setActive] = useState<HeroView>("practice");
@@ -124,67 +117,77 @@ export function HeroShowcase() {
   const activeTab = tabs.find((tab) => tab.key === active)!;
 
   return (
-    <div className="relative overflow-hidden bg-[#fafafa]">
-      <div className="bg-grid mask-fade-bottom absolute inset-0" aria-hidden />
-
-      {/* Transparent tab row — only the active pill gets a surface */}
-      <div className="relative mx-auto max-w-4xl px-6 pb-2 pt-6">
-        <div
-          ref={listRef}
-          role="tablist"
-          aria-label="Poznaj produkt Examax"
-          onKeyDown={onKeyDown}
-          className="relative flex flex-wrap items-center justify-center gap-2 sm:gap-3"
-        >
-          {indicator ? (
-            <span
-              aria-hidden
-              className="absolute rounded-full border bg-white shadow-subtle transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)]"
-              style={{
-                left: indicator.left,
-                top: indicator.top,
-                width: indicator.width,
-                height: indicator.height,
-                borderColor: accentBorder[activeTab.accent],
-              }}
-            />
-          ) : null}
-          {tabs.map((tab) => {
-            const selected = tab.key === active;
-            return (
-              <button
-                key={tab.key}
-                ref={(el) => {
-                  tabRefs.current[tab.key] = el;
+    <div className="col-rules relative overflow-hidden bg-paper-mist">
+      {/* White notch — the hero plane extends down as a rounded tab that hugs
+          the tab row, with a concave fillet on each side (reference detail). */}
+      <div className="relative z-[2] flex justify-center">
+        <div className="relative rounded-b-[24px] bg-white px-6 pb-3.5">
+          <span
+            aria-hidden
+            className="absolute right-full top-0 size-6 bg-[radial-gradient(circle_at_0_0,transparent_0_24px,#fff_24px)]"
+          />
+          <span
+            aria-hidden
+            className="absolute left-full top-0 size-6 bg-[radial-gradient(circle_at_100%_0,transparent_0_24px,#fff_24px)]"
+          />
+          <div
+            ref={listRef}
+            role="tablist"
+            aria-label="Poznaj produkt Examax"
+            onKeyDown={onKeyDown}
+            className="relative flex flex-wrap items-center justify-center gap-2"
+          >
+            {indicator ? (
+              <span
+                aria-hidden
+                className="absolute rounded-full border border-ash bg-white shadow-subtle transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                style={{
+                  left: indicator.left,
+                  top: indicator.top,
+                  width: indicator.width,
+                  height: indicator.height,
                 }}
-                type="button"
-                role="tab"
-                id={`hero-tab-${tab.key}`}
-                aria-selected={selected}
-                aria-controls="hero-panel"
-                tabIndex={selected ? 0 : -1}
-                onClick={() => setActive(tab.key)}
-                className={cn(
-                  "focus-ring relative z-10 inline-flex items-center gap-2 rounded-full px-4 py-2 text-body font-medium transition-colors duration-200",
-                  selected ? "text-charcoal" : "text-fog hover:text-charcoal",
-                )}
-              >
-                <AccentTile icon={tab.icon} accent={tab.accent} />
-                {tab.label}
-              </button>
-            );
-          })}
+              />
+            ) : null}
+            {tabs.map((tab) => {
+              const selected = tab.key === active;
+              return (
+                <button
+                  key={tab.key}
+                  ref={(el) => {
+                    tabRefs.current[tab.key] = el;
+                  }}
+                  type="button"
+                  role="tab"
+                  id={`hero-tab-${tab.key}`}
+                  aria-selected={selected}
+                  aria-controls="hero-panel"
+                  tabIndex={selected ? 0 : -1}
+                  onClick={() => setActive(tab.key)}
+                  className={cn(
+                    "focus-ring relative z-10 inline-flex items-center gap-2 rounded-full px-3.5 py-2 text-body font-medium transition-colors duration-200",
+                    selected
+                      ? "text-charcoal"
+                      : "bg-paper-mist text-steel hover:text-charcoal",
+                  )}
+                >
+                  <AccentTile icon={tab.icon} accent={tab.accent} />
+                  {tab.label}
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
 
-      {/* Product shot — fully contained in the stage; the contextual card
-          overlaps the mockup, never the section seam below */}
-      <Container className="relative pb-20 pt-12 sm:pb-24">
+      {/* Product window — 16px top radius, bottom flush: the frame is cut by
+          the band edge rather than faded, exactly as in the reference. */}
+      <Container className="relative pt-10">
         <div
           role="tabpanel"
           id="hero-panel"
           aria-labelledby={`hero-tab-${active}`}
-          className="[mask-image:linear-gradient(to_bottom,black_70%,transparent)]"
+          className="h-[520px] overflow-hidden"
         >
           <HeroDashboard view={active} />
         </div>
@@ -194,7 +197,7 @@ export function HeroShowcase() {
       <div className="pointer-events-none absolute inset-x-4 bottom-6 z-20 sm:inset-x-auto sm:left-1/2 sm:w-full sm:max-w-2xl sm:-translate-x-1/2">
         <div
           key={active}
-          className="animate-view-swap pointer-events-auto flex items-center gap-4 rounded-largecards bg-midnight-ink/95 p-3.5 pl-5 text-white shadow-md backdrop-blur"
+          className="animate-view-swap pointer-events-auto flex items-center gap-4 rounded-largecards bg-charcoal p-3.5 pl-5 text-white shadow-md"
         >
           <span className="grid size-10 shrink-0 place-items-center rounded-cards bg-white/10">
             <activeTab.icon

@@ -1,7 +1,12 @@
 import Link from "next/link";
 import { cn } from "@/lib/cn";
 
-type ButtonVariant = "primary" | "outline" | "ghost" | "inverted";
+type ButtonVariant =
+  | "primary"
+  | "outline"
+  | "ghost"
+  | "inverted"
+  | "translucent";
 type ButtonSize = "sm" | "md" | "lg";
 
 /**
@@ -20,6 +25,11 @@ const variantClasses: Record<ButtonVariant, string> = {
   ghost: "bg-transparent text-charcoal hover:text-steel",
   // White-on-dark, for the dark CTA band
   inverted: "border border-white bg-white text-charcoal hover:bg-ash",
+  // Secondary on dark — translucent, never a solid slab. Must be a variant:
+  // cn() is a plain join, so a bg-* passed via className cannot beat one
+  // already set by another variant.
+  translucent:
+    "border border-white/20 bg-white/10 text-white hover:bg-white/20",
 };
 
 const sizeClasses: Record<ButtonSize, string> = {

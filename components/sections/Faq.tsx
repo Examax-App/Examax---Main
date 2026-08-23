@@ -64,7 +64,7 @@ export function Faq() {
     <section
       id="faq"
       aria-labelledby="faq-heading"
-      className="border-t border-ash bg-white"
+      className="col-rules border-t border-ash bg-white"
     >
       <Container className="py-20">
         <div className="mx-auto max-w-3xl">

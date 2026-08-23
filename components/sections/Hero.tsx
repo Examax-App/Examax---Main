@@ -9,14 +9,15 @@ import { HeroCountdown } from "@/components/ui/ExamCountdown";
  * Above-the-fold content renders at final opacity on first paint — the hero
  * is deliberately excluded from the scroll-reveal system (LCP must never be
  * gated on an IntersectionObserver).
+ *
+ * The headline stage is plain white: the reference puts no texture behind its
+ * hero, and the column rules alone carry the structure.
  */
 export function Hero() {
   return (
     <section aria-labelledby="hero-heading">
-      {/* Headline stage on the blueprint grid */}
-      <div className="relative overflow-hidden bg-white">
-        <div className="bg-grid mask-fade-edges absolute inset-0" aria-hidden />
-        <Container className="relative flex flex-col items-center pb-20 pt-12 text-center sm:pt-16">
+      <div className="col-rules bg-white">
+        <Container className="relative flex flex-col items-center pb-20 pt-14 text-center sm:pt-20">
           <Link
             href="#agent"
             className="inline-flex items-center rounded-full border border-ash bg-white text-body font-medium text-charcoal shadow-subtle transition-all duration-200 hover:bg-paper-mist hover:shadow-sm"
@@ -30,7 +31,7 @@ export function Hero() {
 
           <h1
             id="hero-heading"
-            className="mt-8 max-w-3xl text-balance font-satoshi text-[32px] font-medium leading-[1.15] text-charcoal sm:text-[48px]"
+            className="mt-8 max-w-3xl text-balance font-satoshi text-[36px] font-medium leading-[1.05] text-charcoal sm:text-[56px] lg:text-[64px]"
           >
             Twoje braki. Twoje zadania. Twój wynik.
           </h1>
@@ -40,7 +41,7 @@ export function Hero() {
             Twój osobisty trening przed egzaminem ósmoklasisty i&nbsp;maturą.
           </p>
 
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+          <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
             <Button href="#cennik" variant="primary" size="lg">
               Zacznij za darmo
             </Button>
@@ -54,7 +55,7 @@ export function Hero() {
         </Container>
       </div>
 
-      {/* Product stage — tabs, swappable screenshot, contextual card */}
+      {/* Product stage — tabs on the white notch, swappable screenshot */}
       <HeroShowcase />
     </section>
   );

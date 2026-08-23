@@ -80,9 +80,8 @@ export function Editorial() {
     <section
       id="metoda"
       aria-label="Dlaczego Examax"
-      className="relative overflow-hidden bg-white"
+      className="col-rules relative overflow-hidden border-t border-ash bg-white"
     >
-      <div className="bg-dots mask-fade-edges absolute inset-0" aria-hidden />
       <Container className="relative py-20">
         {/* Floating outline icon tiles */}
         <div aria-hidden className="pointer-events-none absolute inset-0 hidden lg:block">

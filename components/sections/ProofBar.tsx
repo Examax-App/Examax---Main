@@ -1,4 +1,5 @@
 import { BookMarked, FileText, GraduationCap } from "lucide-react";
+import { Container } from "@/components/ui/Container";
 import type { LucideIcon } from "lucide-react";
 
 const cells: Array<{ icon: LucideIcon; label: string; sub: string }> = [
@@ -25,8 +26,9 @@ const cells: Array<{ icon: LucideIcon; label: string; sub: string }> = [
  */
 export function ProofBar() {
   return (
-    <section aria-label="Zakres materiału" className="border-t border-ash bg-white">
-      <div className="grid divide-y divide-ash sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+    <section aria-label="Zakres materiału" className="col-rules border-t border-ash bg-white">
+      <Container>
+        <div className="grid divide-y divide-ash sm:grid-cols-3 sm:divide-x sm:divide-y-0">
       {cells.map((cell) => (
         <div
           key={cell.label}
@@ -39,7 +41,8 @@ export function ProofBar() {
           <p className="text-[13px] text-fog">{cell.sub}</p>
         </div>
       ))}
-      </div>
+        </div>
+      </Container>
     </section>
   );
 }

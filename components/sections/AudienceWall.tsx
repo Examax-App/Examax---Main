@@ -23,7 +23,7 @@ type WallCell = {
 const cells: WallCell[] = [
   {
     icon: Backpack,
-    iconClass: "bg-soft-blue text-electric-blue",
+    iconClass: "bg-electric-blue text-white",
     title: "Ósmoklasista",
     description:
       "Trzy przedmioty, jedna roadmapa. Matematyka, polski i angielski rozpisane od września do maja — bez paniki w kwietniu.",
@@ -31,31 +31,31 @@ const cells: WallCell[] = [
   },
   {
     icon: GraduationCap,
-    iconClass: "bg-soft-mint text-[#166534]",
+    iconClass: "bg-vivid-green text-white",
     title: "Matura podstawowa",
     description: "Pewny wynik z przedmiotów obowiązkowych, temat po temacie.",
   },
   {
     icon: TrendingUp,
-    iconClass: "bg-soft-peach text-tangerine",
+    iconClass: "bg-tangerine text-white",
     title: "Matura rozszerzona",
     description: "Trening na poziomie, którego wymaga rekrutacja na studia.",
   },
   {
     icon: RefreshCcw,
-    iconClass: "bg-soft-amber text-[#92400e]",
+    iconClass: "bg-lavender text-white",
     title: "Poprawiasz wynik",
     description: "Zaczynasz od diagnozy, nie od zera — system wskaże braki.",
   },
   {
     icon: Bot,
-    iconClass: "bg-soft-violet text-lavender",
+    iconClass: "bg-vivid-green text-white",
     title: "Uczysz się bez korepetycji",
     description: "Agent tłumaczy i pilnuje planu — jak dobry korepetytor.",
   },
   {
     icon: Users,
-    iconClass: "bg-soft-blue text-electric-blue",
+    iconClass: "bg-electric-blue text-white",
     title: "Rodzice i korepetytorzy",
     description:
       "Realny obraz postępów zamiast „będzie dobrze”. Widać, co zrobione, co opanowane i nad czym trzeba jeszcze usiąść.",
@@ -72,7 +72,7 @@ export function AudienceWall() {
   return (
     <section
       aria-labelledby="audience-heading"
-      className="border-t border-ash bg-white"
+      className="col-rules border-t border-ash bg-white"
     >
       <Container className="py-20">
         <Reveal>
@@ -102,11 +102,11 @@ export function AudienceWall() {
                 <span
                   aria-hidden
                   className={cn(
-                    "grid size-10 place-items-center rounded-cards",
+                    "grid size-9 place-items-center rounded-buttons",
                     cell.iconClass,
                   )}
                 >
-                  <cell.icon className="size-5" strokeWidth={1.8} />
+                  <cell.icon className="size-4.5" strokeWidth={2} />
                 </span>
                 <h3 className="mt-4 text-body-xl font-semibold text-charcoal">
                   {cell.title}

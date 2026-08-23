@@ -12,9 +12,10 @@ export type SubFeature = {
 };
 
 /**
- * The reference's product-feature block: a tight left-aligned intro with a
- * right-hand payload card (no dead columns), a showcase panel on the paper
- * surface, then the interactive three-column feature row (see FeatureTriad).
+ * The reference's product-feature block: a left-aligned intro that deliberately
+ * leaves its right column empty, a grey demo band where the product window is
+ * cut flush by the band's bottom edge, then the interactive three-column
+ * feature row (see FeatureTriad).
  */
 export function FeatureSection({
   id,
@@ -27,7 +28,6 @@ export function FeatureSection({
   showcase,
   subFeatures,
   highlightIndex,
-  aside,
 }: {
   id: string;
   accent: Accent;
@@ -39,60 +39,55 @@ export function FeatureSection({
   showcase: React.ReactNode;
   subFeatures: [SubFeature, SubFeature, SubFeature];
   highlightIndex: 0 | 1 | 2;
-  /** Right-hand header payload — a compact metric/mini-visual card. */
-  aside?: React.ReactNode;
 }) {
   return (
     <section
       id={id}
       aria-labelledby={`${id}-heading`}
-      className="overflow-clip border-t border-ash bg-white"
+      className="border-t border-ash bg-white"
     >
-      <Container className="pb-10 pt-20">
-        <div className="grid items-center gap-10 lg:grid-cols-[1fr_auto]">
+      <div className="col-rules">
+        <Container className="pb-20 pt-20">
           <Reveal>
-            <p className="flex items-center gap-2 text-[12px] font-medium text-steel">
+            <p className="flex items-center gap-2 text-[12px] font-medium leading-4 text-steel">
               <AccentTile icon={eyebrowIcon} accent={accent} size="sm" />
               {eyebrowLabel}
             </p>
             <h2
               id={`${id}-heading`}
-              className="mt-3 max-w-lg font-satoshi text-heading-lg font-medium leading-[1.15] text-charcoal sm:text-display sm:leading-[1.15]"
+              className="mt-3 max-w-lg text-pretty font-satoshi text-[36px] font-medium leading-[1.1] text-charcoal sm:text-[48px] sm:leading-none"
             >
               {heading}
             </h2>
-            <p className="mt-3 max-w-xl text-body-xl text-fog">{sub}</p>
-            <Button href="#cennik" variant="outline" className="mt-8">
+            <p className="mt-3 max-w-xl text-pretty text-body-xl text-fog">
+              {sub}
+            </p>
+            <Button href="#cennik" variant="outline" size="lg" className="mt-8">
               {ctaLabel}
             </Button>
           </Reveal>
-          {aside ? (
-            <Reveal delay={120} className="hidden py-2 lg:block">
-              {aside}
-            </Reveal>
-          ) : null}
-        </div>
-      </Container>
-
-      {/* Demo band — grey, hairline top and bottom, flush to the column */}
-      <div className="border-y border-ash bg-[#fafafa]">
-        <Container className="py-12">
-          <Reveal>{showcase}</Reveal>
         </Container>
       </div>
 
-      {/* Feature strip on white below the band (reference structure) */}
-      <FeatureTriad
-        accent={accent}
-        initialIndex={highlightIndex}
-        items={subFeatures.map((feature) => ({
-          title: feature.title,
-          description: feature.description,
-          iconNode: (
-            <feature.icon className="size-4" strokeWidth={1.8} aria-hidden />
-          ),
-        }))}
-      />
+      {/* Demo band: the product window sits top-aligned so the band's bottom
+          edge cuts it flush (reference), with the feature strip below it on
+          the same grey surface. */}
+      <div className="col-rules border-t border-ash bg-[#fafafa]">
+        <div className="flex h-[420px] items-start justify-center overflow-hidden px-8 pt-14">
+          <Reveal className="w-full">{showcase}</Reveal>
+        </div>
+        <FeatureTriad
+          accent={accent}
+          initialIndex={highlightIndex}
+          items={subFeatures.map((feature) => ({
+            title: feature.title,
+            description: feature.description,
+            iconNode: (
+              <feature.icon className="size-4" strokeWidth={1.8} aria-hidden />
+            ),
+          }))}
+        />
+      </div>
     </section>
   );
 }

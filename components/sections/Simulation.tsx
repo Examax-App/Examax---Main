@@ -17,7 +17,7 @@ export function Simulation() {
     <section
       id="symulacja"
       aria-labelledby="symulacja-heading"
-      className="border-t border-ash bg-white"
+      className="col-rules border-t border-ash bg-white"
     >
       <Container className="py-20">
         <Reveal>
@@ -25,9 +25,7 @@ export function Simulation() {
             <div className="p-8 sm:p-10">
               <p className="inline-flex items-center gap-2 rounded-full border border-ash bg-white px-3.5 py-1.5 text-[12px] font-semibold text-charcoal shadow-subtle">
                 <span className="size-2 rounded-full bg-lavender" aria-hidden />
-                <span className="bg-gradient-to-r from-[#db2777] to-lavender bg-clip-text text-transparent">
-                  Wkrótce · Examax Premium
-                </span>
+                <span className="text-lavender">Wkrótce · Examax Premium</span>
               </p>
               <h2
                 id="symulacja-heading"

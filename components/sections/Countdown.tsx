@@ -129,7 +129,7 @@ export function Countdown() {
     <section
       id="terminy"
       aria-labelledby="terminy-heading"
-      className="relative overflow-hidden border-t border-ash bg-paper-mist"
+      className="col-rules relative overflow-hidden border-t border-ash bg-paper-mist"
     >
       <Container className="relative py-20">
         <div className="grid items-center gap-14 lg:grid-cols-[1.1fr_1fr]">

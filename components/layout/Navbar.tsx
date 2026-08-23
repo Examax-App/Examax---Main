@@ -225,7 +225,9 @@ export function Navbar() {
       )}
       onMouseLeave={scheduleClose}
     >
-      <Container className="flex h-[72px] items-center justify-between">
+      {/* Full-width bar: the reference sets its logo against the viewport
+          edge, not the 1080px content column. */}
+      <div className="mx-auto flex h-[72px] w-full max-w-[1600px] items-center justify-between px-5 sm:px-8">
         <Link
           href="/"
           aria-label="Examax — strona główna"
@@ -369,7 +371,7 @@ export function Navbar() {
         >
           {mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}
         </button>
-      </Container>
+      </div>
 
       <div
         id="mobile-menu"

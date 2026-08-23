@@ -86,12 +86,12 @@
     #3a8bfd 288deg,
     #855afc
   );
-  /* Reference grid: 1080px white sheet on a #fafafa canvas */
+  /* Reference grid: full-bleed bands, 1080px content column */
   --page-max-width: 1080px;
 }
 
 body {
-  background: #fafafa;
+  background: var(--color-canvas-white);
   color: var(--color-charcoal);
   font-family: var(--font-inter);
   font-size: 16px;
@@ -113,7 +113,35 @@ body {
   color: #ffffff;
 }
 
-/* Fine blueprint grid — hero + dark CTA texture */
+/* Column rules — the reference's two hairlines marking the 1080px content
+   column. Every full-bleed band draws them, so they read as one pair of lines
+   running the whole page. --rule overrides the colour on dark surfaces. */
+.col-rules {
+  position: relative;
+}
+
+.col-rules::before,
+.col-rules::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 1px;
+  pointer-events: none;
+  background: var(--rule, rgb(0 0 0 / 0.05));
+}
+
+.col-rules::before {
+  left: max(0px, calc(50% - var(--page-max-width) / 2));
+}
+
+.col-rules::after {
+  right: max(0px, calc(50% - var(--page-max-width) / 2));
+}
+
+/* Fine blueprint grid — app surfaces only (auth shell, integrations tile).
+   The marketing pages carry no grid: the reference leaves them untextured. */
 .bg-grid {
   background-image: linear-gradient(
       to right,
@@ -124,17 +152,7 @@ body {
   background-size: 72px 72px;
 }
 
-.bg-grid-dark {
-  background-image: linear-gradient(
-      to right,
-      rgba(255, 255, 255, 0.04) 1px,
-      transparent 1px
-    ),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  background-size: 40px 40px;
-}
-
-/* Dotted design-system texture — editorial + testimonial sections */
+/* Dotted design-system texture — the arkusz panel in the simulation card */
 .bg-dots {
   background-image: radial-gradient(rgba(23, 23, 23, 0.14) 1.1px, transparent 1.1px);
   background-size: 15px 15px;
@@ -199,18 +217,18 @@ body {
   transform: translateY(0);
 }
 
-/* Feature-strip active-column progress fill (4s = the auto-advance beat) */
+/* Feature-strip active-column progress fill: a full-height accent bar sliding
+   down its 1px track over the 4s auto-advance beat (reference behaviour). */
 @keyframes triad-progress {
   from {
-    transform: scaleY(0);
+    transform: translateY(-100%);
   }
   to {
-    transform: scaleY(1);
+    transform: translateY(0);
   }
 }
 
 .animate-triad-progress {
-  transform-origin: top;
   animation: triad-progress 4s linear both;
 }
 

@@ -73,7 +73,7 @@ export function Pricing() {
     <section
       id="cennik"
       aria-labelledby="pricing-heading"
-      className="border-t border-ash bg-white"
+      className="col-rules border-t border-ash bg-white"
     >
       <Container className="py-20">
         <Reveal>

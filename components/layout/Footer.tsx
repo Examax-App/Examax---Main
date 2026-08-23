@@ -92,7 +92,7 @@ const socials = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-ash bg-white">
+    <footer className="col-rules border-t border-ash bg-white">
       <Container className="py-16">
         <div className="grid gap-12 lg:grid-cols-[1.1fr_2.2fr]">
           <div className="flex flex-col gap-7">
