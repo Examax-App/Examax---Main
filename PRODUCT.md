@@ -43,7 +43,16 @@ components/
   ui/              Primitives (Button, Container, Logo, Reveal, …)
 lib/               cn() helper, shared hooks, nav config, type ramps
 fonts/             Self-hosted Satoshi woff2 files (via next/font/local)
+public/            Static assets served from the site root
+  favicon.ico      Legacy favicon (browsers request /favicon.ico directly)
+  icons/           icon.svg, icon-96/192/512.png, apple-touch-icon.png
+  manifest.webmanifest
 ```
+
+Icons live in `public/` rather than as `app/` file conventions, so they are
+declared explicitly in `metadata.icons` in `app/layout.tsx`. Adding or renaming
+an icon means editing that list too — the file-based convention would sync
+automatically, but keeps the assets scattered across `app/`.
 
 Routes, folders and identifiers are English throughout; only user-facing copy
 is Polish. The product area lives at `app/dashboard/` rather than `app/app/` —

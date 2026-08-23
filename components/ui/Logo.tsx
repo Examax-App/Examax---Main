@@ -26,7 +26,7 @@ export function Logo({
       <BrandMark className={wordmark ? "h-5" : "h-6"} />
       {wordmark ? (
         <span className="font-satoshi text-[20px] font-bold leading-none tracking-tight">
-          examax
+          Examax
         </span>
       ) : null}
     </span>

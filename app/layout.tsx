@@ -58,6 +58,19 @@ export const metadata: Metadata = {
       "Kompletny system przygotowań do egzaminu ósmoklasisty i matury: roadmapa nauki, zadania z arkuszy CKE i agent AI.",
   },
   robots: { index: true, follow: true },
+  /* Icons live in /public rather than as app/ file conventions, so they are
+     declared here explicitly. Keep this list in sync with public/icons/. */
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "48x48", type: "image/x-icon" },
+      { url: "/icons/icon.svg", type: "image/svg+xml", sizes: "any" },
+      { url: "/icons/icon-96.png", type: "image/png", sizes: "96x96" },
+    ],
+    apple: [
+      { url: "/icons/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
+  manifest: "/manifest.webmanifest",
 };
 
 /* theme-color lives on the viewport export, not on metadata. */
