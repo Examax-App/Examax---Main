@@ -220,14 +220,17 @@ export function Navbar() {
       className="sticky inset-x-0 top-0 z-30 w-full transition-all"
       onMouseLeave={scheduleClose}
     >
-      {/* The surface is a separate absolutely-positioned layer that fades in
-          on scroll — at scroll-top the bar is fully transparent, exactly as
-          in the reference. */}
+      {/* The surface is a separate absolutely-positioned layer. At rest it is
+          solid white — flush with the hero behind it, so no band of the page
+          surface shows through. On scroll it thins to a glassy tint and picks
+          up the hairline. */}
       <div
         aria-hidden
         className={cn(
-          "absolute inset-0 block border-b transition-all duration-200",
-          scrolled ? "border-ash bg-white" : "border-transparent bg-transparent",
+          "absolute inset-0 block border-b transition-all duration-300",
+          scrolled
+            ? "border-ash bg-white/70 backdrop-blur-md"
+            : "border-transparent bg-white",
         )}
       />
       {/* Inner container is max-w-screen-lg (1024px), narrower than the
@@ -239,7 +242,7 @@ export function Navbar() {
           aria-label="Examax — strona główna"
           className="focus-ring rounded-buttons"
         >
-          <Logo mark={false} />
+          <Logo wordmark={false} />
         </Link>
 
         <nav aria-label="Główna nawigacja" className="relative hidden lg:block">

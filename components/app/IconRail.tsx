@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Bot, CircleHelp, Compass, Gift } from "lucide-react";
 import { cn } from "@/lib/cn";
+import { BrandMark } from "@/components/ui/BrandMark";
 
 /**
  * Leftmost product rail — brand glyph on top, product-area switches below,
@@ -14,30 +15,7 @@ export function IconRail() {
         aria-label="Examax — strona główna"
         className="mb-2 grid size-8 place-items-center rounded-[9px] bg-midnight-ink"
       >
-        <svg viewBox="0 0 32 32" className="size-8" role="presentation">
-          <defs>
-            <linearGradient
-              id="rail-spectrum"
-              x1="0"
-              y1="0"
-              x2="32"
-              y2="32"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop offset="0" stopColor="#3a8bfd" />
-              <stop offset="0.5" stopColor="#855afc" />
-              <stop offset="1" stopColor="#ff5f5f" />
-            </linearGradient>
-          </defs>
-          <path
-            d="M10 20.5 16 9.5l6 11M12.4 16.6h7.2"
-            fill="none"
-            stroke="url(#rail-spectrum)"
-            strokeWidth="2.6"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
+        <BrandMark className="size-4 text-white" />
       </Link>
 
       <RailIcon href="/app" label="Nauka" active>

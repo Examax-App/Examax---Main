@@ -119,16 +119,21 @@ export function HeroShowcase() {
   return (
     <div className="col-rules relative overflow-hidden bg-paper-mist">
       {/* White notch — the hero plane extends down as a rounded tab that hugs
-          the tab row, with a concave fillet on each side (reference detail). */}
+          the tab row. The transition is two arcs, as in the reference: an
+          88x42 concave fillet that leaves the band edge horizontally and
+          arrives vertically, handing off to the tab's own 30px bottom corner,
+          which flattens back out along the tab's base. Both joins are
+          tangent, so the whole run reads as one long shallow S — 118px of
+          horizontal travel over the notch's 72px depth. */}
       <div className="relative z-[2] flex justify-center">
-        <div className="relative rounded-b-[24px] bg-white px-6 pb-3.5">
+        <div className="relative rounded-b-[30px] bg-white px-10 pb-3 pt-[22px]">
           <span
             aria-hidden
-            className="absolute right-full top-0 size-6 bg-[radial-gradient(circle_at_0_0,transparent_0_24px,#fff_24px)]"
+            className="absolute right-full top-0 h-[42px] w-[88px] bg-[radial-gradient(88px_42px_at_0_100%,transparent_99.2%,#fff_99.6%)]"
           />
           <span
             aria-hidden
-            className="absolute left-full top-0 size-6 bg-[radial-gradient(circle_at_100%_0,transparent_0_24px,#fff_24px)]"
+            className="absolute left-full top-0 h-[42px] w-[88px] bg-[radial-gradient(88px_42px_at_100%_100%,transparent_99.2%,#fff_99.6%)]"
           />
           <div
             ref={listRef}
@@ -140,7 +145,7 @@ export function HeroShowcase() {
             {indicator ? (
               <span
                 aria-hidden
-                className="absolute rounded-full border border-ash bg-white shadow-subtle transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                className="absolute rounded-buttons bg-white shadow-subtle transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)]"
                 style={{
                   left: indicator.left,
                   top: indicator.top,
@@ -165,9 +170,9 @@ export function HeroShowcase() {
                   tabIndex={selected ? 0 : -1}
                   onClick={() => setActive(tab.key)}
                   className={cn(
-                    "focus-ring relative z-10 inline-flex items-center gap-2 rounded-full px-3.5 py-2 text-body font-medium transition-colors duration-200",
+                    "focus-ring relative z-10 inline-flex h-[38px] items-center gap-2 rounded-buttons border border-ash px-4 text-body font-medium transition-colors duration-200",
                     selected
-                      ? "text-charcoal"
+                      ? "bg-transparent text-charcoal"
                       : "bg-paper-mist text-steel hover:text-charcoal",
                   )}
                 >

@@ -11,6 +11,7 @@ import {
 import { PageHeader } from "@/components/app/PageHeader";
 import { SearchInput } from "@/components/ui/SearchInput";
 import { cn } from "@/lib/cn";
+import { BrandMark } from "@/components/ui/BrandMark";
 
 type Integration = {
   icon: LucideIcon;
@@ -78,16 +79,7 @@ function FeaturedCard({
             aria-hidden
             className="grid size-16 place-items-center rounded-full bg-midnight-ink shadow-md"
           >
-            <svg viewBox="0 0 32 32" className="size-12" role="presentation">
-              <path
-                d="M10 20.5 16 9.5l6 11M12.4 16.6h7.2"
-                fill="none"
-                stroke="#ffffff"
-                strokeWidth="2.6"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+            <BrandMark className="size-7 text-white" />
           </span>
           <X className="size-4 text-fog" aria-hidden />
           <span

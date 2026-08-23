@@ -17,8 +17,9 @@ export type TriadItem = {
 };
 
 /**
- * The reference feature strip: an 800px-wide 3-column row below the demo
- * band. The divider system is deliberately neutral — a 1px #e5e5e5 rule on
+ * The reference feature strip: a 3-column row below the demo band, spanning
+ * the full 1080px content column so its dividers line up with the page rules
+ * instead of cutting across the middle of the band. The divider system is deliberately neutral — a 1px #e5e5e5 rule on
  * every column, and a #171717 fill sliding down the active column's rule as a
  * 4s progress indicator. Colour lives in the section eyebrow, not here.
  */
@@ -59,7 +60,7 @@ export function FeatureTriad({
   return (
     <div
       ref={wrapperRef}
-      className="mx-auto grid w-full max-w-[800px] gap-y-8 px-5 py-8 md:grid-cols-3 md:gap-x-10"
+      className="mx-auto grid w-full max-w-[1080px] gap-y-8 px-5 py-10 sm:px-10 md:grid-cols-3 md:gap-x-12"
       onMouseLeave={() => setHovered(false)}
     >
       {items.map((item, index) => {

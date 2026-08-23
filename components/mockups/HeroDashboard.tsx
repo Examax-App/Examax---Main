@@ -25,6 +25,7 @@ import { Sparkline } from "@/components/ui/Sparkline";
 import { StatusBadge } from "@/components/ui/StatusBadge";
 import { useReducedMotion } from "@/lib/hooks";
 import { cn } from "@/lib/cn";
+import { BrandMark } from "@/components/ui/BrandMark";
 
 export type HeroView = "roadmap" | "practice" | "agent" | "analytics";
 
@@ -514,16 +515,7 @@ export function HeroDashboard({ view }: { view: HeroView }) {
           className="hidden w-14 shrink-0 flex-col items-center gap-4 border-r border-ash bg-paper-mist py-4 sm:flex"
         >
           <span className="grid size-8 place-items-center rounded-buttons bg-midnight-ink">
-            <svg viewBox="0 0 32 32" className="size-7" role="presentation">
-              <path
-                d="M10 20.5 16 9.5l6 11M12.4 16.6h7.2"
-                fill="none"
-                stroke="#fff"
-                strokeWidth="2.6"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+            <BrandMark className="size-4 text-white" />
           </span>
           <span className="grid size-8 place-items-center rounded-buttons bg-white text-charcoal shadow-subtle">
             <Compass className="size-4" />

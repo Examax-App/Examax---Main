@@ -2,6 +2,7 @@
 
 import { ArrowRight, BookOpenCheck } from "lucide-react";
 import { Modal } from "@/components/ui/Modal";
+import { BrandMark } from "@/components/ui/BrandMark";
 
 /**
  * The reference import dialog ("Import Your Bitly Links"): two service
@@ -30,16 +31,7 @@ export function ImportModal({
             aria-hidden
             className="grid size-11 place-items-center rounded-full bg-midnight-ink"
           >
-            <svg viewBox="0 0 32 32" className="size-9" role="presentation">
-              <path
-                d="M10 20.5 16 9.5l6 11M12.4 16.6h7.2"
-                fill="none"
-                stroke="#ffffff"
-                strokeWidth="2.6"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+            <BrandMark className="size-5 text-white" />
           </span>
         </div>
         <h2
