@@ -131,12 +131,12 @@ export function Countdown() {
       aria-labelledby="terminy-heading"
       className="relative overflow-hidden border-t border-ash bg-paper-mist"
     >
-      <Container className="relative py-24">
+      <Container className="relative py-20">
         <div className="grid items-center gap-14 lg:grid-cols-[1.1fr_1fr]">
           <Reveal>
             <h2
               id="terminy-heading"
-              className="font-satoshi text-heading-lg font-medium leading-[1.11] text-charcoal sm:text-display sm:leading-none"
+              className="font-satoshi text-heading-lg font-medium leading-[1.15] text-charcoal sm:text-display sm:leading-[1.15]"
             >
               Do egzaminu liczy się każdy dzień
             </h2>

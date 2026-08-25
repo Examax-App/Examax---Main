@@ -65,12 +65,12 @@ export function Faq() {
       aria-labelledby="faq-heading"
       className="border-t border-ash bg-white"
     >
-      <Container className="py-24">
+      <Container className="py-20">
         <div className="mx-auto max-w-3xl">
           <Reveal>
             <h2
               id="faq-heading"
-              className="font-satoshi text-heading-lg font-medium leading-[1.11] text-charcoal sm:text-display sm:leading-none"
+              className="font-satoshi text-heading-lg font-medium leading-[1.15] text-charcoal sm:text-display sm:leading-[1.15]"
             >
               Częste pytania
             </h2>

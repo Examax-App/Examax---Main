@@ -83,7 +83,7 @@ export function Editorial() {
       className="relative overflow-hidden bg-white"
     >
       <div className="bg-dots mask-fade-edges absolute inset-0" aria-hidden />
-      <Container className="relative py-24">
+      <Container className="relative py-20">
         {/* Floating outline icon tiles */}
         <div aria-hidden className="pointer-events-none absolute inset-0 hidden lg:block">
           <span className="absolute left-16 top-20 grid size-12 -rotate-6 place-items-center rounded-cards border border-ash bg-white text-steel shadow-subtle">

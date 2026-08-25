@@ -46,28 +46,28 @@ export function FeatureSection({
     <section
       id={id}
       aria-labelledby={`${id}-heading`}
-      className="border-t border-ash bg-white"
+      className="overflow-clip border-t border-ash bg-white"
     >
-      <Container className="pb-12 pt-24">
+      <Container className="pb-10 pt-20">
         <div className="grid items-center gap-10 lg:grid-cols-[1fr_auto]">
           <Reveal>
-            <p className="flex items-center gap-2 text-body font-semibold text-charcoal">
-              <AccentTile icon={eyebrowIcon} accent={accent} />
+            <p className="flex items-center gap-1.5 text-[12px] font-medium text-steel">
+              <AccentTile icon={eyebrowIcon} accent={accent} size="sm" />
               {eyebrowLabel}
             </p>
             <h2
               id={`${id}-heading`}
-              className="mt-5 max-w-2xl font-satoshi text-heading-lg font-medium leading-[1.11] text-charcoal sm:text-display sm:leading-none"
+              className="mt-5 max-w-2xl font-satoshi text-heading-lg font-medium leading-[1.15] text-charcoal sm:text-display sm:leading-[1.15]"
             >
               {heading}
             </h2>
-            <p className="mt-5 max-w-xl text-body-xl text-fog">{sub}</p>
-            <Button href="#cennik" variant="outline" className="mt-7">
+            <p className="mt-4 max-w-xl text-body-xl text-fog">{sub}</p>
+            <Button href="#cennik" variant="outline" className="mt-6">
               {ctaLabel}
             </Button>
           </Reveal>
           {aside ? (
-            <Reveal delay={120} className="hidden lg:block">
+            <Reveal delay={120} className="hidden py-2 lg:block">
               {aside}
             </Reveal>
           ) : null}
@@ -75,7 +75,7 @@ export function FeatureSection({
       </Container>
 
       <div className="border-t border-ash bg-[#fafafa]">
-        <Container className="py-16">
+        <Container className="py-12">
           <Reveal>{showcase}</Reveal>
           <FeatureTriad
             accent={accent}

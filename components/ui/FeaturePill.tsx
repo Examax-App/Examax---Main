@@ -45,8 +45,8 @@ export function AccentTile({
     <span
       aria-hidden
       className={cn(
-        "grid shrink-0 place-items-center rounded-[6px] text-white",
-        size === "sm" ? "size-4" : "size-5",
+        "grid shrink-0 place-items-center text-white",
+        size === "sm" ? "size-4 rounded-[4px]" : "size-5 rounded-[6px]",
         accentStyles[accent].tile,
         className,
       )}

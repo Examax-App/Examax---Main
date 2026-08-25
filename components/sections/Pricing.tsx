@@ -75,11 +75,11 @@ export function Pricing() {
       aria-labelledby="pricing-heading"
       className="border-t border-ash bg-white"
     >
-      <Container className="py-24">
+      <Container className="py-20">
         <Reveal>
           <h2
             id="pricing-heading"
-            className="max-w-md font-satoshi text-heading-lg font-medium leading-[1.11] text-charcoal sm:text-display sm:leading-none"
+            className="max-w-md font-satoshi text-heading-lg font-medium leading-[1.15] text-charcoal sm:text-display sm:leading-[1.15]"
           >
             Prosty cennik na cały rok szkolny
           </h2>

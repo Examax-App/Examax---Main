@@ -74,12 +74,12 @@ export function AudienceWall() {
       aria-labelledby="audience-heading"
       className="border-t border-ash bg-white"
     >
-      <Container className="py-24">
+      <Container className="py-20">
         <Reveal>
           <div className="flex flex-wrap items-end justify-between gap-6">
             <h2
               id="audience-heading"
-              className="max-w-lg font-satoshi text-heading-lg font-medium leading-[1.11] text-charcoal sm:text-display sm:leading-none"
+              className="max-w-lg font-satoshi text-heading-lg font-medium leading-[1.15] text-charcoal sm:text-display sm:leading-[1.15]"
             >
               Dla każdego, kto ma egzamin przed sobą
             </h2>

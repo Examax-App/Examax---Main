@@ -19,7 +19,7 @@ export function Simulation() {
       aria-labelledby="symulacja-heading"
       className="border-t border-ash bg-white"
     >
-      <Container className="py-24">
+      <Container className="py-20">
         <Reveal>
           <div className="grid overflow-hidden rounded-largecards border border-ash lg:grid-cols-[1.5fr_1fr]">
             <div className="p-8 sm:p-10">

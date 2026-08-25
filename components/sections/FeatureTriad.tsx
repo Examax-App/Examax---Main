@@ -24,6 +24,14 @@ const accentBg: Record<Accent, string> = {
   blue: "bg-electric-blue",
 };
 
+/* Stacked layout (<md): the accent moves from a left bar to a top border. */
+const accentTopBorder: Record<Accent, string> = {
+  tangerine: "max-md:border-t-2 max-md:border-t-tangerine",
+  green: "max-md:border-t-2 max-md:border-t-vivid-green",
+  lavender: "max-md:border-t-2 max-md:border-t-lavender",
+  blue: "max-md:border-t-2 max-md:border-t-electric-blue",
+};
+
 /**
  * The three-column feature row under each demo. Every column renders at full
  * contrast; the accent bar and colored icon mark the active column, following
@@ -94,7 +102,7 @@ export function FeatureTriad({
         <span
           aria-hidden
           className={cn(
-            "absolute w-0.5 rounded-full transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]",
+            "absolute hidden w-0.5 rounded-full transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] md:block",
             accentBg[accent],
           )}
           style={{ left: bar.left, top: bar.top, height: bar.height }}
@@ -114,32 +122,47 @@ export function FeatureTriad({
               setActive(index);
             }}
             onFocus={() => setActive(index)}
-            className="h-full border-l border-ash pl-5"
+            className={cn(
+              "h-full border-t border-ash pt-4 md:border-l md:border-t-0 md:pl-5 md:pt-0",
+              isActive && accentTopBorder[accent],
+            )}
           >
             <span
               aria-hidden
               className={cn(
                 "block w-fit transition-colors duration-300",
-                isActive ? accentStyles[accent].text : "text-steel",
+                isActive ? accentStyles[accent].text : "text-silver",
               )}
             >
               {item.iconNode}
             </span>
-            <h3 className="mt-4 text-body-xl font-semibold text-charcoal">
+            <h3
+              className={cn(
+                "mt-4 text-body-lg font-medium transition-colors duration-300",
+                isActive ? "text-charcoal" : "text-silver",
+              )}
+            >
               {item.title}
             </h3>
-            <p className="mt-2.5 text-body-lg text-steel">{item.description}</p>
+            <p
+              className={cn(
+                "mt-2 text-body leading-5 transition-colors duration-300",
+                isActive ? "text-fog" : "text-smoke",
+              )}
+            >
+              {item.description}
+            </p>
             <a
               href="#cennik"
               className={cn(
-                "link-underline mt-4 inline-flex items-center gap-1 text-body-lg font-medium transition-colors duration-300",
-                isActive ? accentStyles[accent].text : "text-slate",
+                "focus-ring group/link mt-4 inline-flex items-center gap-1 rounded-[4px] text-body font-medium transition-colors duration-300",
+                isActive ? accentStyles[accent].text : "text-smoke",
               )}
             >
               Dowiedz się więcej
               <ChevronRight
                 className={cn(
-                  "size-4 transition-transform duration-300",
+                  "size-4 transition-transform duration-300 group-hover/link:-translate-y-0.5",
                   isActive && "translate-x-0.5",
                 )}
                 aria-hidden

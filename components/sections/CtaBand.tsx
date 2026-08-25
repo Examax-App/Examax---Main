@@ -32,7 +32,7 @@ export function CtaBand() {
         <Reveal>
           <h2
             id="cta-heading"
-            className="max-w-2xl font-satoshi text-heading-lg font-medium leading-[1.11] text-white sm:text-display sm:leading-none"
+            className="max-w-2xl font-satoshi text-heading-lg font-medium leading-[1.15] text-white sm:text-display sm:leading-[1.15]"
           >
             Wejdź na salę ze spokojną głową
           </h2>
