@@ -309,11 +309,3 @@ html {
   background-size: 100% 1px;
 }
 
-/* Dotted underline on pricing feature items — matches the reference tables */
-.underline-dotted {
-  text-decoration-line: underline;
-  text-decoration-style: dotted;
-  text-decoration-color: var(--color-pebble);
-  text-underline-offset: 4px;
-  text-decoration-thickness: 1px;
-}

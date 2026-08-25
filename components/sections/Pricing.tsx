@@ -101,7 +101,7 @@ export function Pricing() {
                 onClick={() => setYearly(false)}
                 aria-pressed={!yearly}
                 className={cn(
-                  "rounded-full px-4 py-2 text-body font-medium transition-colors",
+                  "focus-ring rounded-full px-4 py-2 text-body font-medium transition-colors duration-150",
                   !yearly
                     ? "border border-ash bg-white text-charcoal shadow-subtle"
                     : "text-steel hover:text-charcoal",
@@ -114,7 +114,7 @@ export function Pricing() {
                 onClick={() => setYearly(true)}
                 aria-pressed={yearly}
                 className={cn(
-                  "flex items-center gap-2 rounded-full px-4 py-2 text-body font-medium transition-colors",
+                  "focus-ring flex items-center gap-2 rounded-full px-4 py-2 text-body font-medium transition-colors duration-150",
                   yearly
                     ? "border border-ash bg-white text-charcoal shadow-subtle"
                     : "text-steel hover:text-charcoal",
@@ -163,7 +163,12 @@ export function Pricing() {
             <Reveal key={plan.name} delay={index * 60} className="h-full">
               <article
                 aria-label={`Plan ${plan.name}`}
-                className="flex h-full flex-col rounded-largecards border border-ash bg-[#fafafa] p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-md motion-reduce:hover:translate-y-0"
+                className={cn(
+                  "flex h-full flex-col rounded-cards border bg-white p-6 shadow-subtle transition-shadow duration-150 hover:shadow-md",
+                  plan.bestValue
+                    ? "border-midnight-ink ring-1 ring-midnight-ink"
+                    : "border-ash",
+                )}
               >
                 <div className="flex items-center gap-2.5">
                   <h3 className="text-heading-sm font-medium text-charcoal">
@@ -214,7 +219,7 @@ export function Pricing() {
                           strokeWidth={1.8}
                           aria-hidden
                         />
-                        <span className="underline-dotted">{feature.label}</span>
+                        <span>{feature.label}</span>
                       </li>
                     ))}
                   </ul>

@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Minus, Plus } from "lucide-react";
+import { ChevronDown } from "lucide-react";
+import { cn } from "@/lib/cn";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 
@@ -89,14 +90,16 @@ export function Faq() {
                         aria-expanded={open}
                         aria-controls={`faq-panel-${index}`}
                         id={`faq-button-${index}`}
-                        className="flex w-full items-center justify-between gap-6 py-6 text-left text-body-xl font-semibold text-charcoal transition-colors hover:text-graphite"
+                        className="focus-ring flex w-full items-center justify-between gap-6 py-6 text-left text-body-xl font-semibold text-charcoal transition-colors duration-150 hover:text-steel"
                       >
                         {faq.question}
-                        {open ? (
-                          <Minus className="size-5 shrink-0" aria-hidden />
-                        ) : (
-                          <Plus className="size-5 shrink-0" aria-hidden />
-                        )}
+                        <ChevronDown
+                          className={cn(
+                            "size-4 shrink-0 text-fog transition-transform duration-150 ease-out",
+                            open && "rotate-180",
+                          )}
+                          aria-hidden
+                        />
                       </button>
                     </h3>
                     <div
