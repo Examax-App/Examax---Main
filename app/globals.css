@@ -182,25 +182,6 @@ body {
   );
 }
 
-/* Coverage marquee — two counter-scrolling rows; each track holds four
-   copies of the list, so -25% loops seamlessly */
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-25%);
-  }
-}
-
-.animate-marquee-left {
-  animation: marquee 36s linear infinite;
-}
-
-.animate-marquee-right {
-  animation: marquee 42s linear infinite reverse;
-}
-
 /* Viewport reveal — driven by the <Reveal /> component. The hidden state is
    only ever applied by JS to elements below the current viewport, so content
    is always readable without it (deep links, restored scroll, no JS). */
@@ -299,8 +280,6 @@ body {
   .animate-float-delayed,
   .animate-view-swap,
   .animate-demo-ripple,
-  .animate-marquee-left,
-  .animate-marquee-right,
   .animate-funnel-sheen {
     animation: none;
   }

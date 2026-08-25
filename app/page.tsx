@@ -20,14 +20,12 @@ import {
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
-import { CoverageMarquee } from "@/components/sections/CoverageMarquee";
+import { ProofBar } from "@/components/sections/ProofBar";
 import { Editorial } from "@/components/sections/Editorial";
 import { FeatureSection } from "@/components/sections/FeatureSection";
-import { Testimonial } from "@/components/sections/Testimonial";
 import { Simulation } from "@/components/sections/Simulation";
 import { Countdown } from "@/components/sections/Countdown";
 import { AudienceWall } from "@/components/sections/AudienceWall";
-import { StatsBand } from "@/components/sections/StatsBand";
 import { Pricing } from "@/components/sections/Pricing";
 import { Faq } from "@/components/sections/Faq";
 import { CtaBand } from "@/components/sections/CtaBand";
@@ -126,7 +124,7 @@ export default function Home() {
       <main id="main" className="flex-1 pt-[72px]">
         <div className="relative mx-auto w-full max-w-[1080px] border-x border-ash bg-white">
           <Hero />
-          <CoverageMarquee />
+          <ProofBar />
           <Editorial />
 
           <FeatureSection
@@ -160,19 +158,6 @@ export default function Home() {
                   "Roadmapa wskazuje, co zrobić dziś, żeby wynik ruszył do przodu.",
               },
             ]}
-          />
-
-          {/* TODO: replace with a real, consented beta-user quote */}
-          <Testimonial
-            quote={
-              <>
-                Najbardziej pomogło mi to, że w końcu wiedziałam, czego się
-                uczyć. Otwieram Examax, widzę kolejny krok z roadmapy i po
-                prostu go robię — bez godziny szukania materiałów.
-              </>
-            }
-            attribution="Uczennica, klasa maturalna"
-            context="opinia z testów bety"
           />
 
           <FeatureSection
@@ -241,19 +226,6 @@ export default function Home() {
             ]}
           />
 
-          {/* TODO: replace with a real, consented tutor quote */}
-          <Testimonial
-            quote={
-              <>
-                Pierwsze narzędzie, które pokazuje uczniom egzamin jako plan, a
-                nie stos zadań. Uczniowie w końcu wiedzą, po co robią kolejne
-                zadanie.
-              </>
-            }
-            attribution="Korepetytor matematyki"
-            context="opinia z testów bety"
-          />
-
           <FeatureSection
             id="postepy"
             accent="blue"
@@ -290,7 +262,6 @@ export default function Home() {
           <Simulation />
           <Countdown />
           <AudienceWall />
-          <StatsBand />
           <Pricing />
           <Faq />
           <CtaBand />
