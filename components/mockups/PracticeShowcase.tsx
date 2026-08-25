@@ -76,7 +76,7 @@ export function PracticeShowcase() {
                 Matematyka · E8
               </p>
               <span className="inline-flex items-center gap-1.5 rounded-full border border-ash px-3 py-1.5 text-[12px] font-medium text-charcoal">
-                <Timer className="size-3.5 text-lavender" aria-hidden />
+                <Timer className="size-3.5 text-vivid-green" aria-hidden />
                 <span className="font-geist-mono tabular-nums">
                   {formatClock(seconds)}
                 </span>{" "}
@@ -151,7 +151,7 @@ export function PracticeShowcase() {
             <div className="mt-4 flex items-center justify-between">
               <p className="text-[12px] font-medium text-fog">Tryb na czas</p>
               <span
-                className="relative inline-flex h-5 w-9 items-center rounded-full bg-lavender"
+                className="relative inline-flex h-5 w-9 items-center rounded-full bg-vivid-green"
                 aria-hidden
               >
                 <span className="absolute right-0.5 size-4 rounded-full bg-white shadow-subtle" />

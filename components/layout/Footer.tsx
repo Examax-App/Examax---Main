@@ -13,11 +13,18 @@ import { Logo } from "@/components/ui/Logo";
 import { AccentTile } from "@/components/ui/FeaturePill";
 
 const productLinks = [
-  { label: "Roadmapa nauki", href: "#roadmapa", icon: Route, accent: "lavender" as const },
-  { label: "Trening zadań", href: "#trening", icon: PencilLine, accent: "lavender" as const },
+  { label: "Roadmapa nauki", href: "#roadmapa", icon: Route, accent: "tangerine" as const },
+  { label: "Trening zadań", href: "#trening", icon: PencilLine, accent: "green" as const },
   { label: "Agent Examax", href: "#agent", icon: Bot, accent: "lavender" as const },
-  { label: "Śledzenie postępów", href: "#postepy", icon: BarChart3, accent: "lavender" as const },
+  { label: "Śledzenie postępów", href: "#postepy", icon: BarChart3, accent: "blue" as const },
 ];
+
+const footerHrefs: Record<string, string> = {
+  Kontakt: "/kontakt",
+  "Centrum pomocy": "/pomoc",
+  Cennik: "/#cennik",
+  FAQ: "/#faq",
+};
 
 const columns = [
   {
@@ -186,7 +193,7 @@ export function Footer() {
                   {column.links.map((label) => (
                     <li key={label}>
                       <a
-                        href="#"
+                        href={footerHrefs[label] ?? "#"}
                         className="link-underline text-body text-steel transition-colors hover:text-charcoal"
                       >
                         {label}

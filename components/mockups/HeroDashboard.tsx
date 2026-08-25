@@ -275,12 +275,12 @@ function RoadmapView() {
           </p>
           <p className="text-[12px] text-fog">Roadmapa do maja 2027</p>
         </div>
-        <span className="font-geist-mono text-[12px] font-medium text-lavender">
+        <span className="font-geist-mono text-[12px] font-medium text-tangerine">
           42% ukończone
         </span>
       </div>
       <div className="mt-2 h-2 overflow-hidden rounded-full bg-paper-mist">
-        <div className="h-full w-[42%] rounded-full bg-lavender" />
+        <div className="h-full w-[42%] rounded-full bg-tangerine" />
       </div>
       <ol className="relative mt-4 space-y-2">
         {roadmapNodes.map((node) => (
@@ -289,7 +289,7 @@ function RoadmapView() {
             className={cn(
               "flex items-center gap-3 rounded-cards border px-3.5 py-2.5 transition-colors",
               node.state === "active"
-                ? "border-lavender/40 bg-sidebar-active/40"
+                ? "border-tangerine/40 bg-soft-peach/40"
                 : "border-ash",
               node.state === "todo" && "opacity-55",
             )}
@@ -300,7 +300,7 @@ function RoadmapView() {
                 node.state === "done" &&
                   "border-vivid-green bg-vivid-green text-white",
                 node.state === "active" &&
-                  "border-lavender bg-white text-lavender",
+                  "border-tangerine bg-white text-tangerine",
                 node.state === "next" && "border-smoke bg-white text-fog",
                 node.state === "todo" &&
                   "border-dashed border-smoke bg-white text-fog",
@@ -309,7 +309,7 @@ function RoadmapView() {
             >
               {node.state === "done" ? <Check className="size-3" /> : null}
               {node.state === "active" ? (
-                <span className="size-2 rounded-full bg-lavender" />
+                <span className="size-2 rounded-full bg-tangerine" />
               ) : null}
             </span>
             <span className="min-w-0">
@@ -321,7 +321,7 @@ function RoadmapView() {
               </span>
             </span>
             {node.state === "active" ? (
-              <span className="ml-auto hidden shrink-0 rounded-full bg-lavender px-2.5 py-1 text-[11px] font-medium text-white sm:block">
+              <span className="ml-auto hidden shrink-0 rounded-full bg-midnight-ink px-2.5 py-1 text-[11px] font-medium text-white sm:block">
                 Kontynuuj
               </span>
             ) : null}
@@ -340,7 +340,7 @@ function AgentView() {
           <FileText className="size-3" aria-hidden />
           Zadanie 7 · Procenty · Arkusz E8 2024
         </span>
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-sidebar-active px-2.5 py-1 text-[11px] font-medium leading-none text-lavender">
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-soft-violet px-2.5 py-1 text-[11px] font-medium leading-none text-lavender">
           <Sparkles className="size-3" aria-hidden />
           Agent Examax
         </span>
@@ -387,9 +387,9 @@ function AgentView() {
 
 function AnalyticsView() {
   const funnel = [
-    { label: "Przerobione", value: "1 246", pct: 100, className: "bg-lavender" },
-    { label: "Poprawne", value: "1 047", pct: 84, className: "bg-[#a78bfa]" },
-    { label: "Opanowane", value: "38 tematów", pct: 38, className: "bg-[#c4b5fd]" },
+    { label: "Przerobione", value: "1 246", pct: 100, className: "bg-electric-blue" },
+    { label: "Poprawne", value: "1 047", pct: 84, className: "bg-[#60a5fa]" },
+    { label: "Opanowane", value: "38 tematów", pct: 38, className: "bg-[#93c5fd]" },
   ];
   return (
     <div className="animate-view-swap">
@@ -561,7 +561,7 @@ export function HeroDashboard({ view }: { view: HeroView }) {
                           className={cn(
                             "flex items-center gap-2 rounded-buttons px-2 py-1.5 text-[13px] transition-colors duration-300",
                             active
-                              ? "bg-sidebar-active font-medium text-lavender"
+                              ? "bg-sidebar-active font-medium text-electric-blue"
                               : "text-slate",
                           )}
                         >
@@ -572,7 +572,7 @@ export function HeroDashboard({ view }: { view: HeroView }) {
                               className={cn(
                                 "ml-auto rounded-full px-1.5 py-0.5 text-[10px] font-medium leading-none transition-colors duration-300",
                                 active
-                                  ? "bg-lavender text-white"
+                                  ? "bg-electric-blue text-white"
                                   : "bg-ash text-steel",
                               )}
                             >
@@ -637,7 +637,7 @@ export function HeroDashboard({ view }: { view: HeroView }) {
             {showRipple ? (
               <span
                 key={step}
-                className="animate-demo-ripple absolute -left-3 -top-3 size-8 rounded-full bg-lavender/50"
+                className="animate-demo-ripple absolute -left-3 -top-3 size-8 rounded-full bg-electric-blue/50"
               />
             ) : null}
             <svg

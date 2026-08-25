@@ -349,10 +349,10 @@ export function Navbar() {
         </nav>
 
         <div className="hidden items-center gap-2 lg:flex">
-          <Button href="#cennik" variant="outline">
+          <Button href="/logowanie" variant="outline">
             Zaloguj się
           </Button>
-          <Button href="#cennik" variant="primary">
+          <Button href="/rejestracja" variant="primary">
             Załóż konto
           </Button>
         </div>
@@ -406,10 +406,10 @@ export function Navbar() {
             </Link>
           ))}
           <div className="mt-3 flex gap-2 border-t border-ash pt-4">
-            <Button href="#cennik" variant="outline" className="flex-1">
+            <Button href="/logowanie" variant="outline" className="flex-1">
               Zaloguj się
             </Button>
-            <Button href="#cennik" variant="primary" className="flex-1">
+            <Button href="/rejestracja" variant="primary" className="flex-1">
               Załóż konto
             </Button>
           </div>

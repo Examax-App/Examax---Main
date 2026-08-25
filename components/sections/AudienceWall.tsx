@@ -23,7 +23,7 @@ type WallCell = {
 const cells: WallCell[] = [
   {
     icon: Backpack,
-    iconClass: "bg-sidebar-active text-lavender",
+    iconClass: "bg-soft-blue text-electric-blue",
     title: "Ósmoklasista",
     description:
       "Trzy przedmioty, jedna roadmapa. Matematyka, polski i angielski rozpisane od września do maja — bez paniki w kwietniu.",
@@ -31,31 +31,31 @@ const cells: WallCell[] = [
   },
   {
     icon: GraduationCap,
-    iconClass: "bg-sidebar-active text-lavender",
+    iconClass: "bg-soft-mint text-[#166534]",
     title: "Matura podstawowa",
     description: "Pewny wynik z przedmiotów obowiązkowych, temat po temacie.",
   },
   {
     icon: TrendingUp,
-    iconClass: "bg-sidebar-active text-lavender",
+    iconClass: "bg-soft-peach text-tangerine",
     title: "Matura rozszerzona",
     description: "Trening na poziomie, którego wymaga rekrutacja na studia.",
   },
   {
     icon: RefreshCcw,
-    iconClass: "bg-sidebar-active text-lavender",
+    iconClass: "bg-soft-amber text-[#92400e]",
     title: "Poprawiasz wynik",
     description: "Zaczynasz od diagnozy, nie od zera — system wskaże braki.",
   },
   {
     icon: Bot,
-    iconClass: "bg-sidebar-active text-lavender",
+    iconClass: "bg-soft-violet text-lavender",
     title: "Uczysz się bez korepetycji",
     description: "Agent tłumaczy i pilnuje planu — jak dobry korepetytor.",
   },
   {
     icon: Users,
-    iconClass: "bg-sidebar-active text-lavender",
+    iconClass: "bg-soft-blue text-electric-blue",
     title: "Rodzice i korepetytorzy",
     description:
       "Realny obraz postępów zamiast „będzie dobrze”. Widać, co zrobione, co opanowane i nad czym trzeba jeszcze usiąść.",

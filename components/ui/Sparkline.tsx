@@ -16,12 +16,12 @@ export function Sparkline({ className }: { className?: string }) {
     >
       <defs>
         <linearGradient id={`${id}-stroke`} x1="0" y1="0" x2="96" y2="0" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stopColor="#6d28d9" />
-          <stop offset="1" stopColor="#a78bfa" />
+          <stop offset="0" stopColor="#1d4ed8" />
+          <stop offset="1" stopColor="#60a5fa" />
         </linearGradient>
         <linearGradient id={`${id}-fill`} x1="0" y1="0" x2="0" y2="32" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stopColor="#a78bfa" stopOpacity="0.25" />
-          <stop offset="1" stopColor="#a78bfa" stopOpacity="0" />
+          <stop offset="0" stopColor="#60a5fa" stopOpacity="0.25" />
+          <stop offset="1" stopColor="#60a5fa" stopOpacity="0" />
         </linearGradient>
       </defs>
       <path

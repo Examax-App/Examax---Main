@@ -3,6 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { HeroShowcase } from "@/components/sections/HeroShowcase";
+import { HeroCountdown } from "@/components/ui/ExamCountdown";
 
 /**
  * Above-the-fold content renders at final opacity on first paint — the hero
@@ -31,13 +32,12 @@ export function Hero() {
             id="hero-heading"
             className="mt-8 max-w-3xl font-satoshi text-[38px] font-medium leading-[1.02] tracking-[-0.01em] text-charcoal sm:text-[56px]"
           >
-            Zamień naukę w wyniki
+            Twoje braki. Twoje zadania. Twój wynik.
           </h1>
 
           <p className="mt-6 max-w-xl text-body-xl text-steel">
-            Examax to kompletny system przygotowań do egzaminu ósmoklasisty
-            i&nbsp;matury — roadmapa nauki, zadania z arkuszy CKE i agent AI,
-            który tłumaczy tak długo, aż zrozumiesz.
+            Examax znajduje pytania, w których się mylisz, i buduje z nich
+            Twój osobisty trening przed egzaminem ósmoklasisty i&nbsp;maturą.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
@@ -48,6 +48,9 @@ export function Hero() {
               Zobacz, jak działa
             </Button>
           </div>
+
+          {/* Live countdown — the strongest emotional asset, above the fold */}
+          <HeroCountdown />
         </Container>
       </div>
 

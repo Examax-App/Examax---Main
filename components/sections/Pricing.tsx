@@ -121,10 +121,39 @@ export function Pricing() {
                 )}
               >
                 Rocznie
-                <span className="rounded-full bg-sidebar-active px-2 py-0.5 text-[11px] font-medium text-lavender">
+                <span className="rounded-full bg-soft-mint px-2 py-0.5 text-[11px] font-medium text-[#166534]">
                   2 miesiące gratis
                 </span>
               </button>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* Price anchor — the real competitor is private tutoring */}
+        <Reveal delay={140}>
+          <div className="mx-auto mt-10 grid max-w-4xl items-stretch gap-px overflow-hidden rounded-largecards border border-ash bg-ash sm:grid-cols-[1fr_auto_1fr]">
+            <div className="bg-white p-6">
+              <p className="text-[12px] font-medium uppercase tracking-[0.12em] text-fog">
+                Godzina korepetycji
+              </p>
+              <p className="mt-2 font-geist-mono text-heading-sm font-medium leading-none text-steel">
+                80–150 zł
+              </p>
+              <p className="mt-2 text-body text-fog">za 60 minut, raz</p>
+            </div>
+            <div className="grid place-items-center bg-white px-5 py-3 text-body font-semibold uppercase tracking-[0.1em] text-fog">
+              vs
+            </div>
+            <div className="bg-white p-6">
+              <p className="text-[12px] font-medium uppercase tracking-[0.12em] text-fog">
+                Miesiąc Examax Premium
+              </p>
+              <p className="mt-2 font-geist-mono text-heading-sm font-medium leading-none text-electric-blue">
+                29 zł
+              </p>
+              <p className="mt-2 text-body text-fog">
+                codziennie, przez cały miesiąc
+              </p>
             </div>
           </div>
         </Reveal>
@@ -141,7 +170,7 @@ export function Pricing() {
                     {plan.name}
                   </h3>
                   {plan.bestValue ? (
-                    <span className="rounded-full bg-[#ece2fb] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.08em] text-lavender">
+                    <span className="rounded-full bg-sidebar-active px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.08em] text-electric-blue">
                       Najczęściej wybierany
                     </span>
                   ) : null}

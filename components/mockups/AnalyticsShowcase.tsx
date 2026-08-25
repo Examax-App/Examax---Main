@@ -116,16 +116,16 @@ export function AnalyticsShowcase() {
             <svg viewBox="0 0 640 170" className="w-full" aria-hidden>
               <defs>
                 <linearGradient id="funnel-1" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0" stopColor="#6d28d9" />
-                  <stop offset="1" stopColor="#7c3aed" />
+                  <stop offset="0" stopColor="#1d4ed8" />
+                  <stop offset="1" stopColor="#2563eb" />
                 </linearGradient>
                 <linearGradient id="funnel-2" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0" stopColor="#8b5cf6" />
-                  <stop offset="1" stopColor="#a78bfa" />
+                  <stop offset="0" stopColor="#3b82f6" />
+                  <stop offset="1" stopColor="#60a5fa" />
                 </linearGradient>
                 <linearGradient id="funnel-3" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0" stopColor="#c4b5fd" />
-                  <stop offset="1" stopColor="#ddd6fe" />
+                  <stop offset="0" stopColor="#93c5fd" />
+                  <stop offset="1" stopColor="#bfdbfe" />
                 </linearGradient>
                 <linearGradient id="funnel-sheen-fill" x1="0" y1="0" x2="1" y2="0">
                   <stop offset="0" stopColor="#fff" stopOpacity="0" />

@@ -71,7 +71,7 @@ export function AgentShowcase() {
                 </span>
                 Agent Examax
               </p>
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-sidebar-active px-3 py-1.5 text-[12px] font-medium leading-none text-lavender">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-soft-violet px-3 py-1.5 text-[12px] font-medium leading-none text-lavender">
                 <Sparkles className="size-3.5" aria-hidden />
                 Widzi Twoje odpowiedzi
               </span>

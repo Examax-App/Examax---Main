@@ -21,7 +21,13 @@
   --color-tangerine: #ea580c;
   --color-lavender: #7c3aed;
   --color-primary-action-fill: #000000;
-  --color-sidebar-active: #ece2fb;
+  /* Soft tint palette — small badge backgrounds and highlights only
+     (DESIGN.md: never large surfaces). Sidebar active = Dub's light blue. */
+  --color-sidebar-active: #dbeaff;
+  --color-soft-blue: #dbeaff;
+  --color-soft-violet: #ede9fe;
+  --color-soft-peach: #ffedd5;
+  --color-soft-amber: #fef3c7;
 
   /* Typography */
   --font-satoshi: var(--font-satoshi-local), var(--font-inter-local),
@@ -94,7 +100,7 @@ body {
 }
 
 ::selection {
-  background: var(--color-lavender);
+  background: var(--color-electric-blue);
   color: #ffffff;
 }
 
@@ -148,6 +154,42 @@ body {
 .mask-fade-bottom {
   -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
   mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+}
+
+.mask-fade-x {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 12%,
+    black 88%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 12%,
+    black 88%,
+    transparent
+  );
+}
+
+/* Coverage marquee — two counter-scrolling rows; each track holds four
+   copies of the list, so -25% loops seamlessly */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-25%);
+  }
+}
+
+.animate-marquee-left {
+  animation: marquee 36s linear infinite;
+}
+
+.animate-marquee-right {
+  animation: marquee 42s linear infinite reverse;
 }
 
 /* Viewport reveal — driven by the <Reveal /> component. The hidden state is
@@ -248,6 +290,8 @@ body {
   .animate-float-delayed,
   .animate-view-swap,
   .animate-demo-ripple,
+  .animate-marquee-left,
+  .animate-marquee-right,
   .animate-funnel-sheen {
     animation: none;
   }

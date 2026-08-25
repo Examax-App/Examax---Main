@@ -11,9 +11,9 @@ function StudentCard() {
         <p className="text-[12px] font-medium text-fog">Marzec 2027</p>
         <dl className="mt-3 space-y-1.5 text-[13px]">
           {[
-            { dot: "bg-lavender", label: "Zadania", value: "3 214" },
-            { dot: "bg-[#a78bfa]", label: "Poprawne", value: "2 705" },
-            { dot: "bg-[#c4b5fd]", label: "Opanowane", value: "38 tematów" },
+            { dot: "bg-electric-blue", label: "Zadania", value: "3 214" },
+            { dot: "bg-[#60a5fa]", label: "Poprawne", value: "2 705" },
+            { dot: "bg-[#93c5fd]", label: "Opanowane", value: "38 tematów" },
           ].map((row) => (
             <div key={row.label} className="flex items-center gap-2">
               <span className={`size-2 rounded-[3px] ${row.dot}`} aria-hidden />
@@ -113,8 +113,8 @@ export function Editorial() {
               </p>
               <p>
                 Examax łączy{" "}
-                <span className="font-medium text-lavender">roadmapę</span>,{" "}
-                <span className="font-medium text-lavender">zadania CKE</span>{" "}
+                <span className="font-medium text-tangerine">roadmapę</span>,{" "}
+                <span className="font-medium text-vivid-green">zadania CKE</span>{" "}
                 i{" "}
                 <span className="font-medium text-lavender">agenta AI</span> —
                 w jeden system przygotowań.

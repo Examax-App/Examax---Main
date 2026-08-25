@@ -20,14 +20,14 @@ import {
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
-import { LogoCloud } from "@/components/sections/LogoCloud";
+import { CoverageMarquee } from "@/components/sections/CoverageMarquee";
 import { Editorial } from "@/components/sections/Editorial";
 import { FeatureSection } from "@/components/sections/FeatureSection";
 import { Testimonial } from "@/components/sections/Testimonial";
 import { Simulation } from "@/components/sections/Simulation";
 import { Countdown } from "@/components/sections/Countdown";
 import { AudienceWall } from "@/components/sections/AudienceWall";
-import { Changelog } from "@/components/sections/Changelog";
+import { StatsBand } from "@/components/sections/StatsBand";
 import { Pricing } from "@/components/sections/Pricing";
 import { Faq } from "@/components/sections/Faq";
 import { CtaBand } from "@/components/sections/CtaBand";
@@ -48,7 +48,7 @@ function RoadmapAside() {
       </p>
       <p className="mt-2 text-body-lg font-semibold text-charcoal">Procenty</p>
       <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-paper-mist">
-        <div className="h-full w-[68%] rounded-full bg-lavender" />
+        <div className="h-full w-[68%] rounded-full bg-tangerine" />
       </div>
       <p className="mt-2 text-[12px] text-fog">
         68% opanowania · potem: Równania
@@ -65,7 +65,7 @@ function TreningAside() {
           Zadanie 14 z 19
         </p>
         <span className="inline-flex items-center gap-1.5 rounded-full border border-ash px-2 py-1 text-[11px] font-medium text-charcoal">
-          <Timer className="size-3 text-lavender" aria-hidden />
+          <Timer className="size-3 text-vivid-green" aria-hidden />
           <span className="font-geist-mono tabular-nums">24:36</span>
         </span>
       </div>
@@ -126,12 +126,12 @@ export default function Home() {
       <main id="main" className="flex-1 pt-[72px]">
         <div className="relative mx-auto w-full max-w-[1200px] bg-white">
           <Hero />
-          <LogoCloud />
+          <CoverageMarquee />
           <Editorial />
 
           <FeatureSection
             id="roadmapa"
-            accent="lavender"
+            accent="tangerine"
             eyebrowIcon={Route}
             eyebrowLabel="Roadmapa nauki"
             heading="Wiesz dokładnie, czego się uczyć"
@@ -177,7 +177,7 @@ export default function Home() {
 
           <FeatureSection
             id="trening"
-            accent="lavender"
+            accent="green"
             eyebrowIcon={PencilLine}
             eyebrowLabel="Inteligentny trening"
             heading="Ćwicz na zadaniach z arkuszy CKE"
@@ -256,7 +256,7 @@ export default function Home() {
 
           <FeatureSection
             id="postepy"
-            accent="lavender"
+            accent="blue"
             eyebrowIcon={LineChart}
             eyebrowLabel="Śledzenie postępów"
             heading="Wiedz, na czym stoisz"
@@ -290,7 +290,7 @@ export default function Home() {
           <Simulation />
           <Countdown />
           <AudienceWall />
-          <Changelog />
+          <StatsBand />
           <Pricing />
           <Faq />
         </div>

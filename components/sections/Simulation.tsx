@@ -3,9 +3,9 @@ import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 
 const pillars = [
-  { icon: FileText, label: "Format 1:1 z arkuszem" },
-  { icon: AlarmClock, label: "Czas jak na sali" },
-  { icon: Gauge, label: "Raport gotowości" },
+  { icon: FileText, label: "Format 1:1 z arkuszem", iconClass: "text-tangerine" },
+  { icon: AlarmClock, label: "Czas jak na sali", iconClass: "text-vivid-green" },
+  { icon: Gauge, label: "Raport gotowości", iconClass: "text-electric-blue" },
 ];
 
 /**
@@ -25,7 +25,9 @@ export function Simulation() {
             <div className="p-8 sm:p-10">
               <p className="inline-flex items-center gap-2 rounded-full border border-ash bg-white px-3.5 py-1.5 text-[12px] font-semibold text-charcoal shadow-subtle">
                 <span className="size-2 rounded-full bg-lavender" aria-hidden />
-                Wkrótce · Examax Premium
+                <span className="bg-gradient-to-r from-[#db2777] to-lavender bg-clip-text text-transparent">
+                  Wkrótce · Examax Premium
+                </span>
               </p>
               <h2
                 id="symulacja-heading"
@@ -45,7 +47,7 @@ export function Simulation() {
                     className="inline-flex items-center gap-2 rounded-full border border-ash bg-white px-3.5 py-2 text-body font-medium text-charcoal"
                   >
                     <pillar.icon
-                      className="size-4 text-lavender"
+                      className={`size-4 ${pillar.iconClass}`}
                       strokeWidth={1.8}
                       aria-hidden
                     />
@@ -55,7 +57,7 @@ export function Simulation() {
               </ul>
               <a
                 href="#faq"
-                className="link-underline mt-6 inline-flex items-center gap-1 text-body-lg font-medium text-lavender"
+                className="link-underline mt-6 inline-flex items-center gap-1 text-body-lg font-medium text-electric-blue"
               >
                 Dowiedz się, kiedy startujemy
                 <ChevronRight className="size-4" aria-hidden />
@@ -100,7 +102,7 @@ export function Simulation() {
                 </div>
               </div>
               <span className="absolute right-6 top-6 inline-flex items-center gap-1.5 rounded-full border border-ash bg-white px-3 py-1.5 text-[11px] font-medium text-charcoal shadow-md">
-                <AlarmClock className="size-3 text-lavender" />
+                <AlarmClock className="size-3 text-tangerine" />
                 <span className="font-geist-mono tabular-nums">98:42</span>
               </span>
             </div>

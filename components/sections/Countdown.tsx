@@ -1,73 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
-import { useInView, useReducedMotion } from "@/lib/hooks";
+import { useDaysUntil } from "@/components/ui/ExamCountdown";
+import { E8_DATE, MATURA_DATE } from "@/lib/examDates";
 import { cn } from "@/lib/cn";
-
-/**
- * Likely first days of the May 2027 CKE session. Deliberately approximate —
- * the section carries an explicit "orientacyjne" footnote, and the exact
- * timetable is announced by CKE.
- */
-const MATURA_DATE = new Date(2027, 4, 4);
-const E8_DATE = new Date(2027, 4, 11);
-
-function daysUntil(target: Date) {
-  const now = new Date();
-  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  return Math.max(0, Math.round((target.getTime() - today.getTime()) / 86_400_000));
-}
-
-function subscribeToNothing() {
-  return () => {};
-}
-
-/**
- * Client-clock value with a null server snapshot: the server (and first
- * hydration pass) renders a placeholder, the real number appears right after
- * hydration — no mismatch, no setState-in-effect.
- */
-function useDaysUntil(target: Date) {
-  return useSyncExternalStore(
-    subscribeToNothing,
-    () => daysUntil(target),
-    () => null,
-  );
-}
-
-/** Count-up from ~92% of the target once the number scrolls into view. */
-function AnimatedDays({ value }: { value: number }) {
-  const { ref, inView } = useInView<HTMLSpanElement>(0.4);
-  const reducedMotion = useReducedMotion();
-  const [display, setDisplay] = useState(value);
-  const startedRef = useRef(false);
-
-  useEffect(() => {
-    if (reducedMotion || !inView || startedRef.current) return;
-    startedRef.current = true;
-    const start = Math.round(value * 0.92);
-    const duration = 1200;
-    const startedAt = performance.now();
-    let frame: number;
-    const tick = (now: number) => {
-      const progress = Math.min(1, (now - startedAt) / duration);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setDisplay(Math.round(start + (value - start) * eased));
-      if (progress < 1) frame = requestAnimationFrame(tick);
-    };
-    frame = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frame);
-  }, [inView, value, reducedMotion]);
-
-  return (
-    <span ref={ref} className="tabular-nums">
-      {reducedMotion ? value : display}
-    </span>
-  );
-}
 
 /* May 2027: May 1st is a Saturday → 5 leading blanks in a Monday-first grid. */
 const MAY_OFFSET = 5;
@@ -124,9 +62,9 @@ function CalendarCard({
                 key={day}
                 className={cn(
                   "relative grid aspect-square place-items-center rounded-buttons text-[12px] tabular-nums",
-                  kind === "matura" && "bg-lavender font-semibold text-white",
+                  kind === "matura" && "bg-electric-blue font-semibold text-white",
                   kind === "e8" &&
-                    "bg-sidebar-active font-semibold text-lavender",
+                    "bg-sidebar-active font-semibold text-electric-blue",
                   kind === "holiday" && "text-silver",
                   kind === "plain" && (weekend ? "text-silver" : "text-steel"),
                 )}
@@ -145,11 +83,11 @@ function CalendarCard({
 
         <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1.5 border-t border-ash pt-3.5 text-[11px] text-steel">
           <span className="inline-flex items-center gap-1.5">
-            <span className="size-2 rounded-[3px] bg-lavender" aria-hidden />
+            <span className="size-2 rounded-[3px] bg-electric-blue" aria-hidden />
             Matura — start sesji
           </span>
           <span className="inline-flex items-center gap-1.5">
-            <span className="size-2 rounded-[3px] bg-sidebar-active ring-1 ring-inset ring-lavender/40" aria-hidden />
+            <span className="size-2 rounded-[3px] bg-sidebar-active ring-1 ring-inset ring-electric-blue/40" aria-hidden />
             Egzamin ósmoklasisty
           </span>
         </div>
@@ -158,7 +96,7 @@ function CalendarCard({
       {/* Floating countdown chips */}
       <div className="animate-float absolute -left-4 -top-4 sm:-left-10">
         <span className="inline-flex items-center gap-2 rounded-full border border-ash bg-white px-3.5 py-2 text-[12px] font-medium text-charcoal shadow-md">
-          <span className="size-2 rounded-full bg-lavender" aria-hidden />
+          <span className="size-2 rounded-full bg-electric-blue" aria-hidden />
           Matura ·{" "}
           <span className="font-geist-mono tabular-nums">
             {maturaDays === null ? "—" : `za ${maturaDays} dni`}
@@ -167,7 +105,7 @@ function CalendarCard({
       </div>
       <div className="animate-float-delayed absolute -bottom-4 -right-3 sm:-right-8">
         <span className="inline-flex items-center gap-2 rounded-full border border-ash bg-white px-3.5 py-2 text-[12px] font-medium text-charcoal shadow-md">
-          <span className="size-2 rounded-full bg-[#a78bfa]" aria-hidden />
+          <span className="size-2 rounded-full bg-[#60a5fa]" aria-hidden />
           E8 ·{" "}
           <span className="font-geist-mono tabular-nums">
             {e8Days === null ? "—" : `za ${e8Days} dni`}
@@ -206,25 +144,6 @@ export function Countdown() {
               Nie musisz robić wszystkiego naraz. Wystarczy, że wiesz, co
               zrobić dziś — a od tego jest roadmapa.
             </p>
-
-            <dl className="mt-10 space-y-8">
-              <div>
-                <dt className="text-[12px] font-medium uppercase tracking-[0.14em] text-steel">
-                  Dni do matury
-                </dt>
-                <dd className="mt-2 font-geist-mono text-heading font-medium leading-none text-lavender sm:text-heading-lg">
-                  {maturaDays === null ? "—" : <AnimatedDays value={maturaDays} />}
-                </dd>
-              </div>
-              <div>
-                <dt className="text-[12px] font-medium uppercase tracking-[0.14em] text-steel">
-                  Dni do egzaminu ósmoklasisty
-                </dt>
-                <dd className="mt-2 font-geist-mono text-heading font-medium leading-none text-lavender sm:text-heading-lg">
-                  {e8Days === null ? "—" : <AnimatedDays value={e8Days} />}
-                </dd>
-              </div>
-            </dl>
 
             <p className="mt-8 text-[12px] text-fog">
               Terminy orientacyjne — oficjalny harmonogram ogłasza CKE.

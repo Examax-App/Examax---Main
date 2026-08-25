@@ -1,9 +1,10 @@
 import { cn } from "@/lib/cn";
 
 const tints = [
-  "bg-sidebar-active text-lavender",
-  "bg-paper-mist text-steel",
-  "bg-[#f1ebfd] text-lavender",
+  "bg-soft-blue text-electric-blue",
+  "bg-soft-mint text-[#166534]",
+  "bg-soft-violet text-lavender",
+  "bg-soft-peach text-tangerine",
 ];
 
 /** Initials avatar on a soft tinted disc — no stock photography (DESIGN.md). */
