@@ -124,7 +124,7 @@ export default function Home() {
       </a>
       <Navbar />
       <main id="main" className="flex-1 pt-[72px]">
-        <div className="relative mx-auto w-full max-w-[1200px] bg-white">
+        <div className="relative mx-auto w-full max-w-[1080px] border-x border-ash bg-white">
           <Hero />
           <CoverageMarquee />
           <Editorial />
@@ -293,8 +293,8 @@ export default function Home() {
           <StatsBand />
           <Pricing />
           <Faq />
+          <CtaBand />
         </div>
-        <CtaBand />
       </main>
       <Footer />
     </>

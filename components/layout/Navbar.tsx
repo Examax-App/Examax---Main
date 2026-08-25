@@ -229,7 +229,7 @@ export function Navbar() {
         <Link
           href="/"
           aria-label="Examax — strona główna"
-          className="rounded-buttons focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-charcoal"
+          className="focus-ring rounded-buttons"
         >
           <Logo />
         </Link>
@@ -248,8 +248,10 @@ export function Navbar() {
                     setOpenMenu((current) => (current === key ? null : key))
                   }
                   className={cn(
-                    "inline-flex h-10 items-center gap-1 rounded-full px-4 text-body font-medium text-charcoal transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-charcoal",
-                    openMenu === key ? "bg-paper-mist" : "hover:bg-paper-mist",
+                    "focus-ring inline-flex h-8 items-center gap-1 rounded-buttons px-3 text-[13px] transition-colors duration-150",
+                    openMenu === key
+                      ? "bg-paper-mist text-charcoal"
+                      : "text-charcoal hover:text-steel",
                   )}
                 >
                   {menus[key].label}
@@ -268,7 +270,7 @@ export function Navbar() {
                 <Link
                   href={link.href}
                   onMouseEnter={scheduleClose}
-                  className="inline-flex h-10 items-center rounded-full px-4 text-body font-medium text-charcoal transition-colors hover:bg-paper-mist focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-charcoal"
+                  className="focus-ring inline-flex h-8 items-center rounded-buttons px-3 text-[13px] text-charcoal transition-colors duration-150 hover:text-steel"
                 >
                   {link.label}
                 </Link>
@@ -349,10 +351,10 @@ export function Navbar() {
         </nav>
 
         <div className="hidden items-center gap-2 lg:flex">
-          <Button href="/logowanie" variant="outline">
+          <Button href="/logowanie" variant="outline" size="sm">
             Zaloguj się
           </Button>
-          <Button href="/rejestracja" variant="primary">
+          <Button href="/rejestracja" variant="primary" size="sm">
             Załóż konto
           </Button>
         </div>
@@ -363,7 +365,7 @@ export function Navbar() {
           aria-expanded={mobileOpen}
           aria-controls="mobile-menu"
           aria-label={mobileOpen ? "Zamknij menu" : "Otwórz menu"}
-          className="grid size-10 place-items-center rounded-buttons border border-ash text-charcoal transition-colors hover:bg-paper-mist lg:hidden"
+          className="focus-ring grid size-10 place-items-center rounded-buttons border border-ash text-charcoal transition-colors duration-150 hover:bg-paper-mist lg:hidden"
         >
           {mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}
         </button>

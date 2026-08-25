@@ -4,25 +4,28 @@ import { cn } from "@/lib/cn";
 type ButtonVariant = "primary" | "outline" | "ghost" | "inverted";
 type ButtonSize = "sm" | "md" | "lg";
 
+/**
+ * Reference metrics: primary/secondary 38px tall, 14px/500, 8px radius,
+ * 1px border on BOTH variants, 0 1px 2px shadow that grows on hover.
+ * "sm" is the 32px / 13px / 400 nav size.
+ */
 const variantClasses: Record<ButtonVariant, string> = {
   // Filled dark CTA — the single committed action per surface
   primary:
-    "bg-primary-action-fill text-white shadow-subtle hover:bg-graphite hover:shadow-sm focus-visible:outline-charcoal",
+    "border border-midnight-ink bg-primary-action-fill text-white shadow-subtle hover:bg-graphite hover:shadow-sm",
   // Outlined action button — the workhorse secondary
   outline:
-    "bg-white text-charcoal border border-ash hover:border-smoke hover:bg-paper-mist hover:shadow-subtle focus-visible:outline-charcoal",
+    "border border-ash bg-white text-charcoal shadow-subtle hover:bg-[#fafafa] hover:shadow-sm",
   // Ghost nav button — transparent until hover
-  ghost:
-    "bg-transparent text-charcoal hover:bg-paper-mist focus-visible:outline-charcoal",
+  ghost: "bg-transparent text-charcoal hover:text-steel",
   // White-on-dark, for the dark CTA band
-  inverted:
-    "bg-white text-charcoal hover:bg-ash hover:shadow-sm focus-visible:outline-white",
+  inverted: "border border-white bg-white text-charcoal hover:bg-ash",
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
-  sm: "h-9 px-3.5 text-body",
-  md: "h-10 px-4 text-body",
-  lg: "h-12 px-5 text-body-lg",
+  sm: "h-8 px-3 text-[13px] font-normal",
+  md: "h-[38px] px-3.5 text-body font-medium",
+  lg: "h-[38px] px-4 text-body font-medium",
 };
 
 export function Button({
@@ -42,7 +45,7 @@ export function Button({
     <Link
       href={href}
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-buttons font-medium whitespace-nowrap transition-all duration-200 hover:scale-[1.01] active:scale-[0.99] focus-visible:outline-2 focus-visible:outline-offset-2 motion-reduce:hover:scale-100",
+        "focus-ring inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-buttons transition-all duration-150",
         variantClasses[variant],
         sizeClasses[size],
         className,

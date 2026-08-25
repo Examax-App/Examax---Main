@@ -86,17 +86,26 @@
     #3a8bfd 288deg,
     #855afc
   );
-  --page-max-width: 1200px;
+  /* Reference grid: 1080px white sheet on a #fafafa canvas */
+  --page-max-width: 1080px;
 }
 
 body {
-  background: var(--color-canvas-white);
+  background: #fafafa;
   color: var(--color-charcoal);
   font-family: var(--font-inter);
   font-size: 16px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+/* Shared focus treatment — ring-2 black/10 with a white offset */
+.focus-ring:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px #ffffff,
+    0 0 0 4px rgb(0 0 0 / 0.12);
 }
 
 ::selection {
