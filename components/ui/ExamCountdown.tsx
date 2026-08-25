@@ -61,20 +61,14 @@ export function HeroCountdown() {
   const e8 = useDaysUntil(E8_DATE);
 
   return (
-    <p className="mt-9 flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1 text-body text-steel">
-      <span className="relative flex size-2" aria-hidden>
-        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-electric-blue opacity-60 motion-reduce:animate-none" />
-        <span className="relative inline-flex size-2 rounded-full bg-electric-blue" />
-      </span>
+    <p className="mt-9 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[13px] text-fog">
       Do matury zostało{" "}
-      <span className="font-geist-mono font-medium text-charcoal">
+      <span className="font-medium tabular-nums text-charcoal">
         {matura === null ? "—" : <AnimatedDays value={matura} />} dni
       </span>
-      <span className="text-pebble" aria-hidden>
-        ·
-      </span>
+      <span aria-hidden>·</span>
       do egzaminu ósmoklasisty{" "}
-      <span className="font-geist-mono font-medium text-charcoal">
+      <span className="font-medium tabular-nums text-charcoal">
         {e8 === null ? "—" : <AnimatedDays value={e8} />} dni
       </span>
     </p>

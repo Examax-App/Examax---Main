@@ -30,7 +30,7 @@ export function Hero() {
 
           <h1
             id="hero-heading"
-            className="mt-8 max-w-3xl font-satoshi text-[38px] font-medium leading-[1.02] tracking-[-0.01em] text-charcoal sm:text-[56px]"
+            className="mt-8 max-w-3xl text-balance font-satoshi text-[32px] font-medium leading-[1.15] text-charcoal sm:text-[48px]"
           >
             Twoje braki. Twoje zadania. Twój wynik.
           </h1>

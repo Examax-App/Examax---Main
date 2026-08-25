@@ -505,7 +505,7 @@ export function HeroDashboard({ view }: { view: HeroView }) {
       ref={frameRef}
       role="img"
       aria-label="Podgląd aplikacji Examax: roadmapa nauki, trening zadań, rozmowa z agentem AI i postępy"
-      className="relative overflow-hidden rounded-largecards bg-white text-left [box-shadow:var(--shadow-ring),var(--shadow-lg)]"
+      className="relative overflow-hidden rounded-largecards bg-white text-left ring-1 ring-black/5 shadow-[0_24px_48px_-12px_rgba(0,0,0,0.12)]"
     >
       <div className="flex">
         {/* Icon rail */}

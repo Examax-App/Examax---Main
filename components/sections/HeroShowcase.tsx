@@ -124,11 +124,11 @@ export function HeroShowcase() {
   const activeTab = tabs.find((tab) => tab.key === active)!;
 
   return (
-    <div className="relative overflow-hidden bg-gradient-to-br from-[#fafafa] via-[#f7f7f7] to-[#f0f6f1]">
+    <div className="relative overflow-hidden bg-[#fafafa]">
       <div className="bg-grid mask-fade-bottom absolute inset-0" aria-hidden />
 
-      {/* White shelf carrying the tabs */}
-      <div className="relative mx-auto -mt-px max-w-4xl rounded-b-[40px] bg-white px-6 pb-5 pt-1">
+      {/* Transparent tab row — only the active pill gets a surface */}
+      <div className="relative mx-auto max-w-4xl px-6 pb-2 pt-6">
         <div
           ref={listRef}
           role="tablist"
@@ -165,8 +165,8 @@ export function HeroShowcase() {
                 tabIndex={selected ? 0 : -1}
                 onClick={() => setActive(tab.key)}
                 className={cn(
-                  "relative z-10 inline-flex items-center gap-2 rounded-full px-4 py-2 text-body font-medium transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-charcoal",
-                  selected ? "text-charcoal" : "text-steel hover:text-charcoal",
+                  "focus-ring relative z-10 inline-flex items-center gap-2 rounded-full px-4 py-2 text-body font-medium transition-colors duration-200",
+                  selected ? "text-charcoal" : "text-fog hover:text-charcoal",
                 )}
               >
                 <AccentTile icon={tab.icon} accent={tab.accent} />
@@ -184,6 +184,7 @@ export function HeroShowcase() {
           role="tabpanel"
           id="hero-panel"
           aria-labelledby={`hero-tab-${active}`}
+          className="[mask-image:linear-gradient(to_bottom,black_70%,transparent)]"
         >
           <HeroDashboard view={active} />
         </div>
