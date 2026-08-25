@@ -114,11 +114,11 @@ export function Footer() {
                   id="footer-email"
                   type="email"
                   placeholder="ty@przyklad.pl"
-                  className="h-10 min-w-0 flex-1 rounded-inputs border border-midnight-ink bg-white px-3 text-body text-charcoal placeholder:text-fog focus:outline-2 focus:outline-offset-2 focus:outline-charcoal"
+                  className="focus-ring h-[38px] min-w-0 flex-1 rounded-inputs border border-midnight-ink bg-white px-3 text-body text-charcoal placeholder:text-fog"
                 />
                 <button
                   type="button"
-                  className="h-10 shrink-0 rounded-buttons bg-primary-action-fill px-4 text-body font-medium text-white shadow-subtle transition-all duration-200 hover:bg-graphite hover:shadow-sm"
+                  className="focus-ring h-[38px] shrink-0 rounded-buttons border border-midnight-ink bg-primary-action-fill px-4 text-body font-medium text-white shadow-subtle transition-all duration-150 hover:bg-graphite hover:shadow-sm"
                 >
                   Zapisz się
                 </button>
@@ -142,7 +142,7 @@ export function Footer() {
                   key={social.label}
                   href="#"
                   aria-label={social.label}
-                  className="text-charcoal transition-all duration-200 hover:-translate-y-0.5 hover:text-fog"
+                  className="focus-ring rounded-[4px] text-charcoal transition-all duration-150 hover:-translate-y-0.5 hover:text-fog"
                 >
                   <social.icon className="size-5" />
                 </a>
@@ -158,7 +158,7 @@ export function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="inline-flex items-center gap-2 text-body text-steel transition-colors hover:text-charcoal"
+                      className="focus-ring inline-flex items-center gap-2 rounded-[4px] text-body text-steel transition-colors duration-150 hover:text-charcoal"
                     >
                       <AccentTile icon={link.icon} accent={link.accent} size="sm" />
                       {link.label}
@@ -195,7 +195,7 @@ export function Footer() {
                     <li key={label}>
                       <a
                         href={footerHrefs[label] ?? "#"}
-                        className="link-underline text-body text-steel transition-colors hover:text-charcoal"
+                        className="focus-ring link-underline rounded-[4px] text-body text-steel transition-colors duration-150 hover:text-charcoal"
                       >
                         {label}
                       </a>
@@ -208,11 +208,13 @@ export function Footer() {
         </div>
 
         <div className="mt-16 flex flex-col items-center justify-between gap-6 border-t border-ash pt-8 sm:flex-row">
-          <span className="inline-flex items-center gap-2 rounded-full border border-ash px-3.5 py-2 text-body text-charcoal">
+          <span className="inline-flex h-8 items-center gap-2 rounded-full border border-ash px-3.5 text-[13px] text-charcoal">
             <span className="size-2 rounded-full bg-vivid-green" aria-hidden />
             Serwis działa bez zakłóceń
           </span>
-          <p className="text-body text-fog">© 2026 Examax</p>
+          <p className="flex h-8 items-center text-[13px] text-fog">
+            © 2026 Examax
+          </p>
         </div>
       </Container>
     </footer>
