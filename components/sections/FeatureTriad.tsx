@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChevronRight } from "lucide-react";
 import { accentStyles, type Accent } from "@/components/ui/FeaturePill";
 import { useReducedMotion } from "@/lib/hooks";
@@ -24,7 +24,7 @@ const accentBg: Record<Accent, string> = {
   blue: "bg-electric-blue",
 };
 
-/* Stacked layout (<md): the accent moves from a left bar to a top border. */
+/* Stacked layout (<md): the accent moves from a left track to a top border. */
 const accentTopBorder: Record<Accent, string> = {
   tangerine: "max-md:border-t-2 max-md:border-t-tangerine",
   green: "max-md:border-t-2 max-md:border-t-vivid-green",
@@ -33,10 +33,10 @@ const accentTopBorder: Record<Accent, string> = {
 };
 
 /**
- * The three-column feature row under each demo. Every column renders at full
- * contrast; the accent bar and colored icon mark the active column, following
- * hover and auto-advancing gently while in view. Never dims siblings —
- * emphasis is additive, not subtractive.
+ * The reference feature strip: an 800px-wide 3-column tab row on white below
+ * the demo band. Every column carries a 1px grey track on its left edge; the
+ * active column's track fills with the accent as a 4s progress indicator,
+ * and the two inactive columns genuinely recede.
  */
 export function FeatureTriad({
   accent,
@@ -52,8 +52,6 @@ export function FeatureTriad({
   const [inView, setInView] = useState(false);
   const reducedMotion = useReducedMotion();
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const columnRefs = useRef<Array<HTMLElement | null>>([]);
-  const [bar, setBar] = useState<{ left: number; top: number; height: number } | null>(null);
 
   useEffect(() => {
     const node = wrapperRef.current;
@@ -66,7 +64,7 @@ export function FeatureTriad({
     return () => observer.disconnect();
   }, []);
 
-  // Auto-advance the accent while the row is on screen and not hovered.
+  // Auto-advance while the row is on screen and not hovered.
   useEffect(() => {
     if (!inView || hovered || reducedMotion) return;
     const timer = window.setInterval(
@@ -76,57 +74,42 @@ export function FeatureTriad({
     return () => window.clearInterval(timer);
   }, [inView, hovered, reducedMotion, items.length]);
 
-  const measure = useCallback(() => {
-    const column = columnRefs.current[active];
-    if (!column) return;
-    setBar({
-      left: column.offsetLeft,
-      top: column.offsetTop,
-      height: column.offsetHeight,
-    });
-  }, [active]);
-
-  useEffect(() => {
-    measure();
-    window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
-  }, [measure]);
-
   return (
     <div
       ref={wrapperRef}
-      className="relative mt-10 grid gap-10 sm:mt-12 md:grid-cols-3 md:gap-8"
+      className="mx-auto grid w-full max-w-[800px] gap-y-8 px-5 py-8 md:grid-cols-3 md:gap-x-10"
       onMouseLeave={() => setHovered(false)}
     >
-      {bar ? (
-        <span
-          aria-hidden
-          className={cn(
-            "absolute hidden w-0.5 rounded-full transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] md:block",
-            accentBg[accent],
-          )}
-          style={{ left: bar.left, top: bar.top, height: bar.height }}
-        />
-      ) : null}
-
       {items.map((item, index) => {
         const isActive = index === active;
         return (
           <article
             key={item.title}
-            ref={(el) => {
-              columnRefs.current[index] = el;
-            }}
             onMouseEnter={() => {
               setHovered(true);
               setActive(index);
             }}
             onFocus={() => setActive(index)}
             className={cn(
-              "h-full border-t border-ash pt-4 md:border-l md:border-t-0 md:pl-5 md:pt-0",
+              "relative h-full border-t border-ash pt-4 md:border-t-0 md:pl-6 md:pr-2 md:pt-0",
               isActive && accentTopBorder[accent],
             )}
           >
+            <span
+              aria-hidden
+              className="absolute left-0 top-0 hidden h-full w-px overflow-hidden bg-ash md:block"
+            >
+              {isActive ? (
+                <span
+                  key={`${active}-${hovered}`}
+                  className={cn(
+                    "block h-full w-px",
+                    accentBg[accent],
+                    !hovered && !reducedMotion && "animate-triad-progress",
+                  )}
+                />
+              ) : null}
+            </span>
             <span
               aria-hidden
               className={cn(
@@ -138,7 +121,7 @@ export function FeatureTriad({
             </span>
             <h3
               className={cn(
-                "mt-4 text-body-lg font-medium transition-colors duration-300",
+                "mt-2 text-body-lg font-medium transition-colors duration-300",
                 isActive ? "text-charcoal" : "text-silver",
               )}
             >
@@ -155,7 +138,7 @@ export function FeatureTriad({
             <a
               href="#cennik"
               className={cn(
-                "focus-ring group/link mt-4 inline-flex items-center gap-1 rounded-[4px] text-body font-medium transition-colors duration-300",
+                "focus-ring group/link mt-3.5 inline-flex items-center gap-1 rounded-[4px] text-body font-medium transition-colors duration-300",
                 isActive ? accentStyles[accent].text : "text-smoke",
               )}
             >

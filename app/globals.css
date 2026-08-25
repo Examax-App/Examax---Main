@@ -199,6 +199,21 @@ body {
   transform: translateY(0);
 }
 
+/* Feature-strip active-column progress fill (4s = the auto-advance beat) */
+@keyframes triad-progress {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+.animate-triad-progress {
+  transform-origin: top;
+  animation: triad-progress 4s linear both;
+}
+
 /* Content swap inside the hero demo / tab panels */
 @keyframes view-swap {
   from {
@@ -280,6 +295,7 @@ body {
   .animate-float-delayed,
   .animate-view-swap,
   .animate-demo-ripple,
+  .animate-triad-progress,
   .animate-funnel-sheen {
     animation: none;
   }

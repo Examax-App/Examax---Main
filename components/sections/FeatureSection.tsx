@@ -51,18 +51,18 @@ export function FeatureSection({
       <Container className="pb-10 pt-20">
         <div className="grid items-center gap-10 lg:grid-cols-[1fr_auto]">
           <Reveal>
-            <p className="flex items-center gap-1.5 text-[12px] font-medium text-steel">
+            <p className="flex items-center gap-2 text-[12px] font-medium text-steel">
               <AccentTile icon={eyebrowIcon} accent={accent} size="sm" />
               {eyebrowLabel}
             </p>
             <h2
               id={`${id}-heading`}
-              className="mt-5 max-w-2xl font-satoshi text-heading-lg font-medium leading-[1.15] text-charcoal sm:text-display sm:leading-[1.15]"
+              className="mt-3 max-w-lg font-satoshi text-heading-lg font-medium leading-[1.15] text-charcoal sm:text-display sm:leading-[1.15]"
             >
               {heading}
             </h2>
-            <p className="mt-4 max-w-xl text-body-xl text-fog">{sub}</p>
-            <Button href="#cennik" variant="outline" className="mt-6">
+            <p className="mt-3 max-w-xl text-body-xl text-fog">{sub}</p>
+            <Button href="#cennik" variant="outline" className="mt-8">
               {ctaLabel}
             </Button>
           </Reveal>
@@ -74,22 +74,25 @@ export function FeatureSection({
         </div>
       </Container>
 
-      <div className="border-t border-ash bg-[#fafafa]">
+      {/* Demo band — grey, hairline top and bottom, flush to the column */}
+      <div className="border-y border-ash bg-[#fafafa]">
         <Container className="py-12">
           <Reveal>{showcase}</Reveal>
-          <FeatureTriad
-            accent={accent}
-            initialIndex={highlightIndex}
-            items={subFeatures.map((feature) => ({
-              title: feature.title,
-              description: feature.description,
-              iconNode: (
-                <feature.icon className="size-5" strokeWidth={1.8} aria-hidden />
-              ),
-            }))}
-          />
         </Container>
       </div>
+
+      {/* Feature strip on white below the band (reference structure) */}
+      <FeatureTriad
+        accent={accent}
+        initialIndex={highlightIndex}
+        items={subFeatures.map((feature) => ({
+          title: feature.title,
+          description: feature.description,
+          iconNode: (
+            <feature.icon className="size-4" strokeWidth={1.8} aria-hidden />
+          ),
+        }))}
+      />
     </section>
   );
 }
