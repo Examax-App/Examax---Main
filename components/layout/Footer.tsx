@@ -22,6 +22,7 @@ const productLinks = [
 const footerHrefs: Record<string, string> = {
   Kontakt: "/kontakt",
   "Centrum pomocy": "/pomoc",
+  "Co nowego": "/#co-nowego",
   Cennik: "/#cennik",
   FAQ: "/#faq",
 };

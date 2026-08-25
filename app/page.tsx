@@ -26,6 +26,7 @@ import { FeatureSection } from "@/components/sections/FeatureSection";
 import { Simulation } from "@/components/sections/Simulation";
 import { Countdown } from "@/components/sections/Countdown";
 import { AudienceWall } from "@/components/sections/AudienceWall";
+import { Changelog } from "@/components/sections/Changelog";
 import { Pricing } from "@/components/sections/Pricing";
 import { Faq } from "@/components/sections/Faq";
 import { CtaBand } from "@/components/sections/CtaBand";
@@ -262,6 +263,7 @@ export default function Home() {
           <Simulation />
           <Countdown />
           <AudienceWall />
+          <Changelog />
           <Pricing />
           <Faq />
           <CtaBand />
