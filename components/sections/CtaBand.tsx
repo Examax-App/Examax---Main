@@ -20,15 +20,21 @@ export function CtaBand() {
       className="relative overflow-hidden bg-midnight-ink"
     >
       <div className="bg-grid-dark absolute inset-0" aria-hidden />
+      {/* Warm radial highlight behind the headline */}
       <div
         aria-hidden
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 55% 70% at 50% 30%, rgba(124,58,237,0.16), transparent 65%), radial-gradient(ellipse 60% 80% at 75% 85%, rgba(124,58,237,0.06), transparent 60%)",
+            "radial-gradient(ellipse 52% 58% at 50% 26%, rgba(255,178,120,0.14), transparent 65%), radial-gradient(ellipse 60% 80% at 72% 90%, rgba(255,120,90,0.05), transparent 60%)",
         }}
       />
-      <Container className="relative flex flex-col items-center py-24 text-center">
+      {/* Scalloped white notch where the grid rules of the page end */}
+      <span
+        aria-hidden
+        className="absolute left-1/2 top-0 h-7 w-32 -translate-x-1/2 rounded-b-full bg-white"
+      />
+      <Container className="relative flex flex-col items-center py-20 text-center">
         <Reveal>
           <h2
             id="cta-heading"
@@ -58,18 +64,14 @@ export function CtaBand() {
           </div>
         </Reveal>
         <Reveal delay={300}>
-          <ul className="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
+          <ul className="mt-12 flex flex-wrap items-center justify-center gap-2.5">
             {assurances.map((item) => (
-              <li key={item.label} className="flex items-center gap-2.5">
-                <span
-                  aria-hidden
-                  className="grid size-6 place-items-center rounded-full bg-white/15 text-white"
-                >
-                  <item.icon className="size-3.5" />
-                </span>
-                <span className="text-body font-medium text-white/90">
-                  {item.label}
-                </span>
+              <li
+                key={item.label}
+                className="flex items-center gap-2 rounded-full border border-white/10 px-3.5 py-1.5"
+              >
+                <item.icon className="size-3.5 text-white/70" aria-hidden />
+                <span className="text-[13px] text-white/70">{item.label}</span>
               </li>
             ))}
           </ul>
