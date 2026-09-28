@@ -20,7 +20,7 @@ export function Hero() {
             section edges (reference). */}
         <div className="bg-hero-grid absolute inset-0" aria-hidden />
 
-        <div className="relative mx-auto w-full max-w-[1080px] px-6 py-20 sm:px-12">
+        <div className="relative mx-auto w-full max-w-[1080px] px-6 py-14 sm:px-12">
           <div className="mx-auto flex w-full max-w-2xl flex-col items-center px-4 text-center">
             <Link
               href="#agent"
@@ -54,7 +54,7 @@ export function Hero() {
               style={{ "--delay": "300ms", "--offset": "20px" } as React.CSSProperties}
               className="animate-slide-up-fade mt-8 flex flex-wrap items-center justify-center gap-3"
             >
-              <Button href="#pricing" variant="primary">
+              <Button href="/pricing" variant="primary">
                 Zacznij za darmo
               </Button>
               <Button href="#roadmap" variant="outline">

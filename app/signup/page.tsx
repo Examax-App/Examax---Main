@@ -1,22 +1,17 @@
 import type { Metadata } from "next";
-import { AuthShell } from "@/components/app/AuthShell";
-import { AuthForm } from "@/components/app/AuthForm";
+import { AuthLayout } from "@/components/auth/AuthLayout";
+import { SignUpFlow } from "@/components/auth/SignUpFlow";
 
 export const metadata: Metadata = {
   title: "Załóż konto",
-  description: "Załóż darmowe konto Examax i zacznij przygotowania.",
+  description: "Załóż darmowe konto Examax i zacznij przygotowania do egzaminu.",
 };
 
-export default function RejestracjaPage() {
+/** Dub's register page (dubinc/dub: (auth-marketing)/register), in Polish. */
+export default function SignupPage() {
   return (
-    <AuthShell>
-      <AuthForm
-        title="Załóż konto Examax"
-        primaryLabel="Zarejestruj się e-mailem"
-        swapPrompt="Masz już konto?"
-        swapLabel="Zaloguj się"
-        swapHref="/login"
-      />
-    </AuthShell>
+    <AuthLayout>
+      <SignUpFlow />
+    </AuthLayout>
   );
 }

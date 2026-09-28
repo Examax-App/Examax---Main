@@ -132,7 +132,7 @@ export function CreateModal({
             <p className="min-w-0 flex-1 truncate text-body text-charcoal">
               Odbierz <span className="font-semibold">30 dni</span> Premium za
               darmo.{" "}
-              <a href="#pricing" className="underline">
+              <a href="/pricing" className="underline">
                 Dowiedz się więcej
               </a>
             </p>

@@ -14,7 +14,7 @@ export default function TemplatesPage() {
         actions={
           <button
             type="button"
-            className="inline-flex items-center gap-2 rounded-buttons bg-primary-action-fill px-4 py-2 text-body font-medium text-white shadow-subtle transition-colors hover:bg-graphite"
+            className="inline-flex items-center gap-2 rounded-buttons bg-primary-action-fill px-3.5 py-1.5 text-body-sm font-medium text-white shadow-subtle transition-colors hover:bg-graphite"
           >
             Nowy szablon
             <Kbd tone="dark">S</Kbd>
@@ -31,14 +31,14 @@ export default function TemplatesPage() {
           >
             <button
               type="button"
-              className="inline-flex items-center gap-2 rounded-buttons bg-primary-action-fill px-4 py-2 text-body font-medium text-white shadow-subtle transition-colors hover:bg-graphite"
+              className="inline-flex items-center gap-2 rounded-buttons bg-primary-action-fill px-3.5 py-1.5 text-body-sm font-medium text-white shadow-subtle transition-colors hover:bg-graphite"
             >
               Nowy szablon
               <Kbd tone="dark">S</Kbd>
             </button>
             <button
               type="button"
-              className="rounded-buttons border border-ash bg-white px-4 py-2 text-body font-medium text-charcoal transition-colors hover:border-smoke hover:bg-paper-mist"
+              className="rounded-buttons border border-ash bg-white px-3.5 py-1.5 text-body-sm font-medium text-charcoal transition-colors hover:border-smoke hover:bg-paper-mist"
             >
               Dowiedz się więcej
             </button>

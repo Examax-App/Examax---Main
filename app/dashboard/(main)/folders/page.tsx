@@ -16,7 +16,7 @@ export default function FolderyPage() {
           <button
             type="button"
             disabled
-            className="inline-flex items-center gap-2 rounded-buttons border border-ash bg-paper-mist px-4 py-2 text-body font-medium text-silver"
+            className="inline-flex items-center gap-2 rounded-buttons border border-ash bg-paper-mist px-3.5 py-1.5 text-body-sm font-medium text-silver"
           >
             Nowy folder
             <Kbd>F</Kbd>
@@ -34,7 +34,7 @@ export default function FolderyPage() {
                 aria-hidden
                 className="grid size-10 place-items-center rounded-full bg-soft-mint text-[#166534]"
               >
-                <FolderOpen className="size-4.5" strokeWidth={1.8} />
+                <FolderOpen className="size-4" strokeWidth={1.8} />
               </span>
               <button
                 type="button"

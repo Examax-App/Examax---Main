@@ -28,7 +28,7 @@ const satoshi = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL("https://examax.app"),
   title: {
-    default: "Examax — Zamień naukę w wyniki",
+    default: "Examax",
     template: "%s — Examax",
   },
   description:
@@ -58,19 +58,22 @@ export const metadata: Metadata = {
       "Kompletny system przygotowań do egzaminu ósmoklasisty i matury: roadmapa nauki, zadania z arkuszy CKE i agent AI.",
   },
   robots: { index: true, follow: true },
-  /* Icons live in /public rather than as app/ file conventions, so they are
-     declared here explicitly. Keep this list in sync with public/icons/. */
+  /* The RealFaviconGenerator set lives in public/ and is declared here once
+     for every page. Keep the app/ icon file conventions (favicon.ico, icon.*,
+     apple-icon.*) empty — they would emit a second set of <link> tags, and an
+     app/favicon.ico collides with public/favicon.ico. Bump `v` when the set is
+     regenerated so browsers drop their cached copies. In-app imagery lives in
+     public/brand/. */
   icons: {
     icon: [
-      { url: "/favicon.ico", sizes: "48x48", type: "image/x-icon" },
-      { url: "/icons/icon.svg", type: "image/svg+xml", sizes: "any" },
-      { url: "/icons/icon-96.png", type: "image/png", sizes: "96x96" },
+      { url: "/favicon-96x96.png?v=20260924", type: "image/png", sizes: "96x96" },
+      { url: "/favicon.svg?v=20260924", type: "image/svg+xml" },
     ],
-    apple: [
-      { url: "/icons/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
-    ],
+    shortcut: "/favicon.ico?v=20260924",
+    apple: { url: "/apple-touch-icon.png?v=20260924", sizes: "180x180" },
   },
-  manifest: "/manifest.webmanifest",
+  appleWebApp: { title: "Examax" },
+  manifest: "/site.webmanifest?v=20260924",
 };
 
 /* theme-color lives on the viewport export, not on metadata. */

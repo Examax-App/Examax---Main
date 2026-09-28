@@ -38,13 +38,13 @@ export default function SubscriptionPage() {
             <div className="flex gap-2">
               <button
                 type="button"
-                className="rounded-buttons bg-primary-action-fill px-4 py-2 text-body font-medium text-white shadow-subtle transition-colors hover:bg-graphite"
+                className="rounded-buttons bg-primary-action-fill px-3.5 py-1.5 text-body-sm font-medium text-white shadow-subtle transition-colors hover:bg-graphite"
               >
                 Ulepsz
               </button>
               <button
                 type="button"
-                className="rounded-buttons border border-ash bg-white px-4 py-2 text-body font-medium text-charcoal transition-colors hover:border-smoke hover:bg-paper-mist"
+                className="rounded-buttons border border-ash bg-white px-3.5 py-1.5 text-body-sm font-medium text-charcoal transition-colors hover:border-smoke hover:bg-paper-mist"
               >
                 Zobacz faktury
               </button>

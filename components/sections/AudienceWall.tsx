@@ -1,7 +1,5 @@
-import type { LucideIcon } from "lucide-react";
 import {
   Backpack,
-  Bot,
   GraduationCap,
   RefreshCcw,
   TrendingUp,
@@ -12,9 +10,11 @@ import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { cn } from "@/lib/cn";
 import { SECTION_H2 } from "@/lib/type";
+import type { IconComponent } from "@/lib/icon";
+import { AgentIcon } from "@/components/ui/AgentIcon";
 
 type WallCell = {
-  icon: LucideIcon;
+  icon: IconComponent;
   iconClass: string;
   title: string;
   description: string;
@@ -38,7 +38,7 @@ const cells: WallCell[] = [
   },
   {
     icon: TrendingUp,
-    iconClass: "bg-tangerine text-white",
+    iconClass: "bg-deep-sapphire text-white",
     title: "Matura rozszerzona",
     description: "Trening na poziomie, którego wymaga rekrutacja na studia.",
   },
@@ -49,8 +49,11 @@ const cells: WallCell[] = [
     description: "Zaczynasz od diagnozy, nie od zera — system wskaże braki.",
   },
   {
-    icon: Bot,
-    iconClass: "bg-vivid-green text-white",
+    icon: AgentIcon,
+    // The agent mark is a raster that carries its own edges and highlights.
+    // It needs no tile behind it, so this cell's slot stays empty while the
+    // rest of the wall keeps its accent fills.
+    iconClass: "",
     title: "Uczysz się bez korepetycji",
     description: "Agent tłumaczy i pilnuje planu — jak dobry korepetytor.",
   },

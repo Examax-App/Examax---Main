@@ -45,7 +45,7 @@ export function Integrations() {
             Matematyka, polski i angielski są gotowe — z roadmapą, arkuszami i
             agentem. Kolejne przedmioty dokładamy przed każdą sesją.
           </p>
-          <Button href="#pricing" variant="outline" size="lg" className="mt-8">
+          <Button href="/pricing" variant="outline" size="lg" className="mt-8">
             Zobacz przedmioty
           </Button>
         </Reveal>

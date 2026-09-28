@@ -20,6 +20,9 @@
   --color-deep-sapphire: #1e40af;
   --color-soft-mint: #dcfce7;
   --color-vivid-green: #16a34a;
+  /* Orange family — part of Dub's token set. The product areas run on
+     blue / green / violet / sapphire; tangerine is the one warm accent,
+     reserved for the exam simulation. */
   --color-tangerine: #ea580c;
   --color-lavender: #7c3aed;
   --color-primary-action-fill: #000000;
@@ -43,6 +46,8 @@
   /* Type scale — design-examax/DESIGN.md */
   --text-caption: 11px;
   --text-caption--line-height: 1.5;
+  --text-body-sm: 13px;
+  --text-body-sm--line-height: 1.46;
   --text-body: 14px;
   --text-body--line-height: 1.43;
   --text-body-lg: 16px;
@@ -76,6 +81,16 @@
   --shadow-md: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
     rgba(0, 0, 0, 0.1) 0px 4px 6px -4px;
   --shadow-lg: rgba(0, 0, 0, 0.09) 0px 20px 20px 0px;
+
+  /* Motion — AgentAvatar's status cross-fade and TextShimmer's sweep (the
+     shimmer-text keyframes are defined below, shared with LoadingState) */
+  --ease-snap: cubic-bezier(0.23, 1, 0.32, 1);
+  --animate-shimmer-text: shimmer-text 1.4s linear infinite;
+  --animate-pulse-in: pulse-in 0.5s ease-in-out both;
+  /* The reference's stage entrance: slide-up-fade over half a second. */
+  --animate-rise: slide-up-fade 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  /* The reference's funnel bands, grown from their centre line. */
+  --animate-band-grow: band-grow 0.5s linear both;
 }
 
 :root {
@@ -110,9 +125,11 @@ body {
     0 0 0 4px rgb(0 0 0 / 0.12);
 }
 
+/* Text selection: the soft sky blue the reference shows (it sets no colour of
+   its own, so visitors get the browser's standard highlight). Pinned here so
+   it looks the same on every OS, and the text keeps its own colour. */
 ::selection {
-  background: var(--color-electric-blue);
-  color: #ffffff;
+  background: #b4d5fe;
 }
 
 /* Column rules — the reference's two hairlines marking the 1080px content
@@ -162,6 +179,19 @@ body {
     black 45%,
     transparent 100%
   );
+}
+
+/* The same rule field on dark surfaces, in the band's own rule colour rather
+   than ink. No mask baked in — the consumer supplies its own falloff, which is
+   the one thing .bg-hero-grid gets wrong when it is reused. */
+.bg-hero-grid-inverse {
+  background-image: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.035) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 60px 60px;
 }
 
 /* Fine blueprint grid — app surfaces only (auth shell, integrations tile).
@@ -266,8 +296,46 @@ body {
   animation-delay: var(--delay, 0ms);
 }
 
+/* <Reveal fade />: the same gate, opacity only and over a shorter beat. For
+   decorative marks scattered across a surface, where the shared 10px lift
+   would read as the whole scatter sliding in as one block. */
+.reveal.reveal-fade.is-visible {
+  animation: fade-in 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--delay, 0ms);
+}
+
 /* Feature-strip active-column progress fill: a full-height accent bar sliding
    down its 1px track over the 4s auto-advance beat (reference behaviour). */
+/* The reference's tile entrance (dub.co, read off its stylesheet): from half
+   size and invisible, overshooting to 1.05 at the midpoint, settling at 1. */
+@keyframes pulse-in {
+  0% {
+    opacity: 0;
+    transform: scale(var(--from-scale, 0.5));
+  }
+  50% {
+    opacity: 1;
+    transform: scale(var(--to-scale, 1.05));
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* The reference's funnel entrance (dub.co, read off its SMIL): each band
+   scales from nothing to full height about its own centre while it fades in.
+   Pair it with `origin-center [transform-box:fill-box]` on the SVG group. */
+@keyframes band-grow {
+  from {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
 @keyframes triad-progress {
   from {
     transform: translateY(-100%);
@@ -295,6 +363,127 @@ body {
 
 .animate-view-swap {
   animation: view-swap 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Price swap on the billing toggle (components/pricing/PlanCards).
+   A short zoom rather than a slide: the figure stays put and only changes
+   scale, so the eye reads it as the same number being restated. */
+@keyframes price-swap {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animate-price-swap {
+  animation: price-swap 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Pixel-grid agent loader (components/ui/LoadingState) */
+@keyframes pixel-on {
+  0%,
+  100% {
+    opacity: 0.12;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes shimmer-text {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Auth screens (components/auth) — dub.co's login motion, in CSS: logos and
+   slide copy blur in, the slide photo settles from 1.04, the progress bar
+   fills in a straight line, the code field's caret blinks. The ease is
+   Dub's own EASE_OUT (0.23, 1, 0.32, 1). */
+@keyframes auth-fade-in-blur {
+  from {
+    opacity: 0;
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+@keyframes auth-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+
+@keyframes auth-settle {
+  from {
+    transform: scale(1.04);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes auth-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes auth-caret-blink {
+  0%,
+  70%,
+  100% {
+    opacity: 1;
+  }
+  20%,
+  50% {
+    opacity: 0;
+  }
+}
+
+.animate-auth-fade-in-blur {
+  animation: auth-fade-in-blur 0.6s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+.animate-auth-rise {
+  animation: auth-rise 0.45s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+.animate-auth-settle {
+  animation: auth-settle 0.6s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+.animate-auth-caret-blink {
+  animation: auth-caret-blink 1.2s ease-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-auth-fade-in-blur,
+  .animate-auth-rise,
+  .animate-auth-settle,
+  .animate-auth-caret-blink {
+    animation: none;
+  }
 }
 
 /* Synthetic click ripple used by the scripted hero demo */
@@ -334,6 +523,49 @@ body {
   animation: funnel-sheen 3.2s linear infinite;
 }
 
+/* Vertical marquee for the training hero's topic wall.
+   The stack is rendered twice and each item carries its own bottom padding
+   rather than a flex `gap`, so the loop point is exactly -50% — a gap would
+   put it half a gap out and jump once per cycle. */
+@keyframes marquee-up {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes marquee-down {
+  from {
+    transform: translateY(-50%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes marquee-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee-left {
+  animation: marquee-left var(--marquee-duration, 60s) linear infinite;
+}
+
+.animate-marquee-up {
+  animation: marquee-up var(--marquee-duration, 60s) linear infinite;
+}
+
+.animate-marquee-down {
+  animation: marquee-down var(--marquee-duration, 60s) linear infinite;
+}
+
 /* Gentle drift for floating UI cards */
 @keyframes float-y {
   from {
@@ -355,6 +587,7 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .reveal,
   .reveal.is-visible,
+  .reveal.reveal-fade.is-visible,
   .animate-slide-up-fade {
     opacity: 1;
     transform: none;
@@ -362,7 +595,11 @@ body {
   }
   .animate-float,
   .animate-float-delayed,
+  .animate-marquee-up,
+  .animate-marquee-down,
+  .animate-marquee-left,
   .animate-view-swap,
+  .animate-price-swap,
   .animate-demo-ripple,
   .animate-triad-progress,
   .animate-funnel-sheen {

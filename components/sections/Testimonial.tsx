@@ -52,11 +52,64 @@ export const PLACEHOLDER_QUOTES: Record<string, Quote> = {
 };
 
 /**
- * Customer quote band — the reference closes every product section with one
- * of these, on the dotted design-system texture: quote at 20px/28px, wordmark
- * top-right, 40px avatar, and an optional story pill.
+ * Customer quote, in two shapes.
+ *
+ * `band` (the default, and what the landing page uses) is the reference's
+ * compact closer: a 12px-padded strip on the dotted texture, quote left,
+ * attribution right.
+ *
+ * `feature` is the reference's *other* quote treatment — the one it gives a
+ * section of its own: wordmark, a centred 24px quote, avatar, name, role and
+ * the story link, all stacked down the middle. Use it where a page carries one
+ * quote rather than one per feature; three thin bands at even intervals read
+ * as speed bumps rather than as proof.
  */
-export function Testimonial({ quote, name, role, mark, story }: Quote) {
+export function Testimonial({
+  quote,
+  name,
+  role,
+  mark,
+  story,
+  layout = "band",
+}: Quote & { layout?: "band" | "feature" }) {
+  if (layout === "feature") {
+    return (
+      <section className="col-rules relative overflow-hidden border-t border-ash bg-white">
+        <div className="bg-dots mask-fade-edges absolute inset-0 opacity-60" aria-hidden />
+        <Container className="relative py-20">
+          <Reveal>
+            <figure className="mx-auto flex max-w-2xl flex-col items-center text-center">
+              <p className="font-satoshi text-body-lg font-bold tracking-tight text-charcoal">
+                {mark}
+              </p>
+              <blockquote className="mt-8 text-pretty text-heading-sm leading-[1.42] text-charcoal">
+                „{quote}”
+              </blockquote>
+              <figcaption className="mt-8 flex flex-col items-center gap-3">
+                <Avatar name={name} size="lg" />
+                <span className="block">
+                  <span className="block text-body font-medium text-charcoal">
+                    {name}
+                  </span>
+                  <span className="block text-body text-fog">{role}</span>
+                </span>
+              </figcaption>
+              {story ? (
+                <Link
+                  href={story}
+                  className="focus-ring mt-8 inline-flex items-center gap-1.5 rounded-full border border-ash bg-white px-3.5 py-2 text-[13px] font-medium text-electric-blue shadow-subtle transition-all hover:ring-4 hover:ring-ash"
+                >
+                  <BookOpen className="size-3.5" aria-hidden />
+                  Przeczytaj historię
+                </Link>
+              ) : null}
+            </figure>
+          </Reveal>
+        </Container>
+      </section>
+    );
+  }
+
   return (
     <section className="col-rules relative overflow-hidden border-t border-ash bg-white">
       <div className="bg-dots mask-fade-edges absolute inset-0 opacity-60" aria-hidden />

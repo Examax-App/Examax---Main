@@ -81,7 +81,7 @@ export default function AnalitykaPage() {
         actions={
           <button
             type="button"
-            className="inline-flex items-center gap-2 rounded-buttons border border-ash bg-white px-4 py-2 text-body font-medium text-charcoal transition-colors hover:border-smoke hover:bg-paper-mist"
+            className="inline-flex items-center gap-2 rounded-buttons border border-ash bg-white px-3.5 py-1.5 text-body-sm font-medium text-charcoal transition-colors hover:border-smoke hover:bg-paper-mist"
           >
             <Grid2x2 className="size-4 text-steel" aria-hidden />
             Zobacz aktywność

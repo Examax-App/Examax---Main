@@ -67,7 +67,7 @@ export default function ResultsPage() {
                 Chcesz widzieć pełną historię arkuszy, rozkład punktów i słabe
                 punkty? Przejdź na plan Premium, aby odblokować szczegółowy
                 wgląd w wyniki.{" "}
-                <Link href="/#pricing" className="underline">
+                <Link href="/pricing" className="underline">
                   Dowiedz się więcej
                 </Link>
               </>

@@ -9,10 +9,18 @@ export function DataTable({
   columns,
   children,
   className,
+  divided = false,
 }: {
   columns: string[];
   children: React.ReactNode;
   className?: string;
+  /**
+   * Draw a hairline between columns as well as between rows. Off by default —
+   * the dashboard's own tables are row-ruled only; the marketing pages' event
+   * stream is column-ruled, which is what the reference does when a table is
+   * being read as a grid of fields rather than as a list.
+   */
+  divided?: boolean;
 }) {
   return (
     <div
@@ -28,7 +36,10 @@ export function DataTable({
               <th
                 key={column}
                 scope="col"
-                className="px-4 py-3.5 text-body font-medium text-charcoal"
+                className={cn(
+                  "px-3.5 py-2.5 text-body-sm font-medium text-charcoal",
+                  divided && "border-l border-ash first:border-l-0",
+                )}
               >
                 {column}
               </th>
@@ -45,11 +56,14 @@ export function TableRow({
   cells,
   ghost = false,
   className,
+  divided = false,
 }: {
   cells: React.ReactNode[];
   /** Faded placeholder record (the reference's locked-plan preview rows). */
   ghost?: boolean;
   className?: string;
+  /** Match the parent DataTable's `divided`. */
+  divided?: boolean;
 }) {
   return (
     <tr
@@ -64,8 +78,9 @@ export function TableRow({
         <td
           key={index}
           className={cn(
-            "px-4 py-3.5 text-body",
+            "px-3.5 py-2.5 text-body-sm",
             ghost ? "text-fog" : "text-charcoal",
+            divided && "border-l border-ash first:border-l-0",
           )}
         >
           {cell}
@@ -86,7 +101,7 @@ export function TableFooter({
   return (
     <div
       className={cn(
-        "flex items-center justify-between gap-4 px-1 py-3.5 text-body text-charcoal",
+        "flex items-center justify-between gap-4 px-1 py-3 text-body-sm text-charcoal",
         className,
       )}
     >
@@ -95,14 +110,14 @@ export function TableFooter({
         <button
           type="button"
           disabled
-          className="rounded-buttons border border-ash bg-white px-3.5 py-2 text-body font-medium text-silver"
+          className="rounded-buttons border border-ash bg-white px-3 py-1.5 text-body-sm font-medium text-silver"
         >
           Poprzednia
         </button>
         <button
           type="button"
           disabled
-          className="rounded-buttons border border-ash bg-white px-3.5 py-2 text-body font-medium text-silver"
+          className="rounded-buttons border border-ash bg-white px-3 py-1.5 text-body-sm font-medium text-silver"
         >
           Następna
         </button>

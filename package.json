@@ -11,10 +11,15 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@remotion/player": "^4.0.515",
+    "border-beam": "^1.4.1",
+    "bot-avatars": "0.1.1",
     "lucide-react": "^1.33.0",
+    "metal-fx": "^2.0.11",
     "next": "16.3.2",
     "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react-dom": "19.2.8",
+    "remotion": "^4.0.515"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

@@ -21,7 +21,7 @@ export default function AktywnoscPage() {
         actions={
           <button
             type="button"
-            className="inline-flex items-center gap-2 rounded-buttons border border-ash bg-white px-4 py-2 text-body font-medium text-charcoal transition-colors hover:border-smoke hover:bg-paper-mist"
+            className="inline-flex items-center gap-2 rounded-buttons border border-ash bg-white px-3.5 py-1.5 text-body-sm font-medium text-charcoal transition-colors hover:border-smoke hover:bg-paper-mist"
           >
             <ChartNoAxesCombined className="size-4 text-steel" aria-hidden />
             Zobacz analitykę
@@ -68,7 +68,7 @@ export default function AktywnoscPage() {
               <>
                 Chcesz widzieć każdą odpowiedź i próbę na bieżąco? Przejdź na
                 plan Premium, aby odblokować szczegółowy strumień aktywności.{" "}
-                <Link href="/#pricing" className="underline">
+                <Link href="/pricing" className="underline">
                   Dowiedz się więcej
                 </Link>
               </>

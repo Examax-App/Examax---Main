@@ -62,7 +62,7 @@ export default function GeneralSettingsPage() {
             <span className="inline-flex items-center gap-2">
               <span
                 aria-hidden
-                className="grid size-5 place-items-center rounded-[5px] bg-soft-peach text-tangerine"
+                className="grid size-5 place-items-center rounded-[5px] bg-soft-violet text-lavender"
               >
                 <Sigma className="size-3" />
               </span>

@@ -4,7 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 import {
   BarChart3,
-  Bot,
   CalendarDays,
   FileClock,
   Link2,
@@ -41,6 +40,7 @@ import {
 } from "@/components/ui/SettingsCard";
 import { CreateModal } from "@/components/app/CreateModal";
 import { ImportModal } from "@/components/app/ImportModal";
+import { AgentIcon } from "@/components/ui/AgentIcon";
 
 const swatches = [
   { name: "Charcoal", cls: "bg-charcoal", hex: "#171717" },
@@ -50,16 +50,14 @@ const swatches = [
   { name: "Paper Mist", cls: "bg-paper-mist", hex: "#f5f5f5" },
   { name: "Electric Blue", cls: "bg-electric-blue", hex: "#2563eb" },
   { name: "Vivid Green", cls: "bg-vivid-green", hex: "#16a34a" },
-  { name: "Tangerine", cls: "bg-tangerine", hex: "#ea580c" },
   { name: "Lavender", cls: "bg-lavender", hex: "#7c3aed" },
+  { name: "Deep Sapphire", cls: "bg-deep-sapphire", hex: "#1e40af" },
 ];
 
 const tints = [
   { name: "Soft Blue", cls: "bg-soft-blue", text: "text-electric-blue" },
   { name: "Soft Mint", cls: "bg-soft-mint", text: "text-[#166534]" },
-  { name: "Soft Peach", cls: "bg-soft-peach", text: "text-tangerine" },
   { name: "Soft Violet", cls: "bg-soft-violet", text: "text-lavender" },
-  { name: "Soft Amber", cls: "bg-soft-amber", text: "text-[#92400e]" },
 ];
 
 function Section({
@@ -229,9 +227,9 @@ export default function ComponentsPage() {
 
         <Section title="Pigułki, odznaki i awatary">
           <div className="flex flex-wrap items-center gap-3">
-            <FeaturePill icon={Route} accent="tangerine" label="Roadmapa" active />
+            <FeaturePill icon={Route} accent="blue" label="Roadmapa" active />
             <FeaturePill icon={PencilLine} accent="green" label="Trening" active />
-            <FeaturePill icon={Bot} accent="lavender" label="Agent AI" active />
+            <FeaturePill icon={AgentIcon} accent="lavender" label="Agent AI" active />
             <FeaturePill icon={BarChart3} accent="blue" label="Postępy" active />
           </div>
           <div className="mt-4 flex flex-wrap items-center gap-3">
@@ -244,9 +242,9 @@ export default function ComponentsPage() {
             <span className="rounded-[6px] bg-soft-violet px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.06em] text-lavender">
               Wkrótce
             </span>
-            <AccentTile icon={Route} accent="tangerine" />
+            <AccentTile icon={Route} accent="blue" />
             <AccentTile icon={PencilLine} accent="green" />
-            <AccentTile icon={Bot} accent="lavender" />
+            <AccentTile icon={AgentIcon} accent="lavender" />
             <AccentTile icon={BarChart3} accent="blue" />
             <Avatar name="Ala Wiśniewska" size="md" />
             <Avatar name="Jan Kowalski" size="md" />

@@ -2,13 +2,13 @@ import { cn } from "@/lib/cn";
 
 const styles = {
   completed: "bg-soft-mint text-[#166534]",
-  pending: "bg-soft-amber text-[#92400e]",
+  pending: "bg-soft-violet text-lavender",
   active: "bg-sidebar-active text-electric-blue",
 } as const;
 
 const dots = {
   completed: "bg-vivid-green",
-  pending: "bg-[#d97706]",
+  pending: "bg-lavender",
   active: "bg-electric-blue",
 } as const;
 

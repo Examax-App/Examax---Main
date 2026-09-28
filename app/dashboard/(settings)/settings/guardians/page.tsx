@@ -18,7 +18,7 @@ export default function GuardiansPage() {
             <button
               type="button"
               disabled
-              className="inline-flex items-center gap-2 rounded-buttons border border-ash bg-paper-mist px-4 py-2 text-body font-medium text-silver"
+              className="inline-flex items-center gap-2 rounded-buttons border border-ash bg-paper-mist px-3.5 py-1.5 text-body-sm font-medium text-silver"
             >
               Zaproś opiekuna
               <Kbd>O</Kbd>

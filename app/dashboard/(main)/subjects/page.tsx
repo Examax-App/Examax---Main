@@ -20,7 +20,7 @@ export default function SubjectsPage() {
         actions={
           <button
             type="button"
-            className="inline-flex items-center gap-2 rounded-buttons bg-primary-action-fill px-4 py-2 text-body font-medium text-white shadow-subtle transition-colors hover:bg-graphite"
+            className="inline-flex items-center gap-2 rounded-buttons bg-primary-action-fill px-3.5 py-1.5 text-body-sm font-medium text-white shadow-subtle transition-colors hover:bg-graphite"
           >
             Dodaj przedmiot
             <ChevronDown className="size-3.5 opacity-70" aria-hidden />
@@ -50,7 +50,7 @@ export default function SubjectsPage() {
         >
           Odbierz <span className="font-semibold">30 dni</span> Premium za
           darmo.{" "}
-          <Link href="/#pricing" className="underline">
+          <Link href="/pricing" className="underline">
             Dowiedz się więcej
           </Link>
         </Banner>
@@ -63,13 +63,13 @@ export default function SubjectsPage() {
           >
             <button
               type="button"
-              className="rounded-buttons bg-primary-action-fill px-4 py-2 text-body font-medium text-white shadow-subtle transition-colors hover:bg-graphite"
+              className="rounded-buttons bg-primary-action-fill px-3.5 py-1.5 text-body-sm font-medium text-white shadow-subtle transition-colors hover:bg-graphite"
             >
               Dodaj przedmiot
             </button>
             <button
               type="button"
-              className="rounded-buttons border border-ash bg-white px-4 py-2 text-body font-medium text-charcoal transition-colors hover:border-smoke hover:bg-paper-mist"
+              className="rounded-buttons border border-ash bg-white px-3.5 py-1.5 text-body-sm font-medium text-charcoal transition-colors hover:border-smoke hover:bg-paper-mist"
             >
               Dowiedz się więcej
             </button>

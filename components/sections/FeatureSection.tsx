@@ -1,4 +1,3 @@
-import type { LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { cn } from "@/lib/cn";
@@ -6,9 +5,11 @@ import { SECTION_H2 } from "@/lib/type";
 import { Reveal } from "@/components/ui/Reveal";
 import { AccentTile, type Accent } from "@/components/ui/FeaturePill";
 import { FeatureTriad } from "@/components/sections/FeatureTriad";
+import { FeatureStage } from "@/components/sections/FeatureStage";
+import type { IconComponent } from "@/lib/icon";
 
 export type SubFeature = {
-  icon: LucideIcon;
+  icon: IconComponent;
   title: string;
   description: string;
 };
@@ -24,24 +25,46 @@ export function FeatureSection({
   accent,
   eyebrowIcon,
   eyebrowLabel,
+  eyebrowBadge,
   heading,
   sub,
   ctaLabel,
+  ctaHref = "/pricing",
   showcase,
+  showcases,
   subFeatures,
-  highlightIndex,
+  highlightIndex = 0,
 }: {
   id: string;
   accent: Accent;
-  eyebrowIcon: LucideIcon;
+  /** Left out, the eyebrow is its label alone, starting where the chip would. */
+  eyebrowIcon?: IconComponent;
   eyebrowLabel: string;
+  /** A mark after the label, such as the Pro badge on a paid feature. */
+  eyebrowBadge?: React.ReactNode;
   heading: string;
   sub: string;
   ctaLabel: string;
-  showcase: React.ReactNode;
-  subFeatures: [SubFeature, SubFeature, SubFeature];
-  highlightIndex: 0 | 1 | 2;
+  /** Where the intro's button goes; the product sections default to pricing. */
+  ctaHref?: string;
+  showcase?: React.ReactNode;
+  /**
+   * One picture per sub-feature, in the same order. When given, the band
+   * swaps its picture with the strip below instead of showing `showcase`.
+   */
+  showcases?: [React.ReactNode, React.ReactNode, React.ReactNode];
+  /**
+   * Left out, the band is the picture alone — no strip beneath it — for a
+   * picture that is a whole product on its own (the agent window).
+   */
+  subFeatures?: [SubFeature, SubFeature, SubFeature];
+  highlightIndex?: 0 | 1 | 2;
 }) {
+  const triadItems = (subFeatures ?? []).map((feature) => ({
+    title: feature.title,
+    description: feature.description,
+    iconNode: <feature.icon className="size-4" strokeWidth={2} aria-hidden />,
+  }));
   return (
     <section
       id={id}
@@ -51,10 +74,15 @@ export function FeatureSection({
       <div className="col-rules">
         <Container className="pb-20 pt-20">
           <Reveal>
-            <p className="flex items-center gap-2 text-[12px] font-medium leading-4 text-steel">
-              <AccentTile icon={eyebrowIcon} accent={accent} size="sm" />
+            {/* leading-5 matches the chip's own height, so the eyebrow's
+                text sits on the chip's centre line rather than above it. A
+                div, not a p: a badge after the label may render block
+                elements (the Pro mark's metal pill does). */}
+            <div className="flex items-center gap-2.5 text-[12px] font-medium leading-5 text-steel">
+              {eyebrowIcon && <AccentTile icon={eyebrowIcon} accent={accent} size="sm" />}
               {eyebrowLabel}
-            </p>
+              {eyebrowBadge}
+            </div>
             <h2
               id={`${id}-heading`}
               className={cn("mt-3 max-w-lg text-charcoal", SECTION_H2)}
@@ -64,7 +92,7 @@ export function FeatureSection({
             <p className="mt-3 max-w-xl text-pretty text-body-xl text-fog">
               {sub}
             </p>
-            <Button href="#pricing" variant="outline" size="lg" className="mt-8">
+            <Button href={ctaHref} variant="outline" size="lg" className="mt-8">
               {ctaLabel}
             </Button>
           </Reveal>
@@ -75,19 +103,20 @@ export function FeatureSection({
           edge cuts it flush (reference), with the feature strip below it on
           the same grey surface. */}
       <div className="col-rules border-t border-ash bg-[#fafafa]">
-        <div className="flex h-[420px] items-start justify-center overflow-hidden px-8 pt-14">
-          <Reveal className="w-full">{showcase}</Reveal>
-        </div>
-        <FeatureTriad
-          initialIndex={highlightIndex}
-          items={subFeatures.map((feature) => ({
-            title: feature.title,
-            description: feature.description,
-            iconNode: (
-              <feature.icon className="size-4" strokeWidth={1.8} aria-hidden />
-            ),
-          }))}
-        />
+        {showcases ? (
+          <FeatureStage showcases={showcases} items={triadItems} initialIndex={highlightIndex} />
+        ) : !subFeatures ? (
+          <div className="px-5 py-14 sm:px-8">
+            <Reveal className="w-full">{showcase}</Reveal>
+          </div>
+        ) : (
+          <>
+            <div className="flex h-[420px] items-start justify-center overflow-hidden px-8 pt-14">
+              <Reveal className="w-full">{showcase}</Reveal>
+            </div>
+            <FeatureTriad initialIndex={highlightIndex} items={triadItems} />
+          </>
+        )}
       </div>
     </section>
   );

@@ -1,17 +1,9 @@
-import { Bot, FileText, Gauge, RefreshCcw, Route } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { cn } from "@/lib/cn";
 import { SECTION_H2 } from "@/lib/type";
 import { Reveal } from "@/components/ui/Reveal";
-
-const releases = [
-  { date: "18 sie 2026", title: "Agent Examax 2.0", icon: Bot },
-  { date: "4 sie 2026", title: "Arkusze CKE 2026", icon: FileText },
-  { date: "21 lip 2026", title: "Roadmapa matury rozszerzonej", icon: Route },
-  { date: "8 lip 2026", title: "Wskaźnik gotowości", icon: Gauge },
-  { date: "24 cze 2026", title: "Tryb powtórek", icon: RefreshCcw },
-];
+import { releases } from "@/lib/releases";
 
 /**
  * Release timeline in the reference's two-column layout: heading + outline
@@ -38,7 +30,7 @@ export function Changelog() {
               Nowe arkusze, mądrzejsza roadmapa i lepszy agent — co kilka
               tygodni, nie co semestr.
             </p>
-            <Button href="#faq" variant="outline" className="mt-6">
+            <Button href="/updates" variant="outline" className="mt-6">
               Pełny changelog
             </Button>
           </Reveal>

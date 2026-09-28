@@ -115,7 +115,7 @@ export function RoadmapShowcase() {
               </div>
               <span className="inline-flex items-center gap-2 rounded-full border border-ash px-3 py-1.5 text-[12px] font-medium text-charcoal">
                 <span
-                  className="font-geist-mono tabular-nums text-tangerine"
+                  className="font-geist-mono tabular-nums text-electric-blue"
                   key={overall}
                 >
                   {overall}%
@@ -127,7 +127,7 @@ export function RoadmapShowcase() {
             {/* Overall progress */}
             <div className="mt-4 h-2 overflow-hidden rounded-full bg-paper-mist">
               <div
-                className="h-full rounded-full bg-tangerine transition-[width] duration-700"
+                className="h-full rounded-full bg-electric-blue transition-[width] duration-700"
                 style={{ width: `${overall}%` }}
               />
             </div>
@@ -144,7 +144,7 @@ export function RoadmapShowcase() {
                   className={cn(
                     "relative flex items-center gap-3.5 rounded-cards border px-3 py-2.5 transition-colors duration-300",
                     node.state === "active"
-                      ? "border-tangerine/40 bg-[#fff8f3]"
+                      ? "border-electric-blue/40 bg-soft-blue/40"
                       : "border-transparent",
                     node.state === "locked" && "opacity-55",
                   )}
@@ -154,7 +154,7 @@ export function RoadmapShowcase() {
                       "relative z-10 grid size-8 shrink-0 place-items-center rounded-full border-2 bg-white",
                       node.state === "done" &&
                         "border-vivid-green bg-vivid-green text-white",
-                      node.state === "active" && "border-tangerine text-tangerine",
+                      node.state === "active" && "border-electric-blue text-electric-blue",
                       node.state === "next" && "border-smoke text-fog",
                       node.state === "locked" &&
                         "border-dashed border-smoke text-silver",
@@ -206,7 +206,7 @@ export function RoadmapShowcase() {
               <p className="text-body-lg font-semibold text-charcoal">
                 Następny krok
               </p>
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-soft-peach px-2.5 py-1 text-[11px] font-medium leading-none text-tangerine">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-soft-blue px-2.5 py-1 text-[11px] font-medium leading-none text-electric-blue">
                 <Sparkles className="size-3" aria-hidden />
                 Dobrane przez Examax
               </span>
@@ -232,7 +232,7 @@ export function RoadmapShowcase() {
                   key={step.kind}
                   className={cn(
                     "h-1 flex-1 rounded-full transition-colors duration-300",
-                    index === stepIndex ? "bg-tangerine" : "bg-ash",
+                    index === stepIndex ? "bg-electric-blue" : "bg-ash",
                   )}
                 />
               ))}

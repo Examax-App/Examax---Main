@@ -3,7 +3,6 @@
 import { useState } from "react";
 import {
   BarChart3,
-  Bot,
   FileText,
   Gauge,
   LifeBuoy,
@@ -12,12 +11,13 @@ import {
   Route,
   Timer,
 } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { cn } from "@/lib/cn";
 import { SECTION_H2 } from "@/lib/type";
+import type { IconComponent } from "@/lib/icon";
+import { AgentIcon } from "@/components/ui/AgentIcon";
 
 type Plan = {
   name: string;
@@ -27,7 +27,7 @@ type Plan = {
   ctaVariant: "primary" | "outline";
   bestValue?: boolean;
   featuresHeading: string;
-  features: Array<{ icon: LucideIcon; label: string }>;
+  features: Array<{ icon: IconComponent; label: string }>;
 };
 
 const plans: Plan[] = [
@@ -42,7 +42,7 @@ const plans: Plan[] = [
       { icon: Route, label: "Roadmapa dla jednego przedmiotu" },
       { icon: PencilLine, label: "20 zadań treningu dziennie" },
       { icon: FileText, label: "Wybrane arkusze CKE" },
-      { icon: Bot, label: "Rozmowy z agentem (limit dzienny)" },
+      { icon: AgentIcon, label: "Rozmowy z agentem (limit dzienny)" },
       { icon: BarChart3, label: "Podstawowe postępy" },
     ],
   },
@@ -58,7 +58,7 @@ const plans: Plan[] = [
       { icon: Route, label: "Roadmapy wszystkich przedmiotów" },
       { icon: PencilLine, label: "Trening bez limitów" },
       { icon: FileText, label: "Pełna baza arkuszy CKE" },
-      { icon: Bot, label: "Agent Examax bez limitu" },
+      { icon: AgentIcon, label: "Agent Examax bez limitu" },
       { icon: Gauge, label: "Wskaźnik gotowości i pełna analityka" },
       { icon: RefreshCcw, label: "Inteligentne powtórki" },
       { icon: Timer, label: "Symulacje egzaminu (wkrótce)" },

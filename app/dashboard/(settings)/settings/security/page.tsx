@@ -19,7 +19,7 @@ function ProviderRow({
           aria-hidden
           className="grid size-10 place-items-center rounded-full border border-ash bg-white text-charcoal"
         >
-          <Icon className="size-4.5" strokeWidth={1.7} />
+          <Icon className="size-4" strokeWidth={1.7} />
         </span>
         <div>
           <p className="text-body-lg font-semibold text-charcoal">{title}</p>
@@ -29,7 +29,7 @@ function ProviderRow({
       <button
         type="button"
         disabled
-        className="rounded-buttons border border-ash bg-paper-mist px-4 py-2 text-body font-medium text-silver"
+        className="rounded-buttons border border-ash bg-paper-mist px-3.5 py-1.5 text-body-sm font-medium text-silver"
       >
         Konfiguruj
       </button>
@@ -117,7 +117,7 @@ export default function BezpieczenstwoPage() {
               <button
                 type="button"
                 disabled
-                className="rounded-buttons border border-ash bg-paper-mist px-4 py-2 text-body font-medium text-silver"
+                className="rounded-buttons border border-ash bg-paper-mist px-3.5 py-1.5 text-body-sm font-medium text-silver"
               >
                 Eksportuj CSV
               </button>
@@ -126,13 +126,13 @@ export default function BezpieczenstwoPage() {
           <div className="flex items-center justify-between gap-4 rounded-b-cards border-t border-ash bg-[#fafafa] px-6 py-3">
             <p className="text-body text-steel">
               Dziennik zdarzeń jest dostępny w planie{" "}
-              <Link href="/#pricing" className="underline">
+              <Link href="/pricing" className="underline">
                 Premium
               </Link>
             </p>
             <button
               type="button"
-              className="rounded-buttons bg-primary-action-fill px-4 py-2 text-body font-medium text-white shadow-subtle transition-colors hover:bg-graphite"
+              className="rounded-buttons bg-primary-action-fill px-3.5 py-1.5 text-body-sm font-medium text-white shadow-subtle transition-colors hover:bg-graphite"
             >
               Ulepsz
             </button>

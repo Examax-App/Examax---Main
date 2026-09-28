@@ -46,13 +46,13 @@ const school: Integration[] = [
 const planning: Integration[] = [
   {
     icon: CalendarDays,
-    iconClass: "bg-soft-peach text-tangerine",
+    iconClass: "bg-soft-blue text-electric-blue",
     name: "Kalendarz Google",
     description: "Bloki nauki z roadmapy trafiają prosto do kalendarza.",
   },
   {
     icon: Presentation,
-    iconClass: "bg-soft-amber text-[#92400e]",
+    iconClass: "bg-soft-mint text-vivid-green",
     name: "Notion",
     description: "Eksportuj notatki i podsumowania powtórek do Notion.",
   },
@@ -72,7 +72,7 @@ function FeaturedCard({
   description,
 }: Integration) {
   return (
-    <div className="overflow-hidden rounded-largecards border border-ash bg-gradient-to-br from-soft-violet/40 via-white to-soft-peach/40 p-3">
+    <div className="overflow-hidden rounded-largecards border border-ash bg-gradient-to-br from-soft-violet/40 via-white to-soft-blue/40 p-3">
       <div className="bg-grid relative grid h-44 place-items-center rounded-cards">
         <div className="flex items-center gap-5">
           <span
@@ -101,7 +101,7 @@ function FeaturedCard({
             iconClass,
           )}
         >
-          <Icon className="size-4.5" strokeWidth={1.8} />
+          <Icon className="size-4" strokeWidth={1.8} />
         </span>
         <div>
           <p className="text-body-lg font-semibold text-charcoal">{name}</p>

@@ -44,7 +44,7 @@ export function Stats() {
                 <dt className="font-geist-mono text-xs uppercase tracking-[0.08em] text-fog">
                   {figure.label}
                 </dt>
-                <dd className="mt-1.5 font-geist-mono text-[32px] leading-none tracking-tight text-tangerine tabular-nums sm:text-[40px]">
+                <dd className="mt-1.5 font-geist-mono text-[32px] leading-none tracking-tight text-electric-blue tabular-nums sm:text-[40px]">
                   <CountUp value={figure.value} />
                 </dd>
               </div>

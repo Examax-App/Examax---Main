@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { ChevronRight } from "lucide-react";
 import { useReducedMotion } from "@/lib/hooks";
 import { cn } from "@/lib/cn";
@@ -26,11 +26,27 @@ export type TriadItem = {
 export function FeatureTriad({
   items,
   initialIndex,
+  active: controlledActive,
+  onActiveChange,
 }: {
   items: TriadItem[];
   initialIndex: number;
+  /**
+   * Optional control from above, for a demo band that swaps its picture with
+   * the active column (see FeatureStage). Left out, the strip runs itself.
+   */
+  active?: number;
+  onActiveChange?: (index: number) => void;
 }) {
-  const [active, setActive] = useState(initialIndex);
+  const [ownActive, setOwnActive] = useState(initialIndex);
+  const active = controlledActive ?? ownActive;
+  const setActive = useCallback(
+    (value: number) => {
+      setOwnActive(value);
+      onActiveChange?.(value);
+    },
+    [onActiveChange],
+  );
   const [hovered, setHovered] = useState(false);
   const [inView, setInView] = useState(false);
   const reducedMotion = useReducedMotion();
@@ -47,15 +63,13 @@ export function FeatureTriad({
     return () => observer.disconnect();
   }, []);
 
-  // Auto-advance while the row is on screen and not hovered.
+  // Auto-advance while the row is on screen and not hovered. The timer
+  // restarts whenever the column changes, in step with the progress rule.
   useEffect(() => {
     if (!inView || hovered || reducedMotion) return;
-    const timer = window.setInterval(
-      () => setActive((current) => (current + 1) % items.length),
-      4000,
-    );
-    return () => window.clearInterval(timer);
-  }, [inView, hovered, reducedMotion, items.length]);
+    const timer = window.setTimeout(() => setActive((active + 1) % items.length), 4000);
+    return () => window.clearTimeout(timer);
+  }, [active, inView, hovered, reducedMotion, items.length, setActive]);
 
   return (
     <div
@@ -74,7 +88,10 @@ export function FeatureTriad({
             }}
             onFocus={() => setActive(index)}
             className={cn(
-              "relative h-full border-t border-ash pt-4 md:border-t-0 md:pl-6 md:pr-2 md:pt-0",
+              // The whole column is the hover target that drives the strip, so
+              // it takes the pointer even though only the link inside it
+              // navigates.
+              "relative h-full cursor-pointer border-t border-ash pt-4 md:border-t-0 md:pl-6 md:pr-2 md:pt-0",
               isActive && "max-md:border-t-2 max-md:border-t-charcoal",
             )}
           >
@@ -95,8 +112,10 @@ export function FeatureTriad({
             <span
               aria-hidden
               className={cn(
+                // The reference draws these near-black and dims the whole
+                // column when inactive, which is what gives them weight.
                 "block w-fit transition-colors duration-300",
-                isActive ? "text-silver" : "text-smoke",
+                isActive ? "text-charcoal" : "text-charcoal/35",
               )}
             >
               {item.iconNode}
@@ -118,18 +137,16 @@ export function FeatureTriad({
               {item.description}
             </p>
             <a
-              href="#pricing"
+              href="/pricing"
               className={cn(
                 "focus-ring group/link mt-3.5 inline-flex items-center gap-1 rounded-[4px] text-body font-medium transition-colors duration-300",
                 isActive ? "text-charcoal" : "text-smoke",
               )}
             >
               Dowiedz się więcej
+              {/* A small, smooth nudge to the right on hover — nothing else. */}
               <ChevronRight
-                className={cn(
-                  "size-4 transition-transform duration-300 group-hover/link:-translate-y-0.5",
-                  isActive && "translate-x-0.5",
-                )}
+                className="size-4 transition-transform duration-300 ease-out group-hover/link:translate-x-0.5 motion-reduce:transition-none"
                 aria-hidden
               />
             </a>
