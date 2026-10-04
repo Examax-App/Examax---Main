@@ -1,123 +1,167 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import { Container } from "@/components/ui/Container";
-import { Reveal } from "@/components/ui/Reveal";
-import { BillingToggle } from "@/components/pricing/BillingToggle";
 import { CompareTable } from "@/components/pricing/CompareTable";
+import { EnterpriseBand } from "@/components/pricing/EnterpriseBand";
+import { PillToggle } from "@/components/pricing/PillToggle";
 import { PlanCards } from "@/components/pricing/PlanCards";
-import { PricingFaq } from "@/components/pricing/PricingFaq";
-import { cn } from "@/lib/cn";
+import { Faq } from "@/components/sections/Faq";
+import {
+  DEFAULT_EXAM,
+  RECOMMENDED_PLAN,
+  YEARLY_DISCOUNT_NOTE,
+  enterprisePlan,
+  exams,
+  pricingFaqs,
+  tierCompareGroups,
+  tierPlans,
+  type ExamType,
+} from "@/lib/pricing";
+
+/** Where a plan sits in the carousel. */
+const planIndex = (id: string) => Math.max(0, tierPlans.findIndex((plan) => plan.id === id));
 
 /**
- * The four bands of /pricing: hero, plan cards, comparison, FAQ.
+ * Every band of /pricing: hero with the two switches, the plan cards, the
+ * Enterprise band, the comparison and the FAQ — dub.co/pricing rebuilt 1:1,
+ * minus its testimonial. Free, Pro and Max share the cards row and the
+ * comparison; Enterprise stands apart on its own band, as dub's odd plan out
+ * does.
  *
- * Owns the billing period for the whole page. The cards and the comparison
- * header both print prices, so the switch has to sit above both — which is
- * where the reference puts it too (Figma `105:1996`: inside the hero, 40px
- * under the text block).
+ * The frame is dub.co's own on this page, not the landing's: each band is a
+ * 1080px box inside a 16px gutter, walled by Ash hairlines. The hero's walls
+ * fade in from the top, the cards sit in a closed box, and the comparison's
+ * floor runs the full width of the page.
  *
- * The heading and subheading arrive as `children` from the server page rather
- * than being written here: they are static copy with no reason to ship in the
- * client bundle, and this component only needs to own the band around them.
+ * State read by more than one band lives here:
+ *
+ *   exam     "Przygotowujesz się do". Prices never depend on it; it only
+ *            picks the recommended plan (RECOMMENDED_PLAN), whose badge and
+ *            filled CTA move between cards when it changes.
+ *   yearly   off by default: the page opens on monthly prices, with
+ *            Egzamin ósmoklasisty as the exam.
+ *   index    the plan the small-screen carousel shows, shared by the cards
+ *            and every comparison row. It starts on the recommended plan and
+ *            follows the recommendation when the exam changes.
  */
-/**
- * Section titles on this page sit at a flat 36px on a 40px line — the
- * reference's own ramp for them (`105:2497`, `105:3526`). Declared here rather
- * than reaching for the shared `SECTION_H2`, which climbs to 48px at `md` and
- * is what the landing page's sections use.
- */
-export const PRICING_H2 =
-  "font-satoshi text-3xl font-medium text-pretty sm:text-heading-lg";
-
 export function PricingView({ children }: { children: React.ReactNode }) {
-  // Yearly is the default: it is the better offer, so it is the one the page
-  // opens on rather than something the reader has to go looking for.
-  const [yearly, setYearly] = useState(true);
+  const [exam, setExam] = useState<ExamType>(DEFAULT_EXAM);
+  const [yearly, setYearly] = useState(false);
+  const [index, setIndex] = useState(() => planIndex(RECOMMENDED_PLAN[DEFAULT_EXAM]));
+
+  const recommended = RECOMMENDED_PLAN[exam];
+  const badgeClassName = exams.find((option) => option.id === exam)?.badgeClassName ?? exams[0].badgeClassName;
+
+  const chooseExam = (next: ExamType) => {
+    setExam(next);
+    setIndex(planIndex(RECOMMENDED_PLAN[next]));
+  };
 
   return (
     <>
       {/* ── 1. Hero ─────────────────────────────────────────────────────── */}
-      <section aria-labelledby="pricing-heading" className="col-rules bg-white">
-        <Container className="pb-16 pt-20">
-          {/* 672px is the reference's own measure for this block — wide enough
-              for the headline to break where it wants, narrow enough that the
-              subheading still reads as one column. */}
-          <div className="max-w-2xl">{children}</div>
+      <section aria-labelledby="pricing-heading" className="relative overflow-clip bg-white px-4">
+        <div className="relative z-0 mx-auto max-w-[1080px] border-b border-ash">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 border-x border-ash [mask-image:linear-gradient(transparent,black)]"
+          />
+          <div className="relative px-4 pb-8 pt-16 sm:px-8">
+            <div className="relative max-w-2xl">{children}</div>
 
-          <Reveal delay={80}>
-            {/* One row, note left and switch right — the switch sits on the
-                far edge of the column without changing the height it had when
-                it was stacked. It wraps to two lines only when the note can no
-                longer share the line. */}
-            <div className="mt-10 flex flex-wrap items-center justify-between gap-4">
-              <p className="text-body text-fog">
-                Ceny w złotówkach, z VAT. Subskrypcję anulujesz jednym
-                kliknięciem.
-              </p>
-              <BillingToggle yearly={yearly} onChange={setYearly} />
+            <div
+              style={{ "--delay": "100ms" } as React.CSSProperties}
+              className="animate-slide-up-fade [--offset:10px] mt-10 flex flex-col items-start justify-between gap-4 lg:flex-row lg:items-center"
+            >
+              <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-3">
+                <span aria-hidden className="text-body text-fog">
+                  Przygotowujesz się do:
+                </span>
+                <PillToggle
+                  ariaLabel="Do czego się przygotowujesz?"
+                  layoutId="pricing-exam"
+                  selected={exam}
+                  onSelect={chooseExam}
+                  options={exams.map((option) => ({
+                    value: option.id,
+                    label: (
+                      <span className="flex items-center gap-2">
+                        <option.icon className="size-[1.125rem]" />
+                        {/* The full exam name needs a 375px screen; below
+                            that it takes its short name. (Under 360px the
+                            billing badge steps aside too; the cards still
+                            carry the saving.) */}
+                        <span className="text-body font-semibold text-slate max-[374px]:hidden">{option.label}</span>
+                        <span className="hidden text-body font-semibold text-slate max-[374px]:inline">
+                          {option.shortLabel}
+                        </span>
+                      </span>
+                    ),
+                  }))}
+                />
+              </div>
+              <PillToggle
+                ariaLabel="Okres rozliczenia"
+                layoutId="pricing-billing"
+                size="lg"
+                selected={yearly ? "yearly" : "monthly"}
+                onSelect={(value) => setYearly(value === "yearly")}
+                options={[
+                  { value: "monthly", label: "Miesięcznie" },
+                  {
+                    value: "yearly",
+                    label: (
+                      <>
+                        Rocznie
+                        <span className="max-w-fit whitespace-nowrap rounded-full border border-blue-200 max-[359px]:hidden bg-linear-to-r from-blue-100 via-blue-100/50 to-blue-100 px-2 py-0 text-xs font-medium text-blue-900">
+                          {YEARLY_DISCOUNT_NOTE}
+                        </span>
+                      </>
+                    ),
+                  },
+                ]}
+              />
             </div>
-          </Reveal>
-        </Container>
+          </div>
+        </div>
       </section>
 
       {/* ── 2. Plan cards ───────────────────────────────────────────────── */}
-      <section
-        aria-labelledby="plans-heading"
-        className="col-rules border-t border-ash bg-white"
-      >
-        <Container className="py-16">
-          <h2 id="plans-heading" className="sr-only">
-            Plany Examax
-          </h2>
-          <PlanCards yearly={yearly} />
-        </Container>
+      <section aria-label="Plany Examax" className="relative overflow-clip bg-white px-4">
+        <div className="relative z-0 mx-auto max-w-[1080px] border-x border-b border-ash">
+          <PlanCards
+            plans={tierPlans}
+            recommended={recommended}
+            badgeClassName={badgeClassName}
+            yearly={yearly}
+            index={index}
+            onIndexChange={setIndex}
+          />
+        </div>
       </section>
 
-      {/* ── 3. Compare plans ────────────────────────────────────────────── */}
-      <section
-        id="compare"
-        aria-labelledby="compare-heading"
-        className="col-rules border-t border-ash bg-white"
-      >
-        <Container className="py-20">
-          <Reveal>
-            <h2
-              id="compare-heading"
-              className={cn("text-charcoal", PRICING_H2)}
-            >
-              Porównaj plany
-            </h2>
-            <p className="mt-4 max-w-md text-body-xl text-steel">
-              Wszystko, co wchodzi w skład każdego planu — w jednym miejscu.
-            </p>
-          </Reveal>
+      {/* ── 3. Enterprise ───────────────────────────────────────────────── */}
+      <EnterpriseBand plan={enterprisePlan} />
 
-          {/* No Reveal around the table: its transform would create a
-              containing block and the sticky header would scroll away with
-              the section instead of pinning under the navbar. */}
-          <div className="mt-10">
-            <CompareTable yearly={yearly} />
-          </div>
-
-          <Reveal delay={120}>
-            <p className="mt-6 text-body text-fog">
-              Uczysz w szkole lub prowadzisz organizację edukacyjną?{" "}
-              <Link
-                href="/contact"
-                className="link-underline font-medium text-charcoal"
-              >
-                Napisz do nas
-              </Link>{" "}
-              — dobierzemy plan pod liczbę uczniów.
-            </p>
-          </Reveal>
-        </Container>
+      {/* ── 4. Compare plans ────────────────────────────────────────────── */}
+      <section id="compare" aria-labelledby="compare-heading" className="relative bg-white px-4">
+        {/* No overflow clip on this band: it would become the sticky
+            header's scroll container and the header would stop pinning. */}
+        <div className="relative z-0 mx-auto max-w-[1080px] border-x border-ash">
+          <CompareTable
+            plans={tierPlans}
+            groups={tierCompareGroups}
+            recommended={recommended}
+            badgeClassName={badgeClassName}
+            yearly={yearly}
+            index={index}
+            onIndexChange={setIndex}
+          />
+        </div>
       </section>
 
-      {/* ── 4. FAQ ──────────────────────────────────────────────────────── */}
-      <PricingFaq />
+      {/* ── 5. FAQ ──────────────────────────────────────────────────────── */}
+      <Faq items={pricingFaqs} className="col-rules-fade" />
     </>
   );
 }

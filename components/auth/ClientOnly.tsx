@@ -5,9 +5,9 @@ import { useSyncExternalStore } from "react";
 const subscribe = () => () => {};
 
 /**
- * Dub's ClientOnly: the forms render in the browser only, because they read
- * the last-used sign-in method from localStorage and must not flash the
- * default arrangement first.
+ * Dub's ClientOnly: the forms render in the browser only, so they can ask
+ * for the pointer type (autofocus, canAutoFocus) and measure their animated
+ * heights from the first render.
  */
 export function ClientOnly({ className, children }: { className?: string; children: React.ReactNode }) {
   const hydrated = useSyncExternalStore(

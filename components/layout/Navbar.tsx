@@ -11,16 +11,17 @@ import {
 } from "react";
 import Link from "next/link";
 import {
-  ArrowRight,
   Backpack,
   BadgePercent,
   BookMarked,
   BookOpen,
+  BriefcaseBusiness,
+  ArrowRight,
   ChevronDown,
-  Compass,
   GraduationCap,
   Languages,
-  Menu,
+  LifeBuoy,
+  Mail,
   Newspaper,
   PencilLine,
   Presentation,
@@ -30,51 +31,26 @@ import {
   Sigma,
   Timer,
   TrendingUp,
-  X,
+  Users,
+  Zap,
 } from "lucide-react";
 import { Logo } from "@/components/ui/Logo";
 import { Button } from "@/components/ui/Button";
-import { Container } from "@/components/ui/Container";
 import { cn } from "@/lib/cn";
+import { prefetchFor } from "@/lib/routes";
 import type { IconComponent } from "@/lib/icon";
 import { AccentTile, type Accent } from "@/components/ui/FeaturePill";
 import { ACCENT_VAR } from "@/lib/glow";
-import { AgentIcon } from "@/components/ui/AgentIcon";
 import {
+  AgentChatPreview,
+  SimulationPreview,
   ProgressPreview,
   RoadmapPreview,
-  AgentHuddle,
-  ExamSheetPreview,
   TrainingPreview,
 } from "@/components/layout/NavPreviews";
 
 type MenuKey = "product" | "exams" | "materials";
 
-type MenuItem = {
-  icon: IconComponent;
-  title: string;
-  description: string;
-  href: string;
-  /**
-   * The card's accent. Every card lights the same blurred colour sweep behind
-   * its white surface; `violet` adds a wash of the palette's lavender pooling
-   * at the bottom edge on top of it, which is the only thing separating two
-   * cards sharing a slot.
-   */
-  tone?: "accent" | "violet";
-  /**
-   * Size class for the icon. Raster marks need more area than a line glyph to
-   * stay readable, so they opt up from the default.
-   */
-  iconSize?: string;
-  /**
-   * Fixed height for the icon row. Cards sharing a slot keep their titles on
-   * one line no matter how the marks inside differ in size.
-   */
-  iconSlot?: string;
-};
-
-type MenuColumn = { heading: string; items: MenuItem[] };
 
 /**
  * A card in the Product panel's feature grid.
@@ -91,24 +67,13 @@ type FeatureCard = {
   /** A tall card's picture of the product, filling the slot under its copy. */
   preview?: React.ReactNode;
   /**
-   * A wide card's artwork, laid behind the copy and bleeding off the right
-   * edge — the reference's own treatment for its wide cards.
+   * A wide card's artwork, laid behind the copy and fading off the right
+   * edge — the reference's own treatment for its wide cards. Nothing in it
+   * moves on hover.
    */
   backdrop?: React.ReactNode;
-  /**
-   * A wide card's inline artwork, beside the copy — the Agent card's huddle of
-   * the team at its right edge. Nothing in it moves on hover.
-   */
-  art?: React.ReactNode;
 };
 
-/**
- * Two panel shapes.
- *
- * `grid` is the reference's Product dropdown — a row of three tall cards over a
- * row of two wide ones. `split` is the original: large blocks in a left column
- * with headed lists beside them, which is what Egzaminy still uses.
- */
 /**
  * An entry in a `columns` menu — the reference's Solutions menu. `compact`
  * columns drop the description and shrink the icon box; `hoverTint` is the
@@ -121,27 +86,35 @@ type ColumnItem = {
   description?: string;
   href: string;
   hoverTint?: string;
+  /** A subject's chip colour, for the mobile menu's tiles (matching the footer's). */
+  accent?: Accent;
+  /** Not available yet: shown greyed out and cannot be picked. */
+  disabled?: boolean;
 };
 
+/**
+ * Two panel shapes.
+ *
+ * `grid` is the reference's Product dropdown — a row of three tall cards over
+ * a row of two wide ones. `columns` is its Solutions and Resources menus:
+ * headed columns split by hairlines. Solutions weights them 3:3:2; `even`
+ * gives Resources' three equal thirds.
+ */
 type Menu =
   | { label: string; layout: "grid"; top: FeatureCard[]; bottom: FeatureCard[] }
   | {
       label: string;
       layout: "columns";
+      even?: boolean;
       columns: Array<{ heading: string; compact?: boolean; items: ColumnItem[] }>;
-    }
-  | {
-      label: string;
-      layout: "split";
-      featured: MenuItem[];
-      columns: MenuColumn[];
     };
 
-/** Every entry in a menu, in reading order — the mobile list is flat. */
-function menuItems(menu: Menu): Array<Pick<MenuItem, "icon" | "title" | "href">> {
-  if (menu.layout === "grid") return [...menu.top, ...menu.bottom];
-  if (menu.layout === "columns") return menu.columns.flatMap((column) => column.items);
-  return [...menu.featured, ...menu.columns.flatMap((column) => column.items)];
+type MobileEntry = { icon: IconComponent; title: string; description?: string; href: string; accent?: Accent; disabled?: boolean };
+
+/** A menu's entries for the mobile accordion, grouped as the desktop panel groups them. */
+function mobileGroups(menu: Menu): Array<{ heading?: string; items: MobileEntry[] }> {
+  if (menu.layout === "grid") return [{ items: [...menu.top, ...menu.bottom] }];
+  return menu.columns.map((column) => ({ heading: column.heading, items: column.items }));
 }
 
 const menus: Record<MenuKey, Menu> = {
@@ -150,9 +123,11 @@ const menus: Record<MenuKey, Menu> = {
     layout: "grid",
     // Landing-page sections are linked root-absolutely, so the panel works
     // the same from /pricing as it does from the landing page. Trening,
-    // Roadmapa and Symulacja are the exceptions: each has a page of its own.
-    // Postępy holds the orange spotlight slot; Symulacja sits in the wide row
-    // beside the agent, in lavender.
+    // Roadmapa, Postępy and Symulacja are the exceptions: each has a page of its own.
+    // The cards follow dub.co's Product menu one for one (NavPreviews):
+    // Trening is its Partners card (in Trening's green), Roadmapa its Links rows, Postępy
+    // its Analytics (last, in orange); the wide row takes its Integrations slot
+    // for the exam launcher and its API window for a chat with an agent.
     top: [
       {
         icon: PencilLine,
@@ -175,7 +150,7 @@ const menus: Record<MenuKey, Menu> = {
         accent: "tangerine",
         title: "Śledzenie postępów",
         description: "Opanowanie i skuteczność na żywo, temat po temacie",
-        href: "/#progress",
+        href: "/progress",
         preview: <ProgressPreview color={ACCENT_VAR.tangerine} />,
       },
     ],
@@ -186,15 +161,15 @@ const menus: Record<MenuKey, Menu> = {
         title: "Symulacja egzaminu",
         description: "Egzamin na czas",
         href: "/simulation",
-        backdrop: <ExamSheetPreview />,
+        backdrop: <SimulationPreview />,
       },
       {
-        icon: AgentIcon,
-        accent: "lavender",
-        title: "Agenci Examax",
-        description: "Twój zespół korepetytorów",
-        href: "/#agent",
-        art: <AgentHuddle />,
+        icon: Zap,
+        accent: "yellow",
+        title: "Korepetytor AI",
+        description: "Wyjaśnia krok po kroku",
+        href: "/agents",
+        backdrop: <AgentChatPreview />,
       },
     ],
   },
@@ -235,7 +210,7 @@ const menus: Record<MenuKey, Menu> = {
             icon: School,
             title: "Dla szkół",
             description: "Licencje i panel dla całych klas",
-            href: "/schools",
+            href: "/enterprise",
           },
           {
             icon: Presentation,
@@ -249,50 +224,46 @@ const menus: Record<MenuKey, Menu> = {
         heading: "Przedmioty",
         compact: true,
         items: [
-          { icon: Sigma, title: "Matematyka", href: "/#practice", hoverTint: "group-hover:text-electric-blue" },
-          { icon: BookMarked, title: "Język polski", href: "/#practice", hoverTint: "group-hover:text-vivid-green" },
-          { icon: Languages, title: "Język angielski", href: "/#practice", hoverTint: "group-hover:text-lavender" },
+          { icon: Sigma, title: "Matematyka", href: "/math", hoverTint: "group-hover:text-electric-blue", accent: "blue" },
+          { icon: BookMarked, title: "Język polski", href: "/polish", hoverTint: "group-hover:text-vivid-green", accent: "green" },
+          { icon: Languages, title: "Język angielski", href: "/english", hoverTint: "group-hover:text-lavender", accent: "lavender" },
         ],
       },
     ],
   },
   materials: {
     label: "O nas",
-    layout: "split",
-    // The two evergreen references lead as cards; what changes over time sits
-    // in the list beside them. Routes are live paths rather than hashes: the
-    // pages land later, but the nav skeleton is then already final.
-    featured: [
-      {
-        icon: Compass,
-        title: "O Examax",
-        description: "Misja, wizja i to, po co powstał Examax",
-        href: "/about",
-      },
-      {
-        icon: BookOpen,
-        title: "Dokumentacja",
-        description: "Przewodniki po platformie, FAQ i materiały do nauki",
-        href: "/docs",
-        tone: "violet",
-      },
-    ],
+    layout: "columns",
+    even: true,
+    // The reference's Resources menu, column for column — Company leads here,
+    // as he asked, then Help and Support, then Updates. Pages that are not
+    // built yet keep their final paths and land on the 404 until they are.
     columns: [
+      {
+        heading: "Firma",
+        items: [
+          { icon: Users, title: "O Examax", description: "Misja, wartości i zespół", href: "/about" },
+          { icon: BookOpen, title: "Dokumentacja", description: "Przewodniki po platformie", href: "/docs" },
+          {
+            icon: BriefcaseBusiness,
+            title: "Kariera",
+            description: "Dołącz do zespołu Examax",
+            href: "/careers",
+          },
+        ],
+      },
+      {
+        heading: "Pomoc i wsparcie",
+        items: [
+          { icon: LifeBuoy, title: "Centrum pomocy", description: "Odpowiedzi na Twoje pytania", href: "/help" },
+          { icon: Mail, title: "Kontakt", description: "Napisz do wsparcia lub w sprawie szkoły", href: "/contact" },
+        ],
+      },
       {
         heading: "Na bieżąco",
         items: [
-          {
-            icon: Newspaper,
-            title: "Aktualności",
-            description: "Nowe funkcje, zmiany w produkcie i ogłoszenia",
-            href: "/updates",
-          },
-          {
-            icon: Quote,
-            title: "Opinie",
-            description: "Historie uczniów i opinie społeczności",
-            href: "/reviews",
-          },
+          { icon: Newspaper, title: "Aktualności", description: "Nowe funkcje i zmiany w produkcie", href: "/updates" },
+          { icon: Quote, title: "Opinie", description: "Historie uczniów i nauczycieli", href: "/reviews" },
         ],
       },
     ],
@@ -303,8 +274,8 @@ const menuKeys = Object.keys(menus) as MenuKey[];
 
 const plainLinks = [
   { label: "Cennik", href: "/pricing" },
-  // Dub's "Enterprise" slot: the plan for whole schools (placeholder route).
-  { label: "Instytucje", href: "/schools" },
+  // Dub's "Enterprise" slot: the plan for schools and institutions (placeholder route).
+  { label: "Dla Instytucji", href: "/enterprise" },
 ];
 
 /**
@@ -317,89 +288,6 @@ const PILL_SPRING =
 function subscribeScroll(callback: () => void) {
   window.addEventListener("scroll", callback, { passive: true });
   return () => window.removeEventListener("scroll", callback);
-}
-
-/**
- * The hover light, borrowed from the reference's GridCard: a heavily blurred
- * colour wash sitting behind the card, fading in on hover.
- *
- * The reference uses a red/violet/blue conic sweep. This is the same technique
- * in Examax's own accents, which is the one liberty taken with DESIGN.md's
- * rule about decorative gradients — the interaction does not read without it.
- */
-const HOVER_GLOW =
-  "conic-gradient(from 180deg, var(--color-electric-blue) 0deg, var(--color-lavender) 130deg, var(--color-deep-sapphire) 230deg, var(--color-vivid-green) 310deg, var(--color-electric-blue) 360deg)";
-
-/**
- * The Matura card's accent: a violet wash pooling at the bottom edge on hover.
- *
- * At rest the two exam cards are the same plain white surface; this is all
- * that tells their hover states apart. It is mixed down from the palette's own
- * lavender and fades out well below the title, which keeps it reading as light
- * collecting under the card rather than as a second background colour.
- */
-const VIOLET_FOOT = [
-  "linear-gradient(to top",
-  "color-mix(in oklab, var(--color-lavender) 16%, transparent) 0%",
-  "color-mix(in oklab, var(--color-lavender) 6%, transparent) 38%",
-  "transparent 78%)",
-].join(", ");
-
-/**
- * A large navigation card — the reference's GridCard proportions: a bordered
- * white surface, icon above, title and description below, generous padding.
- * It is a visible card at rest and lights up on hover.
- */
-function NavCard({
-  item,
-  tabIndex,
-  onNavigate,
-}: {
-  item: MenuItem;
-  tabIndex: number;
-  onNavigate: () => void;
-}) {
-  const violet = item.tone === "violet";
-
-  return (
-    <Link
-      href={item.href}
-      tabIndex={tabIndex}
-      onClick={onNavigate}
-      className="focus-ring group relative isolate z-0 flex h-full flex-col overflow-hidden rounded-cards border border-ash bg-white px-4 py-3.5"
-    >
-      <span
-        aria-hidden
-        className="pointer-events-none absolute -inset-[10%] -z-10 opacity-0 blur-[46px] transition-opacity duration-200 group-hover:opacity-25 motion-reduce:transition-none"
-        style={{ backgroundImage: HOVER_GLOW }}
-      />
-      {/* Sits above the sweep but still below the type. Hidden at rest, like
-          the sweep itself, so the two cards are identical until hovered. */}
-      {violet && (
-        <span
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-1/2 opacity-0 transition-opacity duration-200 group-hover:opacity-100 motion-reduce:transition-none"
-          style={{ backgroundImage: VIOLET_FOOT }}
-        />
-      )}
-      {/* A fixed slot keeps the cards' titles on one line even when the marks
-          above them are sized differently. */}
-      <span className={cn("relative flex items-center", item.iconSlot)}>
-        <item.icon
-          className={cn("text-steel", item.iconSize ?? "size-6")}
-          strokeWidth={1.8}
-        />
-      </span>
-      <span className="relative mt-4 block">
-        <span className="block text-body font-semibold text-charcoal">
-          {item.title}
-        </span>
-        <span className="mt-1 block text-[12px] leading-snug text-fog">
-          {item.description}
-        </span>
-      </span>
-    </Link>
-  );
 }
 
 /**
@@ -450,8 +338,7 @@ function GridPattern({ x, y, className }: { x: number; y: number; className: str
  * Wide cards fill the bottom row. They follow the reference's wide cards: the
  * grid fades in from the left, there is no chip and no glow, and on hover the
  * fill darkens by one step. The reference's artwork sits behind the copy and
- * bleeds off the right edge (`backdrop`). The Agent card carries its own
- * artwork (`art`) instead: the team, huddled at its right edge.
+ * fades off the right edge (`backdrop`).
  */
 function FeatureCard({
   card,
@@ -467,6 +354,7 @@ function FeatureCard({
   return (
     <Link
       href={card.href}
+      prefetch={prefetchFor(card.href)}
       tabIndex={tabIndex}
       onClick={onNavigate}
       className={cn(
@@ -506,20 +394,17 @@ function FeatureCard({
             className="[mask-image:linear-gradient(90deg,transparent,black)]"
           />
           {card.backdrop}
-          {card.art && (
-            <div className="pointer-events-none absolute inset-0">{card.art}</div>
-          )}
           <div className="relative flex items-center gap-4 px-5 py-4">
             <div className="min-w-0 flex-1">
-              <span className="flex items-center gap-1 text-body leading-none font-medium text-charcoal">
-                {card.title}
-              </span>
+              {/* Inline, as in the reference: the line box stays the div's own
+                  24px, which is what gives the wide cards their 80px height. */}
+              <span className="text-body font-medium leading-none text-charcoal">{card.title}</span>
               {/* The copy stops short of the artwork on the right, at both
                   panel widths. */}
               <p
                 className={cn(
                   "mt-1 text-body text-fog",
-                  card.backdrop ? "max-w-52" : card.art ? "max-w-64 xl:max-w-68" : "max-w-sm",
+                  card.backdrop ? "max-w-52" : "max-w-sm",
                 )}
               >
                 {card.description}
@@ -549,16 +434,8 @@ function ColumnLink({
   tabIndex: number;
   onNavigate: () => void;
 }) {
-  return (
-    <Link
-      href={item.href}
-      tabIndex={tabIndex}
-      onClick={onNavigate}
-      className={cn(
-        "focus-ring group -mx-2 flex items-center gap-3 rounded-[8px] p-2 transition-colors hover:bg-canvas-muted active:bg-paper-mist",
-        compact && "py-1",
-      )}
-    >
+  const body = (
+    <>
       <span
         className={cn(
           "shrink-0 border border-ash bg-white/50",
@@ -566,7 +443,7 @@ function ColumnLink({
         )}
       >
         <item.icon
-          className={cn("size-4 text-steel transition-colors", item.hoverTint)}
+          className={cn("size-4 text-steel transition-colors", !item.disabled && item.hoverTint)}
           strokeWidth={1.8}
         />
       </span>
@@ -576,39 +453,75 @@ function ColumnLink({
           <span className="block truncate text-xs text-fog">{item.description}</span>
         )}
       </span>
+    </>
+  );
+
+  // Not available yet: the same row, faded and inert — no link, no hover,
+  // no focus stop — so it reads as there but not pickable.
+  if (item.disabled) {
+    return (
+      <span
+        aria-disabled="true"
+        className={cn(
+          "-mx-2 flex cursor-not-allowed select-none items-center gap-3 rounded-[8px] p-2 opacity-45 grayscale",
+          compact && "py-1",
+        )}
+      >
+        {body}
+        <span className="sr-only">(wkrótce)</span>
+      </span>
+    );
+  }
+
+  return (
+    <Link
+      href={item.href}
+      prefetch={prefetchFor(item.href)}
+      tabIndex={tabIndex}
+      onClick={onNavigate}
+      className={cn(
+        "focus-ring group -mx-2 flex items-center gap-3 rounded-[8px] p-2 transition-colors hover:bg-canvas-muted active:bg-paper-mist",
+        compact && "py-1",
+      )}
+    >
+      {body}
     </Link>
   );
 }
 
 /**
- * A compact navigation row — the reference's small item: icon, title, and an
- * arrow that slides in from the left edge of its slot on hover.
+ * A `columns` panel — the reference's Solutions and Resources menus, read off
+ * the live DOM: headed columns split by hairlines.
  */
-function NavRow({
-  item,
-  tabIndex,
+function ColumnsPanel({
+  menu,
+  active,
   onNavigate,
 }: {
-  item: MenuItem;
-  tabIndex: number;
+  menu: Extract<Menu, { layout: "columns" }>;
+  active: boolean;
   onNavigate: () => void;
 }) {
   return (
-    <Link
-      href={item.href}
-      tabIndex={tabIndex}
-      onClick={onNavigate}
-      className="focus-ring group relative flex items-center gap-3 rounded-cards px-2 py-2 transition-colors duration-150 hover:bg-paper-mist"
+    <div
+      className={cn(
+        "grid w-[58rem] shrink-0 divide-x divide-ash xl:w-[1020px]",
+        menu.even ? "grid-cols-3" : "grid-cols-[minmax(0,3fr)_minmax(0,3fr)_minmax(0,2fr)]",
+      )}
     >
-      <item.icon className="size-4 shrink-0 text-steel" strokeWidth={1.8} />
-      <span className="text-[13px] font-medium text-charcoal">{item.title}</span>
-      <span className="relative ml-auto flex h-full w-4 items-center">
-        <ArrowRight
-          className="size-3.5 -translate-x-2 text-fog opacity-0 transition-all duration-150 group-hover:translate-x-0 group-hover:opacity-100 motion-reduce:transition-none"
-          aria-hidden
-        />
-      </span>
-    </Link>
+      {menu.columns.map((column) => (
+        <div key={column.heading} className="px-6 py-4">
+          <p className="mb-2 text-xs uppercase text-fog">{column.heading}</p>
+          <ul className="flex flex-col gap-0.5">
+            {column.items.map((item) => (
+              <li key={item.title}>
+                <ColumnLink item={item} compact={column.compact} tabIndex={active ? 0 : -1} onNavigate={onNavigate} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
   );
 }
 
@@ -848,28 +761,12 @@ export function Navbar() {
                     )}
                   >
                     {menu.layout === "columns" ? (
-                      /* The reference's Solutions panel: three columns split
-                         3:3:2 by hairlines, each headed by a small caps label. */
-                      <div className="grid w-[58rem] shrink-0 grid-cols-[minmax(0,3fr)_minmax(0,3fr)_minmax(0,2fr)] divide-x divide-ash xl:w-[1020px]">
-                        {menu.columns.map((column) => (
-                          <div key={column.heading} className="px-6 py-4">
-                            <p className="mb-2 text-xs uppercase text-fog">{column.heading}</p>
-                            <ul className="flex flex-col gap-0.5">
-                              {column.items.map((item) => (
-                                <li key={item.title}>
-                                  <ColumnLink
-                                    item={item}
-                                    compact={column.compact}
-                                    tabIndex={active ? 0 : -1}
-                                    onNavigate={() => setOpenMenu(null)}
-                                  />
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        ))}
-                      </div>
-                    ) : menu.layout === "grid" ? (
+                      <ColumnsPanel
+                        menu={menu}
+                        active={active}
+                        onNavigate={() => setOpenMenu(null)}
+                      />
+                    ) : (
                       /* Three equal cards over two, one gap between every
                          edge — the reference's 1020px panel from xl up. */
                       <div className="grid w-[58rem] shrink-0 gap-4 p-4 xl:w-[1020px]">
@@ -897,41 +794,6 @@ export function Navbar() {
                           ))}
                         </ul>
                       </div>
-                    ) : (
-                      <>
-                        <ul className="grid w-[26rem] shrink-0 grid-cols-2 gap-3 border-r border-ash p-4">
-                          {menu.featured.map((item) => (
-                            <li key={item.title}>
-                              <NavCard
-                                item={item}
-                                tabIndex={active ? 0 : -1}
-                                onNavigate={() => setOpenMenu(null)}
-                              />
-                            </li>
-                          ))}
-                        </ul>
-
-                        <div className="w-60 space-y-3 p-3">
-                          {menu.columns.map((column) => (
-                            <div key={column.heading}>
-                              <p className="px-2 pb-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-fog">
-                                {column.heading}
-                              </p>
-                              <ul>
-                                {column.items.map((item) => (
-                                  <li key={item.title}>
-                                    <NavRow
-                                      item={item}
-                                      tabIndex={active ? 0 : -1}
-                                      onNavigate={() => setOpenMenu(null)}
-                                    />
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                          ))}
-                        </div>
-                      </>
                     )}
                   </div>
                 );
@@ -949,65 +811,165 @@ export function Navbar() {
           </Button>
         </div>
 
-        <button
-          type="button"
-          onClick={() => setMobileOpen((value) => !value)}
-          aria-expanded={mobileOpen}
-          aria-controls="mobile-menu"
-          aria-label={mobileOpen ? "Zamknij menu" : "Otwórz menu"}
-          className="focus-ring grid size-8 place-items-center rounded-buttons border border-ash text-charcoal transition-colors duration-150 hover:bg-paper-mist lg:hidden"
-        >
-          {mobileOpen ? <X className="size-4" /> : <Menu className="size-4" />}
-          </button>
+        {/* Below the desktop bar: the mark on the left, the menu button on the right — nothing else. */}
+        <div className="-mr-2 flex items-center lg:hidden">
+          <MenuToggle open={mobileOpen} onToggle={() => setMobileOpen((value) => !value)} />
+        </div>
         </div>
       </div>
 
-      <div
-        id="mobile-menu"
-        className={cn(
-          "absolute inset-x-0 top-full max-h-[calc(100vh-56px)] overflow-y-auto border-b border-ash bg-white shadow-md lg:hidden",
-          mobileOpen ? "block" : "hidden",
-        )}
-      >
-        <Container className="flex flex-col gap-1 py-4">
-          {menuKeys.map((key) => (
-            <div key={key} className="border-b border-ash/70 pb-3 pt-1 last:border-b-0">
-              <p className="px-3 pb-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-fog">
-                {menus[key].label}
-              </p>
-              {menuItems(menus[key]).map((item) => (
-                <Link
-                  key={item.title}
-                  href={item.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="flex items-center gap-2.5 rounded-buttons px-3 py-2 text-body-lg font-medium text-charcoal transition-colors hover:bg-paper-mist"
-                >
-                  <item.icon className="size-4 text-steel" aria-hidden />
-                  {item.title}
-                </Link>
-              ))}
-            </div>
-          ))}
-          {plainLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={() => setMobileOpen(false)}
-              className="rounded-buttons px-3 py-2.5 text-body-lg font-medium text-charcoal transition-colors hover:bg-paper-mist"
-            >
-              {link.label}
-            </Link>
-          ))}
-          <div className="mt-3 flex gap-2 border-t border-ash pt-4">
-            <Button href="/login" variant="outline" className="flex-1">
-              Zaloguj się
-            </Button>
-            <Button href="/signup" variant="primary" className="flex-1">
-              Zacznij teraz
-            </Button>
-          </div>
-        </Container>
-      </div>
+      <MobileMenu open={mobileOpen} onClose={() => setMobileOpen(false)} />
     </header>
+  );
+}
+
+/* ── Mobile ──────────────────────────────────────────────────────────────── */
+
+/**
+ * The mobile menu button: dub's bare round button, its three lines set a
+ * little further apart than lucide's, folding into an X when the menu opens.
+ */
+function MenuToggle({ open, onToggle }: { open: boolean; onToggle: () => void }) {
+  const line = "absolute left-1/2 h-[1.75px] w-[18px] -translate-x-1/2 rounded-full bg-charcoal transition-[transform,opacity,top] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]";
+  return (
+    <button
+      type="button"
+      onClick={onToggle}
+      aria-expanded={open}
+      aria-controls="mobile-menu"
+      aria-label={open ? "Zamknij menu" : "Otwórz menu"}
+      className="focus-ring relative ml-0.5 size-10 shrink-0 rounded-full transition-colors duration-200 hover:bg-paper-mist active:bg-ash"
+    >
+      <span aria-hidden className={cn(line, open ? "top-1/2 -translate-y-1/2 rotate-45" : "top-[13px]")} />
+      <span aria-hidden className={cn(line, "top-1/2 -translate-y-1/2", open && "opacity-0")} />
+      <span aria-hidden className={cn(line, open ? "top-1/2 -translate-y-1/2 -rotate-45" : "top-[25.25px]")} />
+    </button>
+  );
+}
+
+/** A mobile menu entry's tile: the product and subject chips in their colours, every other glyph in charcoal — dub's 36px bordered box. */
+function MobileTile({ item }: { item: MobileEntry }) {
+  return (
+    <span className="grid size-9 shrink-0 place-items-center rounded-lg border border-ash bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04)]">
+      {item.accent ? <AccentTile icon={item.icon} accent={item.accent} size="sm" /> : <item.icon className="size-[18px] text-charcoal" strokeWidth={1.75} aria-hidden />}
+    </span>
+  );
+}
+
+/**
+ * dub.co's mobile menu, one to one: a full-height sheet under the bar with
+ * an accordion — Produkt, Materiały and O nas open to their entries (a tile,
+ * the name, a one-line description), Cennik and Dla Instytucji are plain
+ * links — each row 16px semibold on a hairline. The account buttons close
+ * it. The page underneath stops scrolling while it is open; Escape, a link,
+ * or widening past the breakpoint closes it.
+ */
+function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const [expanded, setExpanded] = useState<MenuKey | null>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (event: KeyboardEvent) => event.key === "Escape" && onClose();
+    const wide = window.matchMedia("(min-width: 1024px)");
+    const onWide = () => wide.matches && onClose();
+    document.addEventListener("keydown", onKey);
+    wide.addEventListener("change", onWide);
+    return () => {
+      document.body.style.overflow = previous;
+      document.removeEventListener("keydown", onKey);
+      wide.removeEventListener("change", onWide);
+    };
+  }, [open, onClose]);
+
+  return (
+    <div
+      id="mobile-menu"
+      aria-hidden={!open}
+      inert={!open}
+      className={cn(
+        "fixed inset-x-0 bottom-0 top-14 z-20 overflow-y-auto overscroll-contain bg-white transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] lg:hidden",
+        open ? "translate-y-0 opacity-100" : "pointer-events-none -translate-y-2 opacity-0",
+      )}
+    >
+      <nav aria-label="Menu" className="flex min-h-full flex-col px-5 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-3">
+        <ul className="divide-y divide-ash">
+          {menuKeys.map((key) => {
+            const isOpen = expanded === key;
+            const panelId = `mobile-${key}`;
+            return (
+              <li key={key}>
+                <button
+                  type="button"
+                  aria-expanded={isOpen}
+                  aria-controls={panelId}
+                  onClick={() => setExpanded(isOpen ? null : key)}
+                  className="flex w-full cursor-pointer items-center justify-between py-4 text-left text-base font-semibold text-charcoal"
+                >
+                  {menus[key].label}
+                  <ChevronDown className={cn("size-4 text-steel transition-transform duration-300", isOpen && "rotate-180")} strokeWidth={2} aria-hidden />
+                </button>
+                <div
+                  id={panelId}
+                  className="grid transition-[grid-template-rows] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                  style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
+                >
+                  <div className="min-h-0 overflow-hidden" inert={!isOpen}>
+                    <div className="space-y-4 pb-5">
+                      {mobileGroups(menus[key]).map((group, i) => (
+                        <div key={group.heading ?? i}>
+                          {group.heading ? <p className="mb-2 text-xs font-medium text-fog">{group.heading}</p> : null}
+                          <ul className="space-y-1">
+                            {group.items.map((item) => (
+                              <li key={item.title}>
+                                <Link
+                                  href={item.href}
+                                  prefetch={prefetchFor(item.href)}
+                                  onClick={onClose}
+                                  className="-mx-2 flex items-center gap-3 rounded-xl px-2 py-1.5 transition-colors active:bg-paper-mist"
+                                >
+                                  <MobileTile item={item} />
+                                  <span className="min-w-0">
+                                    <span className="block text-sm font-medium text-charcoal">{item.title}</span>
+                                    {item.description ? <span className="block truncate text-sm text-fog">{item.description}</span> : null}
+                                  </span>
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </li>
+            );
+          })}
+          {plainLinks.map((link) => (
+            <li key={link.href}>
+              <Link
+                href={link.href}
+                prefetch={prefetchFor(link.href)}
+                onClick={onClose}
+                className="flex w-full items-center justify-between py-4 text-base font-semibold text-charcoal"
+              >
+                {link.label}
+                <ArrowRight className="size-4 text-silver" strokeWidth={2} aria-hidden />
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-auto grid grid-cols-2 gap-2 border-t border-ash pt-5">
+          <Button href="/login" variant="outline" className="h-10">
+            Zaloguj się
+          </Button>
+          <Button href="/signup" variant="primary" className="h-10">
+            Zacznij teraz
+          </Button>
+        </div>
+      </nav>
+    </div>
   );
 }

@@ -1,386 +1,178 @@
 import { PencilLine } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { AccentTile, type Accent } from "@/components/ui/FeaturePill";
-import { CornerMarks, RULE_EDGE } from "@/components/ui/CornerMarks";
-import { cn } from "@/lib/cn";
-
-/**
- * The hero wash.
- *
- * The reference paints its partners hero with a flat left-to-right pastel
- * sweep that stops dead at the content column's edges — indigo through violet
- * to pink, each roughly a 10% tint over white (sampled off
- * `DesignRules/ExporttoFigma _ dub.co _ Dub Partners …png`). This is the same
- * sweep in Examax's own accents, led by the green that carries Trening
- * everywhere else in the product.
- *
- * DESIGN.md reserves chromatic fills for highlights rather than surfaces; a
- * ~10% tint is the same liberty the closing CTA band already documents, and it
- * is exactly what the reference does on this one band.
- */
-const HERO_WASH = [
-  "linear-gradient(to right",
-  "color-mix(in oklab, var(--color-vivid-green) 12%, #ffffff) 0%",
-  "color-mix(in oklab, var(--color-electric-blue) 9%, #ffffff) 52%",
-  "color-mix(in oklab, var(--color-lavender) 12%, #ffffff) 100%)",
-].join(", ");
-
-/**
- * The rule field's falloff.
- *
- * `.bg-hero-grid` ships with a radial mask centred at 45% of its height, which
- * is right for the landing hero's single block of copy and wrong here: this
- * band is copy *plus* a 420px wall, so that ellipse dies out over exactly the
- * part the grid is there to hold. The pattern is reused; only the falloff is
- * replaced, so the lines run the full height and let go only at the far edges.
- */
-const GRID_MASK_Y =
-  "linear-gradient(to bottom, black 0%, black 82%, transparent 100%)";
-const GRID_MASK_X =
-  "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)";
-
-const ACCENT_STROKE: Record<Accent, string> = {
-  blue: "var(--color-electric-blue)",
-  green: "var(--color-vivid-green)",
-  lavender: "var(--color-lavender)",
-  sapphire: "var(--color-deep-sapphire)",
-  tangerine: "var(--color-tangerine)",
-  yellow: "#eab308",
-};
-
-type TopicState = "mastered" | "review" | "new";
-
-const stateStyles: Record<TopicState, { label: string; className: string }> = {
-  mastered: { label: "Opanowane", className: "bg-soft-mint text-[#166534]" },
-  review: { label: "Do powtórki", className: "bg-soft-peach text-[#7c2d12]" },
-  new: { label: "Nowe", className: "bg-soft-blue text-electric-blue" },
-};
+import { AccentTile } from "@/components/ui/FeaturePill";
+import { E8Icon } from "@/components/ui/E8Icon";
+import { MaturaIcon } from "@/components/ui/MaturaIcon";
+import { TaskFigure, type FigureName } from "@/components/training/TaskFigure";
+import { GridPattern } from "@/components/training/GridPattern";
 
 /* ---------------------------------------------------------------------------
- * PLACEHOLDER DATA — topic counts, accuracies and states are illustrative.
+ * The /training hero — dub.co/partners' hero, one to one (read off the live
+ * DOM on 2026-09-30): pill, headline, subline and two actions over a 15%
+ * gradient sweep and a 60px grid, then a 4×3 wall of 300×120 cards that is
+ * cropped by two intersecting masks and slides in card by card.
  *
- * Twenty topics in four columns rather than one flat grid of twelve. A grid of
- * identical cards at identical weight has no focal point and reads as a
- * placeholder; a wall that drifts, fades out at all four edges and dims its
- * outer columns has a centre, and the centre is what the eye lands on.
+ * The reference's cards are partners (portrait, flag, name, Revenue and
+ * Payouts). Here they are tasks: the figure the sheet prints, the exam's
+ * official mark, the topic, and the two facts a student checks first —
+ * which sheet it came from and what it is worth. Maths, Polish and English
+ * are mixed through the wall, with a language task in every visible row.
+ *
+ * PLACEHOLDER DATA — the sheet years and point ranges are illustrative.
  * ------------------------------------------------------------------------- */
-type Topic = {
+
+type Task = {
   topic: string;
-  subject: string;
-  accent: Accent;
-  tasks: number;
-  accuracy: number;
-  state?: TopicState;
+  exam: "e8" | "matura";
+  sheet: string;
+  points: string;
+  figure: FigureName;
 };
 
-const columns: Topic[][] = [
-  [
-    { topic: "Procenty", subject: "Matematyka", accent: "green", tasks: 128, accuracy: 84, state: "mastered" },
-    { topic: "Rozprawka", subject: "Polski", accent: "blue", tasks: 38, accuracy: 66 },
-    { topic: "Czasy przeszłe", subject: "Angielski", accent: "lavender", tasks: 118, accuracy: 91, state: "mastered" },
-    { topic: "Bryły obrotowe", subject: "Matematyka", accent: "green", tasks: 72, accuracy: 54, state: "review" },
-    { topic: "Słowotwórstwo", subject: "Polski", accent: "blue", tasks: 53, accuracy: 74 },
-  ],
-  [
-    { topic: "Geometria płaska", subject: "Matematyka", accent: "green", tasks: 141, accuracy: 63, state: "review" },
-    { topic: "Środki językowe", subject: "Angielski", accent: "lavender", tasks: 152, accuracy: 79 },
-    { topic: "Lektury", subject: "Polski", accent: "blue", tasks: 74, accuracy: 88, state: "mastered" },
-    { topic: "Funkcje", subject: "Matematyka", accent: "green", tasks: 87, accuracy: 58 },
-    { topic: "Mowa zależna", subject: "Angielski", accent: "lavender", tasks: 64, accuracy: 70, state: "new" },
-  ],
-  [
-    { topic: "Równania", subject: "Matematyka", accent: "green", tasks: 96, accuracy: 71 },
-    { topic: "Interpretacja", subject: "Polski", accent: "blue", tasks: 45, accuracy: 61, state: "review" },
-    { topic: "Statystyka", subject: "Matematyka", accent: "green", tasks: 64, accuracy: 82 },
-    { topic: "Rozumienie tekstu", subject: "Angielski", accent: "lavender", tasks: 96, accuracy: 86 },
-    { topic: "Ciągi", subject: "Matematyka", accent: "green", tasks: 58, accuracy: 49, state: "new" },
-  ],
-  [
-    { topic: "Trygonometria", subject: "Matematyka", accent: "green", tasks: 110, accuracy: 67 },
-    { topic: "Środki stylistyczne", subject: "Polski", accent: "blue", tasks: 61, accuracy: 77 },
-    { topic: "Czasowniki modalne", subject: "Angielski", accent: "lavender", tasks: 84, accuracy: 89, state: "mastered" },
-    { topic: "Prawdopodobieństwo", subject: "Matematyka", accent: "green", tasks: 47, accuracy: 52, state: "review" },
-    { topic: "Argumentacja", subject: "Polski", accent: "blue", tasks: 39, accuracy: 64 },
-  ],
+const TASKS: Task[] = [
+  { topic: "Statystyka", exam: "e8", sheet: "2021", points: "0–1", figure: "bars" },
+  { topic: "Procenty", exam: "e8", sheet: "2024", points: "0–1", figure: "percent" },
+  { topic: "Reading", exam: "matura", sheet: "2024", points: "0–5", figure: "choice" },
+  { topic: "Ciągi", exam: "matura", sheet: "2022", points: "0–2", figure: "sequence" },
+  { topic: "Nierówności", exam: "matura", sheet: "2020", points: "0–1", figure: "numberLine" },
+  { topic: "Funkcja liniowa", exam: "matura", sheet: "2024", points: "0–2", figure: "linear" },
+  { topic: "Rozprawka", exam: "e8", sheet: "2023", points: "0–20", figure: "essay" },
+  { topic: "Okrąg i koło", exam: "matura", sheet: "2023", points: "0–2", figure: "circle" },
+  { topic: "Trapez", exam: "e8", sheet: "2019", points: "0–2", figure: "trapezoid" },
+  { topic: "Past Simple", exam: "e8", sheet: "2022", points: "0–1", figure: "gapFill" },
+  { topic: "Kombinatoryka", exam: "matura", sheet: "2024", points: "0–2", figure: "tree" },
+  { topic: "Ostrosłupy", exam: "matura", sheet: "2023", points: "0–4", figure: "pyramid" },
 ];
 
 /**
- * The wall's edge falloff, one axis at a time.
- *
- * Held asymmetric on purpose: the top edge barely fades because the cards
- * there sit right under the CTAs and should read as solid, while the bottom
- * carries most of the falloff so the wall dissolves into the wash instead of
- * ending on a row of half-cards.
+ * The reference's entrance delays: the columns land left to right in about
+ * 180ms, and each row a hair after the one above.
  */
-const WALL_MASK_Y =
-  "linear-gradient(to bottom, black 0%, black 52%, transparent 100%)";
-const WALL_MASK_X =
-  "linear-gradient(to right, transparent 0%, black 14%, black 86%, transparent 100%)";
+const COLUMN_DELAYS = [425, 497, 590, 603];
 
-const RADIUS = 22;
-const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
-
-/**
- * Topic mastery as a ring.
- *
- * The reference puts a square product thumbnail in this slot. Examax has no
- * photography to put there (DESIGN.md), and a grey placeholder box is exactly
- * the failure mode `DesignRules/pending-changes.md` warns about — so the slot
- * carries the one number the card is actually about instead.
- */
-function MasteryRing({ value, accent }: { value: number; accent: Accent }) {
+function TaskCard({ task, delay }: { task: Task; delay: number }) {
+  const Mark = task.exam === "e8" ? E8Icon : MaturaIcon;
   return (
-    <span className="relative grid size-14 shrink-0 place-items-center" aria-hidden>
-      <svg viewBox="0 0 56 56" className="absolute inset-0 size-full -rotate-90">
-        <circle cx="28" cy="28" r={RADIUS} fill="none" stroke="#e5e5e5" strokeWidth="4" />
-        <circle
-          cx="28"
-          cy="28"
-          r={RADIUS}
-          fill="none"
-          stroke={ACCENT_STROKE[accent]}
-          strokeWidth="4"
-          strokeLinecap="round"
-          strokeDasharray={`${(CIRCUMFERENCE * value) / 100} ${CIRCUMFERENCE}`}
-        />
-      </svg>
-      <span className="font-geist-mono text-caption font-medium text-charcoal tabular-nums">
-        {value}
-      </span>
-    </span>
-  );
-}
-
-/**
- * One topic in the wall.
- *
- * Every step of type here is a token from the scale in `DESIGN.md` —
- * `body` for the topic, `caption` for the subject, the badge and both stat
- * cells — rather than the ad-hoc 9/10/11/13px ladder this card used to carry.
- * The reference's own cards do the same: a 14px name over 11px labels, which
- * is the page's type system running straight through the small boxes instead
- * of a second one invented for them.
- */
-function TopicCard({ topic }: { topic: Topic }) {
-  const state = topic.state ? stateStyles[topic.state] : null;
-  return (
-    <article className="flex items-center gap-3 rounded-cards border border-ash bg-white p-3 shadow-subtle">
-      <MasteryRing value={topic.accuracy} accent={topic.accent} />
-      <div className="min-w-0 flex-1">
-        <div className="flex items-center gap-2">
-          <p className="min-w-0 truncate text-body font-medium leading-tight text-charcoal">
-            {topic.topic}
-          </p>
-          {state ? (
-            <span
-              className={cn(
-                "shrink-0 rounded-full px-1.5 py-0.5 text-caption font-medium leading-none",
-                state.className,
-              )}
-            >
-              {state.label}
-            </span>
-          ) : null}
+    <div className="h-[120px] w-[300px] p-2">
+      <div
+        className="animate-slide-up-fade flex size-full select-none overflow-hidden rounded-[10px] border border-ash bg-white p-2"
+        style={{ "--offset": "10px", "--delay": `${delay}ms` } as React.CSSProperties}
+      >
+        {/* The thumbnail: the task's figure on sheet paper */}
+        <div className="grid aspect-square h-full place-items-center rounded-lg border border-smoke bg-canvas-muted text-graphite">
+          <TaskFigure name={task.figure} className="size-[70%]" />
         </div>
-        <p className="mt-0.5 truncate text-caption text-fog">{topic.subject}</p>
-        <div className="mt-2 grid grid-cols-2 divide-x divide-ash border-t border-ash pt-2">
-          <div className="pr-2">
-            <p className="text-caption leading-none text-fog">Zadania</p>
-            <p className="mt-1 font-geist-mono text-caption font-medium leading-none text-charcoal tabular-nums">
-              {topic.tasks}
-            </p>
+        <div className="flex h-full min-w-0 flex-col justify-between px-4 py-3">
+          <div className="flex min-w-0 items-center gap-1.5">
+            <Mark className="size-3.5" />
+            <span className="truncate text-body font-medium text-charcoal">{task.topic}</span>
           </div>
-          <div className="pl-2">
-            <p className="text-caption leading-none text-fog">Skuteczność</p>
-            <p className="mt-1 font-geist-mono text-caption font-medium leading-none text-charcoal tabular-nums">
-              {topic.accuracy}%
-            </p>
+          <div className="flex divide-x divide-ash">
+            <div className="flex flex-col pr-6">
+              <span className="text-xs font-medium text-silver">Arkusz</span>
+              <span className="text-body font-medium text-steel tabular-nums">{task.sheet}</span>
+            </div>
+            <div className="flex flex-col pl-6">
+              <span className="text-xs font-medium text-silver">Punkty</span>
+              <span className="text-body font-medium text-steel tabular-nums">{task.points}</span>
+            </div>
           </div>
         </div>
       </div>
-    </article>
-  );
-}
-
-/**
- * One drifting column of the wall.
- *
- * The stack is rendered twice and each card carries its own bottom padding
- * instead of a flex `gap`, which is what makes the -50% loop point exact — a
- * gap would leave it half a gap out and the loop would visibly jump.
- * `prefers-reduced-motion` stops the drift in globals.css; the wall then just
- * stands still, which is a fine second state.
- */
-function TopicColumn({
-  topics,
-  motion,
-  duration,
-  className,
-}: {
-  topics: Topic[];
-  motion: "up" | "down" | null;
-  duration: number;
-  className?: string;
-}) {
-  return (
-    <div className={cn("overflow-hidden", className)}>
-      <ul
-        className={cn(
-          "flex flex-col",
-          motion === "up" && "animate-marquee-up",
-          motion === "down" && "animate-marquee-down",
-        )}
-        style={{ "--marquee-duration": `${duration}s` } as React.CSSProperties}
-      >
-        {[...topics, ...topics].map((topic, index) => (
-          <li
-            key={`${topic.topic}-${index}`}
-            className="pb-3"
-            // The second pass is the loop's tail, not more content.
-            aria-hidden={index >= topics.length}
-          >
-            <TopicCard topic={topic} />
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }
 
-/**
- * The /training hero.
- *
- * Above-the-fold, so the copy stack animates with the reference's pure-CSS
- * slide-up-fade staggered by `animation-delay` rather than through `<Reveal>`
- * and an IntersectionObserver — the same construction as the landing hero.
- */
 export function TrainingHero() {
   return (
     <section
       aria-labelledby="training-heading"
-      className="col-rules relative overflow-hidden bg-white"
+      className="relative overflow-clip border-b border-ash bg-white px-4"
     >
-      {/* The wash stops at the column rules, as it does in the reference —
-          the band around it stays paper white. */}
-      <div
-        aria-hidden
-        className="absolute inset-y-0 left-1/2 w-full max-w-[var(--page-max-width)] -translate-x-1/2"
-        style={{ backgroundImage: HERO_WASH }}
-      />
+      <div className="relative z-0 mx-auto max-w-[var(--page-max-width)] pt-16 text-center">
+        {/* The column's edges, fading in as they come down */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 border-x border-ash [mask-image:linear-gradient(transparent,black)]"
+        />
 
-      {/* The rule field, over the wash rather than under it — in the reference
-          the grid stays visible straight through the tinted column and carries
-          on into the white band beside it, which is what makes the whole hero
-          read as one measured surface instead of a coloured panel sitting on
-          paper. Same 60px squares as the landing hero. */}
-      <div
-        aria-hidden
-        className="bg-hero-grid absolute inset-0"
-        style={{
-          maskImage: `${GRID_MASK_Y}, ${GRID_MASK_X}`,
-          WebkitMaskImage: `${GRID_MASK_Y}, ${GRID_MASK_X}`,
-          maskComposite: "intersect",
-          WebkitMaskComposite: "source-in",
-        }}
-      />
+        {/* The grid: one field across the column and two wings beyond it,
+            all 600px tall from the bottom edge, fading up and outwards */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-y-0 left-1/2 w-[1800px] -translate-x-1/2 [mask-image:linear-gradient(transparent,black)]"
+        >
+          <div className="absolute inset-x-[360px] inset-y-0">
+            <GridPattern id="hero-grid-left" className="bottom-0 right-full h-[600px] w-[360px] text-ash/60 [mask-image:linear-gradient(90deg,transparent,black)]" />
+            <GridPattern id="hero-grid-right" className="bottom-0 left-full h-[600px] w-[360px] text-ash/60 [mask-image:linear-gradient(270deg,transparent,black)]" />
+          </div>
+        </div>
+        <div aria-hidden className="pointer-events-none absolute inset-x-px inset-y-0 overflow-hidden [mask-image:linear-gradient(transparent,black)]">
+          <GridPattern id="hero-grid" className="bottom-0 left-1/2 h-[600px] w-[var(--page-max-width)] -translate-x-1/2 text-ash/60" />
+        </div>
 
-      {/* Crop marks on the column rules. Led by green here, as the wash is —
-          the landing band runs blue into violet. */}
-      <CornerMarks offset={RULE_EDGE} tint="from-vivid-green/45 to-electric-blue/45" />
+        {/* The sweep: the reference's three stops at 15%, led here by the
+            green that marks Trening everywhere else */}
+        <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+          <div className="absolute -left-1/4 h-full w-[150%] opacity-15">
+            <div className="size-full bg-[linear-gradient(90deg,#22C55E,#5182FC,#9071F9)] [mask-image:linear-gradient(transparent_25%,black)]" />
+          </div>
+        </div>
 
-      <div className="relative mx-auto w-full max-w-[var(--page-max-width)] px-5 pb-16 pt-14 sm:px-10">
-        <div className="mx-auto flex max-w-2xl flex-col items-center text-center">
-          <span
-            style={{ "--offset": "10px" } as React.CSSProperties}
-            className="animate-slide-up-fade inline-flex items-center gap-2 rounded-full border border-ash bg-white/80 py-1.5 pl-1.5 pr-3.5 text-[12px] font-medium text-charcoal shadow-subtle backdrop-blur-sm"
-          >
-            <AccentTile icon={PencilLine} accent="green" />
-            Trening zadań
-          </span>
-
-          <h1
-            id="training-heading"
-            style={{ "--delay": "100ms", "--offset": "20px" } as React.CSSProperties}
-            className="animate-slide-up-fade mt-5 text-pretty font-satoshi text-4xl font-medium leading-[1.15] text-charcoal sm:text-5xl"
-          >
-            Trenuj na zadaniach, które zobaczysz na egzaminie
-          </h1>
-
-          <p
-            style={{ "--delay": "200ms", "--offset": "20px" } as React.CSSProperties}
-            className="animate-slide-up-fade mt-5 text-pretty text-xl leading-7 text-steel"
-          >
-            Zadania z arkuszy CKE, quizy do każdego tematu i sprawdzanie z
-            wyjaśnieniem — dobierane do tego, na czym stoisz.
-          </p>
-
+        <div className="relative">
+          <div className="relative mx-auto flex w-full max-w-2xl flex-col items-center">
+            <span
+              className="animate-slide-up-fade relative mx-auto flex w-fit items-center gap-2 overflow-hidden rounded-full border border-ash bg-white px-3 py-1.5 text-xs font-medium leading-tight text-steel"
+              style={{ "--offset": "10px" } as React.CSSProperties}
+            >
+              <AccentTile icon={PencilLine} accent="green" size="xs" />
+              Trening zadań
+            </span>
+            <h1
+              id="training-heading"
+              className="animate-slide-up-fade mt-6 text-center font-satoshi text-4xl font-medium text-charcoal sm:text-5xl sm:leading-[1.15]"
+              style={{ "--offset": "20px", "--delay": "100ms" } as React.CSSProperties}
+            >
+              Trenuj na zadaniach, które zobaczysz na egzaminie
+            </h1>
+            <p
+              className="animate-slide-up-fade mt-6 text-balance text-base text-steel sm:text-xl"
+              style={{ "--offset": "10px", "--delay": "200ms" } as React.CSSProperties}
+            >
+              Zadania z arkuszy CKE, sprawdzane od razu według zasad oceniania —
+              i dobierane do tego, gdzie tracisz punkty.
+            </p>
+          </div>
           <div
-            style={{ "--delay": "300ms", "--offset": "20px" } as React.CSSProperties}
-            className="animate-slide-up-fade mt-8 flex flex-wrap items-center justify-center gap-3"
+            className="animate-slide-up-fade relative mt-10 flex justify-center gap-2 sm:gap-4"
+            style={{ "--offset": "5px", "--delay": "300ms" } as React.CSSProperties}
           >
             <Button href="/signup" variant="primary">
               Zacznij za darmo
             </Button>
-            <Button href="#library" variant="outline">
+            <Button href="#coverage" variant="outline">
               Przejrzyj bazę zadań
             </Button>
           </div>
         </div>
 
-        {/* The wall. Fixed height and cropped at all four edges, so it reads as
-            a surface continuing past the frame rather than a grid that ran
-            out. Two of the four columns drift, in opposite directions.
-
-            The crop marks are a sibling of the masked block, not a child, so
-            they stay at full strength while the cards under them fade away —
-            the corners stay measured even where the content dissolves. */}
-        <div className="relative mt-14">
-          <CornerMarks
-            inset="-inset-4"
-            tint="from-vivid-green/45 to-electric-blue/45"
-          />
-          <div
-            aria-label="Tematy w bazie zadań, z opanowaniem i skutecznością"
-            style={
-              {
-                "--delay": "420ms",
-                "--offset": "24px",
-                // Two linear fades intersected, rather than the shared
-                // `.mask-fade-edges` ellipse: this box is wide and short, and a
-                // single radial falls off far too slowly on the vertical axis —
-                // the bottom row stayed near-opaque and read as a hard crop.
-                maskImage: `${WALL_MASK_Y}, ${WALL_MASK_X}`,
-                WebkitMaskImage: `${WALL_MASK_Y}, ${WALL_MASK_X}`,
-                maskComposite: "intersect",
-                WebkitMaskComposite: "source-in",
-              } as React.CSSProperties
-            }
-            className="animate-slide-up-fade relative grid h-[360px] grid-cols-1 gap-3 overflow-hidden sm:h-[420px] sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-          >
-            <TopicColumn
-              topics={columns[0]}
-              motion={null}
-              duration={0}
-              className="opacity-60"
-            />
-            <TopicColumn
-              topics={columns[1]}
-              motion="down"
-              duration={58}
-              className="hidden sm:block"
-            />
-            <TopicColumn
-              topics={columns[2]}
-              motion="up"
-              duration={68}
-              className="hidden lg:block"
-            />
-            <TopicColumn
-              topics={columns[3]}
-              motion={null}
-              duration={0}
-              className="hidden opacity-60 xl:block"
-            />
+        {/* The wall: faded out below 40% of its height and to both sides
+            beyond the middle half — cropped, never ended */}
+        <div
+          aria-label="Przykładowe zadania z arkuszy CKE"
+          role="img"
+          className="relative mt-20 h-[420px] [mask-composite:intersect] [mask-image:linear-gradient(black_40%,transparent),linear-gradient(90deg,transparent,black_25%,black_75%,transparent)]"
+        >
+          <div className="absolute bottom-[60px] left-[calc(50%+150px)] -translate-x-1/2 sm:left-1/2">
+            <div className="grid grid-cols-[repeat(4,300px)] text-left">
+              {TASKS.map((task, index) => (
+                <TaskCard
+                  key={task.topic}
+                  task={task}
+                  delay={COLUMN_DELAYS[index % 4] + Math.floor(index / 4) * 4}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>

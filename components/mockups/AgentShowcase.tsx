@@ -200,6 +200,9 @@ const AGENTS: Agent[] = [
 
 const byKey = Object.fromEntries(AGENTS.map((a) => [a.key, a])) as Record<AgentKey, Agent>;
 
+/** The team as /agents presents it — the same names and faces as this window, never a second list. */
+export const AGENT_ROSTER = AGENTS.map(({ key, name, avatar }) => ({ key, name, avatar }));
+
 /* ------------------------------------------------------------------------ */
 /* Timing, in milliseconds from Send — unhurried on purpose                  */
 /* ------------------------------------------------------------------------ */

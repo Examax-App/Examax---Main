@@ -6,17 +6,16 @@ import { PricingView } from "@/components/pricing/PricingView";
 export const metadata: Metadata = {
   title: "Cennik",
   description:
-    "Plany Examax — Free, Pro, Max i Enterprise. Zacznij za darmo i zmień plan wtedy, kiedy zaczniesz potrzebować więcej.",
+    "Plany Examax — Free, Pro, Max i Enterprise, w tych samych cenach dla matury i egzaminu ósmoklasisty. Zacznij za darmo i zmień plan wtedy, kiedy zaczniesz potrzebować więcej.",
 };
 
 /**
- * The standalone pricing page.
+ * The standalone pricing page — dub.co/pricing rebuilt for Examax.
  *
- * The landing page keeps its own short pricing section; this is the long form,
- * with all four tiers, the full comparison and the pricing FAQ.
+ * One set of prices for every exam; the exam switch in `PricingView` only
+ * changes which plan is recommended.
  *
- * `PricingView` owns the billing period, so it owns every band that prints a
- * price. The heading and subheading are passed into it as children rather than
+ * The heading and subheading are passed into it as children rather than
  * rendered inside it — static copy, no reason to ship them to the client.
  */
 export default function PricingPage() {
@@ -29,19 +28,24 @@ export default function PricingPage() {
         Przejdź do treści
       </a>
       <Navbar />
-      <main id="main" className="flex-1">
+      <main id="main" className="relative flex-1 bg-white">
         <PricingView>
           <h1
             id="pricing-heading"
-            className="font-satoshi text-heading-lg font-medium text-pretty text-charcoal sm:text-display"
+            className="animate-slide-up-fade [--offset:20px] mt-5 text-balance text-left font-satoshi text-4xl font-medium text-charcoal sm:text-5xl sm:leading-[1.15]"
           >
             Plany, które rosną razem z Tobą
           </h1>
-          {/* 16px under the headline — the reference's gap for this pair. */}
-          <p className="mt-4 text-subheading text-steel">
-            Zacznij za darmo, bez podawania karty. Kiedy dojdzie kolejny
-            przedmiot albo zbliży się termin CKE, przechodzisz wyżej — i
-            schodzisz z powrotem, gdy przestaje być potrzebny.
+          <p
+            style={{ "--delay": "100ms" } as React.CSSProperties}
+            className="animate-slide-up-fade [--offset:10px] mt-4 text-lg text-steel sm:text-xl"
+          >
+            Elastyczne plany stworzone dla każdego ucznia.
+            Jedna platforma dla matury i egzaminu ósmoklasisty.{" "}
+            {/* Unlike dub.co's, this second line stays on small screens too:
+                "one price for both exams" is the page's key fact. Only the
+                break is dropped. */}
+            <br className="hidden md:inline" />
           </p>
         </PricingView>
       </main>

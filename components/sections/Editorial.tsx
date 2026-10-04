@@ -340,7 +340,7 @@ function StepBuilderMini({ className }: { className: string }) {
             { icon: PencilLine, label: "Quiz" },
             { icon: RefreshCcw, label: "Powtórka" },
             { icon: CalendarCheck, label: "Termin" },
-            { icon: Sparkles, label: "Agent" },
+            { icon: Sparkles, label: "Korepetytor AI" },
           ].map(({ icon: Icon, label }) => (
             <span
               key={label}

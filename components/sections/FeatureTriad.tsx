@@ -14,6 +14,8 @@ export type TriadItem = {
   iconNode: React.ReactNode;
   title: string;
   description: string;
+  /** Where "Dowiedz się więcej" goes — the section's own page; pricing if left out. */
+  href?: string;
 };
 
 /**
@@ -113,9 +115,12 @@ export function FeatureTriad({
               aria-hidden
               className={cn(
                 // The reference draws these near-black and dims the whole
-                // column when inactive, which is what gives them weight.
+                // column when inactive, which is what gives them weight. Only
+                // side by side, though: stacked on a phone the picture they
+                // drive is off-screen, so dimmed entries would just look
+                // switched off — there every entry stays at full contrast.
                 "block w-fit transition-colors duration-300",
-                isActive ? "text-charcoal" : "text-charcoal/35",
+                isActive ? "text-charcoal" : "text-charcoal md:text-charcoal/35",
               )}
             >
               {item.iconNode}
@@ -123,7 +128,7 @@ export function FeatureTriad({
             <h3
               className={cn(
                 "mt-2 text-body font-medium transition-colors duration-300",
-                isActive ? "text-charcoal" : "text-silver",
+                isActive ? "text-charcoal" : "text-charcoal md:text-silver",
               )}
             >
               {item.title}
@@ -131,16 +136,16 @@ export function FeatureTriad({
             <p
               className={cn(
                 "mt-2 text-body leading-5 transition-colors duration-300",
-                isActive ? "text-fog" : "text-smoke",
+                isActive ? "text-fog" : "text-fog md:text-smoke",
               )}
             >
               {item.description}
             </p>
             <a
-              href="/pricing"
+              href={item.href ?? "/pricing"}
               className={cn(
                 "focus-ring group/link mt-3.5 inline-flex items-center gap-1 rounded-[4px] text-body font-medium transition-colors duration-300",
-                isActive ? "text-charcoal" : "text-smoke",
+                isActive ? "text-charcoal" : "text-charcoal md:text-smoke",
               )}
             >
               Dowiedz się więcej

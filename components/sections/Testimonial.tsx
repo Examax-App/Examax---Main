@@ -36,7 +36,7 @@ export const PLACEHOLDER_QUOTES: Record<string, Quote> = {
   },
   agent: {
     quote:
-      "Uczniowie przestali pytać „jaki jest wynik”, a zaczęli pytać „dlaczego”. Agent tłumaczy krok po kroku i nie traci cierpliwości o dwudziestej drugiej.",
+      "Uczniowie przestali pytać „jaki jest wynik”, a zaczęli pytać „dlaczego”. Korepetytor AI tłumaczy krok po kroku i nie traci cierpliwości o dwudziestej drugiej.",
     name: "Marta Zielińska",
     role: "Nauczycielka matematyki",
     mark: "Korepetycje ZM",

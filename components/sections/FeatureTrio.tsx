@@ -6,10 +6,10 @@ import { SECTION_H2 } from "@/lib/type";
 
 export type TrioCard = {
   title: string;
-  description: string;
+  description: React.ReactNode;
   ctaLabel: string;
   ctaHref: string;
-  /** The card's product fragment — see TrainingVisuals. */
+  /** The card's product fragment — a picture drawn for its cell. */
   visual: React.ReactNode;
 };
 
@@ -34,15 +34,68 @@ export function FeatureTrio({
   heading,
   sub,
   cards,
+  variant = "panel",
 }: {
   id: string;
   /** Optional pill above the heading — the reference uses one for its
       plan-gated section and nothing above the rest. */
   eyebrow?: React.ReactNode;
   heading: string;
-  sub: string;
+  sub: React.ReactNode;
   cards: [TrioCard, TrioCard, TrioCard];
+  /**
+   * `panel` frames each fragment in a muted 240px box (the product pages'
+   * original look). `open` is dub.co/partners exactly, read off its DOM: the
+   * picture stands straight on the page in a 280px band, the header sits on
+   * 96px of air, and each cell is 20px of padding round a 32px gap — the
+   * pictures carry their own masks, so no box is drawn round them.
+   */
+  variant?: "panel" | "open";
 }) {
+  if (variant === "open") {
+    return (
+      <section
+        id={id}
+        aria-labelledby={`${id}-heading`}
+        className="relative overflow-clip border-b border-ash bg-white px-4"
+      >
+        <div className="relative z-0 mx-auto max-w-[var(--page-max-width)] border-x border-ash pt-24">
+          <Reveal className="mx-auto w-full max-w-[560px] px-4 text-center">
+            {eyebrow ? <div className="mb-4">{eyebrow}</div> : null}
+            <h2
+              id={`${id}-heading`}
+              className="text-balance font-satoshi text-3xl font-medium text-charcoal sm:text-4xl md:text-5xl"
+            >
+              {heading}
+            </h2>
+            <p className="mt-3 text-pretty text-base text-fog sm:text-lg">{sub}</p>
+          </Reveal>
+          <div className="mt-12 grid grid-cols-1 border-t border-ash md:grid-cols-3">
+            <div className="contents divide-ash max-md:divide-y md:divide-x">
+              {cards.map((card, index) => (
+                <Reveal key={card.title} delay={index * 80} className="flex flex-col gap-8 p-5">
+                  <div className="relative h-[280px] cursor-default select-none overflow-hidden">
+                    {card.visual}
+                  </div>
+                  <div className="relative flex grow flex-col gap-1 text-base sm:pb-3 sm:pl-2.5 sm:pr-1">
+                    <h3 className="font-semibold text-slate">{card.title}</h3>
+                    <p className="text-fog">{card.description}</p>
+                    <a
+                      href={card.ctaHref}
+                      className="focus-ring mt-3 w-fit whitespace-nowrap rounded-lg border border-smoke bg-white px-3 py-2 text-body font-medium leading-none text-charcoal transition-colors duration-75 hover:bg-canvas-muted active:bg-paper-mist"
+                    >
+                      {card.ctaLabel}
+                    </a>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section
       id={id}

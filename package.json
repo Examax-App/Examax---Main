@@ -1,33 +1,63 @@
 {
-  "name": "Examax",
+  "name": "examax",
   "version": "0.1.0",
+  "description": "Examax — platforma do nauki na egzamin ósmoklasisty i maturę, oparta na oryginalnych arkuszach CKE i Korepetytorze AI.",
   "private": true,
+  "license": "UNLICENSED",
+  "author": "Examax",
+  "homepage": "https://examax.app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Examax-App/Examax---Main.git"
+  },
+  "bugs": {
+    "url": "https://examax.app/contact/support",
+    "email": "pomoc@examax.app"
+  },
+  "engines": {
+    "node": ">=20.9.0"
+  },
   "packageManager": "pnpm@11.6.0",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit"
+    "lint:fix": "eslint --fix",
+    "typecheck": "tsc --noEmit",
+    "check": "pnpm typecheck && pnpm lint && pnpm build",
+    "audit:prod": "pnpm audit --prod",
+    "film:studio": "remotion studio",
+    "film:audio": "python3 remotion/audio/compose.py",
+    "film:render": "remotion render LaunchFilm public/about/examax-film.mp4",
+    "film:poster": "remotion still LaunchFilm public/about/examax-film-poster.jpg --frame=1799 --image-format=jpeg --jpeg-quality=90"
   },
   "dependencies": {
+    "@number-flow/react": "^0.6.2",
     "@remotion/player": "^4.0.515",
     "border-beam": "^1.4.1",
     "bot-avatars": "0.1.1",
+    "cobe": "2.0.1",
     "lucide-react": "^1.33.0",
     "metal-fx": "^2.0.11",
-    "next": "16.3.2",
+    "motion": "^13.4.4",
+    "next": "16.3.8",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "remotion": "^4.0.515"
   },
   "devDependencies": {
+    "@remotion/bundler": "4.0.515",
+    "@remotion/cli": "4.0.515",
+    "@remotion/google-fonts": "4.0.515",
+    "@remotion/renderer": "4.0.515",
+    "@remotion/tailwind-v4": "4.0.515",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.3.2",
+    "eslint-config-next": "16.3.8",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

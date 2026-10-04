@@ -20,6 +20,8 @@
   --color-deep-sapphire: #1e40af;
   --color-soft-mint: #dcfce7;
   --color-vivid-green: #16a34a;
+  /* Form errors only (auth fields): Dub's red-600. */
+  --color-alert-red: #dc2626;
   /* Orange family — part of Dub's token set. The product areas run on
      blue / green / violet / sapphire; tangerine is the one warm accent,
      reserved for the exam simulation. */
@@ -82,15 +84,15 @@
     rgba(0, 0, 0, 0.1) 0px 4px 6px -4px;
   --shadow-lg: rgba(0, 0, 0, 0.09) 0px 20px 20px 0px;
 
-  /* Motion — AgentAvatar's status cross-fade and TextShimmer's sweep (the
-     shimmer-text keyframes are defined below, shared with LoadingState) */
-  --ease-snap: cubic-bezier(0.23, 1, 0.32, 1);
+  /* Motion — TextShimmer's sweep (the shimmer-text keyframes are below) */
   --animate-shimmer-text: shimmer-text 1.4s linear infinite;
   --animate-pulse-in: pulse-in 0.5s ease-in-out both;
   /* The reference's stage entrance: slide-up-fade over half a second. */
   --animate-rise: slide-up-fade 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
   /* The reference's funnel bands, grown from their centre line. */
   --animate-band-grow: band-grow 0.5s linear both;
+  /* dub.co/links' endpoint marquee: each run travels its own width. */
+  --animate-infinite-scroll: infinite-scroll var(--scroll-duration, 60s) linear infinite;
 }
 
 :root {
@@ -157,6 +159,13 @@ body {
 
 .col-rules::after {
   right: max(0px, calc(50% - var(--page-max-width) / 2));
+}
+
+/* The same pair of rules in Ash, fading out downwards — how dub.co/pricing
+   frames the FAQ that closes the page, after the boxed plan grid above it. */
+.col-rules-fade::before,
+.col-rules-fade::after {
+  background: linear-gradient(to bottom, var(--color-ash), transparent);
 }
 
 /* Hero grid — the reference's square rule field, faint enough to read as
@@ -365,35 +374,6 @@ body {
   animation: view-swap 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-/* Price swap on the billing toggle (components/pricing/PlanCards).
-   A short zoom rather than a slide: the figure stays put and only changes
-   scale, so the eye reads it as the same number being restated. */
-@keyframes price-swap {
-  from {
-    opacity: 0;
-    transform: scale(0.94);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-.animate-price-swap {
-  animation: price-swap 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-/* Pixel-grid agent loader (components/ui/LoadingState) */
-@keyframes pixel-on {
-  0%,
-  100% {
-    opacity: 0.12;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
 @keyframes shimmer-text {
   0% {
     background-position: 200% 0;
@@ -403,21 +383,9 @@ body {
   }
 }
 
-/* Auth screens (components/auth) — dub.co's login motion, in CSS: logos and
-   slide copy blur in, the slide photo settles from 1.04, the progress bar
-   fills in a straight line, the code field's caret blinks. The ease is
+/* Auth screens (components/auth) — dub.co's login motion, in CSS: the side
+   panel's copy and preview rise in, the code field's caret blinks. The ease is
    Dub's own EASE_OUT (0.23, 1, 0.32, 1). */
-@keyframes auth-fade-in-blur {
-  from {
-    opacity: 0;
-    filter: blur(4px);
-  }
-  to {
-    opacity: 1;
-    filter: blur(0);
-  }
-}
-
 @keyframes auth-rise {
   from {
     opacity: 0;
@@ -428,24 +396,6 @@ body {
     opacity: 1;
     transform: none;
     filter: blur(0);
-  }
-}
-
-@keyframes auth-settle {
-  from {
-    transform: scale(1.04);
-  }
-  to {
-    transform: none;
-  }
-}
-
-@keyframes auth-progress {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    transform: scaleX(1);
   }
 }
 
@@ -461,16 +411,8 @@ body {
   }
 }
 
-.animate-auth-fade-in-blur {
-  animation: auth-fade-in-blur 0.6s cubic-bezier(0.23, 1, 0.32, 1) both;
-}
-
 .animate-auth-rise {
   animation: auth-rise 0.45s cubic-bezier(0.23, 1, 0.32, 1) both;
-}
-
-.animate-auth-settle {
-  animation: auth-settle 0.6s cubic-bezier(0.23, 1, 0.32, 1) both;
 }
 
 .animate-auth-caret-blink {
@@ -478,9 +420,7 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-auth-fade-in-blur,
   .animate-auth-rise,
-  .animate-auth-settle,
   .animate-auth-caret-blink {
     animation: none;
   }
@@ -566,7 +506,117 @@ body {
   animation: marquee-down var(--marquee-duration, 60s) linear infinite;
 }
 
+/* The reference's partners-page motion (dub.co/partners, read off its
+   stylesheet). `infinite-scroll-y` runs two identical stacks one above the
+   other, each travelling its own height, so the loop point is exact.
+   `scale-in-fade` is the chat bubbles' and pills' 100ms pop. */
+@keyframes infinite-scroll-y {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(var(--scroll, -100%));
+  }
+}
+
+.animate-infinite-scroll-y {
+  animation: infinite-scroll-y var(--scroll-duration, 30s) linear infinite;
+}
+
+/* /agents' floating faces: a slow bob with a little sway, never in step. */
+@keyframes agent-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  33% {
+    transform: translate3d(3px, -10px, 0) rotate(1.5deg);
+  }
+  66% {
+    transform: translate3d(-3px, -4px, 0) rotate(-1deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .agent-float {
+    animation: none !important;
+  }
+}
+
+@keyframes infinite-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(var(--scroll, -100%));
+  }
+}
+
+@keyframes scale-in-fade {
+  from {
+    opacity: 0;
+    transform: scale(var(--from-scale, 0.95));
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-scale-in-fade {
+  animation: scale-in-fade 100ms ease-in-out both;
+  animation-delay: var(--delay, 0ms);
+}
+
+/* One confetti piece: out along its own vector, turning, then gone. */
+@keyframes confetti-burst {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(0deg);
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--dx), var(--dy)) rotate(var(--rot));
+  }
+}
+
+.animate-confetti-burst {
+  animation: confetti-burst var(--duration, 1400ms) cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--delay, 0ms);
+}
+
+/* A city lighting up on the coverage map: a ring widening and fading. */
+@keyframes map-ping {
+  from {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(4);
+  }
+}
+
+.animate-map-ping {
+  animation: map-ping 1.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
 /* Gentle drift for floating UI cards */
+/* /progress (dub.co/analytics, read off its live DOM): the slow violet sheen
+   that crosses the first topic in the events table, hinting it opens. */
+@keyframes topic-sheen {
+  0% {
+    transform: translateX(-60%);
+  }
+  60%,
+  100% {
+    transform: translateX(60%);
+  }
+}
+
 @keyframes float-y {
   from {
     transform: translateY(0);
@@ -599,10 +649,13 @@ body {
   .animate-marquee-down,
   .animate-marquee-left,
   .animate-view-swap,
-  .animate-price-swap,
   .animate-demo-ripple,
   .animate-triad-progress,
-  .animate-funnel-sheen {
+  .animate-funnel-sheen,
+  .animate-infinite-scroll-y,
+  .animate-scale-in-fade,
+  .animate-confetti-burst,
+  .animate-map-ping {
     animation: none;
   }
   .demo-cursor {

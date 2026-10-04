@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { interpolate } from "remotion";
 import { Brain, CircleHelp, Compass, Gift } from "lucide-react";
 import { BrandMark } from "@/components/ui/BrandMark";
@@ -7,6 +8,8 @@ import { EASE, GLIDE, ramp } from "@/components/hero-film/motion";
 import { useFrame } from "@/components/hero-film/frame";
 import { cn } from "@/lib/cn";
 import type { IconComponent } from "@/lib/icon";
+
+import learnerPhoto from "@/public/mockups/learner-szymon.jpg";
 
 /* ------------------------------------------------------------------------ */
 /* Geometry                                                                  */
@@ -52,10 +55,12 @@ export function navPoint(groups: NavGroup[], label: string): { x: number; y: num
 /* Shell                                                                     */
 /* ------------------------------------------------------------------------ */
 
-/** The rail's product areas: learning (open) and the agents. */
-const RAIL_PRODUCTS: Array<{ key: string; icon: IconComponent; active: boolean }> = [
-  { key: "nauka", icon: Compass, active: true },
-  { key: "agenci", icon: Brain, active: false },
+export type RailProduct = "nauka" | "agenci";
+
+/** The rail's product areas: learning and the agents. */
+const RAIL_PRODUCTS: Array<{ key: RailProduct; icon: IconComponent }> = [
+  { key: "nauka", icon: Compass },
+  { key: "agenci", icon: Brain },
 ];
 
 /**
@@ -66,6 +71,7 @@ const RAIL_PRODUCTS: Array<{ key: string; icon: IconComponent; active: boolean }
 export function Shell({
   nav = [],
   active,
+  rail = "nauka",
   sidebar,
   framed = true,
   title,
@@ -75,6 +81,8 @@ export function Shell({
 }: {
   nav?: NavGroup[];
   active?: string;
+  /** The rail's open product area: learning (every film but the agents') or the agents. */
+  rail?: RailProduct;
   /**
    * Replaces the "Nauka" heading and `nav` with other sidebar content, for a
    * workspace that brings its own navigation (the exam simulation).
@@ -108,12 +116,12 @@ export function Shell({
           <BrandMark className="size-[15px] text-white" />
         </span>
         <div className="mt-[12px] flex flex-col items-center gap-[6px]">
-          {RAIL_PRODUCTS.map(({ key, icon: Icon, active }) => (
+          {RAIL_PRODUCTS.map(({ key, icon: Icon }) => (
             <span
               key={key}
               className={cn(
                 "grid size-[34px] place-items-center rounded-[9px]",
-                active ? "bg-white shadow-[0_1px_2px_rgba(0,0,0,0.06)]" : "",
+                key === rail ? "bg-white shadow-[0_1px_2px_rgba(0,0,0,0.06)]" : "",
               )}
             >
               <Icon className="size-[16px] text-slate" strokeWidth={1.75} />
@@ -123,9 +131,16 @@ export function Shell({
         <div className="mt-auto flex flex-col items-center gap-[14px] pb-[18px]">
           <Gift className="size-[15px] text-slate" strokeWidth={1.75} />
           <CircleHelp className="size-[15px] text-slate" strokeWidth={1.75} />
-          <span className="grid size-[24px] place-items-center rounded-full bg-[#dbeafe] text-[9px] font-semibold text-deep-sapphire">
-            AW
-          </span>
+          {/* The signed-in learner: Szymon, one of the supplied learner photos. */}
+          <Image
+            src={learnerPhoto}
+            alt=""
+            width={24}
+            height={24}
+            sizes="24px"
+            loading="eager"
+            className="size-[24px] rounded-full object-cover object-[center_35%] ring-1 ring-black/5"
+          />
         </div>
       </div>
 

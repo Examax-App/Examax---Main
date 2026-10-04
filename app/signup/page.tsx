@@ -4,10 +4,10 @@ import { SignUpFlow } from "@/components/auth/SignUpFlow";
 
 export const metadata: Metadata = {
   title: "Załóż konto",
-  description: "Załóż darmowe konto Examax i zacznij przygotowania do egzaminu.",
+  description: "Załóż konto Examax i zacznij przygotowania do egzaminu ósmoklasisty lub matury.",
 };
 
-/** Dub's register page (dubinc/dub: (auth-marketing)/register), in Polish. */
+/** Dub's register page (dubinc/dub: (auth-marketing)/register/page.tsx): a page of its own. */
 export default function SignupPage() {
   return (
     <AuthLayout>

@@ -1,150 +1,145 @@
+import Image from "next/image";
 import {
+  ArrowRight,
+  BookMarked,
   BookOpen,
   Check,
+  CircleCheck,
   CircleDashed,
   CornerDownRight,
   GraduationCap,
-  Lock,
-  MousePointer2,
+  Languages,
   PencilLine,
   Sigma,
 } from "lucide-react";
 import { BotAvatar } from "bot-avatars";
+import { CkeIcon } from "@/components/ui/CkeIcon";
 import { E8Icon } from "@/components/ui/E8Icon";
 import { MaturaIcon } from "@/components/ui/MaturaIcon";
 import { cn } from "@/lib/cn";
 import type { IconComponent } from "@/lib/icon";
 
+import learnerPhoto from "@/public/mockups/learner.jpg";
+
 /**
  * Artwork for the navbar's Product panel. Each piece is a static picture of the
  * product at the scale of the reference's own card previews (dub.co's Product
- * menu, read off the live DOM): the same boxes, type sizes and fade masks,
- * carrying Examax's content instead of links and partners.
+ * menu, read off the live DOM — `DesignRules/Product menu _ Dub.png`): the
+ * same boxes, type sizes and fade masks, carrying Examax's content instead of
+ * links, partners and integrations. Card for card:
  *
- * All of it is `aria-hidden` decoration. The card's title and description are
- * what a screen reader gets.
+ *   Trening zadań       ← Dub Partners    (the partner grid: one cell per question)
+ *   Roadmapa nauki      ← Dub Links       (the link rows: one row per chapter)
+ *   Śledzenie postępów  ← Dub Analytics   (the chart over a stats and profile card)
+ *   Symulacja egzaminu  ← Dub Integrations (its slot: the exam launcher)
+ *   Agenci Examax       ← Dub API & MCP   (its slot: one exchange, the agent thinking)
+ *
+ * Nothing here moves. All of it is `aria-hidden` decoration — the card's title
+ * and description are what a screen reader gets.
  */
 
 /** The reference's preview fade: solid for the top half, gone by the bottom. */
 const FADE_DOWN = "[mask-image:linear-gradient(black_50%,transparent)]";
 
 /* ------------------------------------------------------------------------ */
-/* Trening zadań — the reference's partner grid, 1:1 (template:              */
-/* `DesignRules/Partner grid _ Dub.png`, classes from dub.co's live DOM):    */
-/* 180x60 cells with a 3px gutter, two columns running off the card's right */
-/* edge, a 54px slot holding the score ring, a name and two figures.        */
+/* Trening zadań — the reference's partner grid, 1:1: 180x60 cells with a    */
+/* 3px gutter in two columns running off the card's right edge. Where a      */
+/* partner has a portrait, a question has its exam's official mark (Matura  */
+/* or E8) on a plain white square; where a partner has a flag and a          */
+/* name, a question has its subject and topic; revenue and payouts become    */
+/* the sheet's year and the task number.                                    */
 /* ------------------------------------------------------------------------ */
 
-/** The subject, as a small dot after the topic's name. */
-const SUBJECT_MARK = {
-  math: "bg-[#60a5fa]",
-  polish: "bg-[#4ade80]",
-  english: "bg-[#a78bfa]",
-} as const;
+const SUBJECT = { math: Sigma, polish: BookMarked, english: Languages } as const;
 
-const TOPICS: Array<{ subject: keyof typeof SUBJECT_MARK; name: string; tasks: string; score: string }> = [
-  { subject: "math", name: "Procenty", tasks: "48", score: "92%" },
-  { subject: "english", name: "Past Simple", tasks: "36", score: "88%" },
-  { subject: "polish", name: "Lektury", tasks: "31", score: "74%" },
-  { subject: "math", name: "Funkcje", tasks: "40", score: "81%" },
-  { subject: "polish", name: "Rozprawka", tasks: "20", score: "66%" },
-  { subject: "english", name: "Reading", tasks: "42", score: "90%" },
+const QUESTIONS: Array<{ exam: "matura" | "e8"; subject: keyof typeof SUBJECT; topic: string; sheet: string; task: string }> = [
+  { exam: "matura", subject: "math", topic: "Procenty", sheet: "2024", task: "7" },
+  { exam: "e8", subject: "english", topic: "Past Simple", sheet: "2023", task: "3" },
+  { exam: "e8", subject: "polish", topic: "Lektury", sheet: "2024", task: "12" },
+  { exam: "matura", subject: "math", topic: "Funkcje", sheet: "2022", task: "15" },
+  { exam: "matura", subject: "polish", topic: "Rozprawka", sheet: "2023", task: "21" },
+  { exam: "e8", subject: "math", topic: "Geometria", sheet: "2024", task: "18" },
 ];
-
-/** A 22px ring, charcoal on an ash track, filled to `value` percent. */
-function ScoreRing({ value }: { value: number }) {
-  const radius = 9;
-  const circumference = 2 * Math.PI * radius;
-  return (
-    <svg viewBox="0 0 22 22" className="size-[22px] -rotate-90">
-      <circle cx="11" cy="11" r={radius} fill="none" stroke="var(--color-ash)" strokeWidth="2" />
-      <circle
-        cx="11"
-        cy="11"
-        r={radius}
-        fill="none"
-        stroke="var(--color-charcoal)"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeDasharray={circumference}
-        strokeDashoffset={circumference * (1 - value / 100)}
-      />
-    </svg>
-  );
-}
 
 export function TrainingPreview() {
   return (
     <div aria-hidden className={cn("pointer-events-none absolute left-0 top-0 size-full overflow-hidden pl-2", FADE_DOWN)}>
       <div className="grid grid-cols-[repeat(2,180px)]">
-        {TOPICS.map((topic) => (
-          <div key={topic.name} className="h-[60px] w-[180px] p-[3px]">
-            <div className="flex size-full select-none overflow-hidden rounded border border-ash bg-white">
-              {/* Where the reference has a portrait: the topic's score as a
-                  thin neutral progress ring. */}
-              <div className="grid aspect-square h-full place-items-center bg-canvas-muted">
-                <ScoreRing value={parseInt(topic.score, 10)} />
-              </div>
-              <div className="flex h-full flex-col justify-between border-l border-ash px-2 py-1.5">
-                <div className="flex items-center gap-1">
-                  <span className="text-[9px] font-medium text-slate">{topic.name}</span>
-                  <span className={cn("size-1 rounded-full", SUBJECT_MARK[topic.subject])} />
+        {QUESTIONS.map((question) => {
+          const Subject = SUBJECT[question.subject];
+          return (
+            <div key={question.topic} className="h-[60px] w-[180px] p-[3px]">
+              <div className="flex size-full select-none overflow-hidden rounded border border-paper-mist bg-white">
+                <div className="grid aspect-square h-full place-items-center bg-white">
+                  {question.exam === "matura" ? <MaturaIcon className="h-[20px] w-[28px]" /> : <E8Icon className="h-[18px] w-[26px]" />}
                 </div>
-                <div className="flex divide-x divide-ash">
-                  <div className="flex flex-col pr-4">
-                    <span className="text-[6px] font-medium text-silver">Zadania</span>
-                    <span className="text-[9px] font-medium text-slate">{topic.tasks}</span>
+                <div className="flex h-full flex-col justify-between border-l border-paper-mist px-2 py-1.5">
+                  <div className="flex items-center gap-1.5">
+                    <Subject className="size-2.5 shrink-0 text-charcoal" strokeWidth={2.25} />
+                    <span className="text-[9px] font-medium text-slate">{question.topic}</span>
                   </div>
-                  <div className="flex flex-col pl-4">
-                    <span className="text-[6px] font-medium text-silver">Wynik</span>
-                    <span className="text-[9px] font-medium text-slate">{topic.score}</span>
+                  <div className="flex divide-x divide-paper-mist">
+                    <div className="flex flex-col pr-4">
+                      <span className="text-[6px] font-medium text-silver">Arkusz</span>
+                      <span className="text-[9px] font-medium text-slate">{question.sheet}</span>
+                    </div>
+                    <div className="flex flex-col pl-4">
+                      <span className="text-[6px] font-medium text-silver">Zadanie</span>
+                      <span className="text-[9px] font-medium text-slate">{question.task}</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
 }
 
 /* ------------------------------------------------------------------------ */
-/* Roadmapa nauki — the reference's link list: 52px rows, 8px apart.         */
+/* Roadmapa nauki — the reference's link rows: 52px boxes, 8px apart, the     */
+/* same row repeated. A chapter per row: its status in the circle, lesson and */
+/* quiz marks by the title, the state under it, lessons done in the badge.    */
 /* ------------------------------------------------------------------------ */
 
-/** Status reads from the icon in the circle; the badge carries only a number. */
-const STEPS: Array<{ title: string; meta: string; status: IconComponent; badge: string }> = [
-  { title: "Liczby rzeczywiste", meta: "8 lekcji", status: Check, badge: "100%" },
-  { title: "Potęgi i pierwiastki", meta: "6 lekcji", status: CircleDashed, badge: "60%" },
-  { title: "Równania", meta: "7 lekcji", status: Lock, badge: "0%" },
+const CHAPTERS: Array<{ title: string; state: string; status: IconComponent; badge: string; done: boolean }> = [
+  { title: "Liczby rzeczywiste", state: "Rozdział ukończony", status: Check, badge: "8/8 lekcji", done: true },
+  { title: "Potęgi i pierwiastki", state: "Rozdział ukończony", status: Check, badge: "6/6 lekcji", done: true },
+  { title: "Równania", state: "W trakcie", status: CircleDashed, badge: "3/7 lekcji", done: false },
 ];
 
 export function RoadmapPreview() {
   return (
     <div aria-hidden className={cn("pointer-events-none absolute inset-0 overflow-hidden px-2", FADE_DOWN)}>
       <div className="flex flex-col gap-2 p-1">
-        {STEPS.map((step) => (
+        {CHAPTERS.map((chapter) => (
           <div
-            key={step.title}
+            key={chapter.title}
             className="flex h-[52px] items-center gap-2 rounded-[9px] border-[0.75px] border-ash bg-white pl-[13px] pr-3"
           >
             <span className="grid size-[26px] shrink-0 place-items-center rounded-full border-[0.75px] border-ash bg-gradient-to-b from-transparent to-black/5 text-charcoal">
-              <step.status className="size-3" strokeWidth={2.2} />
+              <chapter.status className="size-3" strokeWidth={2.2} />
             </span>
             <div className="min-w-0 flex-1 pl-0.5">
               <div className="flex items-center gap-1.5">
-                <span className="truncate text-[10px] font-semibold text-charcoal">{step.title}</span>
+                <span className="truncate text-[10px] font-semibold text-charcoal">{chapter.title}</span>
                 <BookOpen className="size-2.5 shrink-0 text-charcoal" strokeWidth={2} />
-                <PencilLine className="size-2.5 shrink-0 text-charcoal" strokeWidth={2} />
+                <PencilLine className="size-2.5 shrink-0 text-silver" strokeWidth={2} />
               </div>
               <div className="mt-1 flex items-center gap-1 text-[10px] font-medium text-fog">
                 <CornerDownRight className="size-2.5 shrink-0 text-silver" strokeWidth={2} />
-                <span className="truncate">{step.meta}</span>
+                <span className="truncate">{chapter.state}</span>
               </div>
             </div>
-            <span className="flex h-5 shrink-0 items-center rounded-md border-[0.75px] border-ash bg-white px-1.5 text-[8.8px] font-medium tabular-nums text-slate">
-              {step.badge}
+            <span className="flex h-5 shrink-0 items-center gap-1 rounded-md border-[0.75px] border-ash bg-white px-1.5 text-[8.8px] font-medium tabular-nums text-slate">
+              {chapter.done ? (
+                <CircleCheck className="size-2.5 text-slate" strokeWidth={2} />
+              ) : (
+                <CircleDashed className="size-2.5 text-slate" strokeWidth={2} />
+              )}
+              {chapter.badge}
             </span>
           </div>
         ))}
@@ -219,8 +214,9 @@ export function ProgressPreview({ color }: { color: string }) {
             <div className="absolute left-0 top-0 whitespace-nowrap rounded-lg border border-ash bg-white py-0.5">
               <div className="px-3 py-2.5">
                 <div className="flex justify-between gap-2">
-                  <span className="grid size-11 place-items-center rounded-full bg-paper-mist text-sm font-medium text-steel">
-                    AW
+                  {/* The reference's portrait: a 44px circle on the placeholder grey. */}
+                  <span className="relative size-11 overflow-hidden rounded-full bg-paper-mist">
+                    <Image src={learnerPhoto} alt="" fill sizes="44px" className="object-cover object-[center_30%]" />
                   </span>
                   <div className="flex flex-col items-end gap-1">
                     <span className="flex items-center gap-1.5 rounded-full border border-ash bg-white px-1.5 py-0.5 text-xs text-charcoal">
@@ -237,8 +233,8 @@ export function ProgressPreview({ color }: { color: string }) {
                     </span>
                   </div>
                 </div>
-                <div className="mt-4 text-[13px] font-medium text-charcoal">Ala Wiśniewska</div>
-                <div className="mt-px text-xs text-fog">ala@examax.app</div>
+                <div className="mt-4 text-[13px] font-medium text-charcoal">Zuzanna Nowakowska</div>
+                <div className="mt-px text-xs text-fog">zuzanna@examax.app</div>
               </div>
               <div className="flex flex-col gap-2.5 border-t border-ash px-3 pb-2.5 pt-3">
                 {PROFILE_ROWS.map((row) => (
@@ -257,142 +253,98 @@ export function ProgressPreview({ color }: { color: string }) {
 }
 
 /* ------------------------------------------------------------------------ */
-/* Symulacja egzaminu — two exam sheets in A4's portrait proportion, narrow  */
-/* and tall, tipped the same way and cropped by the card's bottom edge.      */
-/* Their questions use the Roadmapa rows' style; the cursor rests on one.    */
+/* The wide cards' art stands whole, 20px in from the card's right edge (the */
+/* copy's own inset), and lifts off the card on a soft grey glint: a faint   */
+/* radial shadow behind it, and a two-layer drop shadow on its surfaces.    */
 /* ------------------------------------------------------------------------ */
 
-/**
- * Two exam sheets, one per exam, each opened at a task: the paper's header
- * (exam, subject, the clock), a task with its points, the question as a
- * formula and the A–D answers. The Matura sheet is answered, the ósmoklasista
- * one is being answered — the cursor rests on B.
- */
-const EXAM_SHEETS: Array<{
-  mark: "matura" | "e8";
-  exam: string;
-  subject: string;
-  time: string;
-  task: string;
-  formula: string;
-  /** The ticked answer, or the one under the cursor. */
-  answer: number;
-  done: boolean;
-}> = [
-  {
-    mark: "matura",
-    exam: "Matura 2025",
-    subject: "Matematyka · poziom podstawowy",
-    time: "170:00",
-    task: "Zadanie 1. (0–1)",
-    formula: "2x + 3 = 11",
-    answer: 2,
-    done: true,
-  },
-  {
-    mark: "e8",
-    exam: "Ósmoklasista",
-    subject: "Matematyka · 2025",
-    time: "98:40",
-    task: "Zadanie 4. (0–1)",
-    formula: "¾ · 16 − 5",
-    answer: 1,
-    done: false,
-  },
+/** The soft two-layer drop shadow the wide cards' surfaces sit on. */
+const LIFT = "shadow-[0_1px_2px_rgba(0,0,0,0.05),0_8px_20px_-6px_rgba(0,0,0,0.16)]";
+
+/** A deeper lift for the launcher panel: the same two layers, spread further. */
+const LIFT_DEEP = "shadow-[0_1px_2px_rgba(0,0,0,0.05),0_12px_32px_-8px_rgba(0,0,0,0.22)]";
+
+/** The grey glint behind a wide card's art: a radial shadow, gone by its edges. */
+function Glint({ strength = 0.06 }: { strength?: number }) {
+  return (
+    <span
+      className="absolute -inset-x-8 -inset-y-6"
+      style={{ backgroundImage: `radial-gradient(closest-side, rgba(0,0,0,${strength}), transparent)` }}
+    />
+  );
+}
+
+/* ------------------------------------------------------------------------ */
+/* Symulacja egzaminu — in the reference's integrations slot, a picture of   */
+/* the simulation's launcher: one quiet row (the CKE mark, then three        */
+/* figures) over the button that starts the exam, all in the page's greys   */
+/* and black.                                                               */
+/* ------------------------------------------------------------------------ */
+
+const EXAM_STATS = [
+  { label: "Arkusze", value: "12" },
+  { label: "Średni wynik", value: "78%" },
+  { label: "Ostatnio", value: "14 wrz" },
 ];
 
-const OPTIONS = ["A", "B", "C", "D"];
-
-/**
- * The Symulacja card's picture. The sheets bleed off the card's bottom edge
- * and hold still — nothing moves on hover. They end 20px from the card's
- * right edge, the same inset as the copy on its left.
- */
-export function ExamSheetPreview() {
+export function SimulationPreview() {
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-      <div className="absolute right-5 top-2.5 flex gap-3">
-        {EXAM_SHEETS.map((sheet) => (
-          <div
-            key={sheet.exam}
-            className="aspect-[1/1.414] w-[112px] rotate-6 rounded-[6px] border-[0.75px] border-ash bg-white px-2 py-1.5 shadow-sm"
-          >
-            <div className="flex items-center gap-1">
-              {sheet.mark === "matura" ? <MaturaIcon className="h-2 w-2.5" /> : <E8Icon className="h-2 w-2.5" />}
-              <span className="whitespace-nowrap text-[6.5px] font-semibold leading-none text-charcoal">{sheet.exam}</span>
-              <span className="ml-auto font-geist-mono text-[5.5px] leading-none text-fog">{sheet.time}</span>
-            </div>
-            <p className="mt-1 text-[5px] leading-none text-fog">{sheet.subject}</p>
-            <div className="mt-1.5 border-t-[0.75px] border-ash pt-1.5">
-              <p className="text-[6px] font-semibold leading-none text-charcoal">{sheet.task}</p>
-              <span className="mt-1 block h-[3px] w-full rounded-full bg-paper-mist" />
-              <p className="mt-1.5 font-geist-mono text-[6.5px] leading-none text-charcoal">{sheet.formula}</p>
-              <div className="relative mt-1.5 grid grid-cols-4 gap-1">
-                {OPTIONS.map((option, index) => {
-                  const picked = index === sheet.answer;
-                  return (
-                    <span
-                      key={option}
-                      className={cn(
-                        "flex h-[13px] items-center justify-center gap-0.5 rounded-[4px] border-[0.75px] text-[5.5px] font-medium",
-                        picked && sheet.done
-                          ? "border-charcoal bg-charcoal text-white"
-                          : picked
-                            ? "border-smoke bg-paper-mist text-charcoal"
-                            : "border-ash bg-white text-steel",
-                      )}
-                    >
-                      {picked && sheet.done && <Check className="size-1.5" strokeWidth={3.5} />}
-                      {option}
-                    </span>
-                  );
-                })}
-                {!sheet.done && (
-                  <MousePointer2
-                    className="absolute -bottom-2 size-3.5 fill-charcoal text-white drop-shadow-sm"
-                    style={{ left: `calc(${(sheet.answer + 0.5) * 25}% + 1px)` }}
-                    strokeWidth={1.5}
-                  />
-                )}
+      <div className="absolute right-5 top-1/2 w-[200px] -translate-y-1/2">
+        <Glint strength={0.1} />
+        <div className={cn("relative rounded-lg border border-black/[0.06] bg-white p-2.5", LIFT_DEEP)}>
+          <div className="flex items-center gap-3 px-0.5">
+            <CkeIcon className="h-[20px] w-[15px]" />
+            {EXAM_STATS.map((stat) => (
+              <div key={stat.label} className="flex flex-1 flex-col gap-1">
+                <span className="whitespace-nowrap text-[6px] font-medium leading-none text-fog">{stat.label}</span>
+                <span className="whitespace-nowrap text-[9px] font-medium leading-none tabular-nums text-charcoal">{stat.value}</span>
               </div>
-            </div>
+            ))}
           </div>
-        ))}
+          <span className="mt-2.5 flex h-4 items-center justify-center gap-1 rounded-[5px] bg-charcoal text-[6.5px] font-medium leading-none text-white">
+            Rozpocznij egzamin
+            <ArrowRight className="size-[6px]" strokeWidth={2.5} />
+          </span>
+        </div>
       </div>
     </div>
   );
 }
 
 /* ------------------------------------------------------------------------ */
-/* Agenci Examax — the team, huddled                                        */
+/* Agenci Examax — in the reference's API slot, one exchange with no window  */
+/* around it, drawn for its shape rather than its words: a question sent as */
+/* a short message, and the agent's face beside its thinking line —        */
+/* TextShimmer's gradient held still mid-sweep.                             */
 /* ------------------------------------------------------------------------ */
 
-/** Each face's size, the space between faces, and each step up the slope. */
-const FACE = 40;
-const GAP = 4;
-const STEP = 12;
-
-/** Left to right, climbing: the right-hand face is the peak. */
-const LINEUP = ["circle", "cat", "clover"] as const;
-
-/**
- * The Agent card's picture: three of the team spread along a slope that rises
- * steeply to the card's right edge, each a step higher than the one before. The faces are held
- * still in their resting pose, and nothing on the card moves on hover. The row
- * ends 20px from the card's right edge, the same inset as the copy on its left.
- */
-export function AgentHuddle() {
+export function AgentChatPreview() {
   return (
-    <div aria-hidden className="pointer-events-none absolute inset-y-0 right-5 flex items-center">
-      {LINEUP.map((type, i) => (
-        <span
-          key={type}
-          className="relative"
-          style={{ marginLeft: i === 0 ? 0 : GAP, translate: `0 ${(1 - i) * STEP}px` }}
-        >
-          <BotAvatar type={type} size={FACE} paused interactive={false} turn={0} />
-        </span>
-      ))}
+    <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+      <div className="absolute right-5 top-1/2 w-[180px] -translate-y-1/2">
+        <Glint strength={0.1} />
+        <div className="relative flex flex-col gap-2.5">
+          <span className={cn("self-end rounded-[10px] bg-charcoal px-2.5 py-1.5 text-[9px] leading-[11px] text-white", LIFT)}>
+            Pomożesz mi z tym zadaniem?
+          </span>
+          <span className="flex items-center gap-2">
+            <span className="relative z-[1] grid size-6 shrink-0 place-items-center">
+              <BotAvatar type="circle" size={24} paused interactive={false} turn={0} />
+            </span>
+            <span
+              className="bg-clip-text text-[10.5px] leading-none text-transparent"
+              style={{
+                backgroundImage: "linear-gradient(90deg, var(--color-fog) 35%, var(--color-charcoal) 50%, var(--color-fog) 65%)",
+                backgroundSize: "200% 100%",
+                backgroundPosition: "70% 0",
+              }}
+            >
+              Czytam zadanie…
+            </span>
+          </span>
+        </div>
+      </div>
     </div>
   );
 }

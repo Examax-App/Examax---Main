@@ -41,6 +41,8 @@ import {
 import { EASE, GLIDE, enter, ramp } from "@/components/hero-film/motion";
 import { useReducedMotion } from "@/lib/hooks";
 import { cn } from "@/lib/cn";
+import { CKE_SHEET_URL, SITTING } from "@/components/simulation/sitting";
+import { Frac, Radical, Tall, V } from "@/components/simulation/math";
 
 /**
  * The landing's exam-simulation preview: a Remotion film of the simulation
@@ -74,7 +76,7 @@ const WIDTH = 1200;
 const HEIGHT = 640;
 
 /** The sheet the tasks come from, in CKE's archive. */
-export const CKE_SHEET_URL = "https://cke.gov.pl/egzamin-maturalny/egzamin-maturalny-w-formule-2023/arkusze/2025-2/";
+export { CKE_SHEET_URL };
 
 /* ------------------------------------------------------------------------ */
 /* Geometry — composition pixels, so the cursor aims at the layout's numbers */
@@ -129,24 +131,8 @@ const metricTab = (index: number): Pt => ({ x: CONTENT_X + (CONTENT_W / 3) * (in
 /** The results header's "Nowa symulacja", where the film ends and starts again (measured off the render). */
 const NEW_SHEET = { x: 1105, y: 30 };
 
-const RESULTS = {
-  max: 46,
-  minutes: 141,
-  passMark: 0.3,
-  metrics: [
-    { label: "Wynik", color: "#60a5fa", from: " 0", to: "39", unit: "/ 46 pkt" },
-    { label: "Procent", color: "#fb923c", from: " 0%", to: "85%", unit: "" },
-    { label: "Czas", color: "#a78bfa", from: "  0", to: "141", unit: "min" },
-  ],
-  /** Points collected, 0–1 of the 46, every six minutes or so; the three tasks left for last land at the end. */
-  curve: [0, 0.03, 0.07, 0.11, 0.15, 0.2, 0.24, 0.28, 0.33, 0.37, 0.41, 0.43, 0.48, 0.52, 0.55, 0.59, 0.63, 0.66, 0.69, 0.72, 0.74, 0.76, 0.78, 39 / 46],
-  pointsAxis: ["46", "23", "0"],
-  timeTicks: ["0", "35 min", "70 min", "105 min", "141 min"],
-  /** Minutes on each task, 1 to 31; together, the 141. */
-  perTask: [3, 2, 3, 2, 4, 3, 3, 2, 4, 8, 3, 4, 3, 5, 3, 4, 5, 4, 3, 4, 4, 6, 5, 4, 5, 4, 9, 5, 6, 7, 14],
-  minutesAxis: ["16", "8", "0"],
-  minutesTop: 16,
-};
+/** The results the film hands in to — the same sitting /simulation describes. */
+const RESULTS = SITTING;
 
 /** The points curve at a fraction of the exam, 0–1. */
 function curveAt(t: number) {
@@ -910,48 +896,6 @@ function TaskBar({
   );
 }
 
-/*
- * Printed maths, typeset the way CKE's sheets set it: variables slanted,
- * fractions stacked on the math axis, roots with their bar over the
- * radicand, relations spaced. Everything scales in em, so the same pieces
- * serve the tasks (15px) and the formula sheet (13px).
- */
-
-/**
- * A variable, slanted as a math italic (Inter's own italic is a 10° oblique).
- * The slant leans the letter into its right-hand neighbour, so it gets a
- * hair of room on that side, as an italic correction would.
- */
-function V({ children }: { children: React.ReactNode }) {
-  return <span className="mr-[0.06em] inline-block -skew-x-[10deg]">{children}</span>;
-}
-
-/** A stacked fraction; its bar sits on the math axis, level with a minus sign. */
-function Frac({ n, d }: { n: React.ReactNode; d: React.ReactNode }) {
-  return (
-    <span className="mx-[0.12em] inline-flex flex-col text-center align-middle text-[0.8em] leading-[1.3]">
-      <span className="px-[0.2em]">{n}</span>
-      <span className="border-t border-current px-[0.2em]">{d}</span>
-    </span>
-  );
-}
-
-/** A square root as it is printed: one stroke runs into the bar over the radicand. */
-function Radical({ children }: { children: React.ReactNode }) {
-  return (
-    <span className="inline-flex h-[1.3em] items-stretch align-middle">
-      <svg viewBox="0 0 9 20" fill="none" preserveAspectRatio="none" className="h-full w-[0.58em] shrink-0 overflow-visible">
-        <path d="M0.75 12.5L2.5 11.5L4.75 19L8.25 0.75H9" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" vectorEffect="non-scaling-stroke" />
-      </svg>
-      <span className="flex items-end border-t-[0.08em] border-current pl-[0.05em] pr-[0.12em] leading-[1.15]">{children}</span>
-    </span>
-  );
-}
-
-/** A bracket grown to hold a root or a fraction. */
-function Tall({ children }: { children: string }) {
-  return <span className="inline-block scale-y-[1.3] font-light">{children}</span>;
-}
 
 const INSTRUCTION = "absolute text-[12px] leading-[18px] text-slate";
 
@@ -1058,7 +1002,7 @@ function TaskTwentyOne({ frame }: { frame: number }) {
   ];
   return (
     <>
-      <TaskBar number={21} points="0–1 pkt" page={15} saved={ramp(frame, T.pickP + 8, 14)} />
+      <TaskBar number={21} points="0–1 pkt" page={21} saved={ramp(frame, T.pickP + 8, 14)} />
       <p className="absolute text-[12.5px] leading-[19px] text-charcoal" style={{ left: PAD, right: PAD, top: 62 }}>
         Dany jest trójkąt <V>ABC</V>, w którym |<V>AB</V>| = 11, |<V>BC</V>| = 12 oraz |∡<V>ABC</V>| = 60° (zobacz rysunek).
       </p>
@@ -1471,7 +1415,7 @@ function Results({ frame, opacity }: { frame: number; opacity: number }) {
             <span className="relative z-[1] inline-flex shrink-0">
               <BotAvatar type="clover" size={15} interactive={false} seed={0.3} aria-hidden />
             </span>
-            Omów z Agentem
+            Omów z Korepetytorem AI
           </Chip>
         </div>
       </div>
@@ -1620,12 +1564,12 @@ function SimulationComposition() {
 }
 
 /** The film's still, drawn at composition size and scaled like the Player. */
-function SimulationPoster() {
+function SimulationPoster({ frame = POSTER_FRAME }: { frame?: number }) {
   return (
     <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} className="block h-full w-full" aria-hidden>
       <foreignObject width={WIDTH} height={HEIGHT}>
         <div className="relative" style={{ width: WIDTH, height: HEIGHT }}>
-          <FrameAt frame={POSTER_FRAME}>
+          <FrameAt frame={frame}>
             <SimulationLoop />
           </FrameAt>
         </div>
@@ -1637,6 +1581,19 @@ function SimulationPoster() {
 /* ------------------------------------------------------------------------ */
 /* On the page                                                               */
 /* ------------------------------------------------------------------------ */
+
+/**
+ * One frame of the film as a picture, for /simulation's "Przejrzysty arkusz"
+ * cell (dub's dashboard screenshot): Zadanie 10 worked through — the
+ * handwriting, the sketch and the formula sheet open beside the page.
+ */
+export function SimulationStill({ className }: { className?: string }) {
+  return (
+    <div className={cn("aspect-[1200/640] overflow-hidden", className)}>
+      <SimulationPoster frame={T.answered10 + FPS / 2} />
+    </div>
+  );
+}
 
 /**
  * What is clickable over the film, in composition pixels (measured off the

@@ -17,7 +17,7 @@ import {
   Sigma,
   Target,
 } from "lucide-react";
-import Image from "next/image";
+import Image, { type StaticImageData } from "next/image";
 import { MaturaIcon } from "@/components/ui/MaturaIcon";
 import { RollingNumber } from "@/components/ui/RollingNumber";
 import { Sparkline } from "@/components/ui/Sparkline";
@@ -726,13 +726,18 @@ function MasteredCard({ topic, date }: { topic: string; date: string }) {
   );
 }
 
-function ProfileCard() {
+type Portrait = { src: StaticImageData; position: string };
+
+/** The landing's portrait: Zuzanna, cropped around her face. */
+const LEARNER_PORTRAIT: Portrait = { src: learnerPhoto, position: "object-[center_30%]" };
+
+function ProfileCard({ portrait }: { portrait: Portrait }) {
   return (
     <div className="flex flex-col rounded-2xl border border-ash bg-white p-2 text-sm text-charcoal shadow-md">
       {/* The learner's photo, supplied for this card — the reference's own
           260px well, cover-cropped around the face, shown untinted. */}
       <div className="relative h-[260px] overflow-hidden rounded-2xl border border-black/10 bg-paper-mist">
-        <Image src={learnerPhoto} alt="" fill sizes="240px" className="object-cover object-[center_30%]" />
+        <Image src={portrait.src} alt="" fill sizes="240px" className={cn("object-cover", portrait.position)} />
       </div>
       <div className="mt-1 flex flex-col items-center py-2 text-center">
         <span className="text-base font-semibold text-graphite">
@@ -745,11 +750,11 @@ function ProfileCard() {
 }
 
 /** Five columns, staggered down and in from the centre, as the reference's. */
-const COLUMNS: Array<{
+const COLUMNS = (portrait: Portrait): Array<{
   offset: number;
   delay: number;
   cards: React.ReactNode[];
-}> = [
+}> => [
   {
     offset: 64,
     delay: 200,
@@ -814,7 +819,7 @@ const COLUMNS: Array<{
     offset: 0,
     delay: 0,
     cards: [
-      <ProfileCard key="a" />,
+      <ProfileCard key="a" portrait={portrait} />,
       <MasteredCard key="b" topic="Funkcja liniowa" date="2 kwi 2026, 17:34" />,
     ],
   },
@@ -873,18 +878,26 @@ const COLUMNS: Array<{
   },
 ];
 
-export function ProgressProfile() {
+/**
+ * On the landing it sits on the 800×440 stage at 75%; /progress shows the
+ * same wall at the reference's own size (`full`), across the whole column,
+ * and may pass its own portrait for the centre card.
+ */
+export function ProgressProfile({ full = false, portrait = LEARNER_PORTRAIT }: { full?: boolean; portrait?: Portrait } = {}) {
   return (
     <div className="relative size-full">
       <div
         aria-hidden
         // Wider than the stage, as the reference's band is, so the side fade
         // falls where the reference's does.
-        className="absolute left-1/2 top-0 h-full w-[1014px] -translate-x-1/2 pt-12 [mask-composite:intersect] [mask-image:linear-gradient(black_70%,transparent),linear-gradient(90deg,transparent,black_20%,black_80%,transparent)]"
+        className={cn(
+          "absolute left-1/2 top-0 h-full -translate-x-1/2 [mask-composite:intersect] [mask-image:linear-gradient(black_70%,transparent),linear-gradient(90deg,transparent,black_20%,black_80%,transparent)]",
+          full ? "w-[1352px] pt-0" : "w-[1014px] pt-12",
+        )}
       >
-        <div className="relative h-[520px] w-full origin-top scale-75">
+        <div className={cn("relative h-[520px] w-full origin-top", !full && "scale-75")}>
           <div className="absolute left-1/2 top-0 grid -translate-x-1/2 grid-cols-[repeat(5,256px)] gap-4">
-            {COLUMNS.map((column, i) => (
+            {COLUMNS(portrait).map((column, i) => (
               <div
                 key={i}
                 className="relative flex flex-col gap-4 [--offset:20px] in-data-[current=true]:motion-safe:animate-rise"

@@ -1,20 +1,20 @@
 import Link from "next/link";
-import { BookMarked, Backpack, FileText, GraduationCap, Languages, Sigma } from "lucide-react";
 import { Logo } from "@/components/ui/Logo";
 import { cn } from "@/lib/cn";
 import { ClientOnly } from "@/components/auth/ClientOnly";
-import { FeatureCarousel } from "@/components/auth/FeatureCarousel";
+import { AuthPreview } from "@/components/auth/AuthPreview";
 
 /*
- * dub.co's login and sign-up frame, one to one (dubinc/dub:
- * app.dub.co/(auth-marketing)/layout.tsx, side-panel.tsx, ui/layout/
- * auth-layout.tsx; `DesignRules/Auth _ Dub A.png`, `…B.png`,
- * `Auth components _ Dub.png`).
+ * dub.co's login and sign-up page frame (dubinc/dub: app.dub.co/(auth-marketing)/
+ * layout.tsx, side-panel.tsx, ui/layout/auth-layout.tsx; `DesignRules/Auth _
+ * Dub A.png`, `…B.png`, `Auth components _ Dub.png`) — a full page of its own
+ * at /login and /signup, not a layer over another page.
  *
  * Left: white, a 60px grid fading out over its first 320px, Dub's conic glow
- * behind the logo, the form centred between a 96px spacer and the terms.
- * Right, from 900px: the side panel — neutral-50, a hairline edge, the same
- * glow at its foot, the story card centred, the logo grid below.
+ * behind the logo (which leads home), the form centred between a 96px spacer
+ * and the terms. Right, from 900px: the side panel — neutral-50, a hairline
+ * edge, the same glow at its foot and a still of the product bleeding off its
+ * corner. It stays in view if a short window scrolls the form.
  */
 
 const GLOW =
@@ -39,34 +39,12 @@ function Glow({ position, faint }: { position: string; faint: string }) {
   );
 }
 
-/** Where Dub lists customers, ours lists what Examax covers — monochrome, fading in one by one. */
-const COVERAGE = [
-  { icon: Sigma, label: "Matematyka" },
-  { icon: BookMarked, label: "Polski" },
-  { icon: Languages, label: "Angielski" },
-  { icon: Backpack, label: "E8" },
-  { icon: GraduationCap, label: "Matura" },
-  { icon: FileText, label: "Arkusze CKE" },
-];
-
 function SidePanel() {
   return (
-    <div className="relative hidden h-full flex-col justify-between overflow-hidden border-l border-black/5 bg-canvas-muted min-[900px]:flex">
+    <div className="sticky top-0 hidden h-dvh overflow-hidden border-l border-black/5 bg-canvas-muted min-[900px]:block">
       <Glow position="bottom-0 translate-y-1/2" faint="opacity-15" />
-      <div className="relative flex grow items-center justify-center p-8 lg:p-14">
-        <FeatureCarousel />
-      </div>
-      <div className="relative z-10 mx-auto grid max-w-md grid-cols-3 place-items-center gap-x-10 gap-y-8 px-12 pb-12 pt-6 lg:px-8">
-        {COVERAGE.map((item, i) => (
-          <span
-            key={item.label}
-            className="animate-auth-fade-in-blur flex h-5 items-center gap-1.5 whitespace-nowrap font-satoshi text-[15px] font-bold tracking-tight text-graphite opacity-0 [animation-fill-mode:forwards]"
-            style={{ animationDelay: `${500 + i * 120}ms` }}
-          >
-            <item.icon className="size-4" strokeWidth={2.25} aria-hidden />
-            {item.label}
-          </span>
-        ))}
+      <div className="relative h-full">
+        <AuthPreview />
       </div>
     </div>
   );
@@ -74,7 +52,7 @@ function SidePanel() {
 
 export function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="relative grid min-h-[100dvh] grid-cols-1 min-[900px]:grid-cols-[minmax(0,1fr)_440px] lg:grid-cols-[minmax(0,1fr)_595px]">
+    <div className="relative grid min-h-dvh grid-cols-1 min-[900px]:grid-cols-[minmax(0,1fr)_440px] lg:grid-cols-[minmax(0,1fr)_595px]">
       <div className="relative">
         <div aria-hidden className="absolute inset-0 isolate overflow-hidden bg-white">
           <div className="absolute inset-y-0 left-1/2 w-[1200px] -translate-x-1/2 [mask-composite:intersect] [mask-image:linear-gradient(black,transparent_320px),linear-gradient(90deg,transparent,black_5%,black_95%,transparent)]">
@@ -90,11 +68,11 @@ export function AuthLayout({ children }: { children: React.ReactNode }) {
           <Glow position="top-6 -translate-y-1/2" faint="opacity-10" />
         </div>
 
-        <div className="relative flex min-h-[100dvh] w-full justify-center">
+        <div className="relative flex min-h-dvh w-full justify-center">
           <Link href="/" aria-label="Examax — strona główna" className="focus-ring absolute left-1/2 top-4 z-10 -translate-x-1/2 rounded-[4px] py-1">
             <Logo />
           </Link>
-          <div className="flex min-h-[100dvh] w-full flex-col items-center justify-between">
+          <main className="flex min-h-dvh w-full flex-col items-center justify-between">
             {/* Dub's spacer: keeps the form optically centred under the logo */}
             <div className="grow basis-0">
               <div className="h-24" />
@@ -103,17 +81,17 @@ export function AuthLayout({ children }: { children: React.ReactNode }) {
             <div className="flex grow basis-0 flex-col justify-end">
               <p className="px-20 py-8 text-center text-xs font-medium text-fog md:px-0">
                 Kontynuując, akceptujesz{" "}
-                <Link href="/terms" className="font-semibold text-steel hover:text-graphite">
+                <Link href="/terms" prefetch={false} className="font-semibold text-steel transition-colors hover:text-graphite">
                   Regulamin
                 </Link>{" "}
                 i{" "}
-                <Link href="/privacy" className="font-semibold text-steel hover:text-graphite">
+                <Link href="/privacy" prefetch={false} className="font-semibold text-steel transition-colors hover:text-graphite">
                   Politykę prywatności
                 </Link>{" "}
                 Examax
               </p>
             </div>
-          </div>
+          </main>
         </div>
       </div>
 

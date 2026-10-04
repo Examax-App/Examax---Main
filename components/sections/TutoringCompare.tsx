@@ -24,7 +24,7 @@ const CARDS: DisplayCardItem[] = [
     icon: PencilLine,
     accent: "blue",
     title: "Examax Pro",
-    description: "Zadania CKE, roadmapa i agent — każdego dnia",
+    description: "Zadania CKE, roadmapa i Korepetytor AI — każdego dnia",
     date: "Uczysz się sam, kiedy chcesz",
   },
   {

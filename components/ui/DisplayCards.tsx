@@ -56,7 +56,7 @@ export function DisplayCards({
         <article
           key={item.title}
           className={cn(
-            "relative flex h-36 w-[min(22rem,calc(100vw-4rem))] -skew-y-[8deg] select-none flex-col justify-between rounded-largecards border border-ash bg-white px-4 py-3.5 shadow-subtle transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] [grid-area:stack] hover:border-smoke hover:shadow-md motion-reduce:transition-none",
+            "relative flex h-36 w-[min(22rem,calc(100vw-8rem))] -skew-y-[8deg] select-none flex-col justify-between rounded-largecards border border-ash bg-white px-4 py-3.5 shadow-subtle transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] [grid-area:stack] hover:border-smoke hover:shadow-md motion-reduce:transition-none",
             // The veil over everything but the front card, lifted on hover.
             index < STACK.length - 1 &&
               "before:absolute before:inset-0 before:z-10 before:rounded-largecards before:bg-white/55 before:transition-opacity before:duration-500 before:content-[''] hover:before:opacity-0",

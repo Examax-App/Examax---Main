@@ -14,8 +14,10 @@ at sit at the root of `public/` as `web-app-manifest-*.png`.
 | `exam-e8-source.png` | The 1536x1024 original it is derived from. Not referenced by any code. |
 | `exam-matura.png` | The Matura mark, via `components/ui/MaturaIcon.tsx`. |
 | `exam-matura-source.png` | The 1536x1024 original it is derived from. Not referenced by any code. |
+| `exam-cke.png` | The Centralna Komisja Egzaminacyjna mark (yellow block, white "CKE"), via `components/ui/CkeIcon.tsx`. |
+| `exam-cke-source.png` | The 512x705 original from cke.gov.pl (`logo-cke-strona.png`). Not referenced by any code. |
 
-`agent-icon.png`, `exam-e8.png` and `exam-matura.png` are all **derived**:
+`agent-icon.png`, `exam-e8.png`, `exam-matura.png` and `exam-cke.png` are all **derived**:
 cropped to the artwork's alpha bounds, so the mark fills its box instead of
 sitting in dead space, then resampled to 256px wide — they render at roughly
 24px and their masters run to over 1 MB each. Replacing a source alone will

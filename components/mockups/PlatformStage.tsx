@@ -49,7 +49,7 @@ import type { IconComponent } from "@/lib/icon";
  * PLACEHOLDER DATA — the sheets, tasks and figures are illustrative.
  */
 
-type Exam = "matura" | "e8";
+export type Exam = "matura" | "e8";
 
 function ExamMark({ exam, className }: { exam: Exam; className?: string }) {
   return exam === "matura" ? <MaturaIcon className={className} /> : <E8Icon className={className} />;
@@ -59,7 +59,7 @@ function ExamMark({ exam, className }: { exam: Exam; className?: string }) {
 /* 1 · Sheet flow                                                            */
 /* ------------------------------------------------------------------------ */
 
-type Sheet = {
+export type Sheet = {
   exam: Exam;
   name: string;
   detail: string;
@@ -67,6 +67,8 @@ type Sheet = {
   task: string;
   icon: IconComponent;
 };
+
+export type FlowDestination = { label: string; icon: IconComponent; tint: string };
 
 /**
  * One loop of the carousel, newest session first; the sheet in the centre
@@ -85,7 +87,7 @@ const SHEETS: Sheet[] = [
 ];
 
 /** Where every task lands, in the reference's integration-tile slots. */
-const DESTINATIONS: Array<{ label: string; icon: IconComponent; tint: string }> = [
+const DESTINATIONS: FlowDestination[] = [
   { label: "Trening", icon: PencilLine, tint: "text-vivid-green" },
   { label: "Roadmapa", icon: Route, tint: "text-electric-blue" },
   { label: "Symulacja", icon: Timer, tint: "text-tangerine" },
@@ -98,7 +100,20 @@ const FIRST_EVENT = 1500;
 /** Carousel pitch: 125% of the 80px card, as the reference sets it. */
 const SLOT_PITCH = 100;
 
-export function SheetFlow() {
+/**
+ * The landing page shows CKE sheets flowing in; other pages pass their own
+ * cards, badge and destinations (/roadmap: results reshaping the plan) and
+ * keep the picture and its motion exactly as they are here.
+ */
+export function SheetFlow({
+  items = SHEETS,
+  badge = "Nowe zadanie",
+  destinations = DESTINATIONS,
+}: {
+  items?: Sheet[];
+  badge?: string;
+  destinations?: FlowDestination[];
+} = {}) {
   const current = usePanelCurrent();
   const { ref, inView } = useInView<HTMLDivElement>(0.3);
   const reducedMotion = useReducedMotion();
@@ -117,7 +132,7 @@ export function SheetFlow() {
     };
   }, [current, inView, reducedMotion]);
 
-  const sending = SHEETS[step % SHEETS.length];
+  const sending = items[step % items.length];
 
   return (
     <div ref={ref} aria-hidden className="flex size-full items-center justify-center">
@@ -137,7 +152,7 @@ export function SheetFlow() {
         <div className="relative">
           <div className="absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full">
             <div className="whitespace-nowrap rounded-lg border border-[#bbf7d0] bg-[#dcfce7] px-2 py-1 font-geist-mono text-sm leading-none text-[#166534]">
-              Nowe zadanie
+              {badge}
             </div>
           </div>
           {/* Fixed width, so a longer task never pushes the row about */}
@@ -154,7 +169,7 @@ export function SheetFlow() {
           <div className="absolute left-1/2 top-full w-full -translate-x-1/2">
             <div className="flex w-full flex-col items-center text-silver [--offset:-2px] in-data-[current=true]:animate-[slide-up-fade_0.4s_cubic-bezier(0.16,1,0.3,1)_both]">
               <div className="flex justify-center gap-3.5">
-                {DESTINATIONS.map((destination) => (
+                {destinations.map((destination) => (
                   <div key={destination.label} className="relative flex flex-col items-center">
                     <div className="relative h-12 w-fit pb-1.5 pt-1">
                       <div className="h-full border-r border-dashed border-current" />
@@ -175,10 +190,10 @@ export function SheetFlow() {
         {/* The sheet carousel: the frame stays, the sheets step up through it */}
         <div className="relative">
           <div className="relative h-24 w-48 rounded-[20px] border border-ash bg-white" />
-          {SHEETS.map((sheet, index) => {
+          {items.map((sheet, index) => {
             // Slot relative to the centre: 0 is sending, ±1 wait beside it,
             // the rest are parked out of sight (the reference's -250%…375%).
-            const count = SHEETS.length;
+            const count = items.length;
             const offset = ((((index - step) % count) + count + 2) % count) - 2;
             return (
               <div

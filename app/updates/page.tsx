@@ -1,30 +1,47 @@
 import type { Metadata } from "next";
-import { Newspaper } from "lucide-react";
+import { Rss } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { DisplayCards } from "@/components/ui/DisplayCards";
-import { AccentTile } from "@/components/ui/FeaturePill";
-import { releases } from "@/lib/releases";
+import { GridSection } from "@/components/roadmap/sections";
+import { XIcon } from "@/components/ui/SocialIcons";
+import { ENTRIES, formatDate } from "@/components/updates/entries";
 
 export const metadata: Metadata = {
   title: "Aktualności",
-  description:
-    "Nowe funkcje, zmiany w produkcie i ogłoszenia zespołu Examax.",
+  description: "Wszystkie nowości, ulepszenia i poprawki w Examaxie.",
+  openGraph: { title: "Aktualności — Examax", description: "Wszystkie nowości, ulepszenia i poprawki w Examaxie.", url: "https://examax.app/updates" },
+  alternates: { types: { "application/rss+xml": "/updates/rss.xml" } },
 };
 
+/** Dub's small outline button, measured: 32px tall, 8px radius, neutral-200 edge, a 4px ring on hover. */
+const BUTTON =
+  "focus-ring inline-flex h-8 items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-ash bg-white text-[14px] font-medium leading-none text-charcoal shadow-sm transition-all hover:ring-4 hover:ring-ash";
+
 /**
- * The releases page.
- *
- * Structure follows the marketing-page convention already set by /contact and
- * /help: the 1200px column with its `border-x` edges, a centred display
- * headline, and hairline-divided sections beneath.
- *
- * The three most recent releases lead as a stack rather than as a list,
- * because they are the only three most visitors will read; the full run
- * follows underneath as dated rows. Both read `lib/releases.ts`, which the
- * landing page's changelog strip also reads.
+ * Prose, as dub's posts set it (`prose prose-neutral`, read off the live
+ * page): 16px on 28px in neutral-700, 20px between paragraphs, a disc list
+ * indented 32px with 8px between items, links in medium neutral-500
+ * underlined 4px below the text and darkening on hover.
  */
-export default function AktualnosciPage() {
+const PROSE =
+  "mt-8 text-[16px] leading-[28px] text-slate [&_a]:font-medium [&_a]:text-fog [&_a]:underline [&_a]:underline-offset-4 [&_a]:transition-colors hover:[&_a]:text-black [&_li]:my-2 [&_li]:pl-1.5 [&_p]:my-5 [&_p:first-child]:mt-0 [&_strong]:font-semibold [&_strong]:text-charcoal [&_ul]:my-5 [&_ul]:list-disc [&_ul]:pl-8 [&_li::marker]:text-slate";
+
+/**
+ * /updates — the changelog, a one-to-one of dub.co/changelog (measured off
+ * its live DOM on 2026-10-03; the capture is `DesignRules/Changelog _ Dub.png`):
+ *
+ *   a ruled band: the title (Satoshi 48), the line (20, neutral-500), and
+ *   "Follow" on X beside an RSS button
+ *   then one ruled column of posts, each on a four-column grid — the date
+ *   in the first column, sticky as the post scrolls; the title (Satoshi 24,
+ *   semibold, tight), the 16:9 picture (8px radius, hairline) and the prose
+ *   across the other three
+ *
+ * One post for now, the launch, so there is no "Older posts" strip under it.
+ * The page closes on the footer, with the reference's short empty ruled
+ * strip above it.
+ */
+export default function UpdatesPage() {
   return (
     <>
       <a
@@ -34,61 +51,52 @@ export default function AktualnosciPage() {
         Przejdź do treści
       </a>
       <Navbar />
-      <main id="main" className="flex-1">
-        <div className="mx-auto w-full max-w-[1200px] border-x border-ash/60 bg-white">
-          <section className="border-b border-ash px-5 py-16 text-center sm:py-20">
-            <span
-              aria-hidden
-              className="mx-auto grid size-12 place-items-center rounded-cards text-charcoal"
-            >
-              <Newspaper className="size-8" strokeWidth={1.5} />
-            </span>
-            <h1 className="mx-auto mt-4 max-w-xl font-satoshi text-heading-lg font-medium leading-[1.11] text-charcoal sm:text-display sm:leading-none">
-              Aktualności
-            </h1>
-            <p className="mx-auto mt-5 max-w-md text-body-xl text-steel">
-              Nowe funkcje, zmiany w produkcie i ogłoszenia zespołu.
-            </p>
-
-            {/* The stack is skewed and fans to the right, so it needs room on
-                that side and clipping on small screens — hence the overflow
-                guard and the leftward nudge that re-centres the fan. */}
-            <div className="mt-14 overflow-hidden pb-10">
-              <DisplayCards
-                items={releases}
-                className="-translate-x-6 sm:-translate-x-12"
-              />
+      <main id="main" className="flex-1 bg-white">
+        <GridSection labelledBy="updates-heading" innerClassName="px-4 sm:px-12">
+          <div className="flex flex-col gap-8 py-16">
+            <div>
+              <h1 id="updates-heading" className="mt-5 font-satoshi text-4xl font-medium text-charcoal sm:text-5xl sm:leading-[1.15]">
+                Aktualności
+              </h1>
+              <p className="mt-6 text-lg text-fog sm:text-xl">Wszystkie nowości, ulepszenia i poprawki w Examaxie</p>
             </div>
-          </section>
+            <div className="flex w-fit items-center gap-2">
+              <a href="https://x.com/examaxapp" target="_blank" rel="noopener noreferrer" className={`${BUTTON} px-3`}>
+                <XIcon className="size-4" />
+                Obserwuj
+              </a>
+              <a href="/updates/rss.xml" aria-label="Kanał RSS" className={`${BUTTON} w-8`}>
+                <Rss className="size-4" strokeWidth={2} />
+              </a>
+            </div>
+          </div>
+        </GridSection>
 
-          <section className="px-5 py-12 sm:px-16 sm:py-16">
-            <h2 className="text-body font-medium uppercase tracking-[0.12em] text-fog">
-              Wszystkie wydania
-            </h2>
-            <ol className="mt-6 divide-y divide-ash border-y border-ash">
-              {releases.map((release) => (
-                <li
-                  key={release.title}
-                  className="flex flex-col gap-2 py-5 sm:flex-row sm:items-start sm:gap-6"
-                >
-                  <p className="font-geist-mono text-caption text-silver sm:w-32 sm:shrink-0 sm:pt-1">
-                    {release.date}
-                  </p>
-                  <div className="min-w-0">
-                    <div className="flex items-center gap-2">
-                      <AccentTile icon={release.icon} accent={release.accent} />
-                      <p className="text-body-lg font-medium text-charcoal">
-                        {release.title}
-                      </p>
-                    </div>
-                    <p className="mt-2 max-w-2xl text-body text-steel">
-                      {release.description}
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </section>
+        <GridSection innerClassName="px-4 sm:px-12">
+          {ENTRIES.map((entry) => (
+            <article key={entry.slug} id={entry.slug} aria-labelledby={`${entry.slug}-title`} className="grid scroll-mt-20 pb-20 pt-4 sm:pt-12 md:grid-cols-4">
+              <div className="sticky top-20 hidden self-start md:col-span-1 md:block">
+                <time dateTime={entry.date} className="text-sm font-medium text-graphite">
+                  {formatDate(entry.date)}
+                </time>
+              </div>
+              <div className="flex flex-col md:col-span-3">
+                <time dateTime={entry.date} className="mb-3 text-sm font-medium text-graphite md:hidden">
+                  {formatDate(entry.date)}
+                </time>
+                <h2 id={`${entry.slug}-title`} className="font-satoshi text-2xl font-semibold tracking-tight text-graphite">
+                  {entry.title}
+                </h2>
+                <div className="mt-5 aspect-video overflow-hidden rounded-lg border border-ash">{entry.visual}</div>
+                <div className={PROSE}>{entry.body}</div>
+              </div>
+            </article>
+          ))}
+        </GridSection>
+
+        {/* The reference's empty ruled strip above the footer */}
+        <div className="px-4">
+          <div aria-hidden className="mx-auto h-12 max-w-[var(--page-max-width)] border-x border-ash" />
         </div>
       </main>
       <Footer />

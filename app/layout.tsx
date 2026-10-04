@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist_Mono, Inter } from "next/font/google";
 import localFont from "next/font/local";
+import { FlashToast } from "@/components/ui/Toast";
 import "./globals.css";
 
 const inter = Inter({
@@ -32,7 +33,7 @@ export const metadata: Metadata = {
     template: "%s — Examax",
   },
   description:
-    "Examax to kompletny system przygotowań do egzaminu ósmoklasisty i matury: roadmapa nauki, zadania z arkuszy CKE, agent AI i śledzenie postępów — wszystko w jednym miejscu.",
+    "Examax to kompletny system przygotowań do egzaminu ósmoklasisty i matury: roadmapa nauki, zadania z arkuszy CKE, Korepetytor AI i śledzenie postępów — wszystko w jednym miejscu.",
   keywords: [
     "matura",
     "egzamin ósmoklasisty",
@@ -45,7 +46,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Examax — Zamień naukę w wyniki",
     description:
-      "Kompletny system przygotowań do egzaminu ósmoklasisty i matury: roadmapa nauki, zadania z arkuszy CKE i agent AI.",
+      "Kompletny system przygotowań do egzaminu ósmoklasisty i matury: roadmapa nauki, zadania z arkuszy CKE i Korepetytor AI.",
     url: "https://examax.app",
     siteName: "Examax",
     locale: "pl_PL",
@@ -55,7 +56,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Examax — Zamień naukę w wyniki",
     description:
-      "Kompletny system przygotowań do egzaminu ósmoklasisty i matury: roadmapa nauki, zadania z arkuszy CKE i agent AI.",
+      "Kompletny system przygotowań do egzaminu ósmoklasisty i matury: roadmapa nauki, zadania z arkuszy CKE i Korepetytor AI.",
   },
   robots: { index: true, follow: true },
   /* The RealFaviconGenerator set lives in public/ and is declared here once
@@ -87,7 +88,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="pl"
       className={`${inter.variable} ${geistMono.variable} ${satoshi.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        {children}
+        {/* A toast one page leaves for the next (e.g. "account created") */}
+        <FlashToast />
+      </body>
     </html>
   );
 }

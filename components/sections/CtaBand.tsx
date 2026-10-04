@@ -4,7 +4,7 @@ import { Reveal } from "@/components/ui/Reveal";
 /** Dub's notch piece: a flat top, then a steep S-curve down to the band. */
 const NOTCH = "M50 45C57.3095 56.6952 71.2084 63.9997 85 64V0H0C13.7915 0 26.6905 7.30481 34 19L50 45Z";
 
-function NotchSide({ mirrored = false }: { mirrored?: boolean }) {
+export function NotchSide({ mirrored = false }: { mirrored?: boolean }) {
   return (
     <svg
       viewBox="0 0 85 64"
@@ -34,9 +34,14 @@ function NotchSide({ mirrored = false }: { mirrored?: boolean }) {
  * Dub closes the band with review stars; those need real ratings, so they
  * are left out rather than invented.
  */
-export function CtaBand() {
+/**
+ * The band's field without its copy: the dark ground, the wash, the fading
+ * grid and the notch. CtaBand centres its copy in it; dub.co/solutions pages
+ * put copy on the left and a plan card on the right (`/simulation`).
+ */
+export function CtaBandFrame({ id, labelledBy, children }: { id?: string; labelledBy: string; children: React.ReactNode }) {
   return (
-    <section aria-labelledby="cta-heading" className="relative bg-charcoal px-4">
+    <section id={id} aria-labelledby={labelledBy} className="relative scroll-mt-14 bg-charcoal px-4">
       {/* Dub's colour wash, blended into the dark */}
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden opacity-30 mix-blend-overlay">
         <div className="absolute -inset-[40px] bg-[conic-gradient(from_-81deg,#3A8BFD_-72deg,#855AFC_33deg,#F00_70deg,#EAB308_136deg,#5CFF80_214deg,#00FFF9_259deg,#3A8BFD_288deg,#855AFC_393deg)] blur-[30px]" />
@@ -53,11 +58,11 @@ export function CtaBand() {
               height="100%"
             >
               <defs>
-                <pattern id="cta-band-grid" x="-1" y="-1" width="60" height="60" patternUnits="userSpaceOnUse">
+                <pattern id={`${labelledBy}-grid`} x="-1" y="-1" width="60" height="60" patternUnits="userSpaceOnUse">
                   <path d="M 60 0 L 0 0 0 60" fill="transparent" stroke="currentColor" strokeWidth="1" />
                 </pattern>
               </defs>
-              <rect fill="url(#cta-band-grid)" width="100%" height="100%" />
+              <rect fill={`url(#${labelledBy}-grid)`} width="100%" height="100%" />
             </svg>
           </div>
         </div>
@@ -72,35 +77,61 @@ export function CtaBand() {
           <NotchSide mirrored />
         </div>
 
-        <div className="relative flex flex-col items-center px-4 pb-32 pt-24 text-center">
-          <Reveal>
-            <h2 id="cta-heading" className="max-w-lg text-balance font-satoshi text-4xl font-medium text-canvas-muted sm:text-5xl">
-              Do egzaminu liczy się każdy dzień
-            </h2>
-          </Reveal>
-          <Reveal delay={100}>
-            <p className="mt-6 max-w-[560px] text-pretty text-lg font-medium text-silver sm:text-xl">
-              Zacznij teraz. 5&nbsp;minut dziennie i&nbsp;zobaczysz niesamowite zmiany.
-            </p>
-          </Reveal>
-          <Reveal delay={200}>
-            <div className="mt-10 flex items-center justify-center gap-3">
-              <Link
-                href="/signup"
-                className="focus-ring flex h-10 items-center justify-center rounded-lg border border-ash bg-white px-5 text-center text-sm font-medium text-charcoal ring-white/20 transition-all hover:ring"
-              >
-                Zacznij za darmo
-              </Link>
-              <Link
-                href="/pricing"
-                className="focus-ring flex h-10 items-center justify-center rounded-lg border border-transparent bg-white/20 px-5 text-center text-sm font-medium text-white ring-white/10 backdrop-blur-sm transition-all hover:ring"
-              >
-                Zobacz cennik
-              </Link>
-            </div>
-          </Reveal>
-        </div>
+        {children}
       </div>
     </section>
+  );
+}
+
+type CtaAction = { label: string; href: string; primary?: boolean };
+
+const DEFAULT_ACTIONS: CtaAction[] = [
+  { label: "Zacznij za darmo", href: "/signup", primary: true },
+  { label: "Zobacz cennik", href: "/pricing" },
+];
+
+/**
+ * The landing's closing band. Product pages may pass their own heading,
+ * line and actions (/simulation closes on one); the defaults are the landing's.
+ */
+export function CtaBand({
+  title = "Do egzaminu liczy się każdy dzień",
+  sub = <>Zacznij teraz. 5&nbsp;minut dziennie i&nbsp;zobaczysz niesamowite zmiany.</>,
+  actions = DEFAULT_ACTIONS,
+}: {
+  title?: string;
+  sub?: React.ReactNode;
+  actions?: CtaAction[];
+} = {}) {
+  return (
+    <CtaBandFrame labelledBy="cta-heading">
+      <div className="relative flex flex-col items-center px-4 pb-32 pt-24 text-center">
+        <Reveal>
+          <h2 id="cta-heading" className="max-w-lg text-balance font-satoshi text-4xl font-medium text-canvas-muted sm:text-5xl">
+            {title}
+          </h2>
+        </Reveal>
+        <Reveal delay={100}>
+          <p className="mt-6 max-w-[560px] text-pretty text-lg font-medium text-silver sm:text-xl">{sub}</p>
+        </Reveal>
+        <Reveal delay={200}>
+          <div className="mt-10 flex items-center justify-center gap-3">
+            {actions.map((action) => (
+              <Link
+                key={action.label}
+                href={action.href}
+                className={
+                  action.primary
+                    ? "focus-ring flex h-10 items-center justify-center rounded-lg border border-ash bg-white px-5 text-center text-sm font-medium text-charcoal ring-white/20 transition-all hover:ring"
+                    : "focus-ring flex h-10 items-center justify-center rounded-lg border border-transparent bg-white/20 px-5 text-center text-sm font-medium text-white ring-white/10 backdrop-blur-sm transition-all hover:ring"
+                }
+              >
+                {action.label}
+              </Link>
+            ))}
+          </div>
+        </Reveal>
+      </div>
+    </CtaBandFrame>
   );
 }

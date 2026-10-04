@@ -5,7 +5,9 @@ import { cn } from "@/lib/cn";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 
-const faqs: Array<{ question: string; answer: React.ReactNode }> = [
+type FaqItem = { question: string; answer: React.ReactNode };
+
+const faqs: FaqItem[] = [
   {
     question: "Do których egzaminów przygotowuje Examax?",
     answer:
@@ -19,12 +21,12 @@ const faqs: Array<{ question: string; answer: React.ReactNode }> = [
   {
     question: "Czym Examax różni się od aplikacji z quizami?",
     answer:
-      "Quiz sprawdza, co umiesz — Examax dodatkowo mówi, co dalej. Roadmapa układa cały materiał w kolejne kroki, trening wzmacnia słabe punkty, a agent tłumaczy błędy. To system przygotowań, nie zbiór pytań.",
+      "Quiz sprawdza, co umiesz — Examax dodatkowo mówi, co dalej. Roadmapa układa cały materiał w kolejne kroki, trening wzmacnia słabe punkty, a Korepetytor AI tłumaczy błędy. To system przygotowań, nie zbiór pytań.",
   },
   {
-    question: "Jak działa Agent Examax?",
+    question: "Jak działa Korepetytor AI?",
     answer:
-      "Agent widzi Twoją roadmapę, Twoje odpowiedzi i Twoje wcześniejsze błędy. Kiedy pytasz o zadanie, tłumaczy je krok po kroku i podpowiada, co przećwiczyć dalej. Jak każde AI może się mylić — dlatego zawsze łączymy jego wyjaśnienia z oficjalnymi zasadami oceniania.",
+      "Korepetytor AI widzi Twoją roadmapę, Twoje odpowiedzi i Twoje wcześniejsze błędy. Kiedy pytasz o zadanie, tłumaczy je krok po kroku i podpowiada, co przećwiczyć dalej. Jak każde AI może się mylić — dlatego zawsze łączymy jego wyjaśnienia z oficjalnymi zasadami oceniania.",
   },
   {
     question: "Czy Examax zastępuje korepetycje?",
@@ -40,7 +42,7 @@ const faqs: Array<{ question: string; answer: React.ReactNode }> = [
         bezpłatny na zawsze i nie wymaga karty. Plan{" "}
         <strong className="font-semibold text-charcoal">Premium</strong>{" "}
         kosztuje 29 zł miesięcznie (24 zł przy płatności rocznej) i odblokowuje
-        pełną roadmapę, trening bez limitów i agenta bez ograniczeń.
+        pełną roadmapę, trening bez limitów i Korepetytora AI bez ograniczeń.
       </>
     ),
   },
@@ -61,22 +63,34 @@ const faqs: Array<{ question: string; answer: React.ReactNode }> = [
  * live page): one centred 768px column, the heading above, then a quiet
  * list — each question on a hairline, a "+" that turns to "×" as the answer
  * slides open. Everything starts closed, and one answer is open at a time.
+ *
+ * The landing page renders it as-is. /pricing passes its own questions —
+ * dub.co/pricing closes on this same accordion — and a `className` for its
+ * column rules.
  */
-export function Faq() {
+export function Faq({
+  items = faqs,
+  heading = "Najczęściej zadawane pytania",
+  className,
+}: {
+  items?: FaqItem[];
+  heading?: string;
+  className?: string;
+} = {}) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section id="faq" aria-labelledby="faq-heading" className="col-rules border-t border-ash bg-white">
+    <section id="faq" aria-labelledby="faq-heading" className={cn("col-rules border-t border-ash bg-white", className)}>
       <Container>
         <div className="relative mx-auto w-full max-w-screen-md px-3 py-14 sm:py-20 lg:px-10">
           <Reveal>
             <h2 id="faq-heading" className="mb-10 font-satoshi text-3xl font-medium text-charcoal sm:text-4xl">
-              Najczęściej zadawane pytania
+              {heading}
             </h2>
           </Reveal>
 
           <div className="px-3 sm:px-0">
-            {faqs.map((faq, index) => {
+            {items.map((faq, index) => {
               const open = openIndex === index;
               return (
                 <div key={faq.question} className="border-b border-ash py-3 last:border-none">

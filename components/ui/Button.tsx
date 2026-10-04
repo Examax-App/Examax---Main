@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { cn } from "@/lib/cn";
+import { prefetchFor } from "@/lib/routes";
 
 type ButtonVariant =
   | "primary"
@@ -74,6 +75,7 @@ export function Button({
   return (
     <Link
       href={href}
+      prefetch={prefetchFor(href)}
       className={cn(
         "focus-ring inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-buttons leading-5 transition-all duration-150",
         variantClasses[variant],

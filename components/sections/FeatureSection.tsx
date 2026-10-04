@@ -64,6 +64,8 @@ export function FeatureSection({
     title: feature.title,
     description: feature.description,
     iconNode: <feature.icon className="size-4" strokeWidth={2} aria-hidden />,
+    // Each sub-feature's "Dowiedz się więcej" leads where the section's own button does.
+    href: ctaHref,
   }));
   return (
     <section

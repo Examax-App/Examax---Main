@@ -23,11 +23,11 @@ export function Hero() {
         <div className="relative mx-auto w-full max-w-[1080px] px-6 py-14 sm:px-12">
           <div className="mx-auto flex w-full max-w-2xl flex-col items-center px-4 text-center">
             <Link
-              href="#agent"
+              href="/updates#start-examax"
               style={{ "--offset": "10px" } as React.CSSProperties}
               className="animate-slide-up-fade inline-flex items-center divide-x divide-smoke rounded-full border border-smoke bg-white text-xs font-medium text-charcoal drop-shadow-sm transition-colors duration-75 hover:bg-canvas-muted"
             >
-              <span className="py-1.5 pl-4 pr-3">Nowość: Agent Examax</span>
+              <span className="py-1.5 pl-4 pr-3">Start platformy Examax</span>
               <span className="flex items-center gap-1 py-1.5 pl-3 pr-4 text-steel">
                 Zobacz
                 <ArrowUpRight className="size-3" aria-hidden />
@@ -54,7 +54,7 @@ export function Hero() {
               style={{ "--delay": "300ms", "--offset": "20px" } as React.CSSProperties}
               className="animate-slide-up-fade mt-8 flex flex-wrap items-center justify-center gap-3"
             >
-              <Button href="/pricing" variant="primary">
+              <Button href="/signup" variant="primary">
                 Zacznij za darmo
               </Button>
               <Button href="#roadmap" variant="outline">

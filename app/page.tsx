@@ -58,6 +58,7 @@ export default function Home() {
           heading="Ćwicz na zadaniach z arkuszy CKE"
           sub="Oficjalne zadania egzaminacyjne i quizy do każdego tematu z roadmapy. Odpowiadasz, od razu widzisz wynik — a Twój postęp aktualizuje się sam."
           ctaLabel="Zobacz zadania"
+          ctaHref="/training"
           showcases={[<QuestionRows key="rows" />, <TopicTiles key="tiles" />, <NewSet key="set" />]}
           highlightIndex={0}
           subFeatures={[
@@ -90,6 +91,7 @@ export default function Home() {
           heading="Wiesz dokładnie, czego się uczyć"
           sub="Cały materiał egzaminu rozpisany na tematy i kroki. Widzisz, co masz opanowane, nad czym pracujesz i co jeszcze przed Tobą — aż do dnia egzaminu."
           ctaLabel="Zobacz roadmapę"
+          ctaHref="/roadmap"
           showcases={[<ProgressFunnel key="funnel" />, <LiveProgress key="live" />, <ProgressProfile key="profile" />]}
           highlightIndex={0}
           subFeatures={[
@@ -122,6 +124,7 @@ export default function Home() {
           heading="Wiedz, na czym stoisz"
           sub="Każda odpowiedź buduje obraz Twojego przygotowania: opanowanie tematów, skuteczność i gotowość do egzaminu — na bieżąco, bez zgadywania."
           ctaLabel="Zobacz postępy"
+          ctaHref="/progress"
           showcases={[<TopicFeed key="feed" />, <WeakSpots key="spots" />, <ReadinessDashboard key="dashboard" />]}
           highlightIndex={1}
           subFeatures={[
@@ -152,7 +155,7 @@ export default function Home() {
           eyebrowIcon={Timer}
           eyebrowLabel="Symulacja egzaminu"
           heading="Przećwicz egzamin, zanim się zacznie"
-          sub="Pełny arkusz na czas, w formacie CKE. Liczysz w brudnopisie jak na sali, zaznaczasz odpowiedź, a Agent od razu ją sprawdza i pokazuje, gdzie jest błąd."
+          sub="Pełny arkusz na czas, w formacie CKE. Liczysz w brudnopisie jak na sali, zaznaczasz odpowiedź, a Korepetytor AI od razu ją sprawdza i pokazuje, gdzie jest błąd."
           ctaLabel="Zobacz symulację"
           ctaHref="/simulation"
           showcase={<SimulationShowcase />}
@@ -162,11 +165,12 @@ export default function Home() {
           id="agent"
           accent="yellow"
           eyebrowIcon={Zap}
-          eyebrowLabel="Agent Examax"
+          eyebrowLabel="Korepetytor AI"
           eyebrowBadge={<ProMark />}
           heading="Zrozum błędy i ucz się szybciej"
-          sub="Agent zna Twoją roadmapę i Twoje odpowiedzi. Tłumaczy zadania krok po kroku, pokazuje, skąd wziął się błąd, i podpowiada, co ćwiczyć dalej."
-          ctaLabel="Poznaj Agenta"
+          sub="Korepetytor AI zna Twoją roadmapę i Twoje odpowiedzi. Tłumaczy zadania krok po kroku, pokazuje, skąd wziął się błąd, i podpowiada, co ćwiczyć dalej."
+          ctaLabel="Zobacz agentów"
+          ctaHref="/agents"
           showcase={<AgentShowcase />}
         />
 
@@ -178,6 +182,7 @@ export default function Home() {
           heading="Oficjalne arkusze, zamienione w naukę"
           sub="Examax bierze oryginalne zadania CKE i aktualizuje się z każdym nowym arkuszem. Twoje odpowiedzi i postępy zapisują się na Twoim koncie — w każdym przedmiocie egzaminu."
           ctaLabel="Zobacz, jak to działa"
+          ctaHref="/training#sources"
           showcases={[<SheetFlow key="sheets" />, <KnowledgeSync key="sync" />, <SubjectWindow key="subjects" />]}
           highlightIndex={0}
           subFeatures={[

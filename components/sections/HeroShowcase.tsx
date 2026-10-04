@@ -43,7 +43,7 @@ const tabs: HeroTab[] = [
     accent: "blue",
     title: "Roadmapa nauki",
     description: "Cały egzamin rozpisany na kroki — zawsze wiesz, co dalej",
-    href: "/#roadmap",
+    href: "/roadmap",
   },
   {
     key: "progress",
@@ -52,7 +52,7 @@ const tabs: HeroTab[] = [
     accent: "tangerine",
     title: "Śledzenie postępów",
     description: "Opanowanie i skuteczność na żywo, temat po temacie",
-    href: "/#progress",
+    href: "/progress",
   },
 ];
 

@@ -1,100 +1,98 @@
 import type { Metadata } from "next";
-import { ShieldUser } from "lucide-react";
+import Link from "next/link";
+import { prefetchFor } from "@/lib/routes";
+import { Bug, FileText, MessagesSquare, ShieldUser } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { FieldLabel, Input, Textarea } from "@/components/ui/Input";
+import { ContactHero, SystemsPill } from "@/components/contact/pieces";
+import type { IconComponent } from "@/lib/icon";
 
 export const metadata: Metadata = {
   title: "Kontakt",
-  description:
-    "Porozmawiaj z zespołem Examax — dostęp dla szkół, cennik dla klas i integracje.",
+  description: "Porozmawiaj z zespołem Examax, uzyskaj pomoc, zadaj pytanie albo zgłoś problem.",
+  openGraph: { title: "Kontakt — Examax", description: "W czym możemy pomóc?", url: "https://examax.app/contact" },
 };
 
-const wordmarks: string[][] = [
-  ["Matematyka", "J. polski", "Angielski", "Fizyka", "Chemia"],
-  ["Biologia", "Geografia", "Historia", "WOS", "Informatyka"],
+type Option = { icon: IconComponent; title: string; description: string; cta: string; href: string };
+
+/** dub's four, in its order: Sales, Support, Questions (to the documentation, as dub's goes to its help articles), and — in Developer Docs' place — reporting a problem. */
+const OPTIONS: Option[] = [
+  {
+    icon: ShieldUser,
+    title: "Sprzedaż",
+    description: "Porozmawiaj z nami o dostępie dla szkoły lub klasy, cenach dla grup i wdrożeniu.",
+    cta: "Porozmawiaj z nami",
+    href: "/contact/sales",
+  },
+  {
+    icon: MessagesSquare,
+    title: "Wsparcie",
+    description: "Napisz do nas w sprawie konta, logowania lub płatności albo podziel się opinią.",
+    cta: "Uzyskaj pomoc",
+    href: "/contact/support",
+  },
+  {
+    icon: FileText,
+    title: "Pytania",
+    description: "Masz pytania o Examax? Zajrzyj do naszej dokumentacji — znajdziesz tam przewodniki po platformie.",
+    cta: "Przejdź do dokumentacji",
+    href: "/docs",
+  },
+  {
+    icon: Bug,
+    title: "Zgłoś problem",
+    description: "Znalazłeś błąd w zadaniu, rozwiązaniu albo w aplikacji? Daj znać, a poprawimy go w pierwszej kolejności.",
+    cta: "Zgłoś problem",
+    href: "/contact/support?temat=problem",
+  },
 ];
 
-/** The reference "Contact sales" page: icon, headline, framed form, logo band. */
-export default function KontaktPage() {
+/**
+ * /contact — a one-to-one of dub.co/contact (read off its live DOM on
+ * 2026-10-03; the capture is `DesignRules/Contact _ Dub.png`): a ruled hero
+ * — the question, a line, the status pill — then a two-by-two of cells on
+ * 1px rules, each with a 40px stroke-1 icon, a 20px title, a muted line and
+ * a black button. Sales and Support open their own pages, as dub's do;
+ * Questions points to the documentation (/docs, not built yet, so the 404
+ * for now); the problem report opens Support with that topic picked.
+ */
+export default function ContactPage() {
   return (
     <>
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-buttons focus:bg-midnight-ink focus:px-4 focus:py-2 focus:text-white"
+      >
+        Przejdź do treści
+      </a>
       <Navbar />
-      <main className="flex-1">
-        <div className="mx-auto w-full max-w-[1200px] border-x border-ash/60 bg-white">
-          <section className="border-b border-ash px-5 py-16 text-center sm:py-20">
-            <span
-              aria-hidden
-              className="mx-auto grid size-12 place-items-center rounded-cards text-charcoal"
-            >
-              <ShieldUser className="size-8" strokeWidth={1.5} />
-            </span>
-            <h1 className="mx-auto mt-4 max-w-xl font-satoshi text-heading-lg font-medium leading-[1.11] text-charcoal sm:text-display sm:leading-none">
-              Porozmawiaj z zespołem Examax
-            </h1>
-            <p className="mx-auto mt-5 max-w-md text-body-xl text-steel">
-              Umów prezentację i porozmawiaj o dostępie dla całej klasy lub
-              szkoły oraz o integracjach, których potrzebujesz.
-            </p>
-          </section>
+      <main id="main" className="flex-1 bg-white">
+        <ContactHero title="W czym możemy pomóc?" sub="Napisz do zespołu Examax w sprawie współpracy, wsparcia albo zadaj nam pytanie.">
+          <SystemsPill />
+        </ContactHero>
 
-          <section className="border-b border-ash">
-            <form className="mx-auto max-w-2xl border-x border-ash/60 px-6 py-12 sm:px-12">
-              <FieldLabel htmlFor="contact-email" required>
-                Adres e-mail
-              </FieldLabel>
-              <Input
-                id="contact-email"
-                type="email"
-                placeholder="ty@szkola.edu.pl"
-              />
-
-              <div className="mt-6">
-                <FieldLabel htmlFor="contact-message" required>
-                  W czym możemy pomóc?
-                </FieldLabel>
-                <Textarea
-                  id="contact-message"
-                  rows={5}
-                  placeholder="Opowiedz nam o potrzebach swojej klasy lub szkoły"
-                />
-              </div>
-
-              <button
-                type="button"
-                className="mt-6 rounded-buttons border border-ash bg-paper-mist px-4 py-2 text-body font-medium text-steel transition-colors hover:bg-ash/60 hover:text-charcoal"
-              >
-                Wyślij wiadomość
-              </button>
-            </form>
-          </section>
-
-          <section aria-label="Przedmioty w Examax" className="px-5 py-12">
-            <div className="mx-auto max-w-3xl space-y-7">
-              {wordmarks.map((row, rowIndex) => (
-                <div
-                  key={rowIndex}
-                  className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4"
-                >
-                  {row.map((subject, index) => (
-                    <span
-                      key={subject}
-                      className={
-                        index % 3 === 0
-                          ? "font-satoshi text-body-xl font-bold tracking-tight text-slate"
-                          : index % 3 === 1
-                            ? "font-geist-mono text-body-lg font-medium text-steel"
-                            : "text-body font-semibold uppercase tracking-[0.14em] text-fog"
-                      }
-                    >
-                      {subject}
-                    </span>
-                  ))}
-                </div>
+        <section aria-label="Sposoby kontaktu" className="relative overflow-clip border-b border-ash bg-white px-4">
+          <div className="relative z-0 mx-auto max-w-[var(--page-max-width)] border-x border-ash">
+            <ul className="grid grid-cols-1 gap-px bg-ash md:grid-cols-2">
+              {OPTIONS.map((option) => (
+                <li key={option.title} className="relative space-y-8 bg-white p-8 sm:p-12">
+                  <option.icon className="size-10 text-charcoal" strokeWidth={1} aria-hidden />
+                  <div>
+                    <h2 className="text-xl font-semibold text-charcoal">{option.title}</h2>
+                    <p className="mt-2 max-w-sm text-pretty text-base text-fog">{option.description}</p>
+                  </div>
+                  <Link
+                    href={option.href}
+                    prefetch={prefetchFor(option.href)}
+                    className="focus-ring inline-flex h-9 w-fit items-center justify-center whitespace-nowrap rounded-lg border border-black bg-black px-4 text-sm font-medium text-white transition-all hover:ring-4 hover:ring-ash"
+                  >
+                    {option.cta}
+                  </Link>
+                </li>
               ))}
-            </div>
-          </section>
-        </div>
+            </ul>
+          </div>
+        </section>
       </main>
       <Footer />
     </>

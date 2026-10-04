@@ -1,221 +1,209 @@
 "use client";
 
 import { useState } from "react";
-import { Lock } from "lucide-react";
+import { KeyRound, Lock } from "lucide-react";
 import {
   AnimatedHeight,
-  AppleGlyph,
   AuthButton,
   AuthField,
+  EmailSummary,
+  FacebookGlyph,
   GoogleGlyph,
+  MicrosoftGlyph,
+  PasswordField,
   PREVIEW_DELAY,
   Separator,
-  Toast,
-  useToast,
+  canAutoFocus,
+  useEmailField,
 } from "@/components/auth/pieces";
+import type { ToastTone } from "@/components/ui/Toast";
 
 /*
  * Dub's LoginForm (dubinc/dub: ui/auth/login/login-form.tsx and its method
- * components), UI only — nothing signs anyone in, nothing is stored but the
- * last method used, which is what drives the arrangement:
+ * components), UI only — nothing signs anyone in and nothing is remembered:
  *
- *  - the method used last sits on top, with "Ostatnio logowano się przez …"
- *    under it; with no history, e-mail sits on top;
- *  - every other method is listed under "lub";
- *  - "Zaloguj się e-mailem" from the list promotes e-mail to the top;
- *  - e-mail asks for the address, then offers a password; while the password
- *    step is up, "Kontynuuj inną metodą" stands in for the list;
- *  - SSO opens a field for the school's identifier first.
- * The block eases to its new height at every change.
+ *  - e-mail sits on top; "Kontynuuj" checks the address and moves to the
+ *    password step, where the address stays pinned with a way to change it,
+ *    and a sign-in link by e-mail is offered instead of a password;
+ *  - Google, Facebook and Microsoft follow under "lub", then passkey and school SSO as a
+ *    quieter pair — SSO opens a field for the school's identifier under it.
+ * Every change eases the block to its new height.
  */
 
-type Method = "google" | "apple" | "email" | "sso";
-const METHODS: Method[] = ["google", "apple", "email", "sso"];
-const LAST_USED_KEY = "examax-last-used-auth-method";
-const METHOD_NAME: Record<Method, string> = { google: "Google", apple: "Apple", email: "e-mail", sso: "szkołę (SSO)" };
+type Busy = "password" | "link" | "google" | "facebook" | "microsoft" | "passkey" | "sso";
 
-function readLastUsed(): Method | null {
-  try {
-    const value = localStorage.getItem(LAST_USED_KEY);
-    return METHODS.includes(value as Method) ? (value as Method) : null;
-  } catch {
-    return null;
-  }
-}
-
-export function LoginForm() {
-  // Read once, as Dub does: the arrangement is fixed for this visit even
-  // after a new method is remembered.
-  const [lastUsed] = useState(readLastUsed);
-  const [authMethod, setAuthMethod] = useState<Method>(lastUsed ?? "email");
-  const [clicked, setClicked] = useState<Method | null>(null);
-  const [showPassword, setShowPassword] = useState(false);
-  const [showSSO, setShowSSO] = useState(false);
-  const [email, setEmail] = useState("");
+export function LoginForm({
+  initialEmail,
+  onInbox,
+  notify,
+}: {
+  initialEmail: string;
+  /** The e-mail has "gone out": a sign-in link, or a password reset. */
+  onInbox: (reason: "link" | "reset", email: string) => void;
+  /** A toast; nothing here signs anyone in yet, so every method ends in one. */
+  notify: (message: string, tone: ToastTone) => void;
+}) {
+  const email = useEmailField(initialEmail);
+  const [step, setStep] = useState<"email" | "password">("email");
+  // Focus the address on arrival (not on touch screens) and whenever someone comes back to it.
+  const [focusEmail, setFocusEmail] = useState(() => Boolean(initialEmail) || canAutoFocus());
   const [password, setPassword] = useState("");
-  const { toast, show } = useToast();
+  const [passwordError, setPasswordError] = useState<string>();
+  const [showSSO, setShowSSO] = useState(false);
+  const [school, setSchool] = useState("");
+  const [schoolError, setSchoolError] = useState<string>();
+  const [busy, setBusy] = useState<Busy | null>(null);
 
-  /** A method "runs": remembered, a moment of loading, then what would happen next. */
-  const run = (method: Method, message: string) => {
-    setClicked(method);
-    try {
-      localStorage.setItem(LAST_USED_KEY, method);
-    } catch {
-      /* storage unavailable: the preview still runs */
-    }
+  /** A method "runs": a moment of loading, then what would happen next. */
+  const run = (method: Busy, then: () => void) => {
+    setBusy(method);
     window.setTimeout(() => {
-      setClicked(null);
-      show(message);
+      setBusy(null);
+      then();
     }, PREVIEW_DELAY);
   };
-  const busy = (method: Method) => clicked === method;
-  const blocked = (method: Method) => clicked !== null && clicked !== method;
-
-  const google = (
-    <AuthButton
-      variant="secondary"
-      icon={<GoogleGlyph />}
-      loading={busy("google")}
-      disabled={blocked("google")}
-      onClick={() => run("google", "Podgląd: logowanie przez Google ruszy razem z Examax.")}
-    >
-      Kontynuuj przez Google
-    </AuthButton>
-  );
-
-  const apple = (
-    <AuthButton
-      variant="secondary"
-      icon={<AppleGlyph />}
-      loading={busy("apple")}
-      disabled={blocked("apple")}
-      onClick={() => run("apple", "Podgląd: logowanie przez Apple ruszy razem z Examax.")}
-    >
-      Kontynuuj przez Apple
-    </AuthButton>
-  );
-
-  const emailSignIn = (
-    <form
-      className="flex flex-col gap-y-6"
-      onSubmit={(event) => {
-        event.preventDefault();
-        if (authMethod !== "email") return;
-        // Dub checks the account first and offers its password when it has one.
-        if (!showPassword) {
-          setShowPassword(true);
-          return;
-        }
-        run(
-          "email",
-          password ? "Podgląd: logowanie hasłem ruszy razem z Examax." : `Wysłaliśmy link do logowania na ${email}. Sprawdź skrzynkę.`,
-        );
-      }}
-    >
-      {authMethod === "email" && (
-        <AuthField
-          label="E-mail"
-          name="email"
-          type="email"
-          placeholder="ala@szkola.pl"
-          autoComplete="email"
-          autoFocus={!showPassword}
-          required
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-        />
-      )}
-      {showPassword && (
-        <AuthField
-          label="Hasło"
-          type="password"
-          placeholder="Hasło (opcjonalnie)"
-          autoComplete="current-password"
-          autoFocus
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-          aside={
-            <button
-              type="button"
-              onClick={() => show("Podgląd: przypomnienie hasła ruszy razem z Examax.")}
-              className="cursor-pointer text-xs leading-none text-fog underline underline-offset-2 transition-colors hover:text-charcoal"
-            >
-              Nie pamiętasz hasła?
-            </button>
-          }
-        />
-      )}
-      <AuthButton
-        {...(authMethod !== "email"
-          ? {
-              type: "button" as const,
-              onClick: () => {
-                setShowSSO(false);
-                setAuthMethod("email");
-              },
-            }
-          : { type: "submit" as const })}
-        loading={busy("email")}
-        disabled={blocked("email")}
-      >
-        Zaloguj się {password ? "hasłem" : "e-mailem"}
-      </AuthButton>
-    </form>
-  );
-
-  const sso = (
-    <form
-      className="flex flex-col space-y-3"
-      onSubmit={(event) => {
-        event.preventDefault();
-        run("sso", "Podgląd: logowanie przez szkołę ruszy razem z Examax.");
-      }}
-    >
-      {showSSO && (
-        <div>
-          {authMethod !== "sso" && <div className="mb-4 mt-1 border-t border-smoke" />}
-          <AuthField label="Identyfikator szkoły" name="school" type="text" placeholder="np. lo-5-krakow" autoComplete="off" autoFocus required />
-        </div>
-      )}
-      <AuthButton
-        variant="secondary"
-        icon={<Lock className="size-4" strokeWidth={1.75} />}
-        {...(!showSSO ? { type: "button" as const, onClick: () => setShowSSO(true) } : { type: "submit" as const })}
-        loading={busy("sso")}
-        disabled={blocked("sso")}
-      >
-        Kontynuuj przez szkołę (SSO)
-      </AuthButton>
-    </form>
-  );
-
-  const render: Record<Method, React.ReactNode> = { google, apple, email: emailSignIn, sso };
-  const passwordOnly = authMethod === "email" && showPassword;
+  const blocked = (method: Busy) => busy !== null && busy !== method;
+  const unavailable = (method: Busy, label: string) => () => run(method, () => notify(`${label} nie jest jeszcze dostępne.`, "error"));
 
   return (
-    <>
-      <AnimatedHeight>
-        <div className="flex flex-col gap-3 p-1">
-          <div className="flex flex-col gap-3">
-            {render[authMethod]}
-            {!passwordOnly && authMethod === lastUsed && (
-              <p className="text-center text-xs text-fog">Ostatnio logowano się przez {METHOD_NAME[lastUsed]}</p>
-            )}
-            <Separator />
-          </div>
+    <AnimatedHeight>
+      <div className="flex flex-col gap-3 p-1">
+        {step === "email" ? (
+          <>
+            <form
+              noValidate
+              className="flex flex-col gap-6"
+              onSubmit={(event) => {
+                event.preventDefault();
+                if (email.accept()) setStep("password");
+              }}
+            >
+              <AuthField {...email.field} label="E-mail" name="email" placeholder="ala@szkola.pl" autoComplete="email" autoFocus={focusEmail} />
+              <AuthButton type="submit">Kontynuuj</AuthButton>
+            </form>
 
-          {passwordOnly ? (
-            <div className="mt-2">
-              <AuthButton variant="secondary" type="button" onClick={() => setShowPassword(false)}>
-                Kontynuuj inną metodą
+            <Separator />
+
+            <AuthButton variant="secondary" icon={<GoogleGlyph />} loading={busy === "google"} disabled={blocked("google")} onClick={unavailable("google", "Logowanie przez Google")}>
+              Kontynuuj przez Google
+            </AuthButton>
+            <AuthButton variant="secondary" icon={<FacebookGlyph />} loading={busy === "facebook"} disabled={blocked("facebook")} onClick={unavailable("facebook", "Logowanie przez Facebook")}>
+              Kontynuuj przez Facebook
+            </AuthButton>
+            <AuthButton variant="secondary" icon={<MicrosoftGlyph />} loading={busy === "microsoft"} disabled={blocked("microsoft")} onClick={unavailable("microsoft", "Logowanie przez Microsoft")}>
+              Kontynuuj przez Microsoft
+            </AuthButton>
+            <div className="grid grid-cols-2 gap-3">
+              <AuthButton
+                variant="secondary"
+                icon={<KeyRound className="size-4" strokeWidth={1.75} />}
+                loading={busy === "passkey"}
+                disabled={blocked("passkey")}
+                onClick={unavailable("passkey", "Logowanie kluczem dostępu")}
+              >
+                Klucz dostępu
+              </AuthButton>
+              <AuthButton
+                variant="secondary"
+                icon={<Lock className="size-4" strokeWidth={1.75} />}
+                aria-expanded={showSSO}
+                aria-controls="login-sso"
+                disabled={blocked("sso")}
+                onClick={() => setShowSSO((shown) => !shown)}
+              >
+                SSO szkoły
               </AuthButton>
             </div>
-          ) : (
-            METHODS.filter((method) => method !== authMethod).map((method) => <div key={method}>{render[method]}</div>)
-          )}
-        </div>
-      </AnimatedHeight>
-      <Toast toast={toast} />
-    </>
+
+            {showSSO && (
+              <form
+                id="login-sso"
+                noValidate
+                className="flex flex-col gap-3 pt-1"
+                onSubmit={(event) => {
+                  event.preventDefault();
+                  if (!school.trim()) {
+                    setSchoolError("Wpisz identyfikator szkoły.");
+                    return;
+                  }
+                  run("sso", () => notify("Logowanie przez szkołę nie jest jeszcze dostępne.", "error"));
+                }}
+              >
+                <AuthField
+                  label="Identyfikator szkoły"
+                  name="school"
+                  autoComplete="organization"
+                  autoFocus
+                  value={school}
+                  error={schoolError}
+                  onChange={(event) => {
+                    setSchool(event.target.value);
+                    setSchoolError(undefined);
+                  }}
+                />
+                <AuthButton type="submit" variant="secondary" loading={busy === "sso"} disabled={blocked("sso")}>
+                  Kontynuuj przez SSO
+                </AuthButton>
+              </form>
+            )}
+          </>
+        ) : (
+          <>
+            <form
+              noValidate
+              className="flex flex-col gap-6"
+              onSubmit={(event) => {
+                event.preventDefault();
+                if (!password) {
+                  setPasswordError("Wpisz hasło.");
+                  return;
+                }
+                run("password", () => notify("Logowanie hasłem nie jest jeszcze dostępne.", "error"));
+              }}
+            >
+              <EmailSummary
+                email={email.value}
+                onChange={() => {
+                  setStep("email");
+                  setFocusEmail(true);
+                  setPassword("");
+                  setPasswordError(undefined);
+                }}
+              />
+              <PasswordField
+                label="Hasło"
+                name="password"
+                autoComplete="current-password"
+                autoFocus
+                value={password}
+                error={passwordError}
+                onChange={(event) => {
+                  setPassword(event.target.value);
+                  setPasswordError(undefined);
+                }}
+                aside={
+                  <button
+                    type="button"
+                    onClick={() => onInbox("reset", email.value)}
+                    className="cursor-pointer text-xs leading-none text-fog underline underline-offset-2 transition-colors hover:text-charcoal"
+                  >
+                    Nie pamiętasz hasła?
+                  </button>
+                }
+              />
+              <AuthButton type="submit" loading={busy === "password"} disabled={blocked("password")}>
+                Zaloguj się
+              </AuthButton>
+            </form>
+
+            <Separator />
+
+            <AuthButton variant="secondary" loading={busy === "link"} disabled={blocked("link")} onClick={() => run("link", () => onInbox("link", email.value))}>
+              Wyślij link do logowania
+            </AuthButton>
+          </>
+        )}
+      </div>
+    </AnimatedHeight>
   );
 }
