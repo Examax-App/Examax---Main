@@ -24,7 +24,7 @@
     "start": "next start",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "next typegen && tsc --noEmit",
     "check": "pnpm typecheck && pnpm lint && pnpm build",
     "audit:prod": "pnpm audit --prod",
     "film:studio": "remotion studio",
