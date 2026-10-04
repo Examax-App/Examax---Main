@@ -72,7 +72,7 @@ export function DisplayCards({
           <p className="line-clamp-2 text-body text-steel">
             {item.description}
           </p>
-          <p className="text-caption text-silver">{item.date}</p>
+          <p className="text-caption text-fog">{item.date}</p>
         </article>
       ))}
     </div>

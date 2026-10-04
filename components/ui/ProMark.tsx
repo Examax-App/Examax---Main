@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 
 /** The library's pill is 45×25 at scale 1. */
@@ -89,11 +90,36 @@ function Placeholder({ scale }: { scale: number }) {
  * on the 20px line of a section eyebrow.
  */
 export function ProMark({ scale = 0.8 }: { scale?: number }) {
+  // The metal (a WebGL library) loads only once the mark nears the screen:
+  // set up at page load it was the single most expensive script on the
+  // landing page, for a pill far below the fold. Until then the plain pill
+  // of the same size holds its place.
+  const ref = useRef<HTMLSpanElement>(null);
+  const [near, setNear] = useState(false);
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        setNear(true);
+        observer.disconnect();
+      },
+      { rootMargin: "200px" },
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <span className="inline-flex shrink-0 items-center [&_.metal-fx-glow-svg]:hidden" role="img" aria-label="Funkcja Pro">
-      <MetalBadge theme="light" scale={scale}>
-        Pro
-      </MetalBadge>
+    <span ref={ref} className="inline-flex shrink-0 items-center [&_.metal-fx-glow-svg]:hidden" role="img" aria-label="Funkcja Pro">
+      {near ? (
+        <MetalBadge theme="light" scale={scale}>
+          Pro
+        </MetalBadge>
+      ) : (
+        <Placeholder scale={scale} />
+      )}
     </span>
   );
 }

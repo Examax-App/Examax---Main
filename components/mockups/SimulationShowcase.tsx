@@ -18,7 +18,8 @@ import {
 } from "lucide-react";
 import { BotAvatar } from "bot-avatars";
 import { MaturaIcon } from "@/components/ui/MaturaIcon";
-import { FrameAt, FrameBridge, useFrame } from "@/components/hero-film/frame";
+import { FrameAt, useFrame } from "@/components/hero-film/frame";
+import { FrameBridge } from "@/components/hero-film/frame-bridge";
 import {
   AreaChart,
   CONTENT_W,

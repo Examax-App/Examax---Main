@@ -1,6 +1,6 @@
 "use client";
 
-import { AbsoluteFill, interpolate } from "remotion";
+import { AbsoluteFill, interpolate } from "@/components/hero-film/anim";
 import {
   BarChart3,
   CalendarDays,

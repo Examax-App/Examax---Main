@@ -1,4 +1,4 @@
-import { Easing, interpolate } from "remotion";
+import { Easing, interpolate } from "@/components/hero-film/anim";
 
 /**
  * The reference ease from globals.css — every entrance in the film uses it, so

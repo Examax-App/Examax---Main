@@ -43,11 +43,12 @@ import { AccentTile, type Accent } from "@/components/ui/FeaturePill";
 import { ACCENT_VAR } from "@/lib/glow";
 import {
   AgentChatPreview,
+  NavPreviewsWanted,
   SimulationPreview,
   ProgressPreview,
   RoadmapPreview,
   TrainingPreview,
-} from "@/components/layout/NavPreviews";
+} from "@/components/layout/LazyNavPreviews";
 
 type MenuKey = "product" | "exams" | "materials";
 
@@ -527,6 +528,12 @@ function ColumnsPanel({
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  // The dropdown pictures load the first time a visitor reaches for the menus.
+  const [previewsWanted, setPreviewsWanted] = useState(false);
+  const wantPreviews = () => setPreviewsWanted(true);
+  // The mobile sheet's contents are built the first time a visitor reaches for the menu button.
+  const [mobileMenuWanted, setMobileMenuWanted] = useState(false);
+  const wantMobileMenu = () => setMobileMenuWanted(true);
   const scrolled = useSyncExternalStore(
     subscribeScroll,
     () => window.scrollY > 120,
@@ -620,6 +627,7 @@ export function Navbar() {
   }, [openMenu]);
 
   return (
+    <NavPreviewsWanted value={previewsWanted}>
     <header
       ref={navRef}
       className="sticky inset-x-0 top-0 z-30 w-full transition-all"
@@ -650,7 +658,7 @@ export function Navbar() {
           <Logo wordmark={false} />
         </Link>
 
-        <nav ref={navListRef} aria-label="Główna nawigacja" className="relative hidden lg:block">
+        <nav ref={navListRef} aria-label="Główna nawigacja" className="relative hidden lg:block" onPointerEnter={wantPreviews}>
           <ul
             className="relative flex items-center gap-1"
             onMouseLeave={() => setHoveredItem(null)}
@@ -683,7 +691,10 @@ export function Navbar() {
                     setHoveredItem(key);
                     scheduleOpen(key);
                   }}
-                  onFocus={() => setOpenMenu(key)}
+                  onFocus={() => {
+                    wantPreviews();
+                    setOpenMenu(key);
+                  }}
                   onClick={() =>
                     setOpenMenu((current) => (current === key ? null : key))
                   }
@@ -813,13 +824,21 @@ export function Navbar() {
 
         {/* Below the desktop bar: the mark on the left, the menu button on the right — nothing else. */}
         <div className="-mr-2 flex items-center lg:hidden">
-          <MenuToggle open={mobileOpen} onToggle={() => setMobileOpen((value) => !value)} />
+          <MenuToggle
+            open={mobileOpen}
+            onWant={wantMobileMenu}
+            onToggle={() => {
+              wantMobileMenu();
+              setMobileOpen((value) => !value);
+            }}
+          />
         </div>
         </div>
       </div>
 
-      <MobileMenu open={mobileOpen} onClose={() => setMobileOpen(false)} />
+      <MobileMenu open={mobileOpen} built={mobileMenuWanted} onClose={() => setMobileOpen(false)} />
     </header>
+    </NavPreviewsWanted>
   );
 }
 
@@ -829,12 +848,15 @@ export function Navbar() {
  * The mobile menu button: dub's bare round button, its three lines set a
  * little further apart than lucide's, folding into an X when the menu opens.
  */
-function MenuToggle({ open, onToggle }: { open: boolean; onToggle: () => void }) {
+function MenuToggle({ open, onWant, onToggle }: { open: boolean; onWant: () => void; onToggle: () => void }) {
   const line = "absolute left-1/2 h-[1.75px] w-[18px] -translate-x-1/2 rounded-full bg-charcoal transition-[transform,opacity,top] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]";
   return (
     <button
       type="button"
       onClick={onToggle}
+      onPointerEnter={onWant}
+      onPointerDown={onWant}
+      onFocus={onWant}
       aria-expanded={open}
       aria-controls="mobile-menu"
       aria-label={open ? "Zamknij menu" : "Otwórz menu"}
@@ -863,8 +885,14 @@ function MobileTile({ item }: { item: MobileEntry }) {
  * links — each row 16px semibold on a hairline. The account buttons close
  * it. The page underneath stops scrolling while it is open; Escape, a link,
  * or widening past the breakpoint closes it.
+ *
+ * The sheet itself is always there (the button's aria-controls points at it,
+ * and its fade runs on it), but its contents are only built once `built` —
+ * the first time a visitor reaches for the button. Closed, they would be
+ * a few hundred invisible nodes laid out on every phone's first paint, and
+ * their links, sitting in the viewport at zero opacity, would be prefetched.
  */
-function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
+function MobileMenu({ open, built, onClose }: { open: boolean; built: boolean; onClose: () => void }) {
   const [expanded, setExpanded] = useState<MenuKey | null>(null);
 
   useEffect(() => {
@@ -893,83 +921,85 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
         open ? "translate-y-0 opacity-100" : "pointer-events-none -translate-y-2 opacity-0",
       )}
     >
-      <nav aria-label="Menu" className="flex min-h-full flex-col px-5 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-3">
-        <ul className="divide-y divide-ash">
-          {menuKeys.map((key) => {
-            const isOpen = expanded === key;
-            const panelId = `mobile-${key}`;
-            return (
-              <li key={key}>
-                <button
-                  type="button"
-                  aria-expanded={isOpen}
-                  aria-controls={panelId}
-                  onClick={() => setExpanded(isOpen ? null : key)}
-                  className="flex w-full cursor-pointer items-center justify-between py-4 text-left text-base font-semibold text-charcoal"
-                >
-                  {menus[key].label}
-                  <ChevronDown className={cn("size-4 text-steel transition-transform duration-300", isOpen && "rotate-180")} strokeWidth={2} aria-hidden />
-                </button>
-                <div
-                  id={panelId}
-                  className="grid transition-[grid-template-rows] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
-                  style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
-                >
-                  <div className="min-h-0 overflow-hidden" inert={!isOpen}>
-                    <div className="space-y-4 pb-5">
-                      {mobileGroups(menus[key]).map((group, i) => (
-                        <div key={group.heading ?? i}>
-                          {group.heading ? <p className="mb-2 text-xs font-medium text-fog">{group.heading}</p> : null}
-                          <ul className="space-y-1">
-                            {group.items.map((item) => (
-                              <li key={item.title}>
-                                <Link
-                                  href={item.href}
-                                  prefetch={prefetchFor(item.href)}
-                                  onClick={onClose}
-                                  className="-mx-2 flex items-center gap-3 rounded-xl px-2 py-1.5 transition-colors active:bg-paper-mist"
-                                >
-                                  <MobileTile item={item} />
-                                  <span className="min-w-0">
-                                    <span className="block text-sm font-medium text-charcoal">{item.title}</span>
-                                    {item.description ? <span className="block truncate text-sm text-fog">{item.description}</span> : null}
-                                  </span>
-                                </Link>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      ))}
+      {built ? (
+        <nav aria-label="Menu" className="flex min-h-full flex-col px-5 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-3">
+          <ul className="divide-y divide-ash">
+            {menuKeys.map((key) => {
+              const isOpen = expanded === key;
+              const panelId = `mobile-${key}`;
+              return (
+                <li key={key}>
+                  <button
+                    type="button"
+                    aria-expanded={isOpen}
+                    aria-controls={panelId}
+                    onClick={() => setExpanded(isOpen ? null : key)}
+                    className="flex w-full cursor-pointer items-center justify-between py-4 text-left text-base font-semibold text-charcoal"
+                  >
+                    {menus[key].label}
+                    <ChevronDown className={cn("size-4 text-steel transition-transform duration-300", isOpen && "rotate-180")} strokeWidth={2} aria-hidden />
+                  </button>
+                  <div
+                    id={panelId}
+                    className="grid transition-[grid-template-rows] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                    style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
+                  >
+                    <div className="min-h-0 overflow-hidden" inert={!isOpen}>
+                      <div className="space-y-4 pb-5">
+                        {mobileGroups(menus[key]).map((group, i) => (
+                          <div key={group.heading ?? i}>
+                            {group.heading ? <p className="mb-2 text-xs font-medium text-fog">{group.heading}</p> : null}
+                            <ul className="space-y-1">
+                              {group.items.map((item) => (
+                                <li key={item.title}>
+                                  <Link
+                                    href={item.href}
+                                    prefetch={prefetchFor(item.href)}
+                                    onClick={onClose}
+                                    className="-mx-2 flex items-center gap-3 rounded-xl px-2 py-1.5 transition-colors active:bg-paper-mist"
+                                  >
+                                    <MobileTile item={item} />
+                                    <span className="min-w-0">
+                                      <span className="block text-sm font-medium text-charcoal">{item.title}</span>
+                                      {item.description ? <span className="block truncate text-sm text-fog">{item.description}</span> : null}
+                                    </span>
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </div>
+                </li>
+              );
+            })}
+            {plainLinks.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  prefetch={prefetchFor(link.href)}
+                  onClick={onClose}
+                  className="flex w-full items-center justify-between py-4 text-base font-semibold text-charcoal"
+                >
+                  {link.label}
+                  <ArrowRight className="size-4 text-silver" strokeWidth={2} aria-hidden />
+                </Link>
               </li>
-            );
-          })}
-          {plainLinks.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                prefetch={prefetchFor(link.href)}
-                onClick={onClose}
-                className="flex w-full items-center justify-between py-4 text-base font-semibold text-charcoal"
-              >
-                {link.label}
-                <ArrowRight className="size-4 text-silver" strokeWidth={2} aria-hidden />
-              </Link>
-            </li>
-          ))}
-        </ul>
+            ))}
+          </ul>
 
-        <div className="mt-auto grid grid-cols-2 gap-2 border-t border-ash pt-5">
-          <Button href="/login" variant="outline" className="h-10">
-            Zaloguj się
-          </Button>
-          <Button href="/signup" variant="primary" className="h-10">
-            Zacznij teraz
-          </Button>
-        </div>
-      </nav>
+          <div className="mt-auto grid grid-cols-2 gap-2 border-t border-ash pt-5">
+            <Button href="/login" variant="outline" className="h-10">
+              Zaloguj się
+            </Button>
+            <Button href="/signup" variant="primary" className="h-10">
+              Zacznij teraz
+            </Button>
+          </div>
+        </nav>
+      ) : null}
     </div>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { AbsoluteFill } from "remotion";
+import { AbsoluteFill } from "@/components/hero-film/anim";
 import {
   CalendarDays,
   ChevronDown,

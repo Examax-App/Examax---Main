@@ -1,18 +1,9 @@
 "use client";
 
 import { AbsoluteFill } from "remotion";
-import { FrameBridge } from "@/components/hero-film/frame";
-import { RoadmapLoop } from "@/components/hero-film/loops/RoadmapLoop";
-import { PracticeLoop } from "@/components/hero-film/loops/PracticeLoop";
-import { ProgressLoop } from "@/components/hero-film/loops/ProgressLoop";
+import { FrameBridge } from "@/components/hero-film/frame-bridge";
+import { LOOPS } from "@/components/hero-film/loops";
 import type { FilmTab } from "@/components/hero-film/timeline";
-
-/** The loop each hero tab plays. */
-export const LOOPS: Record<FilmTab, () => React.ReactNode> = {
-  roadmap: RoadmapLoop,
-  practice: PracticeLoop,
-  progress: ProgressLoop,
-};
 
 /**
  * The hero film: the selected tab's loop, as a Remotion composition.

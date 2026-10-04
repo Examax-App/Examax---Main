@@ -37,14 +37,14 @@ export function Hero() {
             <h1
               id="hero-heading"
               style={{ "--delay": "100ms", "--offset": "20px" } as React.CSSProperties}
-              className="animate-slide-up-fade mt-5 text-pretty font-satoshi text-4xl font-medium leading-[1.15] text-charcoal sm:text-5xl"
+              className="animate-slide-up mt-5 text-pretty font-satoshi text-4xl font-medium leading-[1.15] text-charcoal sm:text-5xl"
             >
               Twoje braki. Twoje zadania. Twój wynik.
             </h1>
 
             <p
               style={{ "--delay": "200ms", "--offset": "20px" } as React.CSSProperties}
-              className="animate-slide-up-fade mt-5 text-xl leading-7 text-steel"
+              className="animate-slide-up mt-5 text-xl leading-7 text-steel"
             >
               Examax znajduje pytania, w których się mylisz, i buduje z nich
               Twój osobisty trening przed egzaminem ósmoklasisty i&nbsp;maturą.

@@ -44,7 +44,11 @@ const nextConfig: NextConfig = {
   /** Never ship source maps to the browser (the default, kept explicit). */
   productionBrowserSourceMaps: false,
   async headers() {
-    return [{ source: "/:path*", headers: securityHeaders }];
+    return [
+      { source: "/:path*", headers: securityHeaders },
+      /* The self-hosted fonts' paths carry their version (public/fonts/inter-v20), so they never change in place. */
+      { source: "/fonts/:path*", headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }] },
+    ];
   },
 };
 

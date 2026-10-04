@@ -20,7 +20,8 @@ import {
 } from "lucide-react";
 import { MaturaIcon } from "@/components/ui/MaturaIcon";
 import { AccentTile } from "@/components/ui/FeaturePill";
-import { FrameAt, FrameBridge, useFrame } from "@/components/hero-film/frame";
+import { FrameAt, useFrame } from "@/components/hero-film/frame";
+import { FrameBridge } from "@/components/hero-film/frame-bridge";
 import { Chip, Cursor, NavHeading, Shell, StatusPill, type CursorKey } from "@/components/hero-film/kit";
 import { ramp } from "@/components/hero-film/motion";
 import { Frac, V } from "@/components/simulation/math";

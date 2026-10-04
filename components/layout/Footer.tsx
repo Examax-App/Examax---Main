@@ -156,14 +156,17 @@ function Item({ link }: { link: FooterLink }) {
 function Soon({ link }: { link: FooterLink }) {
   const Icon = link.chip?.icon;
   return (
-    <li className="flex cursor-not-allowed select-none items-center gap-2 text-body text-silver">
+    <li className="flex cursor-not-allowed select-none items-center gap-2 text-body text-fog">
       {Icon && (
         <span aria-hidden className="grid size-4 shrink-0 place-items-center rounded-[4px] border border-black/5 bg-paper-mist text-silver">
           <Icon className="size-2.5" strokeWidth={2.25} />
         </span>
       )}
       {link.label}
-      <span className="sr-only">(wkrótce)</span>
+      {/* Readable grey (WCAG AA) — the tag, not a faded label, says it is not here yet */}
+      <span className="rounded-[4px] border border-ash px-1 text-[10px] font-medium leading-4 text-fog">
+        wkrótce
+      </span>
     </li>
   );
 }

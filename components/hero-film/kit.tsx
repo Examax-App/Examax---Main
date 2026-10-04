@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { interpolate } from "remotion";
+import { interpolate } from "@/components/hero-film/anim";
 import { Brain, CircleHelp, Compass, Gift } from "lucide-react";
 import { BrandMark } from "@/components/ui/BrandMark";
 import { EASE, GLIDE, ramp } from "@/components/hero-film/motion";

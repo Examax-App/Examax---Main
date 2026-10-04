@@ -27,13 +27,24 @@ import { FeatureSection } from "@/components/sections/FeatureSection";
 import { TutoringCompare } from "@/components/sections/TutoringCompare";
 import { Faq } from "@/components/sections/Faq";
 import { CtaBand } from "@/components/sections/CtaBand";
-import { LiveProgress, ProgressFunnel, ProgressProfile } from "@/components/mockups/ProgressStage";
-import { NewSet, QuestionRows, TopicTiles } from "@/components/mockups/PracticeStage";
-import { AgentShowcase } from "@/components/mockups/AgentShowcase";
-import { SimulationShowcase } from "@/components/mockups/SimulationShowcase";
 import { ProMark } from "@/components/ui/ProMark";
-import { ReadinessDashboard, TopicFeed, WeakSpots } from "@/components/mockups/ReadinessStage";
-import { KnowledgeSync, SheetFlow, SubjectWindow } from "@/components/mockups/PlatformStage";
+// The pictures load as lazy islands — see components/landing/LazyVisuals.
+import {
+  AgentShowcase,
+  KnowledgeSync,
+  LiveProgress,
+  NewSet,
+  ProgressFunnel,
+  ProgressProfile,
+  QuestionRows,
+  ReadinessDashboard,
+  SheetFlow,
+  SimulationShowcase,
+  SubjectWindow,
+  TopicFeed,
+  TopicTiles,
+  WeakSpots,
+} from "@/components/landing/LazyVisuals";
 
 export default function Home() {
   return (

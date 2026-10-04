@@ -1,20 +1,21 @@
 import type { Metadata, Viewport } from "next";
-import { Geist_Mono, Inter } from "next/font/google";
+import { preload } from "react-dom";
+import { Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import { FlashToast } from "@/components/ui/Toast";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter-local",
-  subsets: ["latin", "latin-ext"],
-  display: "swap",
-});
+/* Inter is self-hosted from public/fonts (see the @font-face rules at the top of
+   globals.css); these are the two files every page's text needs. */
+const INTER_PRELOADS = ["/fonts/inter-v20/latin.woff2", "/fonts/inter-v20/latin-ext-a.woff2"];
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono-local",
   subsets: ["latin", "latin-ext"],
   weight: ["400", "500"],
   display: "swap",
+  /* Only the product pictures use it, mostly far down the page: fetched when a page shows one, not preloaded on every page. */
+  preload: false,
 });
 
 const satoshi = localFont({
@@ -83,10 +84,11 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
+  for (const href of INTER_PRELOADS) preload(href, { as: "font", type: "font/woff2", crossOrigin: "anonymous" });
   return (
     <html
       lang="pl"
-      className={`${inter.variable} ${geistMono.variable} ${satoshi.variable} h-full antialiased`}
+      className={`${geistMono.variable} ${satoshi.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         {children}

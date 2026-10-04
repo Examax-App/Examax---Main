@@ -1,5 +1,5 @@
 import { FrameAt } from "@/components/hero-film/frame";
-import { LOOPS } from "@/components/hero-film/HeroFilm";
+import { LOOPS } from "@/components/hero-film/loops";
 import { HEIGHT, POSTER_FRAME, WIDTH, type FilmTab } from "@/components/hero-film/timeline";
 
 /**
