@@ -38,7 +38,7 @@ export function UnderlineTabs({
               onChange?.(index);
             }}
             className={cn(
-              "-mb-px border-b-2 pb-3 pt-1 text-body font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-charcoal",
+              "-mb-px border-b-2 pb-2.5 pt-1 text-body-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-charcoal",
               selected
                 ? "border-midnight-ink text-charcoal"
                 : "border-transparent text-fog hover:text-charcoal",

@@ -26,7 +26,7 @@ export function Banner({
   return (
     <div
       className={cn(
-        "flex items-center gap-3 rounded-cards bg-gradient-to-r from-soft-mint/80 to-soft-mint/30 px-4 py-2.5",
+        "flex items-center gap-2.5 rounded-cards bg-gradient-to-r from-soft-mint/80 to-soft-mint/30 px-3.5 py-2",
         className,
       )}
     >

@@ -1,222 +1,329 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import {
-  BarChart3,
-  Bot,
-  Lock,
+  ArrowUpRight,
+  BadgePercent,
+  BookMarked,
+  ChevronDown,
+  Dna,
+  FlaskConical,
+  Landmark,
+  Languages,
   PencilLine,
   Route,
-  ShieldCheck,
+  Sigma,
   Timer,
+  Zap,
 } from "lucide-react";
-import { Container } from "@/components/ui/Container";
 import { Logo } from "@/components/ui/Logo";
-import { AccentTile } from "@/components/ui/FeaturePill";
+import { AccentTile, type Accent } from "@/components/ui/FeaturePill";
+import { EXAMAX_SOCIALS } from "@/components/ui/SocialIcons";
+import { cn } from "@/lib/cn";
+import { prefetchFor } from "@/lib/routes";
+import type { IconComponent } from "@/lib/icon";
 
-const productLinks = [
-  { label: "Roadmapa nauki", href: "#roadmapa", icon: Route, accent: "tangerine" as const },
-  { label: "Trening zadań", href: "#trening", icon: PencilLine, accent: "green" as const },
-  { label: "Agent Examax", href: "#agent", icon: Bot, accent: "lavender" as const },
-  { label: "Śledzenie postępów", href: "#postepy", icon: BarChart3, accent: "blue" as const },
-];
+/**
+ * The site footer, a one-to-one of dub.co's own (`DesignRules/Footer _ Dub.png`,
+ * markup read off the live page): a 1024px column on the page's white; the
+ * logo over the socials on the left, four link columns on the right — the
+ * first two carrying Dub's 16px tinted chips — and a bottom row of status,
+ * compliance mark and copyright.
+ *
+ * Dub's values, mapped onto our tokens: headings 14px medium charcoal, 10px
+ * above their list; links 14px fog, 14px apart, darkening to slate in 75ms;
+ * "Narzędzia" and "Prawne" open small menus, as Dub's "Tools" and "Legal" do.
+ */
 
-const footerHrefs: Record<string, string> = {
-  Kontakt: "/kontakt",
-  "Centrum pomocy": "/pomoc",
-  "Co nowego": "/#co-nowego",
-  Cennik: "/#cennik",
-  FAQ: "/#faq",
+type FooterLink = {
+  label: string;
+  href: string;
+  /** A chip before the label, as Dub's product and compare columns carry. */
+  chip?: { icon: IconComponent; accent: Accent };
+  external?: boolean;
+  /** Not available yet: greyed out and not a link. */
+  soon?: boolean;
 };
 
-const columns = [
-  {
-    heading: "Egzaminy",
-    links: [
-      "Egzamin ósmoklasisty",
-      "Matura podstawowa",
-      "Matura rozszerzona",
-      "Matematyka",
-      "Język polski",
-      "Język angielski",
-    ],
-  },
-  {
-    heading: "Zasoby",
-    links: ["Centrum pomocy", "Blog", "Co nowego", "Cennik", "FAQ"],
-  },
-  {
-    heading: "Firma",
-    links: ["O nas", "Kontakt", "Prywatność", "Regulamin"],
-  },
+/**
+ * Product, in the navbar's icons and accents and the hero tabs' short names —
+ * Dub's product names are one or two words, and the column is sized for that.
+ * The agents are a yellow chip with a black bolt.
+ */
+const PRODUCT: FooterLink[] = [
+  { label: "Trening", href: "/training", chip: { icon: PencilLine, accent: "green" } },
+  { label: "Roadmapa", href: "/roadmap", chip: { icon: Route, accent: "blue" } },
+  { label: "Postępy", href: "/progress", chip: { icon: BadgePercent, accent: "tangerine" } },
+  { label: "Symulacja", href: "/simulation", chip: { icon: Timer, accent: "lavender" } },
+  { label: "Korepetytor AI", href: "/agents", chip: { icon: Zap, accent: "yellow" } },
 ];
 
-function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden {...props}>
-      <rect x="2.5" y="2.5" width="19" height="19" rx="5.5" />
-      <circle cx="12" cy="12" r="4.2" />
-      <circle cx="17.4" cy="6.6" r="1.3" fill="currentColor" stroke="none" />
-    </svg>
-  );
-}
-
-function TikTokIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden {...props}>
-      <path d="M16.6 2h-3.2v13.5a2.9 2.9 0 1 1-2.9-2.9c.3 0 .6 0 .9.1V9.4a6.6 6.6 0 0 0-.9-.06 6.1 6.1 0 1 0 6.1 6.1V8.3a7.7 7.7 0 0 0 4.5 1.4V6.5a4.5 4.5 0 0 1-4.5-4.5Z" />
-    </svg>
-  );
-}
-
-function YouTubeIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden {...props}>
-      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814ZM9.545 15.568V8.432L15.818 12l-6.273 3.568Z" />
-    </svg>
-  );
-}
-
-function DiscordIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden {...props}>
-      <path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.058a.082.082 0 0 0 .031.056 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.3 12.3 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.84 19.84 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03ZM8.02 15.331c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418Zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418Z" />
-    </svg>
-  );
-}
-
-const socials = [
-  { label: "Instagram", icon: InstagramIcon },
-  { label: "TikTok", icon: TikTokIcon },
-  { label: "YouTube", icon: YouTubeIcon },
-  { label: "Discord", icon: DiscordIcon },
+const EXAMS: FooterLink[] = [
+  { label: "Egzamin ósmoklasisty", href: "/roadmap" },
+  { label: "Matura podstawowa", href: "/roadmap" },
+  { label: "Matura rozszerzona", href: "/roadmap" },
 ];
+
+const RESOURCES: FooterLink[] = [
+  { label: "Dokumentacja", href: "/docs" },
+  { label: "Centrum pomocy", href: "/help" },
+  { label: "Aktualności", href: "/updates" },
+  { label: "Cennik", href: "/pricing" },
+  { label: "FAQ", href: "/#faq" },
+  { label: "Arkusze CKE", href: "https://cke.gov.pl/egzamin-maturalny/egzamin-maturalny-w-formule-2023/arkusze/", external: true },
+];
+
+const TOOLS: FooterLink[] = [
+  { label: "Plan nauki", href: "/roadmap" },
+  { label: "Trening z arkuszy", href: "/training" },
+  { label: "Symulacja egzaminu", href: "/simulation" },
+];
+
+/* NOT BUILT YET — /reviews, /tutors, /careers and the legal pages have no page
+   behind them, so their links land on the 404 until each one is written. */
+const COMPANY: FooterLink[] = [
+  { label: "O nas", href: "/about" },
+  { label: "Kontakt", href: "/contact" },
+  { label: "Opinie", href: "/reviews" },
+  { label: "Dla szkół", href: "/enterprise" },
+  { label: "Dla korepetytorów", href: "/tutors" },
+  { label: "Kariera", href: "/careers" },
+  { label: "Prywatność", href: "/privacy" },
+];
+
+const LEGAL: FooterLink[] = [
+  { label: "Regulamin", href: "/terms" },
+  { label: "Polityka prywatności", href: "/privacy" },
+  { label: "Polityka cookies", href: "/cookies" },
+  { label: "RODO", href: "/gdpr" },
+];
+
+/** Subjects, in the navbar's accents; the ones still to come in Dub's neutral chip. */
+const SUBJECTS: FooterLink[] = [
+  { label: "Matematyka", href: "/math", chip: { icon: Sigma, accent: "blue" } },
+  { label: "Język polski", href: "/polish", chip: { icon: BookMarked, accent: "green" } },
+  { label: "Język angielski", href: "/english", chip: { icon: Languages, accent: "lavender" } },
+  { label: "Biologia", href: "", soon: true, chip: { icon: Dna, accent: "blue" } },
+  { label: "Chemia", href: "", soon: true, chip: { icon: FlaskConical, accent: "blue" } },
+  { label: "Historia", href: "", soon: true, chip: { icon: Landmark, accent: "blue" } },
+];
+
+/* Pieces ------------------------------------------------------------------- */
+
+const LINK = "flex items-center gap-2 rounded-[4px] text-body text-fog transition-colors duration-75 hover:text-slate focus-ring";
+
+function Column({ heading, children }: { heading: string; children: React.ReactNode }) {
+  return (
+    <div>
+      <h3 className="text-body font-medium text-charcoal">{heading}</h3>
+      <ul role="list" className="mt-2.5 flex flex-col gap-3.5">
+        {children}
+      </ul>
+    </div>
+  );
+}
+
+function Item({ link }: { link: FooterLink }) {
+  const body = (
+    <>
+      {link.chip && <AccentTile icon={link.chip.icon} accent={link.chip.accent} size="xs" />}
+      {link.label}
+      {link.external && <ArrowUpRight className="-ml-1 size-3.5" strokeWidth={1.75} aria-hidden />}
+    </>
+  );
+  return (
+    <li>
+      {link.external ? (
+        <a href={link.href} target="_blank" rel="noopener noreferrer" className={LINK}>
+          {body}
+          <span className="sr-only">(otwiera się w nowej karcie)</span>
+        </a>
+      ) : (
+        <Link href={link.href} prefetch={prefetchFor(link.href)} className={LINK}>
+          {body}
+        </Link>
+      )}
+    </li>
+  );
+}
+
+/**
+ * A subject still to come: Dub's neutral chip, a quieter label, no link. The
+ * cursor stays the plain arrow over it and it can't be selected as text —
+ * it sits there as if it weren't interactive at all.
+ */
+function Soon({ link }: { link: FooterLink }) {
+  const Icon = link.chip?.icon;
+  return (
+    <li className="flex cursor-not-allowed select-none items-center gap-2 text-body text-fog">
+      {Icon && (
+        <span aria-hidden className="grid size-4 shrink-0 place-items-center rounded-[4px] border border-black/5 bg-paper-mist text-silver">
+          <Icon className="size-2.5" strokeWidth={2.25} />
+        </span>
+      )}
+      {link.label}
+      {/* Readable grey (WCAG AA) — the tag, not a faded label, says it is not here yet */}
+      <span className="rounded-[4px] border border-ash px-1 text-[10px] font-medium leading-4 text-fog">
+        wkrótce
+      </span>
+    </li>
+  );
+}
+
+/**
+ * Dub's "Tools" and "Legal": the last row of a column opens a small menu of
+ * links. It opens upward, since the footer ends the page, and closes on a
+ * click outside it or on Escape.
+ */
+function Menu({ label, links }: { label: string; links: FooterLink[] }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLLIElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const onDown = (event: PointerEvent) => {
+      if (!ref.current?.contains(event.target as Node)) setOpen(false);
+    };
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("pointerdown", onDown);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("pointerdown", onDown);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  return (
+    <li ref={ref} className="relative -mt-1">
+      <button
+        type="button"
+        aria-haspopup="menu"
+        aria-expanded={open}
+        onClick={() => setOpen((o) => !o)}
+        className={cn(LINK, "cursor-pointer", open && "text-slate")}
+      >
+        {label}
+        <ChevronDown
+          className={cn("size-3.5 transition-transform duration-200 motion-reduce:transition-none", open && "rotate-180")}
+          strokeWidth={2}
+          aria-hidden
+        />
+      </button>
+      {open && (
+        <div
+          role="menu"
+          aria-label={label}
+          className="animate-view-swap absolute bottom-full left-0 z-20 mb-2 min-w-[200px] rounded-xl border border-ash bg-white p-1 shadow-md"
+        >
+          {links.map((link) => (
+            <Link
+              key={link.label}
+              href={link.href}
+              prefetch={prefetchFor(link.href)}
+              role="menuitem"
+              onClick={() => setOpen(false)}
+              className="flex h-8 items-center rounded-lg px-2.5 text-body-sm text-steel transition-colors duration-75 hover:bg-paper-mist hover:text-charcoal"
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+      )}
+    </li>
+  );
+}
+
+/* The footer --------------------------------------------------------------- */
 
 export function Footer() {
   return (
-    <footer className="col-rules border-t border-ash bg-canvas-muted">
-      <Container className="py-14">
-        <div className="grid gap-12 lg:grid-cols-[1fr_2fr]">
-          <div className="flex flex-col gap-7">
-            <Logo />
-            <p className="max-w-xs text-body text-steel">
-              Kompletny system przygotowań do egzaminu ósmoklasisty i matury —
-              roadmapa, zadania CKE i agent AI.
-            </p>
-
-            <form aria-label="Zapisz się na nowości produktowe" className="max-w-xs">
-              <label
-                htmlFor="footer-email"
-                className="text-body font-medium text-charcoal"
-              >
-                Bądź na bieżąco z nowościami
-              </label>
-              <div className="mt-2 flex gap-2">
-                <input
-                  id="footer-email"
-                  type="email"
-                  placeholder="ty@przyklad.pl"
-                  className="focus-ring h-[38px] min-w-0 flex-1 rounded-inputs border border-midnight-ink bg-white px-3 text-body text-charcoal placeholder:text-fog"
-                />
-                <button
-                  type="button"
-                  className="focus-ring shrink-0 rounded-buttons border border-midnight-ink bg-primary-action-fill px-5 py-2 text-body font-medium leading-5 text-white shadow-subtle transition-all duration-150 hover:ring-4 hover:ring-ash"
-                >
-                  Zapisz się
-                </button>
-              </div>
-            </form>
-
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 rounded-buttons border border-ash px-2.5 py-1.5 text-[12px] font-medium text-steel">
-                <ShieldCheck className="size-3.5" aria-hidden />
-                Zgodne z RODO
-              </span>
-              <span className="inline-flex items-center gap-1.5 rounded-buttons border border-ash px-2.5 py-1.5 text-[12px] font-medium text-steel">
-                <Lock className="size-3.5" aria-hidden />
-                Dane w UE
-              </span>
+    <footer className="border-t border-ash bg-white">
+      <div className="mx-auto w-full max-w-screen-lg px-3 py-16 lg:px-4 xl:px-0">
+        <div className="xl:grid xl:grid-cols-3 xl:gap-8">
+          {/* The logo, and the socials at the foot of the column */}
+          <div className="flex flex-col gap-6">
+            <div className="grow">
+              <Link href="/" className="focus-ring block max-w-fit rounded-[4px]" aria-label="Examax — strona główna">
+                <Logo />
+              </Link>
+              <p className="mt-4 max-w-[17rem] text-body text-fog">
+                System nauki do egzaminów oparty na&nbsp;AI. Wszystko, czego potrzebujesz przed egzaminem, w&nbsp;jednym miejscu.
+              </p>
             </div>
-
-            <div className="mt-auto flex items-center gap-4 pt-2">
-              {socials.map((social) => (
+            <div className="flex items-center gap-3">
+              {EXAMAX_SOCIALS.map((social) => (
                 <a
                   key={social.label}
-                  href="#"
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="focus-ring rounded-[4px] text-charcoal transition-all duration-150 hover:-translate-y-0.5 hover:text-fog"
+                  className="group focus-ring rounded-full p-1"
                 >
-                  <social.icon className="size-5" />
+                  <social.icon className="size-4 text-charcoal transition-colors duration-75 group-hover:text-steel" />
                 </a>
               ))}
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
-            <nav aria-label="Produkt">
-              <h3 className="text-body font-medium text-charcoal">Produkt</h3>
-              <ul className="mt-4 space-y-3">
-                {productLinks.map((link) => (
-                  <li key={link.label}>
-                    <Link
-                      href={link.href}
-                      className="focus-ring inline-flex items-center gap-2 rounded-[4px] text-body text-fog transition-colors duration-150 hover:text-charcoal"
-                    >
-                      <AccentTile icon={link.icon} accent={link.accent} size="sm" />
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-                <li>
-                  <Link
-                    href="#symulacja"
-                    className="inline-flex items-center gap-2 text-body text-fog transition-colors hover:text-charcoal"
-                  >
-                    <span
-                      aria-hidden
-                      className="grid size-4 shrink-0 place-items-center rounded-[6px] bg-graphite text-white"
-                    >
-                      <Timer className="size-2.5" strokeWidth={2.5} />
-                    </span>
-                    Symulacje egzaminu
-                    <span className="rounded-full bg-paper-mist px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.06em] text-fog">
-                      wkrótce
-                    </span>
-                  </Link>
-                </li>
-              </ul>
-            </nav>
-
-            {columns.map((column) => (
-              <nav key={column.heading} aria-label={column.heading}>
-                <h3 className="text-body font-medium text-charcoal">
-                  {column.heading}
-                </h3>
-                <ul className="mt-4 space-y-3">
-                  {column.links.map((label) => (
-                    <li key={label}>
-                      <a
-                        href={footerHrefs[label] ?? "#"}
-                        className="focus-ring link-underline rounded-[4px] text-body text-fog transition-colors duration-150 hover:text-charcoal"
-                      >
-                        {label}
-                      </a>
-                    </li>
+          {/* Four columns in two pairs, as Dub's */}
+          <nav aria-label="Stopka" className="mt-16 grid grid-cols-2 gap-4 xl:col-span-2 xl:mt-0">
+            <div className="md:grid md:grid-cols-2">
+              <div className="grid gap-8">
+                <Column heading="Produkt">
+                  {PRODUCT.map((link) => (
+                    <Item key={link.label} link={link} />
                   ))}
-                </ul>
-              </nav>
-            ))}
-          </div>
+                </Column>
+                <Column heading="Egzaminy">
+                  {EXAMS.map((link) => (
+                    <Item key={link.label} link={link} />
+                  ))}
+                </Column>
+              </div>
+              <div className="mt-10 md:mt-0">
+                <Column heading="Zasoby">
+                  {RESOURCES.map((link) => (
+                    <Item key={link.label} link={link} />
+                  ))}
+                  <Menu label="Narzędzia" links={TOOLS} />
+                </Column>
+              </div>
+            </div>
+            <div className="md:grid md:grid-cols-2">
+              <Column heading="Firma">
+                {COMPANY.map((link) => (link.soon ? <Soon key={link.label} link={link} /> : <Item key={link.label} link={link} />))}
+                <Menu label="Prawne" links={LEGAL} />
+              </Column>
+              <div className="mt-10 md:mt-0">
+                <Column heading="Przedmioty">
+                  {SUBJECTS.map((link) => (link.soon ? <Soon key={link.label} link={link} /> : <Item key={link.label} link={link} />))}
+                </Column>
+              </div>
+            </div>
+          </nav>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-6 border-t border-ash pt-8 sm:flex-row">
-          <span className="inline-flex h-8 items-center gap-2 rounded-full border border-ash px-3.5 text-[13px] text-charcoal">
-            <span className="size-2 rounded-full bg-vivid-green" aria-hidden />
-            Serwis działa bez zakłóceń
-          </span>
-          <p className="flex h-8 items-center text-[13px] text-fog">
-            © 2026 Examax
-          </p>
+        {/* Status and the copyright */}
+        <div className="mt-12 flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
+          <Link
+            href="/help"
+            prefetch={false}
+            className="group focus-ring flex max-w-fit select-none items-center gap-2 rounded-lg border border-ash bg-white py-2 pl-2 pr-2.5 transition-colors duration-75 hover:bg-canvas-muted active:bg-paper-mist"
+          >
+            <span className="relative size-2">
+              <span className="absolute inset-0 m-auto size-2 animate-ping rounded-full bg-vivid-green/40 group-hover:animate-none motion-reduce:animate-none" />
+              <span className="absolute inset-0 z-10 m-auto size-2 rounded-full bg-vivid-green" />
+            </span>
+            <span className="text-[12px] font-medium leading-none text-steel">Wszystkie systemy działają</span>
+          </Link>
+
+          <p className="text-[12px] text-fog sm:text-right">© 2026 Examax</p>
         </div>
-      </Container>
+      </div>
     </footer>
   );
 }

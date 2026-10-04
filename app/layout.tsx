@@ -1,19 +1,21 @@
 import type { Metadata, Viewport } from "next";
-import { Geist_Mono, Inter } from "next/font/google";
+import { preload } from "react-dom";
+import { Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
+import { FlashToast } from "@/components/ui/Toast";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter-local",
-  subsets: ["latin", "latin-ext"],
-  display: "swap",
-});
+/* Inter is self-hosted from public/fonts (see the @font-face rules at the top of
+   globals.css); these are the two files every page's text needs. */
+const INTER_PRELOADS = ["/fonts/inter-v20/latin.woff2", "/fonts/inter-v20/latin-ext-a.woff2"];
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono-local",
   subsets: ["latin", "latin-ext"],
   weight: ["400", "500"],
   display: "swap",
+  /* Only the product pictures use it, mostly far down the page: fetched when a page shows one, not preloaded on every page. */
+  preload: false,
 });
 
 const satoshi = localFont({
@@ -28,11 +30,11 @@ const satoshi = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL("https://examax.app"),
   title: {
-    default: "Examax — Zamień naukę w wyniki",
+    default: "Examax",
     template: "%s — Examax",
   },
   description:
-    "Examax to kompletny system przygotowań do egzaminu ósmoklasisty i matury: roadmapa nauki, zadania z arkuszy CKE, agent AI i śledzenie postępów — wszystko w jednym miejscu.",
+    "Examax to kompletny system przygotowań do egzaminu ósmoklasisty i matury: roadmapa nauki, zadania z arkuszy CKE, Korepetytor AI i śledzenie postępów — wszystko w jednym miejscu.",
   keywords: [
     "matura",
     "egzamin ósmoklasisty",
@@ -45,7 +47,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Examax — Zamień naukę w wyniki",
     description:
-      "Kompletny system przygotowań do egzaminu ósmoklasisty i matury: roadmapa nauki, zadania z arkuszy CKE i agent AI.",
+      "Kompletny system przygotowań do egzaminu ósmoklasisty i matury: roadmapa nauki, zadania z arkuszy CKE i Korepetytor AI.",
     url: "https://examax.app",
     siteName: "Examax",
     locale: "pl_PL",
@@ -55,9 +57,25 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Examax — Zamień naukę w wyniki",
     description:
-      "Kompletny system przygotowań do egzaminu ósmoklasisty i matury: roadmapa nauki, zadania z arkuszy CKE i agent AI.",
+      "Kompletny system przygotowań do egzaminu ósmoklasisty i matury: roadmapa nauki, zadania z arkuszy CKE i Korepetytor AI.",
   },
   robots: { index: true, follow: true },
+  /* The RealFaviconGenerator set lives in public/ and is declared here once
+     for every page. Keep the app/ icon file conventions (favicon.ico, icon.*,
+     apple-icon.*) empty — they would emit a second set of <link> tags, and an
+     app/favicon.ico collides with public/favicon.ico. Bump `v` when the set is
+     regenerated so browsers drop their cached copies. In-app imagery lives in
+     public/brand/. */
+  icons: {
+    icon: [
+      { url: "/favicon-96x96.png?v=20260924", type: "image/png", sizes: "96x96" },
+      { url: "/favicon.svg?v=20260924", type: "image/svg+xml" },
+    ],
+    shortcut: "/favicon.ico?v=20260924",
+    apple: { url: "/apple-touch-icon.png?v=20260924", sizes: "180x180" },
+  },
+  appleWebApp: { title: "Examax" },
+  manifest: "/site.webmanifest?v=20260924",
 };
 
 /* theme-color lives on the viewport export, not on metadata. */
@@ -66,12 +84,17 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
+  for (const href of INTER_PRELOADS) preload(href, { as: "font", type: "font/woff2", crossOrigin: "anonymous" });
   return (
     <html
       lang="pl"
-      className={`${inter.variable} ${geistMono.variable} ${satoshi.variable} h-full antialiased`}
+      className={`${geistMono.variable} ${satoshi.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        {children}
+        {/* A toast one page leaves for the next (e.g. "account created") */}
+        <FlashToast />
+      </body>
     </html>
   );
 }

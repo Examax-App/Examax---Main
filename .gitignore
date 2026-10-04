@@ -39,3 +39,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# remotion: the film's synthesised audio (regenerate with `pnpm film:audio`)
+/remotion/public/film/
+
+# local tooling
+/.claude/settings.local.json
+.idea/
+.vscode/*
+!.vscode/extensions.json

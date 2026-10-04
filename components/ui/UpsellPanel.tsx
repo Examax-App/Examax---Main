@@ -22,7 +22,7 @@ export function UpsellPanel({
   return (
     <div
       className={cn(
-        "flex flex-col items-center justify-center px-6 py-14 text-center",
+        "flex flex-col items-center justify-center px-5 py-11 text-center",
         className,
       )}
     >

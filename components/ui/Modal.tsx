@@ -1,11 +1,14 @@
 "use client";
 
 import { useEffect } from "react";
+import { createPortal } from "react-dom";
 import { cn } from "@/lib/cn";
 
 /**
  * Overlay dialog — dimmed canvas behind, white 16px-radius panel. The parent
- * owns the open state; Escape and a backdrop click both close.
+ * owns the open state; Escape and a backdrop click both close. It renders
+ * into document.body, so an animated (transformed) ancestor can't trap its
+ * fixed overlay inside itself.
  */
 export function Modal({
   open,
@@ -35,9 +38,10 @@ export function Modal({
     };
   }, [open, onClose]);
 
-  if (!open) return null;
+  // It only ever opens after an interaction, so `document` is there by then.
+  if (!open || typeof document === "undefined") return null;
 
-  return (
+  return createPortal(
     <div
       className="fixed inset-0 z-50 grid place-items-center overflow-y-auto bg-white/60 p-4 backdrop-blur-[2px]"
       onClick={onClose}
@@ -55,6 +59,7 @@ export function Modal({
       >
         {children}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }

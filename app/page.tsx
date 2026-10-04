@@ -1,44 +1,50 @@
 import {
-  Bot,
-  Brain,
-  CheckCircle2,
-  Compass,
+  BadgePercent,
+  CloudCheck,
+  FileInput,
   Gauge,
   Layers,
-  Lightbulb,
+  Library,
   LineChart,
   ListChecks,
   Map,
-  MessagesSquare,
   PencilLine,
+  QrCode,
   Route,
+  ScanFace,
   ScanSearch,
   Target,
+  Timer,
+  Workflow,
+  Zap,
 } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
 import { ProofBar } from "@/components/sections/ProofBar";
-import { LogoWall } from "@/components/sections/LogoWall";
 import { Editorial } from "@/components/sections/Editorial";
 import { FeatureSection } from "@/components/sections/FeatureSection";
-import {
-  Testimonial,
-  PLACEHOLDER_QUOTES,
-} from "@/components/sections/Testimonial";
-import { Integrations } from "@/components/sections/Integrations";
-import { Stats } from "@/components/sections/Stats";
-import { Simulation } from "@/components/sections/Simulation";
-import { Countdown } from "@/components/sections/Countdown";
-import { AudienceWall } from "@/components/sections/AudienceWall";
-import { Changelog } from "@/components/sections/Changelog";
-import { Pricing } from "@/components/sections/Pricing";
+import { TutoringCompare } from "@/components/sections/TutoringCompare";
 import { Faq } from "@/components/sections/Faq";
 import { CtaBand } from "@/components/sections/CtaBand";
-import { RoadmapShowcase } from "@/components/mockups/RoadmapShowcase";
-import { PracticeShowcase } from "@/components/mockups/PracticeShowcase";
-import { AgentShowcase } from "@/components/mockups/AgentShowcase";
-import { AnalyticsShowcase } from "@/components/mockups/AnalyticsShowcase";
+import { ProMark } from "@/components/ui/ProMark";
+// The pictures load as lazy islands — see components/landing/LazyVisuals.
+import {
+  AgentShowcase,
+  KnowledgeSync,
+  LiveProgress,
+  NewSet,
+  ProgressFunnel,
+  ProgressProfile,
+  QuestionRows,
+  ReadinessDashboard,
+  SheetFlow,
+  SimulationShowcase,
+  SubjectWindow,
+  TopicFeed,
+  TopicTiles,
+  WeakSpots,
+} from "@/components/landing/LazyVisuals";
 
 export default function Home() {
   return (
@@ -53,53 +59,19 @@ export default function Home() {
       <main id="main" className="flex-1">
         <Hero />
         <ProofBar />
-        <LogoWall />
         <Editorial />
 
         <FeatureSection
-          id="roadmapa"
-          accent="tangerine"
-          eyebrowIcon={Route}
-          eyebrowLabel="Roadmapa nauki"
-          heading="Wiesz dokładnie, czego się uczyć"
-          sub="Cały materiał egzaminu rozpisany na tematy i kroki. Widzisz, co masz opanowane, nad czym pracujesz i co jeszcze przed Tobą — aż do dnia egzaminu."
-          ctaLabel="Zobacz roadmapę"
-          showcase={<RoadmapShowcase />}
-          highlightIndex={0}
-          subFeatures={[
-            {
-              icon: Map,
-              title: "Cały egzamin na jednej mapie",
-              description:
-                "Wszystkie wymagania CKE ułożone w kolejności, która ma sens — bez zgadywania, od czego zacząć.",
-            },
-            {
-              icon: ListChecks,
-              title: "Status każdego tematu",
-              description:
-                "Opanowane, w trakcie, do powtórki — zawsze wiesz, na czym stoisz.",
-            },
-            {
-              icon: Compass,
-              title: "Następny krok zawsze gotowy",
-              description:
-                "Roadmapa wskazuje, co zrobić dziś, żeby wynik ruszył do przodu.",
-            },
-          ]}
-        />
-
-        <Testimonial {...PLACEHOLDER_QUOTES.roadmapa} />
-
-        <FeatureSection
-          id="trening"
+          id="practice"
           accent="green"
           eyebrowIcon={PencilLine}
           eyebrowLabel="Inteligentny trening"
           heading="Ćwicz na zadaniach z arkuszy CKE"
           sub="Oficjalne zadania egzaminacyjne i quizy do każdego tematu z roadmapy. Odpowiadasz, od razu widzisz wynik — a Twój postęp aktualizuje się sam."
-          ctaLabel="Wypróbuj trening"
-          showcase={<PracticeShowcase />}
-          highlightIndex={1}
+          ctaLabel="Zobacz zadania"
+          ctaHref="/training"
+          showcases={[<QuestionRows key="rows" />, <TopicTiles key="tiles" />, <NewSet key="set" />]}
+          highlightIndex={0}
           subFeatures={[
             {
               icon: ScanSearch,
@@ -109,64 +81,62 @@ export default function Home() {
             },
             {
               icon: Layers,
-              title: "Quiz do każdego tematu",
+              title: "Cały materiał z 6 lat",
               description:
-                "Krótkie serie zadań od podstaw po poziom egzaminacyjny — idealne między lekcjami.",
+                "Arkusze CKE z ostatnich sześciu lat w jednym zestawie zadań — temat po temacie.",
             },
             {
-              icon: CheckCircle2,
-              title: "Wynik od razu",
+              icon: QrCode,
+              title: "Własne zestawy",
               description:
-                "Natychmiastowe sprawdzenie i wyjaśnienie — wiesz, co poszło dobrze i dlaczego.",
+                "Ułóż zestaw z wybranym poziomem trudności i tagami, a potem udostępnij go linkiem albo kodem QR.",
             },
           ]}
         />
 
-        <Testimonial {...PLACEHOLDER_QUOTES.trening} />
-
         <FeatureSection
-          id="agent"
-          accent="lavender"
-          eyebrowIcon={Bot}
-          eyebrowLabel="Agent Examax"
-          heading="Zrozum błędy i ucz się szybciej"
-          sub="Agent zna Twoją roadmapę i Twoje odpowiedzi. Tłumaczy zadania krok po kroku, pokazuje, skąd wziął się błąd, i podpowiada, co ćwiczyć dalej."
-          ctaLabel="Poznaj Agenta"
-          showcase={<AgentShowcase />}
+          id="roadmap"
+          accent="blue"
+          eyebrowIcon={Route}
+          eyebrowLabel="Roadmapa nauki"
+          heading="Wiesz dokładnie, czego się uczyć"
+          sub="Cały materiał egzaminu rozpisany na tematy i kroki. Widzisz, co masz opanowane, nad czym pracujesz i co jeszcze przed Tobą — aż do dnia egzaminu."
+          ctaLabel="Zobacz roadmapę"
+          ctaHref="/roadmap"
+          showcases={[<ProgressFunnel key="funnel" />, <LiveProgress key="live" />, <ProgressProfile key="profile" />]}
           highlightIndex={0}
           subFeatures={[
             {
-              icon: MessagesSquare,
-              title: "Wyjaśnienia krok po kroku",
+              icon: Map,
+              title: "Postęp w całym materiale",
               description:
-                "Każde zadanie rozłożone na czynniki pierwsze — prostym językiem, bez wykładu.",
+                "Wszystkie tematy egzaminu i to, ile z nich masz już przerobione i opanowane.",
             },
             {
-              icon: Brain,
-              title: "Rozumie Twoje błędy",
+              icon: ListChecks,
+              title: "Wyniki na żywo",
               description:
-                "Agent widzi Twoje odpowiedzi i tłumaczy dokładnie to, co sprawia trudność.",
+                "Każde rozwiązane zadanie od razu trafia do statystyk — z tematem, źródłem i punktami.",
             },
             {
-              icon: Lightbulb,
-              title: "Podpowiada następny ruch",
+              icon: ScanFace,
+              title: "Twój profil postępów",
               description:
-                "Po każdej rozmowie wiesz, co przećwiczyć, żeby błąd się nie powtórzył.",
+                "Cel, seria, średni wynik i historia nauki — cały Twój postęp w jednym miejscu.",
             },
           ]}
         />
 
-        <Testimonial {...PLACEHOLDER_QUOTES.agent} />
-
         <FeatureSection
-          id="postepy"
-          accent="blue"
-          eyebrowIcon={LineChart}
+          id="progress"
+          accent="tangerine"
+          eyebrowIcon={BadgePercent}
           eyebrowLabel="Śledzenie postępów"
           heading="Wiedz, na czym stoisz"
           sub="Każda odpowiedź buduje obraz Twojego przygotowania: opanowanie tematów, skuteczność i gotowość do egzaminu — na bieżąco, bez zgadywania."
-          ctaLabel="Zobacz analitykę"
-          showcase={<AnalyticsShowcase />}
+          ctaLabel="Zobacz postępy"
+          ctaHref="/progress"
+          showcases={[<TopicFeed key="feed" />, <WeakSpots key="spots" />, <ReadinessDashboard key="dashboard" />]}
           highlightIndex={1}
           subFeatures={[
             {
@@ -190,15 +160,65 @@ export default function Home() {
           ]}
         />
 
-        <Testimonial {...PLACEHOLDER_QUOTES.postepy} />
+        <FeatureSection
+          id="exam"
+          accent="lavender"
+          eyebrowIcon={Timer}
+          eyebrowLabel="Symulacja egzaminu"
+          heading="Przećwicz egzamin, zanim się zacznie"
+          sub="Pełny arkusz na czas, w formacie CKE. Liczysz w brudnopisie jak na sali, zaznaczasz odpowiedź, a Korepetytor AI od razu ją sprawdza i pokazuje, gdzie jest błąd."
+          ctaLabel="Zobacz symulację"
+          ctaHref="/simulation"
+          showcase={<SimulationShowcase />}
+        />
 
-        <Integrations />
-        <Simulation />
-        <Countdown />
-        <AudienceWall />
-        <Stats />
-        <Changelog />
-        <Pricing />
+        <FeatureSection
+          id="agent"
+          accent="yellow"
+          eyebrowIcon={Zap}
+          eyebrowLabel="Korepetytor AI"
+          eyebrowBadge={<ProMark />}
+          heading="Zrozum błędy i ucz się szybciej"
+          sub="Korepetytor AI zna Twoją roadmapę i Twoje odpowiedzi. Tłumaczy zadania krok po kroku, pokazuje, skąd wziął się błąd, i podpowiada, co ćwiczyć dalej."
+          ctaLabel="Zobacz agentów"
+          ctaHref="/agents"
+          showcase={<AgentShowcase />}
+        />
+
+        <FeatureSection
+          id="platform"
+          accent="sapphire"
+          eyebrowIcon={Workflow}
+          eyebrowLabel="Jak działa Examax"
+          heading="Oficjalne arkusze, zamienione w naukę"
+          sub="Examax bierze oryginalne zadania CKE i aktualizuje się z każdym nowym arkuszem. Twoje odpowiedzi i postępy zapisują się na Twoim koncie — w każdym przedmiocie egzaminu."
+          ctaLabel="Zobacz, jak to działa"
+          ctaHref="/training#sources"
+          showcases={[<SheetFlow key="sheets" />, <KnowledgeSync key="sync" />, <SubjectWindow key="subjects" />]}
+          highlightIndex={0}
+          subFeatures={[
+            {
+              icon: FileInput,
+              title: "Zawsze aktualne arkusze CKE",
+              description:
+                "Każdy nowy arkusz CKE — matura, rozszerzenie, ósmoklasista — od razu trafia do Examaxa. Baza zadań stale się aktualizuje.",
+            },
+            {
+              icon: CloudCheck,
+              title: "Wszystko na Twoim koncie",
+              description:
+                "Rozwiązane zadania i wyniki zapisują się na Twoim koncie, a Examax na bieżąco śledzi postęp w każdym temacie.",
+            },
+            {
+              icon: Library,
+              title: "Każdy przedmiot egzaminu",
+              description:
+                "Matematyka, polski i angielski — na maturze i egzaminie ósmoklasisty, w formacie, który zobaczysz na sali.",
+            },
+          ]}
+        />
+
+        <TutoringCompare />
         <Faq />
         <CtaBand />
       </main>

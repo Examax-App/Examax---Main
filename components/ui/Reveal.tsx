@@ -23,11 +23,17 @@ const FALLBACK_MS = 1200;
  */
 export function Reveal({
   delay = 0,
+  fade = false,
   className,
   children,
 }: {
   /** Stagger offset in milliseconds. */
   delay?: number;
+  /**
+   * Fade only, without the 10px lift. For decorative marks scattered across a
+   * surface, where a slide would read as the whole scatter sliding as a block.
+   */
+  fade?: boolean;
   className?: string;
   children: React.ReactNode;
 }) {
@@ -68,6 +74,7 @@ export function Reveal({
       ref={ref}
       className={cn(
         state !== "static" && "reveal",
+        state !== "static" && fade && "reveal-fade",
         state === "visible" && "is-visible",
         className,
       )}
