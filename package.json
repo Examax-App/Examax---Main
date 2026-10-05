@@ -35,6 +35,7 @@
   "dependencies": {
     "@number-flow/react": "^0.6.2",
     "@remotion/player": "^4.0.515",
+    "@vercel/analytics": "^2.0.1",
     "border-beam": "^1.4.1",
     "bot-avatars": "0.1.1",
     "cobe": "2.0.1",
