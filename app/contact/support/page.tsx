@@ -17,9 +17,10 @@ export const metadata: Metadata = {
  * /contact/support — dub.co/contact/support one to one (the capture is
  * `DesignRules/screenshots/contact-support.png`): the icon over "Support"
  * and a line, a white column on the grey band — dub's holds its support
- * chat; here it is the support form, with a topic so it takes questions,
- * problem reports, account and payment matters and feedback — then the
- * two-cell strip of ways onward. `?temat=` picks the topic (read in the
+ * chat; here it is the support form, with an optional category so it takes
+ * problem reports, account and payment matters and suggestions — then a
+ * one-cell strip back to the help hub (dub's second cell, sales, removed
+ * at the user's request on 2026-10-05). `?temat=` picks the category (read in the
  * browser, so the page stays static), so the hub's "Zgłoś problem" lands
  * on the right one.
  */
@@ -39,23 +40,17 @@ export default function ContactSupportPage() {
           <SupportForm />
         </FormBand>
 
-        {/* Ways onward, as dub's two-cell strip */}
+        {/* The way onward: dub's strip, down to its one help link */}
         <section className="relative overflow-clip border-b border-ash bg-white px-4">
-          <div className="relative z-0 mx-auto grid max-w-[var(--page-max-width)] grid-cols-1 divide-ash border-x border-ash max-sm:divide-y sm:grid-cols-2 sm:divide-x">
-            {[
-              { label: "Centrum pomocy Examax", href: "/help" },
-              { label: "Porozmawiaj z zespołem sprzedaży", href: "/contact/sales" },
-            ].map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                prefetch={prefetchFor(link.href)}
-                className="focus-ring group flex items-center justify-center gap-1 px-6 py-8 text-base text-fog transition-colors hover:bg-canvas-muted hover:text-charcoal"
-              >
-                {link.label}
-                <ChevronRight className="size-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2} aria-hidden />
-              </Link>
-            ))}
+          <div className="relative z-0 mx-auto max-w-[var(--page-max-width)] border-x border-ash">
+            <Link
+              href="/contact"
+              prefetch={prefetchFor("/contact")}
+              className="focus-ring group flex items-center justify-center gap-1 px-6 py-8 text-base text-fog transition-colors hover:bg-canvas-muted hover:text-charcoal"
+            >
+              Centrum pomocy Examax
+              <ChevronRight className="size-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2} aria-hidden />
+            </Link>
           </div>
         </section>
       </main>

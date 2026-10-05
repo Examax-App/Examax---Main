@@ -157,7 +157,7 @@ The guiding pricing principle: **do not limit learning itself.** Core practice, 
 - **Students are often minors.** Data collection is kept to what the product needs to teach; nothing is sold or used for advertising.
 - **Parents can see progress** (Max plan), and schools get a GDPR data-processing agreement (Enterprise).
 - **The AI acts only within its permissions**, and plan changes wait for the student's consent.
-- **The public site is static and self-contained:** no third-party scripts or trackers, every asset served from Examax's own origin, a strict Content Security Policy and security headers on every response (see `next.config.ts`).
+- **The public site is static and self-contained:** no third-party scripts, ads or tracking cookies, every asset served from Examax's own origin, a strict Content Security Policy and security headers on every response (see `next.config.ts`). Visits are counted with Vercel Web Analytics — cookieless, anonymous page views, its script served from Examax's own domain.
 
 ---
 

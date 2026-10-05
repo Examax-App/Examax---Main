@@ -122,7 +122,7 @@ export default function TrainingPage() {
               description:
                 "Metoda, rachunki i wynik oceniane osobno — widzisz, za co jest punkt, a za co go zabrakło.",
               ctaLabel: "Dowiedz się więcej",
-              ctaHref: "/help",
+              ctaHref: "/contact",
               visual: <OpenTaskCheck />,
             },
           ]}

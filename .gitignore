@@ -24,13 +24,21 @@
 .DS_Store
 *.pem
 
+# credentials that must never be committed
+*.key
+*.p12
+*.pfx
+*service-account*.json
+/supabase/.temp/
+/supabase/.branches/
+
 # debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
+# env files: none is ever committed (.env.local holds the real values)
 .env*
 
 # vercel
@@ -45,6 +53,11 @@ next-env.d.ts
 
 # local tooling
 /.claude/settings.local.json
+/.claude/worktrees/
+/.claude/.cc-writes
 .idea/
 .vscode/*
 !.vscode/extensions.json
+
+# Private
+/DesignRules/

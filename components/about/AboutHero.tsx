@@ -73,7 +73,7 @@ export function AboutHero() {
               className="animate-slide-up-fade relative mx-auto mt-10 flex max-w-fit"
               style={{ "--offset": "5px", "--delay": "400ms" } as React.CSSProperties}
             >
-              <Button href="/help">Centrum pomocy</Button>
+              <Button href="/contact">Centrum pomocy</Button>
             </div>
           </div>
         </div>

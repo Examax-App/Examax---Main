@@ -13,7 +13,9 @@ This repository is the Examax website and front-end: the public marketing site a
 - [Remotion](https://www.remotion.dev) for the product films, played in the page with `@remotion/player`
 - Fonts self-hosted at build time (Satoshi, Inter, Geist Mono)
 
-The site needs **no environment variables** and calls **no external services** at runtime.
+The backend will be [Supabase](https://supabase.com) (project `eijggddzbwjtmpifoalj`). It is connected but not used yet: no code calls it, so the site still builds and runs without any environment variables. Its keys go in `.env.local`, which is gitignored, like every `.env*` file; never commit real values.
+
+For AI coding agents, `.mcp.json` registers the Supabase MCP server (run `/mcp` in Claude Code and authenticate), and `.claude/skills/` holds Supabase's agent skills.
 
 ## Getting started
 
@@ -61,7 +63,7 @@ Found a vulnerability? Please report it privately — see [`SECURITY.md`](SECURI
 
 ## Deployment
 
-The site is built for [Vercel](https://vercel.com): import the repository and deploy — no configuration or environment variables are needed. Any host that runs `pnpm build && pnpm start` on Node 20.9+ works too.
+The site is built for [Vercel](https://vercel.com): import the repository and deploy. Once code uses Supabase, add the variables from `.env.local` under Project → Settings → Environment Variables (the secret key server-only, never `NEXT_PUBLIC_`). Any host that runs `pnpm build && pnpm start` on Node 20.9+ works too.
 
 ## License
 

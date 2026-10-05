@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { preload } from "react-dom";
 import { Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
+import { Analytics } from "@vercel/analytics/next";
 import { FlashToast } from "@/components/ui/Toast";
 import "./globals.css";
 
@@ -94,6 +95,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         {children}
         {/* A toast one page leaves for the next (e.g. "account created") */}
         <FlashToast />
+        {/* Vercel Web Analytics: cookieless page views, served from this origin
+            (/_vercel/insights). That route exists only on Vercel, so builds made
+            anywhere else (local `pnpm start`, CI) leave it out instead of 404ing. */}
+        {process.env.VERCEL ? <Analytics /> : null}
       </body>
     </html>
   );

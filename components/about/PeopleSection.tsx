@@ -38,8 +38,8 @@ const OWNER: Person = {
     </span>
   ),
   links: [
-    { label: "X", href: "https://x.com", icon: XIcon },
-    { label: "GitHub", href: "https://github.com", icon: GitHubIcon },
+    { label: "X", href: "https://x.com/kenarfTBD", icon: XIcon },
+    { label: "GitHub", href: "https://github.com/FrancisTechX2", icon: GitHubIcon },
   ],
 };
 
