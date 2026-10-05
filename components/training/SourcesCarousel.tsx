@@ -53,7 +53,7 @@ const STORIES: Story[] = [
     colour: "#15803d",
     figure: "bars",
     title: "Zasady oceniania przepisane kryterium po kryterium",
-    link: { href: "/help", label: "Jak liczymy punkty" },
+    link: { href: "/contact", label: "Jak liczymy punkty" },
   },
   {
     tab: "Informatory",
@@ -62,7 +62,7 @@ const STORIES: Story[] = [
     colour: "#7c3aed",
     figure: "parabola",
     title: "Zadania z informatorów CKE do nowej formuły egzaminu",
-    link: { href: "/help", label: "Dowiedz się więcej" },
+    link: { href: "/contact", label: "Dowiedz się więcej" },
   },
   {
     tab: "Aktualizacje",

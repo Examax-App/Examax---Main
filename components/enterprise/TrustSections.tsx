@@ -116,13 +116,13 @@ export function SecuritySection() {
         </div>
         <div className="grid grid-cols-1 divide-ash border-t border-ash max-md:divide-y md:grid-cols-3 md:divide-x">
           <div className="relative flex h-52 flex-col items-center justify-center font-geist-mono text-lg text-charcoal">
-            <LearnMore href="/help" />
+            <LearnMore href="/contact" />
             <span>RODO</span>
             <span className="my-4 h-px w-16 bg-smoke" />
             <span>DPA</span>
           </div>
           <div className="relative flex h-52 items-center justify-center">
-            <LearnMore href="/help" />
+            <LearnMore href="/contact" />
             <div className="relative grid size-24 place-items-center">
               <StarRing />
               <span className="font-geist-mono text-lg text-charcoal">UE</span>

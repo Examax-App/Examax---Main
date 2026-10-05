@@ -256,7 +256,7 @@ const menus: Record<MenuKey, Menu> = {
       {
         heading: "Pomoc i wsparcie",
         items: [
-          { icon: LifeBuoy, title: "Centrum pomocy", description: "Odpowiedzi na Twoje pytania", href: "/help" },
+          { icon: LifeBuoy, title: "Centrum pomocy", description: "Odpowiedzi na Twoje pytania", href: "/contact" },
           { icon: Mail, title: "Kontakt", description: "Napisz do wsparcia lub w sprawie szkoły", href: "/contact" },
         ],
       },

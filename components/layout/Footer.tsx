@@ -67,7 +67,7 @@ const EXAMS: FooterLink[] = [
 
 const RESOURCES: FooterLink[] = [
   { label: "Dokumentacja", href: "/docs" },
-  { label: "Centrum pomocy", href: "/help" },
+  { label: "Centrum pomocy", href: "/contact" },
   { label: "Aktualności", href: "/updates" },
   { label: "Cennik", href: "/pricing" },
   { label: "FAQ", href: "/#faq" },
@@ -310,8 +310,7 @@ export function Footer() {
         {/* Status and the copyright */}
         <div className="mt-12 flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
           <Link
-            href="/help"
-            prefetch={false}
+            href="/contact"
             className="group focus-ring flex max-w-fit select-none items-center gap-2 rounded-lg border border-ash bg-white py-2 pl-2 pr-2.5 transition-colors duration-75 hover:bg-canvas-muted active:bg-paper-mist"
           >
             <span className="relative size-2">

@@ -73,3 +73,30 @@ export function SystemsPill() {
     </span>
   );
 }
+
+/**
+ * The hub's "Zgłoś problem" icon: lucide's triangle-alert, path for path,
+ * with a heavier exclamation. Lucide draws the mark as a 4-unit stem and a
+ * zero-length dot, which at the hub's 40px and stroke 1 all but disappears
+ * (the dot comes out ~1.7px). Here the stem runs 5 units and the dot is a
+ * filled circle, so the mark reads at the same weight as the triangle.
+ * Takes the same props as a lucide icon.
+ */
+export function WarningIcon({ className, strokeWidth = 2, ...props }: { className?: string; strokeWidth?: number; "aria-hidden"?: boolean }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      {...props}
+    >
+      <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" />
+      <path d="M12 8.5v5" />
+      <circle cx="12" cy="16.75" r="0.9" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}

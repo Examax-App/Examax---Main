@@ -9,11 +9,12 @@ const isDev = process.env.NODE_ENV !== "production";
  * scripts, hence 'unsafe-inline' for scripts; there is no user-generated
  * content anywhere on the site for it to be exploited through. Development
  * adds what React's dev tooling and hot reload need ('unsafe-eval', the HMR
- * websocket).
+ * websocket, and the debug build of Vercel Analytics, which only development
+ * loads from Vercel's CDN; in production it is served from this origin).
  */
 const csp = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}`,
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval' https://va.vercel-scripts.com" : ""}`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob:",
   "font-src 'self' data:",

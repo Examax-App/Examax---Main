@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { prefetchFor } from "@/lib/routes";
-import { Bug, FileText, MessagesSquare, ShieldUser } from "lucide-react";
+import { FileText, MessagesSquare, ShieldUser } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { ContactHero, SystemsPill } from "@/components/contact/pieces";
+import { ContactHero, SystemsPill, WarningIcon } from "@/components/contact/pieces";
 import type { IconComponent } from "@/lib/icon";
 
 export const metadata: Metadata = {
@@ -39,22 +39,26 @@ const OPTIONS: Option[] = [
     href: "/docs",
   },
   {
-    icon: Bug,
+    icon: WarningIcon,
     title: "Zgłoś problem",
     description: "Znalazłeś błąd w zadaniu, rozwiązaniu albo w aplikacji? Daj znać, a poprawimy go w pierwszej kolejności.",
     cta: "Zgłoś problem",
-    href: "/contact/support?temat=problem",
+    href: "/contact/support?temat=techniczny",
   },
 ];
+
+const CTA =
+  "focus-ring inline-flex h-9 w-fit items-center justify-center whitespace-nowrap rounded-lg border border-black bg-black px-4 text-sm font-medium text-white transition-all hover:ring-4 hover:ring-ash";
 
 /**
  * /contact — a one-to-one of dub.co/contact (read off its live DOM on
  * 2026-10-03; the capture is `DesignRules/Contact _ Dub.png`): a ruled hero
  * — the question, a line, the status pill — then a two-by-two of cells on
  * 1px rules, each with a 40px stroke-1 icon, a 20px title, a muted line and
- * a black button. Sales and Support open their own pages, as dub's do;
- * Questions points to the documentation (/docs, not built yet, so the 404
- * for now); the problem report opens Support with that topic picked.
+ * a black button. Sales and Support open their forms, which send through
+ * /api/contact; Questions points to the documentation (/docs, not built yet,
+ * so the 404 for now); the problem report opens the support form with
+ * "Problem techniczny" picked.
  */
 export default function ContactPage() {
   return (
@@ -81,11 +85,7 @@ export default function ContactPage() {
                     <h2 className="text-xl font-semibold text-charcoal">{option.title}</h2>
                     <p className="mt-2 max-w-sm text-pretty text-base text-fog">{option.description}</p>
                   </div>
-                  <Link
-                    href={option.href}
-                    prefetch={prefetchFor(option.href)}
-                    className="focus-ring inline-flex h-9 w-fit items-center justify-center whitespace-nowrap rounded-lg border border-black bg-black px-4 text-sm font-medium text-white transition-all hover:ring-4 hover:ring-ash"
-                  >
+                  <Link href={option.href} prefetch={prefetchFor(option.href)} className={CTA}>
                     {option.cta}
                   </Link>
                 </li>
