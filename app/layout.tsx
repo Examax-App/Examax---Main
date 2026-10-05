@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { preload } from "react-dom";
 import { Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
+import { Analytics } from "@vercel/analytics/next";
 import { FlashToast } from "@/components/ui/Toast";
 import "./globals.css";
 
@@ -94,6 +95,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         {children}
         {/* A toast one page leaves for the next (e.g. "account created") */}
         <FlashToast />
+        <Analytics />
       </body>
     </html>
   );
