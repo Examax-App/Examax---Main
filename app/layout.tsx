@@ -4,6 +4,7 @@ import { Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/next";
 import { FlashToast } from "@/components/ui/Toast";
+import { SITE_LOCALE, SITE_NAME, SITE_URL, X_HANDLE } from "@/lib/seo";
 import "./globals.css";
 
 /* Inter is self-hosted from public/fonts (see the @font-face rules at the top of
@@ -29,11 +30,14 @@ const satoshi = localFont({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://examax.app"),
+  metadataBase: new URL(SITE_URL),
+  /* The landing page's title, and the fallback for any page without one. */
   title: {
-    default: "Examax",
+    default: "Examax — przygotowanie do matury i egzaminu ósmoklasisty",
     template: "%s — Examax",
   },
+  applicationName: SITE_NAME,
+  category: "education",
   description:
     "Examax to kompletny system przygotowań do egzaminu ósmoklasisty i matury: roadmapa nauki, zadania z arkuszy CKE, Korepetytor AI i śledzenie postępów — wszystko w jednym miejscu.",
   keywords: [
@@ -49,18 +53,24 @@ export const metadata: Metadata = {
     title: "Examax — Zamień naukę w wyniki",
     description:
       "Kompletny system przygotowań do egzaminu ósmoklasisty i matury: roadmapa nauki, zadania z arkuszy CKE i Korepetytor AI.",
-    url: "https://examax.app",
-    siteName: "Examax",
-    locale: "pl_PL",
+    url: "/",
+    siteName: SITE_NAME,
+    locale: SITE_LOCALE,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
+    site: X_HANDLE,
     title: "Examax — Zamień naukę w wyniki",
     description:
       "Kompletny system przygotowań do egzaminu ósmoklasisty i matury: roadmapa nauki, zadania z arkuszy CKE i Korepetytor AI.",
   },
-  robots: { index: true, follow: true },
+  robots: {
+    index: true,
+    follow: true,
+    /* Let search show the whole snippet and full-size previews of the product pictures. */
+    googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large", "max-video-preview": -1 },
+  },
   /* The RealFaviconGenerator set lives in public/ and is declared here once
      for every page. Keep the app/ icon file conventions (favicon.ico, icon.*,
      apple-icon.*) empty — they would emit a second set of <link> tags, and an

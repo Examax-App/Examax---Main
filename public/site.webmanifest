@@ -1,7 +1,7 @@
 {
   "name": "Examax — Zamień naukę w wyniki",
   "short_name": "Examax",
-  "description": "Kompletny system przygotowań do egzaminu ósmoklasisty i matury: roadmapa nauki, zadania z arkuszy CKE i agent AI.",
+  "description": "Kompletny system przygotowań do egzaminu ósmoklasisty i matury: roadmapa nauki, zadania z arkuszy CKE i Korepetytor AI.",
   "lang": "pl",
   "dir": "ltr",
   "start_url": "/",

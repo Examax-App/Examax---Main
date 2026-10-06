@@ -6,12 +6,14 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ContactHero, SystemsPill, WarningIcon } from "@/components/contact/pieces";
 import type { IconComponent } from "@/lib/icon";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Kontakt",
   description: "Porozmawiaj z zespołem Examax, uzyskaj pomoc, zadaj pytanie albo zgłoś problem.",
-  openGraph: { title: "Kontakt — Examax", description: "W czym możemy pomóc?", url: "https://examax.app/contact" },
-};
+  path: "/contact",
+  social: { description: "W czym możemy pomóc?" },
+});
 
 type Option = { icon: IconComponent; title: string; description: string; cta: string; href: string };
 

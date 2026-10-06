@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import {
   BadgePercent,
   CloudCheck,
@@ -28,6 +29,10 @@ import { TutoringCompare } from "@/components/sections/TutoringCompare";
 import { Faq } from "@/components/sections/Faq";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { ProMark } from "@/components/ui/ProMark";
+import { EXAMAX_SOCIALS } from "@/components/ui/SocialIcons";
+import { JsonLd } from "@/components/layout/JsonLd";
+import { CONTACT_EMAIL } from "@/lib/contact";
+import { siteStructuredData } from "@/lib/seo";
 // The pictures load as lazy islands — see components/landing/LazyVisuals.
 import {
   AgentShowcase,
@@ -46,9 +51,13 @@ import {
   WeakSpots,
 } from "@/components/landing/LazyVisuals";
 
+/* Title, description and share cards are the root layout's; the landing page adds its canonical URL. */
+export const metadata: Metadata = { alternates: { canonical: "/" } };
+
 export default function Home() {
   return (
     <>
+      <JsonLd data={siteStructuredData({ email: CONTACT_EMAIL, sameAs: EXAMAX_SOCIALS.map((social) => social.href) })} />
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-buttons focus:bg-midnight-ink focus:px-4 focus:py-2 focus:text-white"

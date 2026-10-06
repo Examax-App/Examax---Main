@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next";
-
-const SITE = "https://examax.app";
+import { SITE_URL } from "@/lib/seo";
 
 /** Every public page, most important first. */
 const PAGES: Array<{ path: string; priority: number }> = [
@@ -24,5 +23,5 @@ const PAGES: Array<{ path: string; priority: number }> = [
 
 /** /sitemap.xml */
 export default function sitemap(): MetadataRoute.Sitemap {
-  return PAGES.map(({ path, priority }) => ({ url: `${SITE}${path}`, changeFrequency: "weekly", priority }));
+  return PAGES.map(({ path, priority }) => ({ url: `${SITE_URL}${path}`, changeFrequency: "weekly", priority }));
 }

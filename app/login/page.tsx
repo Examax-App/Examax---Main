@@ -5,6 +5,8 @@ import { LoginPanel } from "@/components/auth/LoginPanel";
 export const metadata: Metadata = {
   title: "Zaloguj się",
   description: "Zaloguj się do swojego konta Examax.",
+  /* An account form, not a page to land on from search; its links still count. */
+  robots: { index: false, follow: true },
 };
 
 /** Dub's login page (dubinc/dub: (auth-marketing)/login/page.tsx): a page of its own. */

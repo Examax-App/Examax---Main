@@ -8,17 +8,18 @@ import { ScaleSection } from "@/components/enterprise/ScaleSection";
 import { ToolkitSection } from "@/components/enterprise/ToolkitSection";
 import { CommunitySection, EligibilitySection, PlatformCanvas, SecuritySection } from "@/components/enterprise/TrustSections";
 import { TrialBand } from "@/components/enterprise/TrialBand";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Examax dla szkół",
   description:
     "Roadmapy, zadania CKE i postępy każdego ucznia w jednym panelu nauczyciela. Licencja dla szkół i placówek, z miesiącem pilotażu za darmo.",
-  openGraph: {
+  path: "/enterprise",
+  social: {
     title: "Examax dla szkół — Enterprise",
     description: "Przygotuj całą szkołę do egzaminu ósmoklasisty i matury.",
-    url: "https://examax.app/enterprise",
   },
-};
+});
 
 /** PLACEHOLDER COPY — terms of the pilot and the licence are illustrative. */
 const FAQS = [

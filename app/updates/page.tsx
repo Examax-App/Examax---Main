@@ -5,12 +5,11 @@ import { Footer } from "@/components/layout/Footer";
 import { GridSection } from "@/components/roadmap/sections";
 import { XIcon } from "@/components/ui/SocialIcons";
 import { ENTRIES, formatDate } from "@/components/updates/entries";
+import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Aktualności",
-  description: "Wszystkie nowości, ulepszenia i poprawki w Examaxie.",
-  openGraph: { title: "Aktualności — Examax", description: "Wszystkie nowości, ulepszenia i poprawki w Examaxie.", url: "https://examax.app/updates" },
-  alternates: { types: { "application/rss+xml": "/updates/rss.xml" } },
+  ...pageMetadata({ title: "Aktualności", description: "Wszystkie nowości, ulepszenia i poprawki w Examaxie.", path: "/updates" }),
+  alternates: { canonical: "/updates", types: { "application/rss+xml": "/updates/rss.xml" } },
 };
 
 /** Dub's small outline button, measured: 32px tall, 8px radius, neutral-200 edge, a 4px ring on hover. */

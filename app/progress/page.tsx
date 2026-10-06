@@ -10,17 +10,15 @@ import { JourneySection } from "@/components/progress/JourneySection";
 import { LiveSection } from "@/components/progress/LiveSection";
 import { ProfileSection } from "@/components/progress/ProfileSection";
 import { NextSection } from "@/components/progress/NextSection";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Śledzenie postępów",
   description:
     "Każde zadanie, lekcja i quiz trafia do statystyk od razu — opanowanie tematów, skuteczność, seria nauki i gotowość do egzaminu CKE w jednym miejscu.",
-  openGraph: {
-    title: "Śledzenie postępów — Examax",
-    description: "Zobacz, ile już umiesz, co się poprawiło i co ćwiczyć dalej — od pierwszego zadania do dnia egzaminu.",
-    url: "https://examax.app/progress",
-  },
-};
+  path: "/progress",
+  social: { description: "Zobacz, ile już umiesz, co się poprawiło i co ćwiczyć dalej — od pierwszego zadania do dnia egzaminu." },
+});
 
 /**
  * The progress route — the long form of the landing page's `#progress`

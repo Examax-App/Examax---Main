@@ -10,17 +10,15 @@ import { StepsCarousel } from "@/components/simulation/StepsCarousel";
 import { ToolsSection } from "@/components/simulation/ToolsSection";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { plans } from "@/lib/pricing";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Symulacja egzaminu",
   description:
     "Pełny arkusz CKE na czas, z narzędziami jak na sali, sprawdzony według zasad oceniania — i raport, który pokazuje, gdzie tracisz punkty.",
-  openGraph: {
-    title: "Symulacja egzaminu — Examax",
-    description: "Napisz egzamin, zanim zacznie się liczyć: pełny arkusz CKE, czas jak na sali i raport po każdym podejściu.",
-    url: "https://examax.app/simulation",
-  },
-};
+  path: "/simulation",
+  social: { description: "Napisz egzamin, zanim zacznie się liczyć: pełny arkusz CKE, czas jak na sali i raport po każdym podejściu." },
+});
 
 /**
  * The simulation route — the long form of the landing page's `#exam` film,

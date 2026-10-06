@@ -7,17 +7,15 @@ import { TeamSection } from "@/components/agents/TeamSection";
 import { WorkSection } from "@/components/agents/WorkSection";
 import { FilmSection } from "@/components/agents/FilmSection";
 import { GridSection } from "@/components/roadmap/sections";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Korepetytor AI",
   description:
     "Zespół agentów AI, który tłumaczy krok po kroku, układa sprawdziany i planuje naukę — ale każde zadanie rozwiązujesz sam.",
-  openGraph: {
-    title: "Korepetytor AI — Examax",
-    description: "Korepetytor, który nie odrabia za Ciebie: prowadzi krok po kroku, aż umiesz to zrobić sam.",
-    url: "https://examax.app/agents",
-  },
-};
+  path: "/agents",
+  social: { description: "Korepetytor, który nie odrabia za Ciebie: prowadzi krok po kroku, aż umiesz to zrobić sam." },
+});
 
 /**
  * The Korepetytor AI route — the destination behind the navbar's
