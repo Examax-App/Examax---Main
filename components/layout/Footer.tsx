@@ -80,8 +80,9 @@ const TOOLS: FooterLink[] = [
   { label: "Symulacja egzaminu", href: "/simulation" },
 ];
 
-/* NOT BUILT YET — /reviews, /tutors, /careers and the legal pages have no page
-   behind them, so their links land on the 404 until each one is written. */
+/* NOT BUILT YET — /reviews, /tutors, /careers and the legal pages other than
+   /legal/privacy have no page behind them, so their links land on the 404
+   until each one is written. */
 const COMPANY: FooterLink[] = [
   { label: "O nas", href: "/about" },
   { label: "Kontakt", href: "/contact" },
@@ -89,12 +90,12 @@ const COMPANY: FooterLink[] = [
   { label: "Dla szkół", href: "/enterprise" },
   { label: "Dla korepetytorów", href: "/tutors" },
   { label: "Kariera", href: "/careers" },
-  { label: "Prywatność", href: "/privacy" },
+  { label: "Prywatność", href: "/legal/privacy" },
 ];
 
 const LEGAL: FooterLink[] = [
   { label: "Regulamin", href: "/terms" },
-  { label: "Polityka prywatności", href: "/privacy" },
+  { label: "Polityka prywatności", href: "/legal/privacy" },
   { label: "Polityka cookies", href: "/cookies" },
   { label: "RODO", href: "/gdpr" },
 ];

@@ -85,7 +85,7 @@ export function AuthLayout({ children }: { children: React.ReactNode }) {
                   Regulamin
                 </Link>{" "}
                 i{" "}
-                <Link href="/privacy" prefetch={false} className="font-semibold text-steel transition-colors hover:text-graphite">
+                <Link href="/legal/privacy" className="font-semibold text-steel transition-colors hover:text-graphite">
                   Politykę prywatności
                 </Link>{" "}
                 Examax

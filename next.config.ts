@@ -44,6 +44,10 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   /** Never ship source maps to the browser (the default, kept explicit). */
   productionBrowserSourceMaps: false,
+  /** The privacy policy lives under /legal, as dub's does; the short path still finds it. */
+  async redirects() {
+    return [{ source: "/privacy", destination: "/legal/privacy", permanent: true }];
+  },
   async headers() {
     return [
       { source: "/:path*", headers: securityHeaders },

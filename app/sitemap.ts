@@ -19,6 +19,7 @@ const PAGES: Array<{ path: string; priority: number }> = [
   { path: "/contact", priority: 0.5 },
   { path: "/contact/sales", priority: 0.4 },
   { path: "/contact/support", priority: 0.4 },
+  { path: "/legal/privacy", priority: 0.3 },
 ];
 
 /** /sitemap.xml */
