@@ -12,18 +12,15 @@ import { FirstSteps, SetBuilder, TimedWindow } from "@/components/training/Tools
 import { DiagnosticBand } from "@/components/training/DiagnosticBand";
 import { SimilarTasks } from "@/components/training/SimilarTasks";
 import { SourcesCarousel } from "@/components/training/SourcesCarousel";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Trening zadań",
   description:
     "Trenuj na zadaniach z oficjalnych arkuszy CKE: sprawdzanie od razu według zasad oceniania, Korepetytor AI przy każdym błędzie i zadania dobierane do tego, gdzie tracisz punkty.",
-  openGraph: {
-    title: "Trening zadań — Examax",
-    description:
-      "Zadania z arkuszy CKE, sprawdzane od razu i dobierane do tego, gdzie tracisz punkty.",
-    url: "https://examax.app/training",
-  },
-};
+  path: "/training",
+  social: { description: "Zadania z arkuszy CKE, sprawdzane od razu i dobierane do tego, gdzie tracisz punkty." },
+});
 
 /**
  * The training route — the long form of the landing page's `#practice`

@@ -5,12 +5,14 @@ import { Footer } from "@/components/layout/Footer";
 import { ExamStrip } from "@/components/about/ExamStrip";
 import { ContactHero, FormBand } from "@/components/contact/pieces";
 import { ContactForm } from "@/components/contact/ContactForm";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Porozmawiaj z nami",
   description: "Umów prezentację Examaxu i porozmawiaj o dostępie dla szkoły, cenach dla grup albo integracjach.",
-  openGraph: { title: "Porozmawiaj z nami — Examax", description: "Examax dla szkół i klas.", url: "https://examax.app/contact/sales" },
-};
+  path: "/contact/sales",
+  social: { description: "Examax dla szkół i klas." },
+});
 
 /**
  * /contact/sales — dub.co/contact/sales one to one (the capture is

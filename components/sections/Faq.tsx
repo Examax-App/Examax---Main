@@ -38,18 +38,22 @@ const faqs: FaqItem[] = [
     answer: (
       <>
         Plan{" "}
-        <strong className="font-semibold text-charcoal">Darmowy</strong> jest
-        bezpłatny na zawsze i nie wymaga karty. Plan{" "}
-        <strong className="font-semibold text-charcoal">Premium</strong>{" "}
-        kosztuje 29 zł miesięcznie (24 zł przy płatności rocznej) i odblokowuje
-        pełną roadmapę, trening bez limitów i Korepetytora AI bez ograniczeń.
+        <strong className="font-semibold text-charcoal">Free</strong> jest
+        darmowy na zawsze i nie wymaga karty — roadmapa i trening są w nim bez
+        limitu. Plan{" "}
+        <strong className="font-semibold text-charcoal">Pro</strong> kosztuje
+        49 zł miesięcznie, a{" "}
+        <strong className="font-semibold text-charcoal">Max</strong> 79 zł
+        miesięcznie; przy płatności rocznej płacisz za dziesięć miesięcy, a
+        korzystasz przez dwanaście. Ceny są takie same dla matury i egzaminu
+        ósmoklasisty.
       </>
     ),
   },
   {
     question: "Kiedy pojawią się symulacje egzaminu?",
     answer:
-      "Pracujemy nad nimi teraz — z pełnym formatem arkusza, czasem liczonym jak na sali i raportem gotowości po zakończeniu. Symulacje trafią najpierw do planu Premium; ogłosimy start na tej stronie i w aplikacji.",
+      "Pracujemy nad nimi teraz — z pełnym formatem arkusza, czasem liczonym jak na sali i raportem gotowości po zakończeniu. W planie Free napiszesz jeden próbny arkusz, w Pro cztery symulacje w miesiącu, a w Max bez limitu. Ogłosimy start na tej stronie i w aplikacji.",
   },
   {
     question: "Co z moimi danymi?",

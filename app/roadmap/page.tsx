@@ -9,17 +9,15 @@ import { ScheduleSection } from "@/components/roadmap/ScheduleSection";
 import { ConnectedBand } from "@/components/roadmap/ConnectedBand";
 import { FlexiblePath } from "@/components/roadmap/FlexiblePath";
 import { GridSection } from "@/components/roadmap/sections";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Roadmapa nauki",
   description:
     "Cały materiał egzaminu CKE rozpisany na tematy i tygodnie — osobisty plan nauki liczony do dnia egzaminu, który wie, co robić dalej.",
-  openGraph: {
-    title: "Roadmapa nauki — Examax",
-    description: "Plan nauki ułożony pod Twój egzamin, termin i tempo — temat po temacie, aż do dnia egzaminu.",
-    url: "https://examax.app/roadmap",
-  },
-};
+  path: "/roadmap",
+  social: { description: "Plan nauki ułożony pod Twój egzamin, termin i tempo — temat po temacie, aż do dnia egzaminu." },
+});
 
 /**
  * The roadmap route — the long form of the landing page's `#roadmap` section,

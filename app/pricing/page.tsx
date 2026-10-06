@@ -2,12 +2,14 @@ import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { PricingView } from "@/components/pricing/PricingView";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Cennik",
   description:
     "Plany Examax — Free, Pro, Max i Enterprise, w tych samych cenach dla matury i egzaminu ósmoklasisty. Zacznij za darmo i zmień plan wtedy, kiedy zaczniesz potrzebować więcej.",
-};
+  path: "/pricing",
+});
 
 /**
  * The standalone pricing page — dub.co/pricing rebuilt for Examax.

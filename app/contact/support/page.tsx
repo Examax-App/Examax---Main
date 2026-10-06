@@ -6,12 +6,14 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ContactHero, FormBand } from "@/components/contact/pieces";
 import { SupportForm } from "@/components/contact/ContactForm";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Wsparcie",
   description: "Napisz do zespołu Examax w sprawie konta lub płatności, zadaj pytanie albo zgłoś problem.",
-  openGraph: { title: "Wsparcie — Examax", description: "Jak możemy pomóc?", url: "https://examax.app/contact/support" },
-};
+  path: "/contact/support",
+  social: { description: "Jak możemy pomóc?" },
+});
 
 /**
  * /contact/support — dub.co/contact/support one to one (the capture is

@@ -8,17 +8,15 @@ import { StorySection } from "@/components/about/StorySection";
 import { PeopleSection } from "@/components/about/PeopleSection";
 import { ValuesSection } from "@/components/about/ValuesSection";
 import { SourcesSection } from "@/components/about/SourcesSection";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "O Examax",
   description:
     "Kim jesteśmy, po co budujemy Examax i według jakich zasad. Platforma do nauki na egzamin ósmoklasisty i maturę, oparta na dokumentach CKE.",
-  openGraph: {
-    title: "O Examax",
-    description: "Pomagamy uczniom zdać egzamin ósmoklasisty i maturę z lepszym wynikiem.",
-    url: "https://examax.app/about",
-  },
-};
+  path: "/about",
+  social: { title: "O Examax", description: "Pomagamy uczniom zdać egzamin ósmoklasisty i maturę z lepszym wynikiem." },
+});
 
 /**
  * The about route — "O Examax" in the navbar's "O nas" menu and the
