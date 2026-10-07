@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { projectId as sanityProjectId } from "./lib/sanity/env";
 
 const isDev = process.env.NODE_ENV !== "production";
 
@@ -11,15 +12,19 @@ const isDev = process.env.NODE_ENV !== "production";
  * adds what React's dev tooling and hot reload need ('unsafe-eval', the HMR
  * websocket, and the debug build of Vercel Analytics, which only development
  * loads from Vercel's CDN; in production it is served from this origin).
+ * The one outside source is Sanity: its image CDN, and the project's API for
+ * live content updates (lib/sanity/live.ts).
  */
+const sanityApi = ` https://${sanityProjectId}.api.sanity.io https://${sanityProjectId}.apicdn.sanity.io`;
+
 const csp = [
   "default-src 'self'",
   `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval' https://va.vercel-scripts.com" : ""}`,
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob:",
+  "img-src 'self' data: blob: https://cdn.sanity.io",
   "font-src 'self' data:",
   "media-src 'self' blob:",
-  `connect-src 'self'${isDev ? " ws: wss:" : ""}`,
+  `connect-src 'self'${sanityApi}${isDev ? " ws: wss:" : ""}`,
   "worker-src 'self' blob:",
   "frame-src 'none'",
   "frame-ancestors 'none'",
@@ -44,9 +49,21 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   /** Never ship source maps to the browser (the default, kept explicit). */
   productionBrowserSourceMaps: false,
-  /** The privacy policy lives under /legal, as dub's does; the short path still finds it. */
+  /** Sanity's image CDN, for next/image (build the URL with urlFor in lib/sanity/image.ts). */
+  images: {
+    remotePatterns: [{ protocol: "https", hostname: "cdn.sanity.io", pathname: `/images/${sanityProjectId}/**` }],
+  },
+  /**
+   * One host for search engines: www.examax.app answers on Vercel too, so it
+   * sends every path to examax.app (the canonical host) instead of serving a
+   * second copy of the site. The privacy policy lives under /legal, as dub's
+   * does; the short path still finds it.
+   */
   async redirects() {
-    return [{ source: "/privacy", destination: "/legal/privacy", permanent: true }];
+    return [
+      { source: "/:path*", has: [{ type: "host", value: "www.examax.app" }], destination: "https://examax.app/:path*", permanent: true },
+      { source: "/privacy", destination: "/legal/privacy", permanent: true },
+    ];
   },
   async headers() {
     return [

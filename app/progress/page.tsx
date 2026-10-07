@@ -10,7 +10,8 @@ import { JourneySection } from "@/components/progress/JourneySection";
 import { LiveSection } from "@/components/progress/LiveSection";
 import { ProfileSection } from "@/components/progress/ProfileSection";
 import { NextSection } from "@/components/progress/NextSection";
-import { pageMetadata } from "@/lib/seo";
+import { JsonLd } from "@/components/layout/JsonLd";
+import { breadcrumbStructuredData, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "Śledzenie postępów",
@@ -45,6 +46,7 @@ export const metadata: Metadata = pageMetadata({
 export default function ProgressPage() {
   return (
     <>
+      <JsonLd data={breadcrumbStructuredData([{ name: "Postępy", path: "/progress" }])} />
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-buttons focus:bg-midnight-ink focus:px-4 focus:py-2 focus:text-white"

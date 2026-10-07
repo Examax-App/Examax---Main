@@ -1,4 +1,6 @@
 import type { MetadataRoute } from "next";
+import { sanityFetch } from "@/lib/sanity/live";
+import { UPDATES_QUERY } from "@/lib/sanity/queries";
 import { SITE_URL } from "@/lib/seo";
 
 /** Every public page, most important first. */
@@ -22,7 +24,11 @@ const PAGES: Array<{ path: string; priority: number }> = [
   { path: "/legal/privacy", priority: 0.3 },
 ];
 
-/** /sitemap.xml */
-export default function sitemap(): MetadataRoute.Sitemap {
-  return PAGES.map(({ path, priority }) => ({ url: `${SITE_URL}${path}`, changeFrequency: "weekly", priority }));
+/** /sitemap.xml — the pages above, then every changelog post from Sanity. */
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const { data: posts } = await sanityFetch({ query: UPDATES_QUERY, perspective: "published", stega: false });
+  return [
+    ...PAGES.map(({ path, priority }) => ({ url: `${SITE_URL}${path}`, changeFrequency: "weekly" as const, priority })),
+    ...posts.map((post) => ({ url: `${SITE_URL}/updates/${post.slug}`, lastModified: post._updatedAt, priority: 0.5 })),
+  ];
 }

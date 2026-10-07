@@ -4,7 +4,7 @@ import { Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/next";
 import { FlashToast } from "@/components/ui/Toast";
-import { SITE_LOCALE, SITE_NAME, SITE_URL, X_HANDLE } from "@/lib/seo";
+import { SITE_DESCRIPTION, SITE_LOCALE, SITE_NAME, SITE_URL, X_HANDLE } from "@/lib/seo";
 import "./globals.css";
 
 /* Inter is self-hosted from public/fonts (see the @font-face rules at the top of
@@ -38,8 +38,7 @@ export const metadata: Metadata = {
   },
   applicationName: SITE_NAME,
   category: "education",
-  description:
-    "Examax to kompletny system przygotowań do egzaminu ósmoklasisty i matury: roadmapa nauki, zadania z arkuszy CKE, Korepetytor AI i śledzenie postępów — wszystko w jednym miejscu.",
+  description: SITE_DESCRIPTION,
   keywords: [
     "matura",
     "egzamin ósmoklasisty",
@@ -79,14 +78,14 @@ export const metadata: Metadata = {
      public/brand/. */
   icons: {
     icon: [
-      { url: "/favicon-96x96.png?v=20260924", type: "image/png", sizes: "96x96" },
-      { url: "/favicon.svg?v=20260924", type: "image/svg+xml" },
+      { url: "/favicon-96x96.png?v=20261007", type: "image/png", sizes: "96x96" },
+      { url: "/favicon.svg?v=20261007", type: "image/svg+xml" },
     ],
-    shortcut: "/favicon.ico?v=20260924",
-    apple: { url: "/apple-touch-icon.png?v=20260924", sizes: "180x180" },
+    shortcut: "/favicon.ico?v=20261007",
+    apple: { url: "/apple-touch-icon.png?v=20261007", sizes: "180x180" },
   },
   appleWebApp: { title: "Examax" },
-  manifest: "/site.webmanifest?v=20260924",
+  manifest: "/site.webmanifest?v=20261007",
 };
 
 /* theme-color lives on the viewport export, not on metadata. */

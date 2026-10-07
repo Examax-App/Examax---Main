@@ -7,7 +7,8 @@ import { TeamSection } from "@/components/agents/TeamSection";
 import { WorkSection } from "@/components/agents/WorkSection";
 import { FilmSection } from "@/components/agents/FilmSection";
 import { GridSection } from "@/components/roadmap/sections";
-import { pageMetadata } from "@/lib/seo";
+import { JsonLd } from "@/components/layout/JsonLd";
+import { breadcrumbStructuredData, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "Korepetytor AI",
@@ -38,6 +39,7 @@ export const metadata: Metadata = pageMetadata({
 export default function AgentsPage() {
   return (
     <>
+      <JsonLd data={breadcrumbStructuredData([{ name: "Korepetytor AI", path: "/agents" }])} />
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-buttons focus:bg-midnight-ink focus:px-4 focus:py-2 focus:text-white"

@@ -6,11 +6,13 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ContactHero, SystemsPill, WarningIcon } from "@/components/contact/pieces";
 import type { IconComponent } from "@/lib/icon";
-import { pageMetadata } from "@/lib/seo";
+import { JsonLd } from "@/components/layout/JsonLd";
+import { breadcrumbStructuredData, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "Kontakt",
-  description: "Porozmawiaj z zespołem Examax, uzyskaj pomoc, zadaj pytanie albo zgłoś problem.",
+  description:
+    "Napisz do zespołu Examax: pomoc z kontem i płatnościami, pytania o naukę, oferta dla szkół albo zgłoszenie problemu.",
   path: "/contact",
   social: { description: "W czym możemy pomóc?" },
 });
@@ -65,6 +67,7 @@ const CTA =
 export default function ContactPage() {
   return (
     <>
+      <JsonLd data={breadcrumbStructuredData([{ name: "Kontakt", path: "/contact" }])} />
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-buttons focus:bg-midnight-ink focus:px-4 focus:py-2 focus:text-white"

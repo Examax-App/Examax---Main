@@ -145,6 +145,32 @@ export type Author = {
   bio?: BlockContent;
 };
 
+export type ChangelogPost = {
+  _id: string;
+  _type: "changelogPost";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  publishedAt?: string;
+  summary?: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  authors?: Array<
+    {
+      _key: string;
+    } & AuthorReference
+  >;
+  body?: BlockContent;
+};
+
 export type SanityImagePaletteSwatch = {
   _type: "sanity.imagePaletteSwatch";
   background?: string;
@@ -253,6 +279,7 @@ export type AllSanitySchemaTypes =
   | SanityImageCrop
   | SanityImageHotspot
   | Author
+  | ChangelogPost
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
@@ -262,7 +289,7 @@ export type AllSanitySchemaTypes =
   | SanityImageAsset
   | Geopoint;
 
-// Source: ../examax/lib/sanity/queries.ts
+// Source: ../../Apps/examax/lib/sanity/queries.ts
 // Variable: POSTS_QUERY
 // Query: *[_type == "post" && defined(slug.current)] | order(publishedAt desc){  _id,  title,  "slug": slug.current,  excerpt,  publishedAt,  mainImage,  "author": author->{ name, "slug": slug.current, image },  "categories": categories[]->{ _id, title, "slug": slug.current }}
 export type POSTS_QUERY_RESULT = Array<{
@@ -298,7 +325,7 @@ export type POSTS_QUERY_RESULT = Array<{
   }> | null;
 }>;
 
-// Source: ../examax/lib/sanity/queries.ts
+// Source: ../../Apps/examax/lib/sanity/queries.ts
 // Variable: POST_QUERY
 // Query: *[_type == "post" && slug.current == $slug][0]{  _id,  title,  "slug": slug.current,  excerpt,  publishedAt,  mainImage,  body,  "author": author->{ name, "slug": slug.current, image, bio },  "categories": categories[]->{ _id, title, "slug": slug.current }}
 export type POST_QUERY_RESULT = {
@@ -336,7 +363,7 @@ export type POST_QUERY_RESULT = {
   }> | null;
 } | null;
 
-// Source: ../examax/lib/sanity/queries.ts
+// Source: ../../Apps/examax/lib/sanity/queries.ts
 // Variable: POST_SLUGS_QUERY
 // Query: *[_type == "post" && defined(slug.current)]{ "slug": slug.current, _updatedAt }
 export type POST_SLUGS_QUERY_RESULT = Array<{
@@ -344,12 +371,68 @@ export type POST_SLUGS_QUERY_RESULT = Array<{
   _updatedAt: string;
 }>;
 
+// Source: ../../Apps/examax/lib/sanity/queries.ts
+// Variable: UPDATES_QUERY
+// Query: *[_type == "changelogPost" && defined(slug.current)] | order(publishedAt desc, _createdAt desc){  _id,  title,  "slug": slug.current,  publishedAt,  summary,  image,  body,  _updatedAt}
+export type UPDATES_QUERY_RESULT = Array<{
+  _id: string;
+  title: string | null;
+  slug: string | null;
+  publishedAt: string | null;
+  summary: string | null;
+  image: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  } | null;
+  body: BlockContent | null;
+  _updatedAt: string;
+}>;
+
+// Source: ../../Apps/examax/lib/sanity/queries.ts
+// Variable: UPDATE_QUERY
+// Query: *[_type == "changelogPost" && slug.current == $slug][0]{  _id,  title,  "slug": slug.current,  publishedAt,  summary,  image,  body,  "authors": authors[]->{ _id, name, "slug": slug.current, image }}
+export type UPDATE_QUERY_RESULT = {
+  _id: string;
+  title: string | null;
+  slug: string | null;
+  publishedAt: string | null;
+  summary: string | null;
+  image: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  } | null;
+  body: BlockContent | null;
+  authors: Array<{
+    _id: string;
+    name: string | null;
+    slug: string | null;
+    image: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    } | null;
+  }> | null;
+} | null;
+
 // Query TypeMap
 declare global {
   interface SanityQueries {
     '*[_type == "post" && defined(slug.current)] | order(publishedAt desc){\n  _id,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  mainImage,\n  "author": author->{ name, "slug": slug.current, image },\n  "categories": categories[]->{ _id, title, "slug": slug.current }\n}': POSTS_QUERY_RESULT;
     '*[_type == "post" && slug.current == $slug][0]{\n  _id,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  mainImage,\n  body,\n  "author": author->{ name, "slug": slug.current, image, bio },\n  "categories": categories[]->{ _id, title, "slug": slug.current }\n}': POST_QUERY_RESULT;
     '*[_type == "post" && defined(slug.current)]{ "slug": slug.current, _updatedAt }': POST_SLUGS_QUERY_RESULT;
+    '*[_type == "changelogPost" && defined(slug.current)] | order(publishedAt desc, _createdAt desc){\n  _id,\n  title,\n  "slug": slug.current,\n  publishedAt,\n  summary,\n  image,\n  body,\n  _updatedAt\n}': UPDATES_QUERY_RESULT;
+    '*[_type == "changelogPost" && slug.current == $slug][0]{\n  _id,\n  title,\n  "slug": slug.current,\n  publishedAt,\n  summary,\n  image,\n  body,\n  "authors": authors[]->{ _id, name, "slug": slug.current, image }\n}': UPDATE_QUERY_RESULT;
   }
 }
 // Lets @sanity/client releases that predate the global registry read it too
