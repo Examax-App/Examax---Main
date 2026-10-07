@@ -8,10 +8,11 @@ import { StorySection } from "@/components/about/StorySection";
 import { PeopleSection } from "@/components/about/PeopleSection";
 import { ValuesSection } from "@/components/about/ValuesSection";
 import { SourcesSection } from "@/components/about/SourcesSection";
-import { pageMetadata } from "@/lib/seo";
+import { JsonLd } from "@/components/layout/JsonLd";
+import { breadcrumbStructuredData, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "O Examax",
+  title: "O nas",
   description:
     "Kim jesteśmy, po co budujemy Examax i według jakich zasad. Platforma do nauki na egzamin ósmoklasisty i maturę, oparta na dokumentach CKE.",
   path: "/about",
@@ -39,6 +40,7 @@ export const metadata: Metadata = pageMetadata({
 export default function AboutPage() {
   return (
     <>
+      <JsonLd data={breadcrumbStructuredData([{ name: "O nas", path: "/about" }])} />
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-buttons focus:bg-midnight-ink focus:px-4 focus:py-2 focus:text-white"

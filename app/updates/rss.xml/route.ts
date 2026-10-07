@@ -1,22 +1,30 @@
-import { ENTRIES } from "@/components/updates/entries";
+import { sanityFetch } from "@/lib/sanity/live";
+import { UPDATES_QUERY } from "@/lib/sanity/queries";
 
-/** /updates/rss.xml — the changelog as an RSS feed, behind the page's RSS button. Built once, at build time. */
+/**
+ * /updates/rss.xml — the changelog as an RSS feed, behind the page's RSS
+ * button. Static; it reads the list page's own query, so the live refresh
+ * that updates /updates refreshes the feed too.
+ */
 export const dynamic = "force-static";
 
 const SITE = "https://examax.app";
 
 const escape = (text: string) => text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
-export function GET() {
-  const items = ENTRIES.map(
-    (entry) => `    <item>
-      <title>${escape(entry.title)}</title>
-      <link>${SITE}/updates#${entry.slug}</link>
-      <guid isPermaLink="false">${entry.slug}</guid>
-      <pubDate>${new Date(`${entry.date}T00:00:00Z`).toUTCString()}</pubDate>
-      <description>${escape(entry.summary)}</description>
+export async function GET() {
+  const { data: posts } = await sanityFetch({ query: UPDATES_QUERY, perspective: "published", stega: false });
+  const items = posts
+    .map(
+      (post) => `    <item>
+      <title>${escape(post.title ?? "")}</title>
+      <link>${SITE}/updates/${post.slug}</link>
+      <guid isPermaLink="true">${SITE}/updates/${post.slug}</guid>
+      <pubDate>${new Date(`${post.publishedAt}T00:00:00Z`).toUTCString()}</pubDate>
+      <description>${escape(post.summary ?? "")}</description>
     </item>`,
-  ).join("\n");
+    )
+    .join("\n");
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">

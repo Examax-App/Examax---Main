@@ -5,7 +5,8 @@ import { Footer } from "@/components/layout/Footer";
 import { ExamStrip } from "@/components/about/ExamStrip";
 import { ContactHero, FormBand } from "@/components/contact/pieces";
 import { ContactForm } from "@/components/contact/ContactForm";
-import { pageMetadata } from "@/lib/seo";
+import { JsonLd } from "@/components/layout/JsonLd";
+import { breadcrumbStructuredData, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "Porozmawiaj z nami",
@@ -24,6 +25,7 @@ export const metadata: Metadata = pageMetadata({
 export default function ContactSalesPage() {
   return (
     <>
+      <JsonLd data={breadcrumbStructuredData([{ name: "Kontakt", path: "/contact" }, { name: "Porozmawiaj z nami", path: "/contact/sales" }])} />
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-buttons focus:bg-midnight-ink focus:px-4 focus:py-2 focus:text-white"

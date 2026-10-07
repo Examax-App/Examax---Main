@@ -6,7 +6,8 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ContactHero, FormBand } from "@/components/contact/pieces";
 import { SupportForm } from "@/components/contact/ContactForm";
-import { pageMetadata } from "@/lib/seo";
+import { JsonLd } from "@/components/layout/JsonLd";
+import { breadcrumbStructuredData, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "Wsparcie",
@@ -29,6 +30,7 @@ export const metadata: Metadata = pageMetadata({
 export default function ContactSupportPage() {
   return (
     <>
+      <JsonLd data={breadcrumbStructuredData([{ name: "Kontakt", path: "/contact" }, { name: "Wsparcie", path: "/contact/support" }])} />
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-buttons focus:bg-midnight-ink focus:px-4 focus:py-2 focus:text-white"

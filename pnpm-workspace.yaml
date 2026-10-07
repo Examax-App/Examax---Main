@@ -5,8 +5,15 @@ allowBuilds:
   unrs-resolver: true
 
 # Patched versions of vulnerable transitive dev dependencies (ESLint's
-# minimatch, Remotion Studio's config loader). None of these ship to the site.
+# minimatch, Remotion Studio's config loader, PostCSS's source maps). None
+# of these ship to the site; all stay within their major version.
+#
+# `sanity` is next-sanity's peer for an embedded Studio (next-sanity/studio).
+# The Studio lives in its own repo (Examax-App/Examax---CMS), so the app
+# never installs it, nor its CLI's vulnerable YAML/TOML parsers and watcher.
 overrides:
   "brace-expansion@<2": "1.1.21"
   "brace-expansion@>=4 <6": "5.0.12"
   "js-yaml@>=4 <4.3.2": "4.3.2"
+  "source-map-js@<1.2.2": "1.2.2"
+  "next-sanity>sanity": "-"

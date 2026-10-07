@@ -10,7 +10,8 @@ import { StepsCarousel } from "@/components/simulation/StepsCarousel";
 import { ToolsSection } from "@/components/simulation/ToolsSection";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { plans } from "@/lib/pricing";
-import { pageMetadata } from "@/lib/seo";
+import { JsonLd } from "@/components/layout/JsonLd";
+import { breadcrumbStructuredData, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "Symulacja egzaminu",
@@ -48,6 +49,7 @@ const PRO_MONTHLY = plans.find((plan) => plan.id === "pro")!.monthly;
 export default function SimulationPage() {
   return (
     <>
+      <JsonLd data={breadcrumbStructuredData([{ name: "Symulacja egzaminu", path: "/simulation" }])} />
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-buttons focus:bg-midnight-ink focus:px-4 focus:py-2 focus:text-white"

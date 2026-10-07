@@ -15,6 +15,8 @@ This repository is the Examax website and front-end: the public marketing site a
 
 The backend will be [Supabase](https://supabase.com) (project `eijggddzbwjtmpifoalj`). It is connected but not used yet: no code calls it, so the site still builds and runs without any environment variables. Its keys go in `.env.local`, which is gitignored, like every `.env*` file; never commit real values.
 
+Content (the changelog at `/updates`, to start) comes from [Sanity](https://www.sanity.io), project `64k3ozib`, dataset `production`. The Studio is a separate repo, [Examax-App/Examax---CMS](https://github.com/Examax-App/Examax---CMS), checked out at `~/Developer/Other/studio-examax` (`npm run dev` there, http://localhost:3333), and is hosted at [examax.sanity.studio](https://examax.sanity.studio). Its README explains how posts are written and how they reach the site. The app reads it through `lib/sanity`: `sanityFetch` and `<SanityLive />` from `lib/sanity/live.ts` for live content, `urlFor` for images. After changing the schema or a GROQ query, run `npm run typegen` in the Studio to regenerate `sanity.types.ts`. It reads `NEXT_PUBLIC_SANITY_PROJECT_ID` and `NEXT_PUBLIC_SANITY_DATASET` (public; they fall back to `64k3ozib` / `production`, so CI and preview builds work without them) and `SANITY_API_READ_TOKEN` (a viewer token, server-only, never sent to the browser).
+
 For AI coding agents, `.mcp.json` registers the Supabase MCP server (run `/mcp` in Claude Code and authenticate), and `.claude/skills/` holds Supabase's agent skills.
 
 ## Getting started
@@ -57,13 +59,13 @@ Product behaviour and decisions are documented in [`PRODUCT.md`](PRODUCT.md); de
 
 ## Security
 
-Every response carries a strict Content Security Policy and the standard security headers (`next.config.ts`). The site is fully static apart from the RSS feed, has no API routes and no server-side secrets, and loads nothing from third-party origins. The dashboard is not part of the public build.
+Every response carries a strict Content Security Policy and the standard security headers (`next.config.ts`). The site is fully static apart from the RSS feed, has no API routes and no server-side secrets, and loads nothing from third-party origins except Sanity (its image CDN and the project's API). The dashboard is not part of the public build.
 
 Found a vulnerability? Please report it privately — see [`SECURITY.md`](SECURITY.md).
 
 ## Deployment
 
-The site is built for [Vercel](https://vercel.com): import the repository and deploy. Once code uses Supabase, add the variables from `.env.local` under Project → Settings → Environment Variables (the secret key server-only, never `NEXT_PUBLIC_`). Any host that runs `pnpm build && pnpm start` on Node 20.9+ works too.
+The site is built for [Vercel](https://vercel.com): import the repository and deploy. Set the Sanity variables there too (the token is optional while the site shows only published content). Once code uses Supabase, add its variables from `.env.local` under Project → Settings → Environment Variables (the secret key server-only, never `NEXT_PUBLIC_`). Any host that runs `pnpm build && pnpm start` on Node 20.9+ works too.
 
 ## License
 

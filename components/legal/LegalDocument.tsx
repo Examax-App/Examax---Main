@@ -85,7 +85,8 @@ export function LegalDocument({
   updated,
 }: {
   title: string;
-  intro: React.ReactNode;
+  /** Text before the numbered sections; leave it out when the document opens on section 1. */
+  intro?: React.ReactNode;
   sections: LegalSection[];
   /** ISO date of the last change, shown under the document. */
   updated: string;
@@ -107,8 +108,8 @@ export function LegalDocument({
       <GridSection>
         <div className="relative grid grid-cols-4 gap-10 bg-white p-8 sm:p-12 lg:gap-20">
           <article className="col-span-4 min-w-0 md:col-span-3">
-            <div className={cn(PROSE, "[&>p:first-child]:mt-0")}>{intro}</div>
-            <div className="relative -mb-4 pt-4">
+            {intro ? <div className={cn(PROSE, "[&>p:first-child]:mt-0")}>{intro}</div> : null}
+            <div className={cn("relative -mb-4", intro ? "pt-4" : null)}>
               {sections.map((section, index) => (
                 <div key={section.id} className="relative">
                   {index < sections.length - 1 ? <div aria-hidden className="absolute bottom-0 left-4 top-0 w-px bg-gray-300" /> : null}

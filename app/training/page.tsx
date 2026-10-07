@@ -12,7 +12,8 @@ import { FirstSteps, SetBuilder, TimedWindow } from "@/components/training/Tools
 import { DiagnosticBand } from "@/components/training/DiagnosticBand";
 import { SimilarTasks } from "@/components/training/SimilarTasks";
 import { SourcesCarousel } from "@/components/training/SourcesCarousel";
-import { pageMetadata } from "@/lib/seo";
+import { JsonLd } from "@/components/layout/JsonLd";
+import { breadcrumbStructuredData, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "Trening zadań",
@@ -48,6 +49,7 @@ export const metadata: Metadata = pageMetadata({
 export default function TrainingPage() {
   return (
     <>
+      <JsonLd data={breadcrumbStructuredData([{ name: "Trening", path: "/training" }])} />
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-buttons focus:bg-midnight-ink focus:px-4 focus:py-2 focus:text-white"

@@ -8,10 +8,11 @@ import { ScaleSection } from "@/components/enterprise/ScaleSection";
 import { ToolkitSection } from "@/components/enterprise/ToolkitSection";
 import { CommunitySection, EligibilitySection, PlatformCanvas, SecuritySection } from "@/components/enterprise/TrustSections";
 import { TrialBand } from "@/components/enterprise/TrialBand";
-import { pageMetadata } from "@/lib/seo";
+import { JsonLd } from "@/components/layout/JsonLd";
+import { breadcrumbStructuredData, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Examax dla szkół",
+  title: "Dla szkół i placówek",
   description:
     "Roadmapy, zadania CKE i postępy każdego ucznia w jednym panelu nauczyciela. Licencja dla szkół i placówek, z miesiącem pilotażu za darmo.",
   path: "/enterprise",
@@ -75,6 +76,7 @@ const FAQS = [
 export default function EnterprisePage() {
   return (
     <>
+      <JsonLd data={breadcrumbStructuredData([{ name: "Dla szkół", path: "/enterprise" }])} />
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-buttons focus:bg-midnight-ink focus:px-4 focus:py-2 focus:text-white"

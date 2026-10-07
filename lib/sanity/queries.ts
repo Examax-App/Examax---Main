@@ -32,3 +32,33 @@ export const POST_QUERY = defineQuery(`*[_type == "post" && slug.current == $slu
 
 /** Every post's slug, for static generation and the sitemap. */
 export const POST_SLUGS_QUERY = defineQuery(`*[_type == "post" && defined(slug.current)]{ "slug": slug.current, _updatedAt }`);
+
+/*
+ * The changelog at /updates (Studio type `changelogPost`). The list, the RSS
+ * feed and the sitemap all read UPDATES_QUERY, so one live revalidation
+ * refreshes all three.
+ */
+
+/** Every changelog post, newest first, with everything the list renders. */
+export const UPDATES_QUERY = defineQuery(`*[_type == "changelogPost" && defined(slug.current)] | order(publishedAt desc, _createdAt desc){
+  _id,
+  title,
+  "slug": slug.current,
+  publishedAt,
+  summary,
+  image,
+  body,
+  _updatedAt
+}`);
+
+/** One changelog post by its slug, for /updates/[slug]. */
+export const UPDATE_QUERY = defineQuery(`*[_type == "changelogPost" && slug.current == $slug][0]{
+  _id,
+  title,
+  "slug": slug.current,
+  publishedAt,
+  summary,
+  image,
+  body,
+  "authors": authors[]->{ _id, name, "slug": slug.current, image }
+}`);

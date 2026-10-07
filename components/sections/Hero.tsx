@@ -23,7 +23,7 @@ export function Hero() {
         <div className="relative mx-auto w-full max-w-[1080px] px-6 py-14 sm:px-12">
           <div className="mx-auto flex w-full max-w-2xl flex-col items-center px-4 text-center">
             <Link
-              href="/updates#start-examax"
+              href="/updates/start-platformy-examax"
               style={{ "--offset": "10px" } as React.CSSProperties}
               className="animate-slide-up-fade inline-flex items-center divide-x divide-smoke rounded-full border border-smoke bg-white text-xs font-medium text-charcoal drop-shadow-sm transition-colors duration-75 hover:bg-canvas-muted"
             >
