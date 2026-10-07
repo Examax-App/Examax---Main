@@ -39,7 +39,7 @@
     "@sanity/image-url": "^2.1.1",
     "@vercel/analytics": "^2.0.1",
     "border-beam": "^1.4.1",
-    "bot-avatars": "0.1.1",
+    "bot-avatars": "0.2.2",
     "cobe": "2.0.1",
     "lucide-react": "^1.33.0",
     "metal-fx": "^2.0.11",
