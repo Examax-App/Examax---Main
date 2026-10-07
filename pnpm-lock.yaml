@@ -34,8 +34,8 @@ importers:
         specifier: ^1.4.1
         version: 1.4.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       bot-avatars:
-        specifier: 0.1.1
-        version: 0.1.1(react@19.2.8)
+        specifier: 0.2.2
+        version: 0.2.2(react@19.2.8)
       cobe:
         specifier: 2.0.1
         version: 2.0.1
@@ -1805,8 +1805,8 @@ packages:
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
 
-  bot-avatars@0.1.1:
-    resolution: {integrity: sha512-J1gamb44dLXWViX6N+qz8wQyMmVUEtv9GrrHXo+xP3GlzbVzPTO4g+bWme0F9OXpX31nyDXSnUG9/mctUi7t3w==}
+  bot-avatars@0.2.2:
+    resolution: {integrity: sha512-EszpDsXfbO7SD3Jv/g8/7mt3I4EpN4WuDy6Uk3reuzIgU+dl4iKtk+fuIzGgfXjOraF1jQqUjaDOdcql1khXHQ==}
     peerDependencies:
       react: '>=18.0.0'
 
@@ -5489,7 +5489,7 @@ snapshots:
       react: 19.2.8
       react-dom: 19.2.8(react@19.2.8)
 
-  bot-avatars@0.1.1(react@19.2.8):
+  bot-avatars@0.2.2(react@19.2.8):
     dependencies:
       react: 19.2.8
 
