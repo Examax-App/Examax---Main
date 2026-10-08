@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { CalendarDays, FileText, Layers, ListFilter, Percent, PencilLine, RefreshCcw, Shapes, TrendingUp, X, Zap } from "lucide-react";
 import { MaturaIcon } from "@/components/ui/MaturaIcon";
 import { accentStyles } from "@/components/ui/FeaturePill";

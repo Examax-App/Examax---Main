@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { HeroShowcase } from "@/components/sections/HeroShowcase";
@@ -39,15 +39,15 @@ export function Hero() {
               style={{ "--delay": "100ms", "--offset": "20px" } as React.CSSProperties}
               className="animate-slide-up mt-5 text-pretty font-satoshi text-4xl font-medium leading-[1.15] text-charcoal sm:text-5xl"
             >
-              Twoje braki. Twoje zadania. Twój wynik.
+              Przygotowanie, które wie, czego potrzebujesz.
             </h1>
 
             <p
               style={{ "--delay": "200ms", "--offset": "20px" } as React.CSSProperties}
               className="animate-slide-up mt-5 text-xl leading-7 text-steel"
             >
-              Examax znajduje pytania, w których się mylisz, i buduje z nich
-              Twój osobisty trening przed egzaminem ósmoklasisty i&nbsp;maturą.
+              Examax pokazuje, gdzie tracisz punkty, i prowadzi Cię przez zadania,
+              tematy i&nbsp;powtórki aż do egzaminu.
             </p>
 
             <div

@@ -15,7 +15,7 @@ export function JourneySection() {
         icon={Filter}
         eyebrow="Opanowanie tematów"
         title="Od pierwszej próby do opanowania"
-        sub="Widzisz, ile tematów z roadmapy już przerobiłeś i ile naprawdę opanowałeś — bez zgadywania, co jeszcze zostało."
+        sub="Widzisz, ile tematów z roadmapy już przerobiłeś, ile masz opanowanych i co jeszcze zostało."
         actions={[
           { label: "Zacznij za darmo", href: "/signup", variant: "primary" },
           { label: "Zobacz roadmapę", href: "/roadmap", variant: "outline" },
@@ -31,8 +31,8 @@ export function JourneySection() {
             visual: <LearnerInsight />,
           },
           {
-            title: "Liczy się wszystko, co robisz",
-            description: "Trening, roadmapa, symulacje i rozmowy z Korepetytorem AI zasilają te same statystyki — nic nie trzeba przepisywać.",
+            title: "Cała nauka w jednym miejscu",
+            description: "Wyniki z treningu, roadmapy i symulacji trafiają do tych samych statystyk — nic nie trzeba przepisywać.",
             cta: { label: "Poznaj Examax", href: "/" },
             visual: <ExamaxTiles />,
           },

@@ -55,7 +55,8 @@ export function FeaturedTopics({ slides, labels }: { slides: React.ReactNode[]; 
         </div>
       </div>
 
-      <div className="mt-3 flex items-center justify-center gap-2" role="group" aria-label="Wybierz temat">
+      {/* 24px-tall targets, 24px apart dot to dot (WCAG 2.5.8); mt-2 keeps the dots where the old 16px row put them. */}
+      <div className="mt-2 flex items-center justify-center gap-3.5" role="group" aria-label="Wybierz temat">
         {labels.map((label, i) => (
           <button
             key={label}
@@ -63,7 +64,7 @@ export function FeaturedTopics({ slides, labels }: { slides: React.ReactNode[]; 
             onClick={() => go(i)}
             aria-label={label}
             aria-current={i === index}
-            className="focus-ring grid h-4 cursor-pointer place-items-center rounded-full px-0.5"
+            className="focus-ring grid h-6 cursor-pointer place-items-center rounded-full px-0.5"
           >
             <span className={cn("block h-1.5 rounded-full transition-all duration-300", i === index ? "w-6 bg-charcoal" : "w-1.5 bg-smoke hover:bg-fog")} />
           </button>

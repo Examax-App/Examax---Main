@@ -13,7 +13,7 @@ import { JsonLd } from "@/components/layout/JsonLd";
 import { breadcrumbStructuredData, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Roadmapa nauki",
+  title: "Roadmapa nauki do matury i egzaminu ósmoklasisty",
   description:
     "Cały materiał egzaminu CKE rozpisany na tematy i tygodnie — osobisty plan nauki liczony do dnia egzaminu, który wie, co robić dalej.",
   path: "/roadmap",

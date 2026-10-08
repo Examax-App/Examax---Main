@@ -24,11 +24,11 @@ type Value = { title: string; body: string };
 const VALUES: Value[] = [
   {
     title: "Nauka szyta na miarę",
-    body: "Naszym głównym celem jest nauka dopasowana do ucznia — taka, po której naprawdę jesteś gotowy na egzamin. Przy okazji uczysz się korzystać z nowych technologii tak, jak wymaga tego dzisiejszy świat.",
+    body: "Nauka dopasowana do ucznia: zaczynasz od tego, co już umiesz, i ćwiczysz to, co wymaga poprawy. Chcemy, żebyś rozumiał nie tylko swój wynik, ale też to, co już opanowałeś i nad czym warto jeszcze popracować.",
   },
   {
     title: "Zero reklam",
-    body: "Żadnych reklam, nigdy. Liczy się Twoja wygoda i to, żebyś naprawdę czegoś się nauczył. Chcemy, żeby Examax rósł dzięki uczniom, którzy polecają go dalej — a nie dzięki reklamodawcom.",
+    body: "Nie budujemy Examaxu wokół reklam. Liczy się Twoja wygoda i to, żebyś naprawdę czegoś się nauczył. Chcemy, żeby Examax rósł dzięki uczniom, którzy polecają go dalej — a nie dzięki reklamodawcom.",
   },
   {
     title: "Zrozumieć, nie przepisać",
@@ -36,11 +36,11 @@ const VALUES: Value[] = [
   },
   {
     title: "Ciągle poprawiamy",
-    body: "Examax jest młody i zmienia się z tygodnia na tydzień. Każdą zmianę opisujemy w aktualnościach, a zgłoszone błędy w zadaniach poprawiamy w pierwszej kolejności.",
+    body: "Examax cały czas się rozwija. Ważne zmiany opisujemy w aktualnościach, a uwagi użytkowników pomagają nam ulepszać platformę. Zgłoszone błędy w zadaniach poprawiamy w pierwszej kolejności.",
   },
   {
     title: "Oryginalne zadania CKE",
-    body: "Nie tworzymy własnych zadań i nie podajemy zadań CKE za swoje. Korzystamy z oryginalnych zadań Centralnej Komisji Egzaminacyjnej, bez żadnych zmian — a od siebie dodajemy lepsze wyjaśnienia, żebyś naprawdę zrozumiał, czego wymaga egzamin.",
+    body: "Korzystamy z oficjalnych materiałów egzaminacyjnych Centralnej Komisji Egzaminacyjnej i nie przypisujemy sobie do nich praw. Nasza wartość to wszystko, co budujemy wokół nich: środowisko nauki, wyjaśnienia i narzędzia, które pomagają zrozumieć, czego wymaga egzamin.",
   },
 ];
 

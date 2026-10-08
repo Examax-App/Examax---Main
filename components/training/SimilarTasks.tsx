@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { ArrowUpRight, ChartNoAxesColumnIncreasing, ListChecks, Repeat, Sparkles } from "lucide-react";
 import { E8Icon } from "@/components/ui/E8Icon";
 import { MaturaIcon } from "@/components/ui/MaturaIcon";

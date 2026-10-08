@@ -29,7 +29,7 @@ function Switch({ on = true }: { on?: boolean }) {
 
 export function ShareProgress() {
   return (
-    <div aria-hidden className="-mx-3.5 h-full cursor-default select-none overflow-clip [mask-image:radial-gradient(140%_100%_at_-10%_0%,black_80%,transparent_100%)]">
+    <div aria-hidden inert className="-mx-3.5 h-full cursor-default select-none overflow-clip [mask-image:radial-gradient(140%_100%_at_-10%_0%,black_80%,transparent_100%)]">
       <div className="mx-3.5 origin-top scale-95 rounded-xl border border-ash bg-white shadow-[0_20px_20px_0_#00000017] md:origin-top-left">
         <h3 className="border-b border-ash px-4 py-4 text-lg font-medium text-charcoal sm:px-6">Udostępnij postępy</h3>
         <div className="min-h-[300px] bg-canvas-muted px-6 pb-6 pt-4">

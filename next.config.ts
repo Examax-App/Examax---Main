@@ -36,7 +36,7 @@ const csp = [
 
 const securityHeaders = [
   { key: "Content-Security-Policy", value: csp },
-  { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains" },
+  { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "X-Frame-Options", value: "DENY" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
@@ -63,6 +63,9 @@ const nextConfig: NextConfig = {
     return [
       { source: "/:path*", has: [{ type: "host", value: "www.examax.app" }], destination: "https://examax.app/:path*", permanent: true },
       { source: "/privacy", destination: "/legal/privacy", permanent: true },
+      { source: "/terms", destination: "/legal/terms", permanent: true },
+      { source: "/cookies", destination: "/legal/cookies", permanent: true },
+      { source: "/gdpr", destination: "/legal/gdpr", permanent: true },
     ];
   },
   async headers() {

@@ -163,7 +163,8 @@ export function TrainingHero() {
           role="img"
           className="relative mt-20 h-[420px] [mask-composite:intersect] [mask-image:linear-gradient(black_40%,transparent),linear-gradient(90deg,transparent,black_25%,black_75%,transparent)]"
         >
-          <div className="absolute bottom-[60px] left-[calc(50%+150px)] -translate-x-1/2 sm:left-1/2">
+          {/* inert: the cards are the picture; the label above is what assistive tech gets */}
+          <div inert className="absolute bottom-[60px] left-[calc(50%+150px)] -translate-x-1/2 sm:left-1/2">
             <div className="grid grid-cols-[repeat(4,300px)] text-left">
               {TASKS.map((task, index) => (
                 <TaskCard

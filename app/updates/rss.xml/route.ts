@@ -31,7 +31,7 @@ export async function GET() {
   <channel>
     <title>Examax — Aktualności</title>
     <link>${SITE}/updates</link>
-    <description>Wszystkie nowości, ulepszenia i poprawki w Examaxie</description>
+    <description>Najnowsze funkcje, aktualizacje i informacje od zespołu Examax</description>
     <language>pl</language>
 ${items}
   </channel>

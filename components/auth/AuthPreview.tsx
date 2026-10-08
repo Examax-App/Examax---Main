@@ -30,14 +30,14 @@ const SLIDES: Array<{ tab: FilmTab; name: string; headline: string; description:
   {
     tab: "practice",
     name: "Trening",
-    headline: "Ćwicz na prawdziwych zadaniach z arkuszy CKE",
-    description: "Zadania z egzaminów z poprzednich lat, sprawdzane od razu, w jednej bibliotece — na Ósmoklasistę i Maturę.",
+    headline: "Ucz się na zadaniach z prawdziwych arkuszy CKE",
+    description: "Zadania z arkuszy CKE z poprzednich lat, sprawdzane od razu i uporządkowane według tematów.",
   },
   {
     tab: "roadmap",
     name: "Roadmapa",
-    headline: "Cały egzamin rozpisany na kroki",
-    description: "Roadmapa prowadzi od pierwszego rozdziału do dnia egzaminu — zawsze wiesz, co zrobić dziś.",
+    headline: "Przygotowanie do egzaminu krok po kroku",
+    description: "Roadmapa pokazuje, czego uczyć się dalej i prowadzi Cię aż do egzaminu.",
   },
   {
     tab: "progress",

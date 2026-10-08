@@ -130,7 +130,7 @@ const STEPS: Story[] = [
     tag: "Krok 4",
     colour: "#2563eb",
     figure: "pyramid",
-    title: "Słabe działy trafiają prosto do Twojej roadmapy",
+    title: "Działy do poprawy trafiają do Twojej roadmapy",
     link: { href: "/roadmap", label: "Zobacz roadmapę" },
     picture: (
       <Desk figure="pyramid">

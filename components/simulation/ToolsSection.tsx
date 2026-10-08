@@ -10,8 +10,8 @@ export function ToolsSection() {
     <GridSection id="tools" labelledBy="tools-heading" innerClassName="pt-20 sm:pt-24">
       <SectionHeader
         id="tools-heading"
-        title="Wszystko w jednym miejscu"
-        sub="Od pierwszej próbnej symulacji do ostatniej przed egzaminem — każdy arkusz, wynik i notatka zostają z Tobą."
+        title="Wszystkie podejścia w jednym miejscu"
+        sub="Od pierwszej próbnej symulacji do ostatniej przed egzaminem — każdy arkusz, wynik i notatka zostają zapisane na Twoim koncie."
       />
       <div className="mt-12">
         <FeatureGrid

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { BadgePercent, BookOpen, Brain, FileText, ListChecks, PencilLine, RefreshCcw, Timer, Zap } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { accentStyles, type Accent } from "@/components/ui/FeaturePill";
@@ -88,7 +88,7 @@ export function ConnectedBand() {
             Połączona z całym Examaxem
           </h2>
           <p className="mt-3 max-w-sm text-pretty text-base text-fog sm:text-lg">
-            Trening, symulacje, Korepetytor AI i&nbsp;powtórki zasilają roadmapę — a&nbsp;ona podpowiada im, co robić dalej.
+            Wyniki z&nbsp;treningu, symulacji i&nbsp;powtórek trafiają do roadmapy, a&nbsp;ona podpowiada, co warto zrobić dalej. Korepetytor AI pomaga ją dostosować.
           </p>
           <div className="pointer-events-auto mt-8">
             <Button href="/" variant="outline">

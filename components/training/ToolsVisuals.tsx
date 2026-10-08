@@ -67,6 +67,7 @@ export function SetBuilder() {
     <div
       ref={ref}
       aria-hidden
+      inert
       className="size-full [mask-composite:intersect] [mask-image:linear-gradient(90deg,black_50%,transparent),linear-gradient(black_50%,transparent)]"
     >
       <div className="relative mx-auto h-full w-[360px] max-w-full">
@@ -192,7 +193,7 @@ export function TimedWindow() {
   }, [inView, reducedMotion]);
 
   return (
-    <div ref={ref} aria-hidden className="relative flex h-full items-start justify-center overflow-hidden">
+    <div ref={ref} aria-hidden inert className="relative flex h-full items-start justify-center overflow-hidden">
       <div className="w-full px-3 pt-6 [mask-image:linear-gradient(black_50%,transparent)]">
         <div className="w-full rounded-lg border border-ash/80 bg-white shadow-sm">
           <div className="flex items-center gap-2.5 px-2.5 py-2 text-[7px] text-charcoal">
@@ -307,7 +308,7 @@ export function FirstSteps() {
   const launched = reducedMotion || stage === STEPS.length;
 
   return (
-    <div ref={ref} aria-hidden className="relative size-full pt-px">
+    <div ref={ref} aria-hidden inert className="relative size-full pt-px">
       <div className="-mx-5 -mt-5 h-[calc(100%+1.25rem)]">
         <div className="mx-auto flex size-full max-w-sm flex-col justify-end px-8 pt-7 [mask-image:linear-gradient(black_50%,transparent)]">
           <div className="w-full rounded-xl border border-ash p-2 shadow-subtle">

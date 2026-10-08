@@ -71,7 +71,7 @@ export function SheetFilters() {
 /** dub's dashboard screenshot: a still of the simulation itself, drawn small and fading out. */
 export function AppStill() {
   return (
-    <div aria-hidden className="pointer-events-none size-full select-none [mask-image:linear-gradient(black_70%,transparent)]">
+    <div aria-hidden inert className="pointer-events-none size-full select-none [mask-image:linear-gradient(black_70%,transparent)]">
       <div className="size-full [mask-image:linear-gradient(90deg,black_85%,transparent)]">
         <SimulationStill className="w-[118%] rounded-lg border border-ash shadow-subtle" />
       </div>
@@ -136,7 +136,7 @@ const ACTIVITY = [
 /** dub's customer card, for one sitting: the learner, the clock, the result and the log. */
 export function SittingCard() {
   return (
-    <div aria-hidden className="h-full cursor-default select-none overflow-clip [mask-image:linear-gradient(black_75%,transparent)]">
+    <div aria-hidden inert className="h-full cursor-default select-none overflow-clip [mask-image:linear-gradient(black_75%,transparent)]">
       <div className="w-[111%] origin-top-left scale-90 rounded-xl border border-ash bg-canvas-muted">
         <div className="px-5 pt-4">
           <div className="flex items-start justify-between gap-2">

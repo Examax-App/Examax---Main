@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { PortableText, type PortableTextComponents } from "next-sanity";
 import type { BlockContent } from "@/sanity.types";
 import { urlFor } from "@/lib/sanity/image";

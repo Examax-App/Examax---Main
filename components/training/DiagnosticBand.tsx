@@ -179,7 +179,7 @@ function DiagnosticStage() {
   const done = answered === TOTAL;
 
   return (
-    <div ref={ref} aria-hidden className="relative z-10 grid grid-cols-1 border-t border-ash md:min-h-[500px] md:grid-cols-2">
+    <div ref={ref} aria-hidden inert className="relative z-10 grid grid-cols-1 border-t border-ash md:min-h-[500px] md:grid-cols-2">
       <div className="relative overflow-visible border-b border-ash px-5 py-10 md:flex md:min-h-[500px] md:items-center md:border-b-0 md:border-r md:px-6 lg:px-8 lg:py-8">
         <div
           ref={enterRef}

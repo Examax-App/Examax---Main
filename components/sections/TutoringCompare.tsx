@@ -64,10 +64,10 @@ export function TutoringCompare() {
               Examax czy korepetycje
             </div>
             <h2 id="value-heading" className={cn("mt-3 max-w-xl text-charcoal", SECTION_H2)}>
-              Godzina mija. Umiejętności zostają.
+              Jedna godzina nauki może zbudować umiejętność, która zostanie na egzamin.
             </h2>
             <p className="mt-3 max-w-xl text-pretty text-body-xl text-fog">
-              Zamiast płacić za kolejne korepetycje, zainwestuj w&nbsp;system, który pracuje razem z&nbsp;Tobą każdego dnia.
+              Korepetycje to płatna godzina zajęć. Examax to plan, zadania i&nbsp;wyjaśnienia dostępne wtedy, kiedy się uczysz.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button href="/signup" variant="primary" size="lg">

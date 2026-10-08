@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { CalendarCheck, CalendarRange, FileText, Zap } from "lucide-react";
 import { FeatureGrid, GridSection, MiniFeatures, SectionHeader } from "@/components/roadmap/sections";
 import { PlanChart } from "@/components/roadmap/PlanChart";
@@ -67,7 +67,7 @@ export function ScheduleSection() {
           {
             icon: Zap,
             title: "Korepetytor AI w planie",
-            description: "Poproś o zmianę w zwykłej rozmowie — Korepetytor AI przesunie tematy za Ciebie.",
+            description: "Napisz, co chcesz zmienić — Korepetytor AI zaproponuje nowy układ tematów, a Ty decydujesz, czy go przyjąć.",
           },
           {
             icon: FileText,

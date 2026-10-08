@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { Workflow } from "lucide-react";
 import { FeatureGrid, GridSection, SectionHeader } from "@/components/roadmap/sections";
 import { ConnectedHub, RoutineCard } from "@/components/agents/WorkVisuals";
@@ -16,8 +16,8 @@ export function WorkSection() {
         id="work-heading"
         icon={Workflow}
         eyebrow="Jak pracują"
-        title="Agenci, którzy znają Twój plan"
-        sub="Widzą Twój trening i roadmapę i pilnują rytmu nauki. Zadania i tak rozwiązujesz sam."
+        title="Znają Twój plan, więc nie zaczynasz od zera"
+        sub="Agenci korzystają z Twojego treningu, roadmapy i postępów, więc nie musisz za każdym razem tłumaczyć, gdzie jesteś. Zadania nadal rozwiązujesz sam."
       />
       <div className="mt-14">
         <FeatureGrid
@@ -27,18 +27,18 @@ export function WorkSection() {
               description: (
                 <>
                   Agent widzi Twój <Link href="/training">trening</Link>, roadmapę i postępy. Nie musisz niczego przeklejać ani tłumaczyć od nowa —
-                  wie, nad czym siedzisz.
+                  wie, nad czym pracujesz.
                 </>
               ),
               cta: { label: "Zobacz trening", href: "/training" },
               visual: <ConnectedHub />,
             },
             {
-              title: "Trzyma rytm za Ciebie",
+              title: "Pomaga utrzymać rytm",
               description: (
                 <>
-                  Ustal raz, kiedy się uczysz. Agent przygotuje zadania na każdą sesję i przestawi <Link href="/roadmap">roadmapę</Link>, gdy coś
-                  wypadnie.
+                  Ustal raz, kiedy się uczysz. Agent przygotuje zadania na każdą sesję i zaproponuje zmianę <Link href="/roadmap">roadmapy</Link>, gdy
+                  coś wypadnie.
                 </>
               ),
               cta: { label: "Zobacz roadmapę", href: "/roadmap" },

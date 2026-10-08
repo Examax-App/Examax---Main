@@ -59,9 +59,8 @@ export function AboutHero() {
               className="animate-slide-up-fade mt-5 text-pretty text-center font-satoshi text-4xl font-medium !leading-tight text-charcoal sm:text-5xl"
               style={{ "--offset": "20px" } as React.CSSProperties}
             >
-              Pomagamy <HeadingChip chip={CHIPS.learner} /> uczniom zdać <HeadingChip chip={CHIPS.exam} /> egzamin ósmoklasisty
-              i&nbsp;maturę z&nbsp;
-              <HeadingChip chip={CHIPS.result} /> lepszym wynikiem.
+              Przygotuj się <HeadingChip chip={CHIPS.learner} /> do egzaminów CKE w&nbsp;jednym miejscu — <HeadingChip chip={CHIPS.exam} /> ćwicz
+              zadania, <HeadingChip chip={CHIPS.result} /> śledź postępy i&nbsp;ucz się na błędach.
             </h1>
             <p
               className="animate-slide-up-fade mx-auto mt-5 w-full max-w-md text-pretty text-xl text-fog"

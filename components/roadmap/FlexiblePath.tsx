@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import {
   ArrowUpRight,
   BookOpen,
@@ -46,7 +46,7 @@ const TABS: Tab[] = [
   {
     icon: LockOpen,
     title: "Każdy temat otwarty",
-    description: "Kolejność to podpowiedź, nie zamek. Zaczynasz od czegokolwiek i przeskakujesz dalej, kiedy chcesz.",
+    description: "Kolejność w planie to sugestia, nie obowiązek. Możesz zacząć od dowolnego tematu i wrócić do niego później.",
     cta: { label: "Ułóż roadmapę", href: "/signup" },
   },
   {
@@ -58,7 +58,7 @@ const TABS: Tab[] = [
   {
     icon: RefreshCcw,
     title: "Plan reaguje na wyniki",
-    description: "Słabszy quiz? Examax dokłada powtórkę i przesuwa resztę tygodnia, zanim zostaniesz w tyle.",
+    description: "Słabszy wynik w quizie? Examax dodaje powtórkę tematu i odpowiednio przesuwa resztę tygodnia.",
     cta: { label: "Poznaj Korepetytora AI", href: "/agents" },
   },
 ];
@@ -100,14 +100,14 @@ export function FlexiblePath() {
         icon={Waypoints}
         eyebrow="Elastyczna ścieżka"
         title="Ty wybierasz, którędy idziesz"
-        sub="Roadmapa podpowiada kolejność, ale nic w niej nie jest zamknięte. Przeskakujesz, wracasz i zmieniasz plan, kiedy chcesz."
+        sub="Roadmapa podpowiada kolejność, ale nie blokuje tematów. Przeskakujesz, wracasz i zmieniasz plan, kiedy chcesz."
       />
       <div ref={ref} className="mt-12 border-y border-ash bg-canvas-muted px-4 pb-10 pt-12">
         <div className="relative mx-auto h-[300px] max-w-screen-md overflow-hidden">
           {[<NodeMarquee key="nodes" />, <QuizWindow key="quiz" />, <PlanReaction key="react" />].map((stage, index) => (
             <div
               key={index}
-              aria-hidden={index !== active}
+              inert={index !== active}
               className={cn(
                 "absolute inset-0 transition-[opacity,transform] duration-500",
                 index === active ? "opacity-100" : "pointer-events-none translate-y-2 opacity-0",
@@ -122,7 +122,8 @@ export function FlexiblePath() {
           {TABS.map(({ icon: Icon, title, description, cta }, index) => {
             const current = index === active;
             return (
-              <div key={title} className={cn("relative flex flex-col pl-6 text-left text-sm text-charcoal transition-opacity duration-500", !current && "opacity-50 hover:opacity-70")}>
+              // Waiting tabs dim their icon and title only: the description is already fog, and any fade on it drops below AA contrast.
+              <div key={title} className="group/tab relative flex flex-col pl-6 text-left text-sm text-charcoal">
                 <div aria-hidden className="absolute left-0 top-0 h-full w-px overflow-hidden bg-ash">
                   <div
                     ref={(node) => {
@@ -133,8 +134,8 @@ export function FlexiblePath() {
                   />
                 </div>
                 <button type="button" onClick={() => setActive(index)} aria-pressed={current} className="flex cursor-pointer flex-col text-left focus:outline-none focus-visible:underline">
-                  <Icon className="size-4" strokeWidth={1.75} aria-hidden />
-                  <span className="mt-2 font-medium">{title}</span>
+                  <Icon className={cn("size-4 transition-opacity duration-500", !current && "opacity-50 group-hover/tab:opacity-70")} strokeWidth={1.75} aria-hidden />
+                  <span className={cn("mt-2 font-medium transition-colors duration-500", !current && "text-charcoal/65 group-hover/tab:text-charcoal/80")}>{title}</span>
                   <span className="mt-3 text-fog">{description}</span>
                 </button>
                 <Link
@@ -192,7 +193,7 @@ function NodePill({ kind, topic }: { kind: Kind; topic: string }) {
 /** dub's endpoint wall: eight rows of pills, each row two identical runs scrolling their own width. */
 function NodeMarquee() {
   return (
-    <div className="flex size-full items-center [mask-image:linear-gradient(90deg,transparent,black_20%,black_80%,transparent)]">
+    <div inert className="flex size-full items-center [mask-image:linear-gradient(90deg,transparent,black_20%,black_80%,transparent)]">
       <div className="flex flex-col gap-2">
         {ROWS.map((row, index) => (
           <div key={index} className="flex items-center" style={{ marginLeft: `${-((index * 97) % 240)}px` }}>

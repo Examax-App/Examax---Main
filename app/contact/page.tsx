@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { prefetchFor } from "@/lib/routes";
 import { FileText, MessagesSquare, ShieldUser } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
@@ -37,15 +37,15 @@ const OPTIONS: Option[] = [
   },
   {
     icon: FileText,
-    title: "Pytania",
-    description: "Masz pytania o Examax? Zajrzyj do naszej dokumentacji — znajdziesz tam przewodniki po platformie.",
+    title: "Dokumentacja",
+    description: "Sprawdź przewodniki po platformie i odpowiedzi na najczęstsze pytania dotyczące Examax.",
     cta: "Przejdź do dokumentacji",
     href: "/docs",
   },
   {
     icon: WarningIcon,
-    title: "Zgłoś problem",
-    description: "Znalazłeś błąd w zadaniu, rozwiązaniu albo w aplikacji? Daj znać, a poprawimy go w pierwszej kolejności.",
+    title: "Znalazłeś błąd?",
+    description: "Powiedz nam, gdzie go zauważyłeś — w zadaniu, rozwiązaniu albo aplikacji. Sprawdzimy to i poprawimy.",
     cta: "Zgłoś problem",
     href: "/contact/support?temat=techniczny",
   },
@@ -76,7 +76,7 @@ export default function ContactPage() {
       </a>
       <Navbar />
       <main id="main" className="flex-1 bg-white">
-        <ContactHero title="W czym możemy pomóc?" sub="Napisz do zespołu Examax w sprawie współpracy, wsparcia albo zadaj nam pytanie.">
+        <ContactHero title="W czym możemy pomóc?" sub="Skontaktuj się z nami w sprawie szkoły, konta, płatności lub dowolnego pytania dotyczącego Examax.">
           <SystemsPill />
         </ContactHero>
 

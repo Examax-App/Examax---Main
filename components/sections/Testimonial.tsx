@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { BookOpen } from "lucide-react";
 import { Avatar } from "@/components/ui/Avatar";
 import { Container } from "@/components/ui/Container";

@@ -74,9 +74,9 @@ export default function Home() {
           id="practice"
           accent="green"
           eyebrowIcon={PencilLine}
-          eyebrowLabel="Inteligentny trening"
+          eyebrowLabel="Trening dopasowany do Twoich wyników"
           heading="Ćwicz na zadaniach z arkuszy CKE"
-          sub="Oficjalne zadania egzaminacyjne i quizy do każdego tematu z roadmapy. Odpowiadasz, od razu widzisz wynik — a Twój postęp aktualizuje się sam."
+          sub="Ćwicz na zadaniach w formacie CKE i od razu sprawdzaj wynik. Każda odpowiedź aktualizuje Twój postęp w danym temacie."
           ctaLabel="Zobacz zadania"
           ctaHref="/training"
           showcases={[<QuestionRows key="rows" />, <TopicTiles key="tiles" />, <NewSet key="set" />]}
@@ -86,13 +86,13 @@ export default function Home() {
               icon: ScanSearch,
               title: "Zadania z prawdziwych arkuszy",
               description:
-                "Trenujesz w formacie, który zobaczysz na sali — te same typy zadań, te same polecenia.",
+                "Zadania w formacie egzaminu CKE — te same typy zadań i te same polecenia co w arkuszach.",
             },
             {
               icon: Layers,
-              title: "Cały materiał z 6 lat",
+              title: "Arkusze z 6 lat",
               description:
-                "Arkusze CKE z ostatnich sześciu lat w jednym zestawie zadań — temat po temacie.",
+                "Zadania z arkuszy CKE z ostatnich sześciu lat, uporządkowane temat po temacie.",
             },
             {
               icon: QrCode,
@@ -108,7 +108,7 @@ export default function Home() {
           accent="blue"
           eyebrowIcon={Route}
           eyebrowLabel="Roadmapa nauki"
-          heading="Wiesz dokładnie, czego się uczyć"
+          heading="Zawsze wiesz, jaki jest następny krok"
           sub="Cały materiał egzaminu rozpisany na tematy i kroki. Widzisz, co masz opanowane, nad czym pracujesz i co jeszcze przed Tobą — aż do dnia egzaminu."
           ctaLabel="Zobacz roadmapę"
           ctaHref="/roadmap"
@@ -141,8 +141,8 @@ export default function Home() {
           accent="tangerine"
           eyebrowIcon={BadgePercent}
           eyebrowLabel="Śledzenie postępów"
-          heading="Wiedz, na czym stoisz"
-          sub="Każda odpowiedź buduje obraz Twojego przygotowania: opanowanie tematów, skuteczność i gotowość do egzaminu — na bieżąco, bez zgadywania."
+          heading="Zobacz, jak rośnie Twoje przygotowanie"
+          sub="Każda odpowiedź uzupełnia obraz Twojego przygotowania: opanowanie tematów, skuteczność i szacowaną gotowość do egzaminu."
           ctaLabel="Zobacz postępy"
           ctaHref="/progress"
           showcases={[<TopicFeed key="feed" />, <WeakSpots key="spots" />, <ReadinessDashboard key="dashboard" />]}
@@ -158,13 +158,13 @@ export default function Home() {
               icon: Target,
               title: "Wykrywanie słabych punktów",
               description:
-                "Examax znajduje tematy, które kosztują punkty — zanim znajdzie je egzaminator.",
+                "Examax wskazuje tematy, w których najczęściej tracisz punkty, żebyś wiedział, co powtórzyć.",
             },
             {
               icon: Gauge,
               title: "Wskaźnik gotowości",
               description:
-                "Jeden wynik, który pokazuje, jak blisko jesteś egzaminacyjnej formy.",
+                "Szacunek oparty na Twoich wynikach z zadań i arkuszy — pomaga ocenić, ile pracy jeszcze przed Tobą.",
             },
           ]}
         />
@@ -174,8 +174,9 @@ export default function Home() {
           accent="lavender"
           eyebrowIcon={Timer}
           eyebrowLabel="Symulacja egzaminu"
-          heading="Przećwicz egzamin, zanim się zacznie"
-          sub="Pełny arkusz na czas, w formacie CKE. Liczysz w brudnopisie jak na sali, zaznaczasz odpowiedź, a Korepetytor AI od razu ją sprawdza i pokazuje, gdzie jest błąd."
+          heading="Sprawdź się w warunkach podobnych do prawdziwego egzaminu"
+          wideHeading
+          sub="Pełny arkusz na czas, w formacie CKE. Liczysz w brudnopisie jak na sali, a po oddaniu arkusza odpowiedzi są sprawdzane według zasad oceniania CKE. Korepetytor AI pomaga zrozumieć, gdzie pojawił się błąd."
           ctaLabel="Zobacz symulację"
           ctaHref="/simulation"
           showcase={<SimulationShowcase />}
@@ -187,8 +188,8 @@ export default function Home() {
           eyebrowIcon={Zap}
           eyebrowLabel="Korepetytor AI"
           eyebrowBadge={<ProMark />}
-          heading="Zrozum błędy i ucz się szybciej"
-          sub="Korepetytor AI zna Twoją roadmapę i Twoje odpowiedzi. Tłumaczy zadania krok po kroku, pokazuje, skąd wziął się błąd, i podpowiada, co ćwiczyć dalej."
+          heading="Zrozum, dlaczego popełniasz błędy"
+          sub="Korepetytor AI korzysta z Twojej roadmapy i Twoich odpowiedzi. Tłumaczy zadania krok po kroku, pokazuje, skąd wziął się błąd, i podpowiada, co warto przećwiczyć."
           ctaLabel="Zobacz agentów"
           ctaHref="/agents"
           showcase={<AgentShowcase />}
@@ -199,8 +200,8 @@ export default function Home() {
           accent="sapphire"
           eyebrowIcon={Workflow}
           eyebrowLabel="Jak działa Examax"
-          heading="Oficjalne arkusze, zamienione w naukę"
-          sub="Examax bierze oryginalne zadania CKE i aktualizuje się z każdym nowym arkuszem. Twoje odpowiedzi i postępy zapisują się na Twoim koncie — w każdym przedmiocie egzaminu."
+          heading="Oficjalne arkusze CKE przekształcone w codzienną naukę"
+          sub="Examax korzysta z oryginalnych zadań CKE, a bazę uzupełniamy o kolejne arkusze po ich publikacji. Twoje odpowiedzi i postępy zapisują się na Twoim koncie — w każdym przedmiocie egzaminu."
           ctaLabel="Zobacz, jak to działa"
           ctaHref="/training#sources"
           showcases={[<SheetFlow key="sheets" />, <KnowledgeSync key="sync" />, <SubjectWindow key="subjects" />]}
@@ -208,9 +209,9 @@ export default function Home() {
           subFeatures={[
             {
               icon: FileInput,
-              title: "Zawsze aktualne arkusze CKE",
+              title: "Aktualna baza arkuszy CKE",
               description:
-                "Każdy nowy arkusz CKE — matura, rozszerzenie, ósmoklasista — od razu trafia do Examaxa. Baza zadań stale się aktualizuje.",
+                "Nowe arkusze CKE — matura podstawowa i rozszerzona oraz egzamin ósmoklasisty — dodajemy do bazy po ich publikacji.",
             },
             {
               icon: CloudCheck,
@@ -222,14 +223,14 @@ export default function Home() {
               icon: Library,
               title: "Każdy przedmiot egzaminu",
               description:
-                "Matematyka, polski i angielski — na maturze i egzaminie ósmoklasisty, w formacie, który zobaczysz na sali.",
+                "Matematyka, polski i angielski — na maturze i egzaminie ósmoklasisty, w formacie egzaminu CKE.",
             },
           ]}
         />
 
         <TutoringCompare />
         <Faq />
-        <CtaBand />
+        <CtaBand title="Do egzaminu przygotowujesz się krok po kroku." sub="Zacznij od krótkiej diagnozy i zobacz, nad czym warto pracować." />
       </main>
       <Footer />
     </>

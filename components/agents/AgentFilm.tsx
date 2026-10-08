@@ -1,8 +1,7 @@
 "use client";
 
-import { memo, useCallback, useEffect, useRef, useState } from "react";
-import { AbsoluteFill, interpolate } from "remotion";
-import { Player, type PlayerRef } from "@remotion/player";
+import { Suspense, lazy, memo, useCallback, useEffect, useRef, useState } from "react";
+import type { PlayerRef } from "@remotion/player";
 import { BotAvatar, type BotAvatarType } from "bot-avatars";
 import {
   ArrowUp,
@@ -20,8 +19,8 @@ import {
 } from "lucide-react";
 import { MaturaIcon } from "@/components/ui/MaturaIcon";
 import { AccentTile } from "@/components/ui/FeaturePill";
+import { AbsoluteFill, interpolate } from "@/components/hero-film/anim";
 import { FrameAt, useFrame } from "@/components/hero-film/frame";
-import { FrameBridge } from "@/components/hero-film/frame-bridge";
 import { Chip, Cursor, NavHeading, Shell, StatusPill, type CursorKey } from "@/components/hero-film/kit";
 import { ramp } from "@/components/hero-film/motion";
 import { Frac, V } from "@/components/simulation/math";
@@ -843,15 +842,8 @@ function Film() {
   );
 }
 
-function Composition() {
-  return (
-    <AbsoluteFill>
-      <FrameBridge>
-        <Film />
-      </FrameBridge>
-    </AbsoluteFill>
-  );
-}
+/** Remotion arrives with the Player, once the film is near the screen (see hero-film/FilmPlayer.tsx). */
+const FilmPlayer = lazy(() => import("@/components/hero-film/FilmPlayer").then((m) => ({ default: m.FilmPlayer })));
 
 /** The still: Zadanie 10 just marked, for reduced motion and until the first frame lands. */
 const POSTER_FRAME = s(29.4);
@@ -884,9 +876,32 @@ export function AgentFilm() {
   const stage = useRef<HTMLDivElement>(null);
   const [ready, setReady] = useState(false);
   const [frame, setFrame] = useState(0);
+  const [near, setNear] = useState(false);
+  // The Player mounts late (lazily, near the screen), so the effect below waits for it, not for the first render.
+  const [mounted, setMounted] = useState<PlayerRef | null>(null);
+  const attach = useCallback((node: PlayerRef | null) => {
+    player.current = node;
+    setMounted(node);
+  }, []);
+
+  // Fetch the Player only once the film is within 600px of the screen.
+  useEffect(() => {
+    const el = stage.current;
+    if (!el || reducedMotion) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        setNear(true);
+        observer.disconnect();
+      },
+      { rootMargin: "600px 0px" },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [reducedMotion]);
 
   useEffect(() => {
-    const current = player.current;
+    const current = mounted;
     const el = stage.current;
     if (!current || !el) return;
     const observer = new IntersectionObserver(([entry]) => (entry.isIntersecting ? current.play() : current.pause()), { threshold: 0.25 });
@@ -902,7 +917,7 @@ export function AgentFilm() {
       observer.disconnect();
       current.removeEventListener("frameupdate", onFrame);
     };
-  }, [reducedMotion]);
+  }, [mounted]);
 
   const chapter = CHAPTERS.reduce((found, item, index) => (frame >= item.from ? index : found), 0);
   const jump = useCallback((index: number) => {
@@ -920,7 +935,7 @@ export function AgentFilm() {
           z matury 2025 rozwiązane krok po kroku — agent tylko zadaje pytania — i pełna symulacja: 42 z 50 punktów w 141 minut, a najsłabsze
           działy trafiają do rutyny.
         </figcaption>
-        <div aria-hidden className="pointer-events-none absolute inset-0">
+        <div aria-hidden inert className="pointer-events-none absolute inset-0">
           {reducedMotion ? (
             <Poster />
           ) : (
@@ -929,24 +944,11 @@ export function AgentFilm() {
                 <Poster />
               </div>
               <div className="absolute inset-0 transition-opacity duration-500" style={{ opacity: ready ? 1 : 0 }}>
-                <Player
-                  ref={player}
-                  component={Composition}
-                  durationInFrames={LOOP}
-                  fps={FPS}
-                  compositionWidth={WIDTH}
-                  compositionHeight={HEIGHT}
-                  style={{ width: "100%", height: "100%" }}
-                  loop
-                  controls={false}
-                  clickToPlay={false}
-                  doubleClickToFullscreen={false}
-                  spaceKeyToPlayOrPause={false}
-                  acknowledgeRemotionLicense
-                  renderLoading={() => <Poster />}
-                  initiallyMuted
-                  numberOfSharedAudioTags={0}
-                />
+                {near ? (
+                  <Suspense fallback={null}>
+                    <FilmPlayer ref={attach} film={Film} durationInFrames={LOOP} fps={FPS} width={WIDTH} height={HEIGHT} poster={() => <Poster />} />
+                  </Suspense>
+                ) : null}
               </div>
             </>
           )}

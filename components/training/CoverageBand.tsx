@@ -162,7 +162,7 @@ function CoverageMap() {
   const [px, py] = project(CITIES[latest.city].at);
 
   return (
-    <div ref={ref} aria-hidden className="relative size-full">
+    <div ref={ref} aria-hidden inert className="relative size-full">
       {/* The map, where the reference has its globe: dots only */}
       <div
         className="absolute left-[8%] top-[40px] md:left-[14%]"

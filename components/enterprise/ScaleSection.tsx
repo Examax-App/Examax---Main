@@ -255,7 +255,7 @@ function SignInDiagram() {
 function Cell({ icon: Icon, title, text, children }: { icon: IconComponent; title: string; text: string; children: React.ReactNode }) {
   return (
     <Reveal className="flex flex-col gap-10 px-4 py-10 sm:px-10 sm:py-14">
-      <div aria-hidden className="cursor-default select-none">
+      <div aria-hidden inert className="cursor-default select-none">
         {children}
       </div>
       <div className="max-w-2xl">
@@ -276,9 +276,9 @@ export function ScaleSection() {
         <SectionHeader
           id="scale-heading"
           icon={TrendingUp}
-          eyebrow="Skala"
-          title="Każda klasa w jednym panelu"
-          sub="Od jednej klasy do całego rocznika i kilku placówek. Dyrekcja widzi gotowość każdej klasy, a nauczyciel — każdego ucznia."
+          eyebrow="Skala szkoły"
+          title="Od pojedynczej klasy do całej sieci placówek"
+          sub="Dyrekcja widzi gotowość każdej klasy, a nauczyciel — każdego ucznia."
         />
         <div className="mt-14 px-4">
           <ReadinessChart />
@@ -287,7 +287,7 @@ export function ScaleSection() {
         <div className="mt-16 divide-y divide-ash border-t border-ash">
           <Cell
             icon={Headset}
-            title="Wsparcie na wyłączność"
+            title="Wsparcie wdrożeniowe"
             text="Dedykowany opiekun na wspólnym kanale, szkolenie dla rady pedagogicznej i wdrożenie bez ręcznego przepisywania list uczniów."
           >
             <div className="grid gap-5 md:h-[340px] md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">

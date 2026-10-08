@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { AbsoluteFill, Easing, interpolate } from "remotion";
-import { Player, type PlayerRef } from "@remotion/player";
+import { Suspense, lazy, useCallback, useEffect, useRef, useState } from "react";
+import type { PlayerRef } from "@remotion/player";
 import {
   ArrowUpRight,
   BarChart3,
@@ -18,8 +17,8 @@ import {
 } from "lucide-react";
 import { BotAvatar } from "bot-avatars";
 import { MaturaIcon } from "@/components/ui/MaturaIcon";
+import { AbsoluteFill, Easing, interpolate } from "@/components/hero-film/anim";
 import { FrameAt, useFrame } from "@/components/hero-film/frame";
-import { FrameBridge } from "@/components/hero-film/frame-bridge";
 import {
   AreaChart,
   CONTENT_W,
@@ -1554,15 +1553,12 @@ function Tooltip({ title, color, label, value }: { title: string; color: string;
   );
 }
 
-function SimulationComposition() {
-  return (
-    <AbsoluteFill>
-      <FrameBridge>
-        <SimulationLoop />
-      </FrameBridge>
-    </AbsoluteFill>
-  );
-}
+/**
+ * Remotion arrives with the Player (see hero-film/FilmPlayer.tsx), so the
+ * stills this file also exports — /simulation's SimulationStill — never pull
+ * it into a page's first load.
+ */
+const LazyFilmPlayer = lazy(() => import("@/components/hero-film/FilmPlayer").then((m) => ({ default: m.FilmPlayer })));
 
 /** The film's still, drawn at composition size and scaled like the Player. */
 function SimulationPoster({ frame = POSTER_FRAME }: { frame?: number }) {
@@ -1590,7 +1586,7 @@ function SimulationPoster({ frame = POSTER_FRAME }: { frame?: number }) {
  */
 export function SimulationStill({ className }: { className?: string }) {
   return (
-    <div className={cn("aspect-[1200/640] overflow-hidden", className)}>
+    <div inert className={cn("aspect-[1200/640] overflow-hidden", className)}>
       <SimulationPoster frame={T.answered10 + FPS / 2} />
     </div>
   );
@@ -1636,7 +1632,7 @@ export function SimulationShowcase() {
           otwiera kartę wzorów, zapisuje obliczenia, szkicuje parabolę i oznacza zadanie do sprawdzenia, w zadaniu 21 ocenia
           prawdziwość stwierdzeń, a po oddaniu arkusza widzi wynik: punkty w czasie egzaminu i czas każdego zadania.
         </figcaption>
-        <div className="pointer-events-none absolute inset-0">
+        <div inert className="pointer-events-none absolute inset-0">
           {reducedMotion ? <SimulationPoster /> : <FilmPlayer playerRef={player} onResults={setResults} />}
         </div>
         <a
@@ -1674,9 +1670,18 @@ function overlay(box: { x: number; y: number; w: number; h: number }): React.CSS
 function FilmPlayer({ playerRef, onResults }: { playerRef: React.RefObject<PlayerRef | null>; onResults: (results: boolean) => void }) {
   const stage = useRef<HTMLDivElement>(null);
   const [ready, setReady] = useState(false);
+  // The Player mounts once its lazy module lands, so the effects below wait for it, not for the first render.
+  const [mounted, setMounted] = useState<PlayerRef | null>(null);
+  const attach = useCallback(
+    (node: PlayerRef | null) => {
+      playerRef.current = node;
+      setMounted(node);
+    },
+    [playerRef],
+  );
 
   useEffect(() => {
-    const player = playerRef.current;
+    const player = mounted;
     const el = stage.current;
     if (!player || !el) return;
     const observer = new IntersectionObserver(
@@ -1688,12 +1693,12 @@ function FilmPlayer({ playerRef, onResults }: { playerRef: React.RefObject<Playe
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, [playerRef]);
+  }, [mounted]);
 
   // The first frame fades the poster out; every frame tells the page which
   // screen is up, so the button over the header does what it says.
   useEffect(() => {
-    const player = playerRef.current;
+    const player = mounted;
     if (!player) return;
     const onFrame = ({ detail }: { detail: { frame: number } }) => {
       setReady(true);
@@ -1701,7 +1706,7 @@ function FilmPlayer({ playerRef, onResults }: { playerRef: React.RefObject<Playe
     };
     player.addEventListener("frameupdate", onFrame);
     return () => player.removeEventListener("frameupdate", onFrame);
-  }, [playerRef, onResults]);
+  }, [mounted, onResults]);
 
   return (
     <div ref={stage} aria-hidden className="absolute inset-0">
@@ -1709,24 +1714,9 @@ function FilmPlayer({ playerRef, onResults }: { playerRef: React.RefObject<Playe
         <SimulationPoster />
       </div>
       <div className="absolute inset-0 transition-opacity duration-500" style={{ opacity: ready ? 1 : 0 }}>
-        <Player
-          ref={playerRef}
-          component={SimulationComposition}
-          durationInFrames={LOOP}
-          fps={FPS}
-          compositionWidth={WIDTH}
-          compositionHeight={HEIGHT}
-          style={{ width: "100%", height: "100%" }}
-          loop
-          controls={false}
-          clickToPlay={false}
-          doubleClickToFullscreen={false}
-          spaceKeyToPlayOrPause={false}
-          acknowledgeRemotionLicense
-          renderLoading={() => <SimulationPoster />}
-          initiallyMuted
-          numberOfSharedAudioTags={0}
-        />
+        <Suspense fallback={null}>
+          <LazyFilmPlayer ref={attach} film={SimulationLoop} durationInFrames={LOOP} fps={FPS} width={WIDTH} height={HEIGHT} poster={() => <SimulationPoster />} />
+        </Suspense>
       </div>
     </div>
   );

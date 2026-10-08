@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import {
   ArrowUpRight,
   BadgePercent,
@@ -80,8 +80,7 @@ const TOOLS: FooterLink[] = [
   { label: "Symulacja egzaminu", href: "/simulation" },
 ];
 
-/* NOT BUILT YET — /reviews, /tutors, /careers and the legal pages other than
-   /legal/privacy have no page behind them, so their links land on the 404
+/* NOT BUILT YET — /reviews, /tutors and /careers have no page behind them, so their links land on the 404
    until each one is written. */
 const COMPANY: FooterLink[] = [
   { label: "O nas", href: "/about" },
@@ -94,10 +93,10 @@ const COMPANY: FooterLink[] = [
 ];
 
 const LEGAL: FooterLink[] = [
-  { label: "Regulamin", href: "/terms" },
+  { label: "Regulamin", href: "/legal/terms" },
   { label: "Polityka prywatności", href: "/legal/privacy" },
-  { label: "Polityka cookies", href: "/cookies" },
-  { label: "RODO", href: "/gdpr" },
+  { label: "Polityka cookies", href: "/legal/cookies" },
+  { label: "RODO", href: "/legal/gdpr" },
 ];
 
 /** Subjects, in the navbar's accents; the ones still to come in Dub's neutral chip. */
@@ -117,7 +116,7 @@ const LINK = "flex items-center gap-2 rounded-[4px] text-body text-fog transitio
 function Column({ heading, children }: { heading: string; children: React.ReactNode }) {
   return (
     <div>
-      <h3 className="text-body font-medium text-charcoal">{heading}</h3>
+      <h2 className="text-body font-medium text-charcoal">{heading}</h2>
       <ul role="list" className="mt-2.5 flex flex-col gap-3.5">
         {children}
       </ul>
@@ -251,7 +250,7 @@ export function Footer() {
                 <Logo />
               </Link>
               <p className="mt-4 max-w-[17rem] text-body text-fog">
-                System nauki do egzaminów oparty na&nbsp;AI. Wszystko, czego potrzebujesz przed egzaminem, w&nbsp;jednym miejscu.
+                Platforma do przygotowania do egzaminów CKE — z&nbsp;zadaniami, roadmapą nauki i&nbsp;wsparciem AI.
               </p>
             </div>
             <div className="flex items-center gap-3">

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import {
   ArrowUpRight,
   Calendar1,
@@ -196,10 +196,10 @@ export function CommunitySection() {
             Razem ze szkołami
           </span>
           <h2 id="community-heading" className="mt-3 max-w-md text-balance font-satoshi text-3xl font-medium text-charcoal sm:text-4xl">
-            Budujemy Examax razem z nauczycielami
+            Opinie nauczycieli pomagają nam rozwijać kolejne funkcje platformy
           </h2>
           <p className="mt-4 max-w-md text-pretty text-body-xl text-fog">
-            Szkoły w pilotażu decydują, co powstaje dalej — a nowe arkusze CKE trafiają do bazy, gdy tylko zostaną opublikowane.
+            Szkoły w pilotażu mają wpływ na to, co powstaje dalej, a nowe arkusze CKE dodajemy do bazy po ich publikacji.
           </p>
         </Reveal>
         <div className="grid grid-rows-2 divide-y divide-ash border-ash max-md:border-t md:border-l">
@@ -295,12 +295,12 @@ export function PlatformCanvas() {
             <h2 id="platform-heading" className="max-w-sm text-balance font-satoshi text-4xl font-medium text-charcoal sm:text-5xl">
               Cały Examax w jednej licencji
             </h2>
-            <p className="mt-4 max-w-sm text-pretty text-body-xl text-fog">
+            <p className="mt-4 max-w-sm text-pretty text-body-xl text-steel">
               Trening, roadmapa, postępy, symulacje i Korepetytor AI — dla każdego ucznia, od pierwszego dnia pilotażu.
             </p>
           </div>
           <div>
-            <p className="text-body text-fog">Poznaj produkty</p>
+            <p className="text-body text-steel">Poznaj produkty</p>
             <div className="mt-3 flex flex-wrap gap-2">
               {TILES.slice(0, 4).map((tile) => (
                 <Link

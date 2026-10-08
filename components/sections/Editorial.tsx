@@ -789,20 +789,19 @@ export function Editorial() {
           >
             <div className="space-y-8 font-inter text-heading leading-snug text-graphite">
               <p>
-                Quiz sprawdza, co umiesz. <br />
-                Nie mówi, co dalej.
+                Sam wynik nie wystarczy. Examax pokazuje, co zrobić dalej.
               </p>
               <p>
-                Examax łączy roadmapę {chip("roadmap")}, zadania CKE{" "}
-                {chip("practice")} i śledzenie postępów {chip("progress")} – w jeden system
-                przygotowań.
+                Examax łączy plan nauki {chip("roadmap")}, zadania egzaminacyjne{" "}
+                {chip("practice")} i historię Twoich wyników {chip("progress")} w jedno
+                miejsce przygotowań.
               </p>
               <p>
-                Od zrozumienia egzaminu do pełnej gotowości. Krok po kroku,
-                dzień po dniu.
+                Od pierwszego zadania do egzaminu widzisz, czego się uczyć, co już
+                umiesz i nad czym pracować dalej.
               </p>
               <p>
-                Bo dobry wynik to nie kwestia szczęścia. To kwestia systemu.
+                Lepszy wynik zaczyna się od regularnej pracy i jasnego planu.
               </p>
             </div>
           </div>

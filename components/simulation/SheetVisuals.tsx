@@ -170,7 +170,7 @@ export function PaceChart() {
 
           <div className="relative border-t border-ash px-3 pb-3 pt-4">
             <div className="flex gap-2">
-              <div className="flex h-[150px] flex-col justify-between py-0 text-right font-geist-mono text-[8px] leading-none text-silver">
+              <div className="flex h-[150px] flex-col justify-between py-0 text-right font-geist-mono text-[8px] leading-none text-fog">
                 {series.axis.map((label) => (
                   <span key={label}>{label}</span>
                 ))}
@@ -214,7 +214,7 @@ export function PaceChart() {
                 </div>
               </div>
             </div>
-            <div className="mt-2 flex justify-between pl-5 font-geist-mono text-[8px] text-silver">
+            <div className="mt-2 flex justify-between pl-5 font-geist-mono text-[8px] text-fog">
               {series.ticks.map((tick) => (
                 <span key={tick}>{tick}</span>
               ))}

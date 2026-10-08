@@ -82,13 +82,13 @@ export function AgentsHero() {
             className="animate-slide-up-fade mt-5 text-balance font-satoshi text-4xl font-medium text-charcoal sm:text-5xl sm:leading-[1.15]"
             style={{ "--offset": "20px" } as React.CSSProperties}
           >
-            Korepetytor, który nie odrabia za&nbsp;Ciebie
+            AI pomaga. Myślisz Ty.
           </h1>
           <p
             className="animate-slide-up-fade mt-5 text-pretty text-lg font-medium text-fog sm:text-xl"
             style={{ "--offset": "10px", "--delay": "150ms" } as React.CSSProperties}
           >
-            Zespół agentów AI tłumaczy krok po kroku, układa sprawdziany i planuje naukę — ale każde zadanie rozwiązujesz Ty. Dlatego zostaje w&nbsp;głowie.
+            Korepetytor AI tłumaczy zadania krok po kroku, sprawdza Twój tok rozumowania i&nbsp;pomaga zaplanować powtórki. Każde zadanie rozwiązujesz sam — dlatego wiedza zostaje z&nbsp;Tobą.
           </p>
         </div>
         <div

@@ -15,7 +15,7 @@ export function GlanceSection() {
         icon={LineChart}
         eyebrow="Postępy na żywo"
         title="Postęp jak na dłoni"
-        sub="Każde zadanie, poprawna odpowiedź i minuta nauki trafiają do statystyk od razu. Widzisz, jak idzie dziś — i jak szło na początku miesiąca."
+        sub="Rozwiązane zadania, poprawne odpowiedzi i czas nauki od razu trafiają do statystyk. Możesz porównać, jak idzie Ci teraz, z tym, jak było na początku miesiąca."
         actions={[
           { label: "Zacznij za darmo", href: "/signup", variant: "primary" },
           { label: "Zobacz cennik", href: "/pricing", variant: "outline" },
@@ -28,14 +28,14 @@ export function GlanceSection() {
         <FeatureGrid
           cells={[
             {
-              title: "Postępy, którymi się dzielisz",
-              description: "Jeden link pokazuje Twoje wyniki rodzicowi, korepetytorowi albo nauczycielowi — bez zakładania konta i bez zrzutów ekranu.",
+              title: "Postępy, które możesz udostępnić",
+              description: "Udostępnij swoje wyniki rodzicowi, korepetytorowi lub nauczycielowi za pomocą linku. Ty decydujesz, komu go wysyłasz, a osoba, która go otworzy, nie musi zakładać konta.",
               cta: { label: "Załóż konto", href: "/signup" },
               visual: <ShareProgress />,
             },
             {
               title: "Każdy przedmiot, dział i typ zadania",
-              description: "Widzisz, który przedmiot ciągnie wynik w górę, który dział jeszcze kuleje i na jakim typie zadań tracisz najwięcej punktów.",
+              description: "Widzisz, w którym przedmiocie idzie Ci najlepiej, który dział wymaga jeszcze pracy i na jakim typie zadań tracisz najwięcej punktów.",
               cta: { label: "Zobacz trening", href: "/training" },
               visual: <SubjectStack />,
             },
@@ -44,7 +44,7 @@ export function GlanceSection() {
       </div>
       <MiniFeatures
         iconClassName="text-tangerine"
-        summary="Wszystko, co robisz w Examaxie, liczy się do postępów samo — bez ręcznego wpisywania."
+        summary="Twoja aktywność w Examaxie zapisuje się w postępach automatycznie — nie musisz niczego wpisywać ręcznie."
         cta={{ label: "Zacznij za darmo", href: "/signup" }}
         items={[
           {
@@ -60,12 +60,12 @@ export function GlanceSection() {
           {
             icon: Flame,
             title: "Seria i cel tygodnia",
-            description: "Codzienna seria i tygodniowy cel pomagają zamienić naukę w nawyk.",
+            description: "Codzienna seria i tygodniowy cel pomagają uczyć się regularnie.",
           },
           {
             icon: Zap,
             title: "Zapytaj Korepetytora AI",
-            description: "„Jak mi poszło w tym tygodniu?” — odpowiedź z Twoich własnych wyników.",
+            description: "„Jak mi poszło w tym tygodniu?” — Korepetytor AI podsumuje Twoje wyniki i podpowie, na czym się skupić.",
           },
         ]}
       />

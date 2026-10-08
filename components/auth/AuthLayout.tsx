@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { Logo } from "@/components/ui/Logo";
 import { cn } from "@/lib/cn";
 import { ClientOnly } from "@/components/auth/ClientOnly";
@@ -81,7 +81,7 @@ export function AuthLayout({ children }: { children: React.ReactNode }) {
             <div className="flex grow basis-0 flex-col justify-end">
               <p className="px-20 py-8 text-center text-xs font-medium text-fog md:px-0">
                 Kontynuując, akceptujesz{" "}
-                <Link href="/terms" prefetch={false} className="font-semibold text-steel transition-colors hover:text-graphite">
+                <Link href="/legal/terms" className="font-semibold text-steel transition-colors hover:text-graphite">
                   Regulamin
                 </Link>{" "}
                 i{" "}

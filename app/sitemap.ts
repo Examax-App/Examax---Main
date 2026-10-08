@@ -22,6 +22,9 @@ const PAGES: Array<{ path: string; priority: number }> = [
   { path: "/contact/sales", priority: 0.4 },
   { path: "/contact/support", priority: 0.4 },
   { path: "/legal/privacy", priority: 0.3 },
+  { path: "/legal/terms", priority: 0.3 },
+  { path: "/legal/cookies", priority: 0.3 },
+  { path: "/legal/gdpr", priority: 0.3 },
 ];
 
 /** /sitemap.xml — the pages above, then every changelog post from Sanity. */

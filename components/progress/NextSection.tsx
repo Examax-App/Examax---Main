@@ -13,8 +13,8 @@ export function NextSection() {
         id="next-heading"
         icon={Sparkles}
         eyebrow="Rekomendacje i przypomnienia"
-        title="Każdy wynik podpowiada, co dalej"
-        sub="Korepetytor AI czyta Twoje wyniki i mówi, co powtórzyć. Przypomnienia pilnują serii, zanim ją stracisz."
+        title="Wyniki pomagają wybrać kolejny krok"
+        sub="Korepetytor AI pomaga zinterpretować Twoje wyniki i proponuje, co warto powtórzyć. Przypomnienia, jeśli je włączysz, pomagają utrzymać regularność."
       />
       <SignalFlow />
     </GridSection>

@@ -51,7 +51,7 @@ function SubjectMark({ subject, since }: { subject: Subject; since?: string }) {
         </span>
       </span>
       {since ? (
-        <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-paper-mist px-1 py-0.5 text-[8px] font-semibold uppercase leading-none text-fog">
+        <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-paper-mist px-1 py-0.5 text-[8px] font-semibold uppercase leading-none text-steel">
           {since}
         </span>
       ) : null}

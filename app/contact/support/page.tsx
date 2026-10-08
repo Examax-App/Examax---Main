@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { prefetchFor } from "@/lib/routes";
 import { ChevronRight, MessagesSquare } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";

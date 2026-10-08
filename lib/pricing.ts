@@ -137,7 +137,7 @@ export const plans: Plan[] = [
     id: "free",
     name: "Free",
     monthly: 0,
-    description: "Roadmapa i trening bez limitu, bez podawania karty",
+    description: "Zacznij naukę bez karty płatniczej i sprawdź, jak działa Examax.",
     cta: { label: "Zacznij za darmo", href: "/signup" },
     featuresHeading: "Najważniejsze funkcje:",
     features: [
@@ -175,7 +175,7 @@ export const plans: Plan[] = [
     id: "pro",
     name: "Pro",
     monthly: 49,
-    description: "Więcej pytań do AI i regularne symulacje",
+    description: "Więcej wsparcia AI i regularne przygotowanie do egzaminu.",
     cta: { label: "Wybierz Pro", href: "/signup" },
     featuresHeading: "Wszystko z Free, plus:",
     features: [
@@ -217,7 +217,7 @@ export const plans: Plan[] = [
     id: "max",
     name: "Max",
     monthly: 79,
-    description: "Największy dostęp do AI i symulacje aż do egzaminu",
+    description: "Pełne wsparcie AI i przygotowanie prowadzone aż do dnia egzaminu.",
     cta: { label: "Wybierz Max", href: "/signup" },
     featuresHeading: "Wszystko z Pro, plus:",
     features: [
@@ -524,7 +524,7 @@ export const tierCompareGroups: CompareGroup[] = compareGroups
 export const enterpriseOffer = {
   subheading: "Indywidualna wycena dla całej placówki",
   body: "Examax dla całych klas i roczników — konta, panel nauczyciela i raporty z postępów, dopasowane do tego, jak uczy Twoja szkoła.",
-  listHeading: "Wszystko dopasowane do Waszych potrzeb",
+  listHeading: "Funkcje dla całej szkoły",
   items: [
     { icon: Receipt, label: "Wycena pod liczbę uczniów i klas", tip: "Płacisz za tylu uczniów, ilu faktycznie korzysta — cena rośnie razem ze szkołą." },
     { icon: GraduationCap, label: "Konta dla klas i roczników", tip: "Uczniów dodajesz całymi klasami, bez osobnej rejestracji każdego z nich." },
@@ -553,7 +553,7 @@ export type PricingFaq = { question: string; answer: ReactNode };
 
 export const pricingFaqs: PricingFaq[] = [
   {
-    question: "Który plan Examax jest dla mnie odpowiedni?",
+    question: "Który plan wybrać?",
     answer:
       "Ceny są takie same dla matury i egzaminu ósmoklasisty. Ósmoklasistom zwykle wystarcza Pro: więcej pytań do Korepetytora AI i regularne symulacje. Maturzystom polecamy Max: najwyższy limit pytań do Korepetytora AI, Korepetytora AI z pamięcią Twoich postępów i symulacje bez limitu aż do dnia egzaminu. Jeśli dopiero zaczynasz, zostań przy Free: roadmapa i trening są w nim bez limitu. Enterprise jest dla szkół.",
   },

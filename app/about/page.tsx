@@ -16,7 +16,7 @@ export const metadata: Metadata = pageMetadata({
   description:
     "Kim jesteśmy, po co budujemy Examax i według jakich zasad. Platforma do nauki na egzamin ósmoklasisty i maturę, oparta na dokumentach CKE.",
   path: "/about",
-  social: { title: "O Examax", description: "Pomagamy uczniom zdać egzamin ósmoklasisty i maturę z lepszym wynikiem." },
+  social: { title: "O Examax", description: "Przygotowanie do egzaminów CKE w jednym miejscu: zadania, postępy i nauka na błędach." },
 });
 
 /**
