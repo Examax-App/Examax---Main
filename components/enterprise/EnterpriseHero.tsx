@@ -277,7 +277,7 @@ export function EnterpriseHero() {
   return (
     <section aria-labelledby="enterprise-heading" className="relative overflow-clip border-b border-ash bg-white px-4">
       <div className="relative mx-auto flex w-full max-w-[var(--page-max-width)] flex-col items-center overflow-clip border-x border-ash bg-gradient-to-b from-white to-canvas-muted px-4 pt-16">
-        <div className="relative z-10 mx-auto flex w-full max-w-xl flex-col items-center px-4 text-center">
+        <div className="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center px-4 text-center">
           <span
             className="animate-slide-up-fade flex w-fit items-center gap-2 rounded-full border border-ash bg-white px-3 py-1.5 text-xs font-medium leading-tight text-steel"
             style={{ "--offset": "10px" } as React.CSSProperties}
@@ -287,13 +287,13 @@ export function EnterpriseHero() {
           </span>
           <h1
             id="enterprise-heading"
-            className="animate-slide-up-fade mt-6 max-w-md text-balance text-center font-satoshi text-4xl font-medium text-charcoal sm:text-5xl sm:leading-[1.15]"
+            className="animate-slide-up-fade mt-6 max-w-2xl text-balance text-center font-satoshi text-4xl font-medium text-charcoal sm:text-5xl sm:leading-[1.15]"
             style={{ "--offset": "20px" } as React.CSSProperties}
           >
-            Przygotowanie do egzaminów CKE dla całej szkoły
+            Przygotowanie do egzaminów dla całej szkoły
           </h1>
           <p
-            className="animate-slide-up-fade mt-6 text-balance text-lg text-steel sm:text-xl"
+            className="animate-slide-up-fade mt-6 max-w-xl text-balance text-lg text-steel sm:text-xl"
             style={{ "--offset": "10px", "--delay": "150ms" } as React.CSSProperties}
           >
             Plan nauki, zadania CKE i wyniki uczniów&nbsp;— z&nbsp;panelem dla nauczycieli i&nbsp;dyrekcji.{" "}
