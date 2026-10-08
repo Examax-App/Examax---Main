@@ -121,6 +121,7 @@ export function QueueScroll() {
   return (
     <div
       aria-hidden
+      inert
       className="size-full overflow-hidden [mask-image:linear-gradient(transparent,black,black,transparent)]"
     >
       <div className="relative mx-auto size-full max-w-sm px-6">
@@ -229,7 +230,7 @@ export function TutorChat() {
   const { ref, inView: played } = useInView<HTMLDivElement>(0.4, true);
 
   return (
-    <div ref={ref} aria-hidden className="size-full overflow-hidden">
+    <div ref={ref} aria-hidden inert className="size-full overflow-hidden">
       <div className="relative mx-auto flex size-full max-w-72 flex-col justify-end gap-2">
         {played ? (
           <>
@@ -313,7 +314,7 @@ export function ReadinessOrbit() {
   const value = START + (counting ? event : STEPS - 3);
 
   return (
-    <div ref={ref} aria-hidden className="relative flex size-full flex-col items-center pt-6">
+    <div ref={ref} aria-hidden inert className="relative flex size-full flex-col items-center pt-6">
       <Waves id="readiness-waves" className="absolute left-1/2 top-4 h-[150px] w-[320px] -translate-x-1/2 text-[#e5e5e5] [mask-image:radial-gradient(50%_50%,black,transparent)]" />
 
       <div className="relative size-[104px]">

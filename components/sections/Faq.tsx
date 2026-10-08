@@ -16,7 +16,7 @@ const faqs: FaqItem[] = [
   {
     question: "Czy zadania naprawdę pochodzą z arkuszy CKE?",
     answer:
-      "Tak. Trenujesz na zadaniach z oficjalnych arkuszy egzaminacyjnych z poprzednich lat, uzupełnionych o zadania przygotowane w tym samym formacie i punktowane według tych samych zasad.",
+      "Tak. Trenujesz na zadaniach z oficjalnych arkuszy egzaminacyjnych CKE z poprzednich lat. Każde zadanie ma podane źródło i jest punktowane według oficjalnych zasad oceniania.",
   },
   {
     question: "Czym Examax różni się od aplikacji z quizami?",
@@ -26,12 +26,12 @@ const faqs: FaqItem[] = [
   {
     question: "Jak działa Korepetytor AI?",
     answer:
-      "Korepetytor AI widzi Twoją roadmapę, Twoje odpowiedzi i Twoje wcześniejsze błędy. Kiedy pytasz o zadanie, tłumaczy je krok po kroku i podpowiada, co przećwiczyć dalej. Jak każde AI może się mylić — dlatego zawsze łączymy jego wyjaśnienia z oficjalnymi zasadami oceniania.",
+      "Korepetytor AI widzi Twoją roadmapę, Twoje odpowiedzi i Twoje wcześniejsze błędy. Kiedy pytasz o zadanie, tłumaczy je krok po kroku i podpowiada, co przećwiczyć dalej. Jak każde AI może się mylić — dlatego jego wyjaśnienia opieramy na oficjalnych zasadach oceniania CKE.",
   },
   {
     question: "Czy Examax zastępuje korepetycje?",
     answer:
-      "Nie obiecujemy cudów. Examax daje Ci system: plan, zadania i wyjaśnienia dostępne o każdej porze. Dla wielu osób to wystarcza; innym pomaga wyciągnąć więcej z korepetycji, bo na zajęcia przychodzą z konkretnymi pytaniami.",
+      "Nie zawsze — i nie musi. Examax daje Ci plan, zadania i wyjaśnienia dostępne o każdej porze. Część osób uczy się tylko z nim; innym pomaga wyciągnąć więcej z korepetycji, bo na zajęcia przychodzą z konkretnymi pytaniami.",
   },
   {
     question: "Ile kosztuje Examax?",
@@ -39,7 +39,7 @@ const faqs: FaqItem[] = [
       <>
         Plan{" "}
         <strong className="font-semibold text-charcoal">Free</strong> jest
-        darmowy na zawsze i nie wymaga karty — roadmapa i trening są w nim bez
+        darmowy i nie wymaga karty — roadmapa i trening są w nim bez
         limitu. Plan{" "}
         <strong className="font-semibold text-charcoal">Pro</strong> kosztuje
         49 zł miesięcznie, a{" "}
@@ -58,7 +58,7 @@ const faqs: FaqItem[] = [
   {
     question: "Co z moimi danymi?",
     answer:
-      "Twoje dane należą do Ciebie. Szyfrujemy je w trakcie przesyłania i przechowywania, nie sprzedajemy ich nikomu i działamy zgodnie z RODO. W każdej chwili możesz je wyeksportować albo usunąć konto.",
+      "Twoje dane należą do Ciebie. Nie sprzedajemy ich i przetwarzamy je zgodnie z RODO. Możesz poprosić o kopię swoich danych albo o usunięcie konta.",
   },
 ];
 

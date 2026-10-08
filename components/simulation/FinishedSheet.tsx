@@ -30,7 +30,7 @@ function Mark({ top }: { top: number }) {
  */
 export function FinishedSheet() {
   return (
-    <div aria-hidden className="absolute inset-0 select-none px-4 pt-3 text-left text-charcoal">
+    <div aria-hidden inert className="absolute inset-0 select-none px-4 pt-3 text-left text-charcoal">
       <div className="flex items-center justify-between border-b border-ash pb-1.5 text-[8.5px] text-silver">
         <span>{SITTING.code}</span>
         <span>Strona 10 z {SITTING.tasks}</span>

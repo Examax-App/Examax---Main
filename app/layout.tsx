@@ -70,22 +70,25 @@ export const metadata: Metadata = {
     /* Let search show the whole snippet and full-size previews of the product pictures. */
     googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large", "max-video-preview": -1 },
   },
-  /* The RealFaviconGenerator set lives in public/ and is declared here once
-     for every page. Keep the app/ icon file conventions (favicon.ico, icon.*,
-     apple-icon.*) empty — they would emit a second set of <link> tags, and an
-     app/favicon.ico collides with public/favicon.ico. Bump `v` when the set is
-     regenerated so browsers drop their cached copies. In-app imagery lives in
-     public/brand/. */
+  /* The icon set lives in public/, rendered from public/brand/examax-logo-source.svg
+     (see public/brand/README.md), and is declared here once for every page.
+     Only the vector and the 192px PNG are offered as rel="icon": Google Search
+     scales whichever it picks up to its own sizes, and a small file (it was
+     using the 96px one) comes out soft. /favicon.ico (16–48px) stays at the
+     root, undeclared, for clients that ask for it by name. Keep the app/ icon
+     file conventions (favicon.ico, icon.*, apple-icon.*) empty — they would
+     emit a second set of <link> tags, and an app/favicon.ico collides with
+     public/favicon.ico. Bump `v` when the set is regenerated so browsers drop
+     their cached copies. In-app imagery lives in public/brand/. */
   icons: {
     icon: [
-      { url: "/favicon-96x96.png?v=20261007", type: "image/png", sizes: "96x96" },
-      { url: "/favicon.svg?v=20261007", type: "image/svg+xml" },
+      { url: "/favicon.svg?v=20261008", type: "image/svg+xml" },
+      { url: "/web-app-manifest-192x192.png?v=20261008", type: "image/png", sizes: "192x192" },
     ],
-    shortcut: "/favicon.ico?v=20261007",
-    apple: { url: "/apple-touch-icon.png?v=20261007", sizes: "180x180" },
+    apple: { url: "/apple-touch-icon.png?v=20261008", sizes: "180x180" },
   },
   appleWebApp: { title: "Examax" },
-  manifest: "/site.webmanifest?v=20261007",
+  manifest: "/site.webmanifest?v=20261008",
 };
 
 /* theme-color lives on the viewport export, not on metadata. */

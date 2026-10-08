@@ -23,7 +23,7 @@ export function LiveSection() {
         <FeatureCell
           cell={{
             title: "Szczegółowe filtry",
-            description: "Zawęź historię do przedmiotu, działu, typu zadania albo okresu i zobacz dokładnie, gdzie tracisz punkty.",
+            description: "Zawęź historię do przedmiotu, działu, typu zadania albo okresu i sprawdź, gdzie tracisz najwięcej punktów.",
             cta: { label: "Zobacz trening", href: "/training" },
             visual: <FilterMarquee />,
           }}

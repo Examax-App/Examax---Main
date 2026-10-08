@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import {
   BookOpen,
   CalendarDays,
@@ -62,7 +62,7 @@ export function PathStill() {
       <div className="size-full [mask-image:linear-gradient(black_95%,transparent)]">
         <div className="relative h-full w-[120%]">
           <Link href="/signup" className="group relative mx-auto block w-full overflow-visible rounded-lg bg-paper-mist" style={{ aspectRatio: `${WIDTH}/${HEIGHT}` }}>
-            <div ref={frame} aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden rounded-lg border border-ash">
+            <div ref={frame} aria-hidden inert className="pointer-events-none absolute inset-0 overflow-hidden rounded-lg border border-ash">
               <div className="origin-top-left" style={{ transform: `scale(${scale})` }}>
                 <PosterScene tab="roadmap" />
               </div>

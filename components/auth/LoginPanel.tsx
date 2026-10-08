@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { MailCheck } from "lucide-react";
 import { LoginForm } from "@/components/auth/LoginForm";
 import { AuthButton, AuthHeading, InstitutionBanner, NoticeIcon, ResendLine } from "@/components/auth/pieces";

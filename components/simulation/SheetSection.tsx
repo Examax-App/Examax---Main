@@ -11,8 +11,8 @@ export function SheetSection() {
     <GridSection id="sheet" labelledBy="sheet-heading" innerClassName="pt-20 sm:pt-24">
       <SectionHeader
         id="sheet-heading"
-        title="Prawdziwy egzamin, nie kolejny quiz"
-        sub="Ten sam arkusz, ten sam czas i te same narzędzia co na sali — żeby w dniu egzaminu nic Cię nie zaskoczyło."
+        title="Pełny arkusz, nie kolejny quiz"
+        sub="Ten sam arkusz, ten sam czas i te same narzędzia co na sali — żeby w dniu egzaminu format był Ci już znany."
       />
       <div className="mt-12">
         <FeatureGrid
@@ -31,13 +31,13 @@ export function SheetSection() {
             },
             {
               title: "Arkusze z każdej sesji",
-              description: "Matura i egzamin ósmoklasisty z poprzednich lat, każdy z oryginalnym czasem i punktacją CKE. Nowy arkusz trafia do bazy w dniu publikacji.",
+              description: "Matura i egzamin ósmoklasisty z poprzednich lat, każdy z oryginalnym czasem i punktacją CKE. Nowe arkusze dodajemy po ich publikacji.",
               cta: { label: "Zobacz arkusze", href: "/training#coverage" },
               visual: <SessionCards />,
             },
             {
               title: "Każdy ruch zapisany",
-              description: "Odpowiedzi, notatki i rysunki zapisują się same, a dziennik arkusza pokazuje, co i kiedy zrobiłeś — nawet gdy zamkniesz kartę.",
+              description: "Odpowiedzi, notatki i rysunki zapisują się automatycznie, a dziennik arkusza pokazuje, co i kiedy zrobiłeś — nawet gdy zamkniesz kartę.",
               cta: { label: "Zobacz postępy", href: "/progress" },
               visual: <AnswerLog />,
             },

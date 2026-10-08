@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { Reveal } from "@/components/ui/Reveal";
 
 /** Dub's notch piece: a flat top, then a steep S-curve down to the band. */
@@ -96,7 +96,7 @@ const DEFAULT_ACTIONS: CtaAction[] = [
  */
 export function CtaBand({
   title = "Do egzaminu liczy się każdy dzień",
-  sub = <>Zacznij teraz. 5&nbsp;minut dziennie i&nbsp;zobaczysz niesamowite zmiany.</>,
+  sub = <>Zacznij od krótkiego testu i&nbsp;ucz się regularnie — nawet kilka minut dziennie.</>,
   actions = DEFAULT_ACTIONS,
 }: {
   title?: string;

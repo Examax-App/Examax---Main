@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import {
   BookMarked,
   BookOpen,
@@ -43,7 +43,7 @@ import type { IconComponent } from "@/lib/icon";
 /** dub's "Link Preview" panel, 90% (75% from lg), fading out below 70%. */
 export function TopicPreview() {
   return (
-    <div className="pointer-events-none size-full [mask-image:linear-gradient(black_70%,transparent)]" aria-hidden>
+    <div className="pointer-events-none size-full [mask-image:linear-gradient(black_70%,transparent)]" aria-hidden inert>
       <div className="flex origin-top scale-90 cursor-default flex-col gap-6 rounded-xl border border-ash bg-white p-4 shadow-[0_20px_20px_0_#00000017] lg:scale-75">
         <div className="flex items-center justify-between">
           <h4 className="text-base font-medium text-charcoal">Podgląd tematu</h4>
@@ -170,7 +170,7 @@ export function PlanWizard() {
   }, [inView, reduced, result]);
 
   return (
-    <div ref={ref} aria-hidden className="size-full px-4 [mask-image:linear-gradient(black_70%,transparent)] md:px-8">
+    <div ref={ref} aria-hidden inert className="size-full px-4 [mask-image:linear-gradient(black_70%,transparent)] md:px-8">
       <div className="relative break-all rounded-lg border border-smoke bg-canvas-muted font-geist-mono text-[0.8125rem] shadow-subtle">
         <div
           className={cn(

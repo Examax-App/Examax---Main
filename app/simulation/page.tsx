@@ -14,7 +14,7 @@ import { JsonLd } from "@/components/layout/JsonLd";
 import { breadcrumbStructuredData, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Symulacja egzaminu",
+  title: "Symulacja matury i egzaminu ósmoklasisty",
   description:
     "Pełny arkusz CKE na czas, z narzędziami jak na sali, sprawdzony według zasad oceniania — i raport, który pokazuje, gdzie tracisz punkty.",
   path: "/simulation",
@@ -67,7 +67,7 @@ export default function SimulationPage() {
         {/* The reference's empty ruled strip between the last band and the CTA notch */}
         <GridSection innerClassName="h-12" />
         <CtaBand
-          title="Egzamin bez niespodzianek"
+          title="Poznaj egzamin, zanim go napiszesz"
           sub={`Symulacje są w planie Pro za ${PRO_MONTHLY} zł miesięcznie. W planie Free napiszesz jeden próbny arkusz.`}
           actions={[{ label: "Zacznij teraz", href: "/signup", primary: true }]}
         />

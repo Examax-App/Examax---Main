@@ -201,7 +201,8 @@ function SchoolCard() {
       </div>
 
       <div className="relative mt-8 flex flex-col gap-4 px-3.5">
-        <div className="flex flex-col">
+        {/* The card is a picture of the school's dashboard; only the two offer buttons are real. */}
+        <div inert className="flex flex-col">
           <p className="text-2xl font-semibold leading-8 tracking-[-0.48px] text-graphite">LO nr 5</p>
           <p className="flex items-center gap-1 text-[15px] font-medium leading-[1.4] tracking-[-0.3px] text-silver">
             <Link2 className="size-3 -rotate-45" strokeWidth={2} aria-hidden />
@@ -213,7 +214,7 @@ function SchoolCard() {
           <OfferButton icon={Percent} hint="30 dni pilotażu gratis" />
         </div>
 
-        <div className="flex flex-col overflow-hidden rounded-xl bg-white">
+        <div inert className="flex flex-col overflow-hidden rounded-xl bg-white">
           {FIGURES.map((figure, i) => (
             <div key={figure.label}>
               {i > 0 ? <div className="mx-5 h-px bg-[#f3f3f3]" /> : null}
@@ -289,13 +290,13 @@ export function EnterpriseHero() {
             className="animate-slide-up-fade mt-6 max-w-md text-balance text-center font-satoshi text-4xl font-medium text-charcoal sm:text-5xl sm:leading-[1.15]"
             style={{ "--offset": "20px" } as React.CSSProperties}
           >
-            Przygotuj całą szkołę do egzaminu
+            Przygotowanie do egzaminów CKE z panelem dla uczniów, nauczycieli i dyrekcji
           </h1>
           <p
             className="animate-slide-up-fade mt-6 text-balance text-lg text-steel sm:text-xl"
             style={{ "--offset": "10px", "--delay": "150ms" } as React.CSSProperties}
           >
-            Roadmapy, zadania CKE i postępy każdego ucznia w jednym panelu.{" "}
+            Plan nauki, zadania CKE i wyniki uczniów dostępne dla całej szkoły.{" "}
             <span className="font-semibold text-slate">Pierwszy miesiąc pilotażu za darmo.</span>
           </p>
           <div

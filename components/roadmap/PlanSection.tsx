@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { CalendarClock, LockOpen, RefreshCcw, Route, Smartphone } from "lucide-react";
 import { FeatureGrid, GridSection, MiniFeatures, SectionHeader } from "@/components/roadmap/sections";
 import { PlanBuilder } from "@/components/roadmap/PlanBuilder";
@@ -16,8 +16,8 @@ export function PlanSection() {
         id="plan-heading"
         icon={Route}
         eyebrow="Plan nauki"
-        title="Roadmapa ułożona pod Ciebie"
-        sub="Egzamin, termin i tempo, które naprawdę masz — z tego powstaje plan, który prowadzi temat po temacie aż do egzaminu."
+        title="Roadmapa dopasowana do Twojego celu"
+        sub="Na podstawie egzaminu, terminu i tempa, jakie możesz utrzymać, Examax pomaga ułożyć plan — temat po temacie, aż do egzaminu."
       />
       <div className="h-12 sm:hidden" />
       <PlanBuilder />
@@ -38,8 +38,8 @@ export function PlanSection() {
             title: "Osobna roadmapa dla każdego przedmiotu",
             description: (
               <>
-                Matematyka, polski i angielski — każdy przedmiot ma własny plan i <Link href="/progress">własny postęp</Link>. Ten, który goni
-                najbardziej, dostaje priorytet.
+                Matematyka, polski i angielski — każdy przedmiot ma własny plan i <Link href="/progress">własny postęp</Link>. Przedmiot, w którym
+                masz najwięcej do nadrobienia, jest oznaczony jako priorytet.
               </>
             ),
             cta: { label: "Zobacz cennik", href: "/pricing" },
@@ -49,8 +49,8 @@ export function PlanSection() {
             title: "Plan z kilku prostych odpowiedzi",
             description: (
               <>
-                Wybierasz egzamin, termin i tempo — Examax rozkłada cały materiał na tygodnie i dni. Zmienisz zdanie? Plan{" "}
-                <Link href="#flexible">przelicza się sam</Link>.
+                Wybierasz egzamin, termin i tempo — Examax rozkłada tematy na tygodnie i dni. Zmienisz zdanie? Plan{" "}
+                <Link href="#flexible">przeliczy się na nowo</Link>.
               </>
             ),
             cta: { label: "Ułóż swój plan", href: "/signup" },
@@ -60,8 +60,8 @@ export function PlanSection() {
             title: "Diagnoza ustawia punkt startu",
             description: (
               <>
-                Krótki <Link href="/training">quiz diagnostyczny</Link> sprawdza, co już umiesz. Braki trafiają na początek planu, a opanowane
-                tematy — na jego koniec.
+                Krótki <Link href="/training">quiz diagnostyczny</Link> sprawdza, co już umiesz. Tematy do nadrobienia trafiają na początek planu, a te,
+                które już znasz — na jego koniec.
               </>
             ),
             cta: { label: "Zacznij od diagnozy", href: "/signup" },
@@ -75,23 +75,23 @@ export function PlanSection() {
         items={[
           {
             icon: LockOpen,
-            title: "Nic nie jest zablokowane",
-            description: "Każdy temat jest otwarty od pierwszego dnia. Chcesz przeskoczyć dalej? Po prostu idź.",
+            title: "Swobodna kolejność",
+            description: "Każdy temat jest dostępny od pierwszego dnia, więc możesz zacząć od tego, którego najbardziej potrzebujesz.",
           },
           {
             icon: RefreshCcw,
-            title: "Powtórki w tle",
-            description: "Stare tematy wracają same, zanim wypadną z głowy — bez dopisywania ich do listy.",
+            title: "Zaplanowane powtórki",
+            description: "Przerobione tematy co jakiś czas wracają w planie jako krótkie powtórki — nie musisz sam ich dopisywać.",
           },
           {
             icon: CalendarClock,
             title: "Zmiana terminu",
-            description: "Przesuwasz datę albo masz słabszy tydzień? Plan rozkłada materiał na nowo.",
+            description: "Przesuwasz datę albo masz słabszy tydzień? Plan rozkłada pozostałe tematy na nowo.",
           },
           {
             icon: Smartphone,
             title: "Na każdym urządzeniu",
-            description: "Ten sam plan na telefonie i komputerze — postęp synchronizuje się sam.",
+            description: "Ten sam plan na telefonie i komputerze — postęp zapisuje się na Twoim koncie.",
           },
         ]}
       />

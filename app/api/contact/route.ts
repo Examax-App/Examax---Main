@@ -25,7 +25,7 @@ import { take } from "@/lib/rateLimit";
  *
  * Safety, in the order a request meets it:
  *   1. Same-origin only: a POST from any other site is refused.
- *   2. Bodies over 5 MB are refused before they are read.
+ *   2. Bodies over 5 MB, or of no stated size, are refused before they are read.
  *   3. Per-IP limits (every request) and per-address and overall send
  *      limits (see lib/rateLimit.ts for what they do and do not cover).
  *   4. A hidden honeypot field and a minimum fill time: bots are told
@@ -130,9 +130,10 @@ function readConfig(channel: Channel) {
 export async function POST(request: Request) {
   if (!isSameOrigin(request)) return json({ error: "Niedozwolone źródło zgłoszenia." }, 403);
 
-  if (Number(request.headers.get("content-length") ?? 0) > MAX_BODY_BYTES) {
-    return json({ error: "Zgłoszenie jest za duże." }, 413);
-  }
+  // A browser's form post always states its size; a body without one (chunked) could stream past the limit before it is read.
+  const length = Number(request.headers.get("content-length"));
+  if (!Number.isFinite(length) || length <= 0) return json({ error: "Nieprawidłowe zgłoszenie." }, 411);
+  if (length > MAX_BODY_BYTES) return json({ error: "Zgłoszenie jest za duże." }, 413);
 
   const ip = clientIp(request);
   const perIp = take([

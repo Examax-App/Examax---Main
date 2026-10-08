@@ -60,7 +60,7 @@ function AssignStack() {
     </div>
   );
   return (
-    <div aria-hidden className="flex h-full select-none flex-col justify-center gap-2 [mask-image:linear-gradient(transparent,black_20%,black_80%,transparent)]">
+    <div aria-hidden inert className="flex h-full select-none flex-col justify-center gap-2 [mask-image:linear-gradient(transparent,black_20%,black_80%,transparent)]">
       {faint(<>Powtórka: <span className="text-blue-400">Ciągi</span> dla klasy 3a do środy</>, "+24")}
       <div className={cn("relative z-10 rounded-xl bg-white px-4 py-4 text-sm", "shadow-[0_0_0_1px_rgba(0,0,0,0.08),0_10px_20px_-6px_rgba(0,0,0,0.12)]")}>
         <div className="flex items-center justify-between">
@@ -87,7 +87,7 @@ const SENT = [
 
 function ReportSend() {
   return (
-    <div aria-hidden className="flex h-full select-none flex-col items-center [mask-image:linear-gradient(black_70%,transparent)]">
+    <div aria-hidden inert className="flex h-full select-none flex-col items-center [mask-image:linear-gradient(black_70%,transparent)]">
       <div className="flex rounded-xl border border-ash bg-white p-1.5">
         {[
           { label: "Średnia klasy", value: "71%" },
@@ -127,7 +127,7 @@ function ReportSend() {
 function TeacherPanel() {
   const bars = [62, 74, 58, 81, 69, 88, 77];
   return (
-    <div aria-hidden className="h-full select-none overflow-hidden [mask-image:linear-gradient(black_75%,transparent)]">
+    <div aria-hidden inert className="h-full select-none overflow-hidden [mask-image:linear-gradient(black_75%,transparent)]">
       <div className="rounded-lg border border-ash bg-white p-3 text-[10px] text-steel">
         <div className="flex items-center gap-3">
           <span className="grid size-4 place-items-center rounded bg-charcoal text-white">
@@ -180,7 +180,7 @@ function AttentionCard() {
     { icon: Flag, label: "Słaby dział: Funkcje", count: "41%", tone: "bg-[#fee2e2] text-[#b91c1c]" },
   ];
   return (
-    <div aria-hidden className="mx-auto flex h-full w-full max-w-[250px] select-none items-center">
+    <div aria-hidden inert className="mx-auto flex h-full w-full max-w-[250px] select-none items-center">
       <div className="w-full rounded-xl border border-ash bg-canvas-muted p-1.5">
         <p className={cn("flex items-center gap-2 rounded-lg bg-white px-3 py-2.5 text-base font-medium text-charcoal", CARD_SHADOW)}>
           <span className="relative size-6 overflow-hidden rounded-full">
@@ -225,7 +225,7 @@ const ORBIT = [
 /** The reference's ring of faces round one, turning slowly; each face stays upright. */
 function ClassOrbit() {
   return (
-    <div aria-hidden className="relative grid h-full select-none place-items-center">
+    <div aria-hidden inert className="relative grid h-full select-none place-items-center">
       <div className="absolute size-[200px] rounded-full border border-dashed border-ash" />
       <div className="absolute size-[200px] motion-safe:animate-[spin_60s_linear_infinite]">
         {ORBIT.map((item, i) => {
@@ -264,7 +264,7 @@ export function ToolkitSection() {
         id="toolkit-heading"
         icon={LayoutDashboard}
         eyebrow="Panel nauczyciela"
-        title="Wszystko, czego potrzebuje nauczyciel"
+        title="Narzędzia dla nauczycieli"
         sub="Widzisz, kto jest gotowy, kto potrzebuje pomocy i co powtórzyć z całą klasą — zanim wyjdzie to na sprawdzianie."
       />
       <div className="mt-12">

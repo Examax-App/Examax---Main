@@ -60,7 +60,7 @@ export function LoopPlayer({ tab, onFinished }: { tab: FilmTab; onFinished?: () 
     // clicked or selected, so the pointer passes straight through it the way
     // it would over a video. The caption card sits outside this box and stays
     // interactive.
-    <div ref={stage} className="pointer-events-none relative h-full w-full select-none overflow-hidden">
+    <div ref={stage} inert className="pointer-events-none relative h-full w-full select-none overflow-hidden">
       <div
         aria-hidden
         className="absolute inset-0 transition-opacity duration-500 motion-reduce:transition-none"

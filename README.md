@@ -59,7 +59,7 @@ Product behaviour and decisions are documented in [`PRODUCT.md`](PRODUCT.md); de
 
 ## Security
 
-Every response carries a strict Content Security Policy and the standard security headers (`next.config.ts`). The site is fully static apart from the RSS feed, has no API routes and no server-side secrets, and loads nothing from third-party origins except Sanity (its image CDN and the project's API). The dashboard is not part of the public build.
+Every response carries a strict Content Security Policy and the standard security headers (`next.config.ts`). The site is static apart from the RSS feed and one API route, `POST /api/contact`, which forwards the contact forms to the team's inboxes through Resend; it accepts same-origin requests only and is rate-limited, size-limited and validated (see the comment at the top of `app/api/contact/route.ts`). The only server-side secrets are the Resend key and the Sanity read token, both read from the environment and never sent to the browser. Nothing loads from third-party origins except Sanity (its image CDN and the project's API). The dashboard is not part of the public build.
 
 Found a vulnerability? Please report it privately — see [`SECURITY.md`](SECURITY.md).
 

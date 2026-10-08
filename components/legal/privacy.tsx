@@ -1,18 +1,18 @@
+import Link from "@/components/ui/Link";
 import type { LegalSection } from "@/components/legal/LegalDocument";
 
 /*
  * The privacy policy at /legal/privacy, in the owner's own words (supplied
- * 2026-10-07). The administrator's details are still a placeholder, to be
- * filled in before the platform takes accounts. LegalDocument numbers the
+ * 2026-10-07, replaced in full 2026-10-08). LegalDocument numbers the
  * sections, so titles carry no numbers. Every section's `id` is its anchor:
  * keep ids stable once the page is public.
  */
 
-/** Where every privacy question goes, on this page only; the rest of the site keeps pomoc@ (lib/contact). */
-const PRIVACY_EMAIL = "contact@examax.app";
+/** Where every privacy question goes. */
+const PRIVACY_EMAIL = "pomoc@examax.app";
 
 /** The date the policy last changed — bump it with every edit below. */
-export const PRIVACY_UPDATED = "2026-10-07";
+export const PRIVACY_UPDATED = "2026-10-08";
 
 const Mail = () => <a href={`mailto:${PRIVACY_EMAIL}`}>{PRIVACY_EMAIL}</a>;
 
@@ -23,15 +23,9 @@ export const PRIVACY_SECTIONS: LegalSection[] = [
     body: (
       <>
         <p>Niniejsza Polityka Prywatności opisuje zasady przetwarzania danych osobowych użytkowników korzystających z platformy Examax.</p>
-        <p>
-          Examax jest internetową platformą edukacyjną wspierającą naukę oraz przygotowanie do egzaminów poprzez interaktywne materiały, ćwiczenia,
-          funkcje analityczne oraz rozwiązania wykorzystujące sztuczną inteligencję.
-        </p>
-        <p>
-          Celem platformy jest zapewnienie użytkownikom spersonalizowanego środowiska nauki, umożliwiającego śledzenie postępów, korzystanie z
-          dostępnych funkcji edukacyjnych oraz rozwijanie własnych umiejętności.
-        </p>
-        <p>Platforma jest przeznaczona przede wszystkim dla osób uczących się zgodnie z polskim systemem edukacji.</p>
+        <p>Examax jest internetową platformą edukacyjną wspierającą naukę oraz przygotowanie do egzaminów poprzez interaktywne materiały, ćwiczenia oraz funkcje wspierane przez sztuczną inteligencję.</p>
+        <p>Celem Examax jest zapewnienie użytkownikom wygodnego, bezpiecznego i spersonalizowanego środowiska nauki.</p>
+        <p>Korzystając z Examax, użytkownik potwierdza, że zapoznał się z niniejszą Polityką Prywatności.</p>
       </>
     ),
   },
@@ -41,15 +35,16 @@ export const PRIVACY_SECTIONS: LegalSection[] = [
     body: (
       <>
         <p>Administratorem danych osobowych użytkowników jest:</p>
-        <p>[Dane operatora zostaną uzupełnione]</p>
+        <p>
+          Examax
+          <br />
+          Polska
+        </p>
         <p>Kontakt w sprawach dotyczących prywatności oraz danych osobowych:</p>
         <p>
           <Mail />
         </p>
-        <p>
-          Administrator odpowiada za sposób przetwarzania danych osobowych zgodnie z obowiązującymi przepisami, w szczególności z Rozporządzeniem
-          Parlamentu Europejskiego i Rady (UE) 2016/679 (RODO).
-        </p>
+        <p>Użytkownik może skontaktować się z nami w sprawach dotyczących korzystania z platformy, swoich danych oraz realizacji praw wynikających z obowiązujących przepisów.</p>
       </>
     ),
   },
@@ -58,94 +53,96 @@ export const PRIVACY_SECTIONS: LegalSection[] = [
     title: "Jakie dane możemy przetwarzać",
     body: (
       <>
-        <p>Zakres przetwarzanych danych zależy od sposobu korzystania z platformy.</p>
+        <p>Zakres przetwarzanych danych zależy od sposobu korzystania z platformy oraz dostępnych funkcji.</p>
         <p>Możemy przetwarzać między innymi:</p>
         <p>
-          <strong>Dane konta:</strong>
+          <strong>Dane konta</strong>
         </p>
+        <p>Podczas tworzenia konta możemy przetwarzać:</p>
         <ul>
           <li>adres e-mail,</li>
-          <li>imię i nazwisko (jeżeli zostanie podane),</li>
-          <li>informacje wymagane do utworzenia i zabezpieczenia konta.</li>
+          <li>dane niezbędne do uwierzytelnienia konta,</li>
+          <li>informacje dotyczące bezpieczeństwa konta.</li>
         </ul>
-        <p>
-          <strong>Dane dotyczące korzystania z platformy:</strong>
-        </p>
-        <ul>
-          <li>postępy w nauce,</li>
-          <li>wykonane ćwiczenia,</li>
-          <li>zapisane materiały,</li>
-          <li>ustawienia użytkownika,</li>
-          <li>historia korzystania z funkcji platformy.</li>
-        </ul>
-        <p>
-          <strong>Dane techniczne:</strong>
-        </p>
-        <ul>
-          <li>informacje dotyczące urządzenia,</li>
-          <li>informacje niezbędne do zapewnienia bezpieczeństwa oraz prawidłowego działania platformy.</li>
-        </ul>
-        <p>Nie zbieramy danych, które nie są potrzebne do działania Examax.</p>
+        <p>Jeżeli użytkownik korzysta z logowania za pomocą zewnętrznej metody uwierzytelniania, możemy otrzymać podstawowe informacje wymagane do utworzenia i zabezpieczenia konta.</p>
+        <p>Nie pobieramy informacji, które nie są potrzebne do działania konta.</p>
       </>
     ),
   },
   {
     id: "wykorzystanie-danych",
-    title: "Dlaczego przetwarzamy dane",
+    title: "Cel przetwarzania danych",
     body: (
       <>
-        <p>Dane użytkowników są wykorzystywane wyłącznie w celu zapewnienia działania platformy oraz poprawy doświadczenia użytkownika.</p>
-        <p>Dane mogą być wykorzystywane w celu:</p>
+        <p>Dane użytkowników są wykorzystywane w celu:</p>
         <ul>
-          <li>utworzenia i obsługi konta,</li>
+          <li>utworzenia i obsługi konta użytkownika,</li>
           <li>zapewnienia dostępu do funkcji platformy,</li>
           <li>zapisywania postępów nauki,</li>
+          <li>zapewnienia działania funkcji edukacyjnych,</li>
           <li>obsługi płatności i subskrypcji,</li>
-          <li>zapewnienia bezpieczeństwa konta,</li>
-          <li>odpowiadania na wiadomości przesłane przez użytkownika,</li>
-          <li>wysyłania niezbędnych komunikatów związanych z działaniem konta.</li>
+          <li>zapewnienia bezpieczeństwa platformy,</li>
+          <li>kontaktu z użytkownikiem w sprawach związanych z kontem,</li>
+          <li>ulepszania działania oraz jakości usług.</li>
         </ul>
-        <p>Nie sprzedajemy danych osobowych użytkowników.</p>
-        <p>Nie wykorzystujemy danych użytkowników w celu tworzenia profili reklamowych ani sprzedaży informacji innym podmiotom.</p>
+        <p>Examax nie wykorzystuje danych użytkowników w celu sprzedaży ich innym podmiotom.</p>
       </>
     ),
   },
   {
     id: "logowanie",
-    title: "Logowanie i uwierzytelnianie",
+    title: "Konto użytkownika i uwierzytelnianie",
     body: (
       <>
-        <p>Użytkownik może mieć możliwość korzystania z różnych metod logowania, w tym:</p>
+        <p>Aby korzystać z części funkcji Examax, użytkownik może zostać poproszony o utworzenie konta.</p>
+        <p>Użytkownik może korzystać z dostępnych metod logowania, takich jak:</p>
         <ul>
-          <li>adresu e-mail i hasła,</li>
-          <li>zewnętrznych metod uwierzytelniania dostępnych na platformie.</li>
+          <li>adres e-mail i hasło,</li>
+          <li>dodatkowe bezpieczne metody uwierzytelniania dostępne na platformie.</li>
         </ul>
-        <p>W przypadku korzystania z zewnętrznej metody logowania możemy otrzymać podstawowe informacje potrzebne do utworzenia konta, takie jak:</p>
+        <p>W celu ochrony kont użytkowników Examax może stosować mechanizmy bezpieczeństwa, takie jak:</p>
         <ul>
-          <li>adres e-mail,</li>
-          <li>imię i nazwisko (jeżeli jest dostępne),</li>
-          <li>podstawowe informacje wymagane do identyfikacji konta.</li>
+          <li>wymagania dotyczące silnych haseł,</li>
+          <li>weryfikacja adresu e-mail,</li>
+          <li>ograniczenia przeciwko nadużyciom,</li>
+          <li>zabezpieczenia przed podejrzaną aktywnością.</li>
         </ul>
-        <p>Nie otrzymujemy dostępu do haseł użytkownika przechowywanych przez zewnętrznych dostawców.</p>
+        <p>Użytkownik jest odpowiedzialny za zachowanie poufności swoich danych logowania.</p>
+      </>
+    ),
+  },
+  {
+    id: "dane-nauki",
+    title: "Dane związane z nauką i korzystaniem z platformy",
+    body: (
+      <>
+        <p>Examax może przechowywać informacje związane z korzystaniem z platformy, takie jak:</p>
+        <ul>
+          <li>postępy nauki,</li>
+          <li>wykonane ćwiczenia,</li>
+          <li>zapisane wyniki,</li>
+          <li>ustawienia użytkownika,</li>
+          <li>historia korzystania z dostępnych funkcji.</li>
+        </ul>
+        <p>Dane te służą wyłącznie do zapewnienia użytkownikowi spersonalizowanego doświadczenia oraz umożliwienia dalszej nauki po ponownym zalogowaniu.</p>
       </>
     ),
   },
   {
     id: "korepetytor-ai",
-    title: "Funkcje wykorzystujące sztuczną inteligencję",
+    title: "Funkcje sztucznej inteligencji",
     body: (
       <>
-        <p>Examax może oferować funkcje wykorzystujące sztuczną inteligencję w celu wspierania nauki użytkownika.</p>
+        <p>Examax może oferować funkcje wykorzystujące sztuczną inteligencję.</p>
         <p>W ramach korzystania z tych funkcji mogą być przetwarzane:</p>
         <ul>
           <li>wiadomości wysyłane przez użytkownika,</li>
-          <li>pytania,</li>
-          <li>treści potrzebne do wygenerowania odpowiedzi,</li>
-          <li>historia rozmów, jeżeli użytkownik zdecyduje się ją zachować.</li>
+          <li>odpowiedzi generowane przez system,</li>
+          <li>historia rozmów związana z korzystaniem z funkcji AI.</li>
         </ul>
-        <p>Dane te są wykorzystywane w celu zapewnienia działania funkcji AI oraz dostarczenia użytkownikowi odpowiedzi.</p>
-        <p>Nie wykorzystujemy prywatnych rozmów użytkowników do celów niezwiązanych ze świadczeniem usługi.</p>
-        <p>Użytkownik powinien korzystać z funkcji AI zgodnie z przeznaczeniem platformy oraz obowiązującymi zasadami.</p>
+        <p>Dane te są wykorzystywane w celu zapewnienia działania funkcji AI oraz umożliwienia użytkownikowi dostępu do swojej historii.</p>
+        <p>Rozmowy użytkownika nie są publiczne i są dostępne wyłącznie dla użytkownika posiadającego dostęp do swojego konta.</p>
+        <p>Examax nie wykorzystuje prywatnych rozmów użytkowników do celów reklamowych.</p>
       </>
     ),
   },
@@ -154,17 +151,17 @@ export const PRIVACY_SECTIONS: LegalSection[] = [
     title: "Płatności i subskrypcje",
     body: (
       <>
-        <p>Examax może oferować bezpłatne oraz płatne plany dostępu.</p>
-        <p>Płatności są obsługiwane przez bezpiecznych operatorów płatności.</p>
-        <p>W związku z płatnościami możemy przetwarzać informacje niezbędne do:</p>
+        <p>Examax może oferować płatne plany oraz funkcje dodatkowe dostępne w ramach subskrypcji.</p>
+        <p>Płatności są realizowane za pomocą bezpiecznych systemów płatniczych.</p>
+        <p>Examax nie przechowuje pełnych danych karty płatniczej ani innych poufnych danych płatniczych.</p>
+        <p>Możemy przetwarzać informacje związane z płatnościami, takie jak:</p>
         <ul>
-          <li>realizacji zakupu,</li>
-          <li>potwierdzenia transakcji,</li>
-          <li>obsługi subskrypcji,</li>
-          <li>zapewnienia dostępu do zakupionych funkcji.</li>
+          <li>status subskrypcji,</li>
+          <li>wybrany plan,</li>
+          <li>historia transakcji,</li>
+          <li>informacje potrzebne do obsługi konta oraz płatności.</li>
         </ul>
-        <p>Zakup planu płatnego nie wpływa na sposób przetwarzania danych użytkownika.</p>
-        <p>Wszyscy użytkownicy są traktowani zgodnie z tymi samymi zasadami ochrony prywatności.</p>
+        <p>Informacje dotyczące płatności są wykorzystywane wyłącznie w celu zapewnienia prawidłowego działania zakupionych usług.</p>
       </>
     ),
   },
@@ -173,16 +170,21 @@ export const PRIVACY_SECTIONS: LegalSection[] = [
     title: "Komunikacja e-mail",
     body: (
       <>
-        <p>Możemy wysyłać wiadomości związane z:</p>
+        <p>Examax może wysyłać wiadomości związane z działaniem platformy, takie jak:</p>
         <ul>
-          <li>bezpieczeństwem konta,</li>
-          <li>logowaniem,</li>
-          <li>odzyskiwaniem dostępu,</li>
-          <li>płatnościami,</li>
-          <li>ważnymi zmianami dotyczącymi usługi.</li>
+          <li>potwierdzenie konta,</li>
+          <li>informacje dotyczące bezpieczeństwa,</li>
+          <li>odzyskiwanie dostępu,</li>
+          <li>informacje dotyczące płatności,</li>
+          <li>ważne informacje dotyczące działania usług.</li>
         </ul>
-        <p>Dodatkowe wiadomości, takie jak informacje o nowych funkcjach lub aktualizacjach produktu, mogą wymagać odpowiednich ustawień użytkownika.</p>
-        <p>Użytkownik może zarządzać preferencjami komunikacji, jeżeli takie ustawienia są dostępne.</p>
+        <p>Użytkownik może również otrzymywać opcjonalne wiadomości dotyczące:</p>
+        <ul>
+          <li>nowych funkcji,</li>
+          <li>aktualizacji platformy,</li>
+          <li>ważnych ogłoszeń.</li>
+        </ul>
+        <p>Użytkownik może zarządzać preferencjami dotyczącymi komunikacji w ustawieniach konta.</p>
       </>
     ),
   },
@@ -191,14 +193,17 @@ export const PRIVACY_SECTIONS: LegalSection[] = [
     title: "Cookies i technologie podobne",
     body: (
       <>
-        <p>Examax wykorzystuje technologie niezbędne do prawidłowego działania platformy.</p>
-        <p>Możemy wykorzystywać między innymi:</p>
+        <p>Examax wykorzystuje niezbędne technologie pomagające zapewnić prawidłowe działanie platformy.</p>
+        <p>Możemy wykorzystywać narzędzia analityczne służące do:</p>
         <ul>
-          <li>pliki cookies wymagane do działania konta,</li>
-          <li>technologie poprawiające bezpieczeństwo,</li>
-          <li>narzędzia pomagające analizować działanie platformy.</li>
+          <li>monitorowania wydajności,</li>
+          <li>poprawy działania platformy,</li>
+          <li>analizowania ogólnego sposobu korzystania z usług.</li>
         </ul>
-        <p>Nie wykorzystujemy plików cookies do sprzedaży danych użytkowników ani tworzenia reklamowych profili użytkowników.</p>
+        <p>Examax nie wykorzystuje obecnie narzędzi reklamowych służących do tworzenia profili użytkowników na potrzeby reklam.</p>
+        <p>
+          Więcej informacji znajduje się w <Link href="/legal/cookies">Polityce Cookies</Link>.
+        </p>
       </>
     ),
   },
@@ -207,15 +212,16 @@ export const PRIVACY_SECTIONS: LegalSection[] = [
     title: "Udostępnianie danych",
     body: (
       <>
-        <p>Dane użytkowników mogą być przetwarzane przez zaufanych dostawców usług technicznych wyłącznie w zakresie niezbędnym do działania platformy.</p>
-        <p>Podmioty te mogą pomagać między innymi w:</p>
+        <p>Examax nie sprzedaje danych osobowych użytkowników.</p>
+        <p>Dane użytkowników nie są przekazywane podmiotom trzecim w celach reklamowych.</p>
+        <p>Dane mogą być przetwarzane przez zaufanych dostawców usług wyłącznie wtedy, gdy jest to konieczne do:</p>
         <ul>
-          <li>utrzymaniu infrastruktury,</li>
-          <li>obsłudze komunikacji,</li>
-          <li>realizacji płatności,</li>
-          <li>zapewnieniu bezpieczeństwa.</li>
+          <li>działania platformy,</li>
+          <li>zapewnienia bezpieczeństwa,</li>
+          <li>realizacji usług,</li>
+          <li>obsługi użytkowników.</li>
         </ul>
-        <p>Nie udostępniamy danych osobowych innym podmiotom w celach sprzedażowych.</p>
+        <p>Dane mogą zostać przekazane również wtedy, gdy wymagają tego obowiązujące przepisy prawa.</p>
       </>
     ),
   },
@@ -224,14 +230,25 @@ export const PRIVACY_SECTIONS: LegalSection[] = [
     title: "Bezpieczeństwo danych",
     body: (
       <>
-        <p>Stosujemy odpowiednie środki organizacyjne oraz techniczne mające na celu ochronę danych użytkowników przed:</p>
+        <p>Examax stosuje odpowiednie środki techniczne i organizacyjne mające na celu ochronę danych użytkowników.</p>
+        <p>Obejmuje to między innymi:</p>
         <ul>
-          <li>nieautoryzowanym dostępem,</li>
-          <li>utratą,</li>
-          <li>nieuprawnioną zmianą,</li>
-          <li>niewłaściwym wykorzystaniem.</li>
+          <li>zabezpieczenie kont użytkowników,</li>
+          <li>ochronę przed nieautoryzowanym dostępem,</li>
+          <li>ograniczanie nadużyć,</li>
+          <li>monitorowanie bezpieczeństwa platformy.</li>
         </ul>
-        <p>Żadna metoda przesyłania lub przechowywania danych w internecie nie gwarantuje jednak całkowitego bezpieczeństwa.</p>
+        <p>Żaden system internetowy nie może jednak zagwarantować całkowitego bezpieczeństwa.</p>
+      </>
+    ),
+  },
+  {
+    id: "okres-przechowywania",
+    title: "Okres przechowywania danych",
+    body: (
+      <>
+        <p>Dane użytkownika są przechowywane tak długo, jak długo konto pozostaje aktywne lub do momentu zgłoszenia żądania usunięcia danych.</p>
+        <p>Niektóre informacje mogą być przechowywane dłużej, jeżeli wymagają tego przepisy prawa lub uzasadnione cele, takie jak bezpieczeństwo, zapobieganie nadużyciom lub prowadzenie wymaganej dokumentacji.</p>
       </>
     ),
   },
@@ -240,18 +257,15 @@ export const PRIVACY_SECTIONS: LegalSection[] = [
     title: "Usunięcie konta",
     body: (
       <>
-        <p>Użytkownik może w każdej chwili wystąpić o usunięcie swojego konta.</p>
-        <p>Po zakończeniu procesu usunięcia:</p>
+        <p>Użytkownik może zażądać usunięcia swojego konta.</p>
+        <p>Po usunięciu konta mogą zostać usunięte między innymi:</p>
         <ul>
-          <li>konto zostaje usunięte,</li>
-          <li>dane związane z użytkownikiem zostają usunięte,</li>
-          <li>postępy oraz zapisane informacje zostają usunięte.</li>
+          <li>dane konta,</li>
+          <li>zapisane postępy,</li>
+          <li>historia korzystania z funkcji,</li>
+          <li>zapisane dane użytkownika.</li>
         </ul>
-        <p>Niektóre informacje mogą zostać zachowane, jeżeli ich przechowywanie jest wymagane przez obowiązujące przepisy prawa.</p>
-        <p>
-          W przypadku aktywnej subskrypcji użytkownik powinien najpierw anulować odnawianie płatności oraz poczekać do zakończenia okresu
-          rozliczeniowego.
-        </p>
+        <p>Niektóre informacje mogą zostać zachowane wyłącznie w formie wymaganej przez prawo lub jako anonimowe dane statystyczne, które nie pozwalają na identyfikację użytkownika.</p>
       </>
     ),
   },
@@ -263,13 +277,13 @@ export const PRIVACY_SECTIONS: LegalSection[] = [
         <p>Użytkownik ma prawo do:</p>
         <ul>
           <li>dostępu do swoich danych,</li>
-          <li>poprawienia danych,</li>
+          <li>poprawienia nieprawidłowych danych,</li>
           <li>usunięcia danych,</li>
-          <li>ograniczenia przetwarzania,</li>
           <li>otrzymania kopii swoich danych,</li>
-          <li>wniesienia sprzeciwu wobec określonych form przetwarzania.</li>
+          <li>uzyskania informacji dotyczących przetwarzania danych,</li>
+          <li>wniesienia sprzeciwu wobec określonych sposobów przetwarzania.</li>
         </ul>
-        <p>W celu realizacji swoich praw użytkownik może skontaktować się:</p>
+        <p>W celu realizacji swoich praw należy skontaktować się:</p>
         <p>
           <Mail />
         </p>
@@ -277,15 +291,23 @@ export const PRIVACY_SECTIONS: LegalSection[] = [
     ),
   },
   {
-    id: "zmiany-polityki",
-    title: "Zmiany Polityki Prywatności",
+    id: "dostepnosc-platformy",
+    title: "Dostępność platformy",
     body: (
       <>
-        <p>
-          Examax może aktualizować niniejszą Politykę Prywatności w związku z rozwojem platformy, zmianami funkcji lub zmianami przepisów prawa.
-        </p>
-        <p>Aktualna wersja dokumentu będzie zawsze dostępna na stronie platformy.</p>
-        <p>Data ostatniej aktualizacji znajduje się na końcu dokumentu.</p>
+        <p>Examax może być używany przez użytkowników niezależnie od miejsca zamieszkania.</p>
+        <p>Platforma jest przeznaczona głównie dla osób korzystających z polskich materiałów edukacyjnych i przygotowujących się do polskich egzaminów.</p>
+      </>
+    ),
+  },
+  {
+    id: "zmiany-polityki",
+    title: "Zmiany w Polityce Prywatności",
+    body: (
+      <>
+        <p>Examax może aktualizować niniejszą Politykę Prywatności w związku z rozwojem platformy, wprowadzaniem nowych funkcji lub zmianami prawnymi.</p>
+        <p>Aktualna wersja dokumentu będzie zawsze dostępna na stronie Examax wraz z informacją o dacie ostatniej aktualizacji.</p>
+        <p>W przypadku istotnych zmian użytkownicy mogą zostać poinformowani za pomocą dostępnych kanałów komunikacji.</p>
       </>
     ),
   },
@@ -294,7 +316,7 @@ export const PRIVACY_SECTIONS: LegalSection[] = [
     title: "Kontakt",
     body: (
       <>
-        <p>W przypadku pytań dotyczących prywatności, danych osobowych lub działania platformy:</p>
+        <p>W przypadku pytań dotyczących prywatności lub danych osobowych prosimy o kontakt:</p>
         <p>
           <Mail />
         </p>

@@ -111,7 +111,7 @@ export function ResultFeed() {
   const indices = Array.from({ length: VISIBLE + 1 }, (_, k) => step - VISIBLE + k).filter((i) => i >= 0);
 
   return (
-    <div ref={ref} aria-hidden className="size-full overflow-hidden [mask-image:linear-gradient(black_75%,transparent)]">
+    <div ref={ref} aria-hidden inert className="size-full overflow-hidden [mask-image:linear-gradient(black_75%,transparent)]">
       <div className="relative z-0 mx-auto flex size-full max-w-sm flex-col items-center">
         <div className="shrink-0 rounded-[10px] border border-ash bg-white p-1.5 shadow-subtle">
           <div className="grid grid-cols-2 gap-px overflow-hidden rounded-[4px] border border-ash bg-ash">
@@ -196,7 +196,7 @@ export function MarkingRules() {
   const item = MARKED[index];
 
   return (
-    <div ref={ref} aria-hidden className="size-full overflow-hidden">
+    <div ref={ref} aria-hidden inert className="size-full overflow-hidden">
       <div className="relative mx-auto flex size-full max-w-sm flex-col items-center gap-0 pt-4 [mask-composite:intersect] [mask-image:linear-gradient(90deg,transparent,black_10%,black_90%,transparent),linear-gradient(black_90%,transparent)]">
         {/* The row of tasks: this one in focus, the rest waiting */}
         <div className="relative flex items-center justify-center gap-4">
@@ -286,7 +286,7 @@ export function OpenTaskCheck() {
   ];
 
   return (
-    <div ref={ref} aria-hidden className="size-full overflow-hidden">
+    <div ref={ref} aria-hidden inert className="size-full overflow-hidden">
       <div className="relative mx-auto flex size-full max-w-sm flex-col items-center justify-center gap-2">
         <div className="relative w-full rounded-[12px] bg-white p-1">
           <div className="absolute inset-0 rounded-[inherit] border border-black/10 bg-white [mask-image:linear-gradient(black_50%,transparent)]" />

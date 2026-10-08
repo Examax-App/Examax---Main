@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useRef, useState, useSyncExternalStore } from "react";
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { BadgePercent, PencilLine, Route } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { AccentTile, type Accent } from "@/components/ui/FeaturePill";

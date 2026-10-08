@@ -49,13 +49,13 @@ export function RoadmapHero() {
             className="animate-slide-up-fade mt-5 text-center font-satoshi text-4xl font-medium text-charcoal sm:text-5xl sm:leading-[1.15]"
             style={{ "--offset": "20px", "--delay": "100ms" } as React.CSSProperties}
           >
-            Plan nauki, który wie, co dalej
+            Plan nauki ułożony pod Twój egzamin
           </h1>
           <p
             className="animate-slide-up-fade mt-5 text-pretty text-base text-steel sm:text-xl"
             style={{ "--offset": "10px", "--delay": "200ms" } as React.CSSProperties}
           >
-            Cały materiał egzaminu CKE rozpisany na tematy i&nbsp;tygodnie — od dziś do dnia egzaminu.
+            Wymagania egzaminu CKE rozpisane na tematy i&nbsp;tygodnie — zamiast notatek i&nbsp;plików PDF masz jeden plan od dziś do dnia egzaminu.
           </p>
         </div>
         <div

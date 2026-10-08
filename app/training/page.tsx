@@ -16,7 +16,7 @@ import { JsonLd } from "@/components/layout/JsonLd";
 import { breadcrumbStructuredData, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Trening zadań",
+  title: "Trening zadań z arkuszy CKE",
   description:
     "Trenuj na zadaniach z oficjalnych arkuszy CKE: sprawdzanie od razu według zasad oceniania, Korepetytor AI przy każdym błędzie i zadania dobierane do tego, gdzie tracisz punkty.",
   path: "/training",

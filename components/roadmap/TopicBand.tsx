@@ -108,7 +108,7 @@ export function TopicBand({ sets = SETS, label = "Tematy w roadmapach" }: { sets
                         <span className="whitespace-nowrap font-satoshi text-[17px] font-bold tracking-tight text-charcoal">{topic.name}</span>
                       </span>
                       {slot === 0 ? (
-                        <span className="absolute -bottom-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-paper-mist px-1 py-0.5 text-[8px] font-semibold uppercase leading-none text-fog">
+                        <span className="absolute -bottom-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-paper-mist px-1 py-0.5 text-[8px] font-semibold uppercase leading-none text-steel">
                           {set.exam}
                         </span>
                       ) : null}

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { ArrowRight, CircleCheck, FileCheck, FileText, ListChecks, PencilLine, Route, Timer, Zap } from "lucide-react";
 import { E8Icon } from "@/components/ui/E8Icon";
 import { accentStyles, type Accent } from "@/components/ui/FeaturePill";
@@ -29,7 +29,7 @@ const ACTIVITY = [
 
 export function LearnerInsight() {
   return (
-    <div aria-hidden className="h-full cursor-default select-none overflow-clip [mask-image:linear-gradient(black_75%,transparent)]">
+    <div aria-hidden inert className="h-full cursor-default select-none overflow-clip [mask-image:linear-gradient(black_75%,transparent)]">
       {/* Drawn a tenth small, as the reference's card is, so its activity shows above the fade */}
       <div className="w-[111%] origin-top-left scale-90 rounded-xl border border-ash bg-canvas-muted">
         <div className="px-5 pt-4">

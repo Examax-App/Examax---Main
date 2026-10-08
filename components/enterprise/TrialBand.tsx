@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { ShieldCheck } from "lucide-react";
 import { CtaBandFrame } from "@/components/sections/CtaBand";
 import { Reveal } from "@/components/ui/Reveal";

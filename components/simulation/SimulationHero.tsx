@@ -230,7 +230,7 @@ export function SimulationHero() {
             className="animate-slide-up-fade mt-5 text-pretty text-lg font-medium text-fog sm:text-xl"
             style={{ "--offset": "10px", "--delay": "400ms" } as React.CSSProperties}
           >
-            Pełny arkusz CKE na czas, z narzędziami jak na sali — a potem dokładnie widzisz, gdzie tracisz punkty.
+            Pełny arkusz CKE na czas, z tymi samymi narzędziami co na sali. Po oddaniu widzisz wynik według zasad oceniania i miejsca, w których tracisz punkty.
           </p>
         </div>
         <div

@@ -192,7 +192,7 @@ function TopicRow({ row, Mark, onRemove }: { row: Row; Mark: typeof E8Icon; onRe
           </div>
           <div className="flex items-center gap-1">
             <CornerDownRight className="size-4 shrink-0 text-silver" strokeWidth={1.5} aria-hidden />
-            <span className="max-w-60 truncate text-sm text-silver sm:max-w-72">
+            <span className="max-w-60 truncate text-sm text-fog sm:max-w-72">
               Tydzień {row.week} · {row.unit}
             </span>
           </div>

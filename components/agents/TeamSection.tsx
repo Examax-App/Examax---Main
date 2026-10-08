@@ -30,12 +30,12 @@ import type { IconComponent } from "@/lib/icon";
 type SkillKey = "explain" | "check" | "test" | "pick" | "plan" | "review";
 
 const SKILLS: Array<{ key: SkillKey; label: string; icon: IconComponent; detail: string }> = [
-  { key: "explain", label: "Tłumaczy krok po kroku", icon: BookOpenCheck, detail: "Pyta o Twój następny ruch, zamiast podawać wynik." },
-  { key: "check", label: "Sprawdza rozwiązania", icon: ScanSearch, detail: "Linijka po linijce, ze wskazaniem błędu." },
-  { key: "test", label: "Układa sprawdziany", icon: FileCheck2, detail: "Z Twoich słabych działów, oceniane jak na egzaminie." },
-  { key: "pick", label: "Dobiera zadania CKE", icon: Search, detail: "Z oryginalnych arkuszy, do tematu, który ćwiczysz." },
-  { key: "plan", label: "Zmienia roadmapę", icon: CalendarClock, detail: "Przestawia plan, gdy masz mniej czasu — za Twoją zgodą." },
-  { key: "review", label: "Pilnuje powtórek", icon: RefreshCcw, detail: "Wraca z materiałem, zanim ucieknie z pamięci." },
+  { key: "explain", label: "Tłumaczy krok po kroku", icon: BookOpenCheck, detail: "Pyta o Twój następny ruch, zamiast podawać gotowy wynik." },
+  { key: "check", label: "Sprawdza rozwiązania", icon: ScanSearch, detail: "Przechodzi przez rozwiązanie i wskazuje, gdzie jest błąd." },
+  { key: "test", label: "Układa sprawdziany", icon: FileCheck2, detail: "Z działów, które wymagają pracy, oceniane według zasad CKE." },
+  { key: "pick", label: "Dobiera zadania CKE", icon: Search, detail: "Z oryginalnych arkuszy, do tematu, który właśnie ćwiczysz." },
+  { key: "plan", label: "Zmienia roadmapę", icon: CalendarClock, detail: "Proponuje zmiany, gdy masz mniej czasu — wprowadza je za Twoją zgodą." },
+  { key: "review", label: "Planuje powtórki", icon: RefreshCcw, detail: "Przypomina o tematach, do których warto wrócić." },
 ];
 const SKILL = Object.fromEntries(SKILLS.map((skill) => [skill.key, skill])) as Record<SkillKey, (typeof SKILLS)[number]>;
 
@@ -292,8 +292,8 @@ export function TeamSection() {
         id="team-heading"
         icon={Users}
         eyebrow="Twoi agenci"
-        title="Stwórz agenta do tego, czego potrzebujesz"
-        sub="Agenci nie mają ról na sztywno. Nadajesz im twarz, imię i zadanie, a potem decydujesz, co mogą robić."
+        title="Stwórz agenta do konkretnego celu"
+        sub="Agent to Twój pomocnik do jednej rzeczy: ćwiczenia matematyki, uwag do wypracowań, nauki angielskiego albo powtórek. Nadajesz mu imię i zadanie, a potem decydujesz, w czym może pomagać."
       />
 
       <div className="mt-14 border-t border-ash px-4 py-10 sm:px-12 sm:py-14">

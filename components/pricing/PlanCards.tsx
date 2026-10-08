@@ -153,7 +153,7 @@ function PlanCard({
       <div className="flex h-60 flex-col justify-between rounded-cards bg-paper-mist p-5 pt-6 ring-1 ring-ash/70">
         <div>
           <div className="flex items-center gap-2">
-            <h3 className="text-[20px] font-medium leading-none text-graphite">{plan.name}</h3>
+            <h2 className="text-[20px] font-medium leading-none text-graphite">{plan.name}</h2>
             {recommended ? <RecommendedBadge layoutId="plan-card-recommended" className={badgeClassName} /> : null}
           </div>
           <div className="relative mt-1">
@@ -186,7 +186,7 @@ function PlanCard({
       </div>
 
       <div className="flex grow flex-col gap-3 px-5 pb-7 pt-5 text-body">
-        <h4 className="font-semibold text-graphite">{plan.featuresHeading}</h4>
+        <h3 className="font-semibold text-graphite">{plan.featuresHeading}</h3>
         <ul className="flex flex-col gap-3">
           {plan.features.map((feature) => (
             <li key={feature.label} className="flex items-center gap-3 text-steel">

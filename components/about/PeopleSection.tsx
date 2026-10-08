@@ -30,8 +30,8 @@ type Person = {
 };
 
 const OWNER: Person = {
-  name: "Franek Kierzkiewicz",
-  role: "Założyciel",
+  name: "Franciszek Kierzkiewicz",
+  role: "Założyciel Examax",
   portrait: (
     <span className="grid size-full place-items-center bg-paper-mist text-silver">
       <UserRound className="size-5" strokeWidth={1.75} aria-hidden />

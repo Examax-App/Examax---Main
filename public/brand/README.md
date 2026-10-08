@@ -1,9 +1,29 @@
 # Brand assets
 
-In-app imagery. The favicon and PWA set lives elsewhere: the browser icons use
-the app/ file conventions (`app/favicon.ico`, `app/icon0.svg`, `app/icon1.png`,
-`app/apple-icon.png`), and the installable icons `manifest.webmanifest` points
-at sit at the root of `public/` as `web-app-manifest-*.png`.
+In-app imagery, plus the master of the favicon set. The set itself sits at the
+root of `public/` and is declared in `app/layout.tsx` (`icons`, `manifest`).
+
+## Favicon and app icons
+
+`examax-logo-source.svg` is the original logo (508×512, rounded black square,
+three white slabs). Every icon below is rendered from its three paths, with the
+square widened to 512×512 and the slabs shifted 1.84px right to stay centred —
+Google Search rejects favicons that are not exactly square.
+
+| File | Shape | Used by |
+| --- | --- | --- |
+| `favicon.svg` | Rounded square, vector | Browsers and Google Search (`rel="icon"`) |
+| `web-app-manifest-192x192.png` | Rounded square | Google Search and Safari (`rel="icon"`), the manifest (`any`) |
+| `web-app-manifest-512x512.png` | Rounded square | The manifest (`any`), the Organization logo in `lib/seo.ts` |
+| `favicon.ico` | Rounded square, 16/32/48px | Clients that request `/favicon.ico` by name; not declared |
+| `favicon-96x96.png` | Rounded square | No longer declared; kept so the URL Google cached keeps resolving |
+| `apple-touch-icon.png` | Full-bleed square, 180px | iOS home screen (iOS rounds the corners itself) |
+| `maskable-icon-*.png` | Full-bleed square | The manifest (`maskable`); the slabs sit inside the 80% safe zone |
+
+The PNGs are rendered with sharp (librsvg) at 4× and downsampled with Lanczos.
+After regenerating, bump the `?v=` in `app/layout.tsx`.
+
+## In-app imagery
 
 | File | Role |
 | --- | --- |

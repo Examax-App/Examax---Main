@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import {
   BarChart3,
   Building2,
@@ -104,7 +104,7 @@ function MarkItem({ mark }: { mark: Mark }) {
         <span className="whitespace-nowrap font-satoshi text-[16px] font-bold tracking-tight text-charcoal">{mark.name}</span>
       </span>
       {mark.tag ? (
-        <span className="mt-1 rounded-full bg-paper-mist px-1 py-0.5 text-[8px] font-semibold uppercase leading-none text-fog">{mark.tag}</span>
+        <span className="mt-1 rounded-full bg-paper-mist px-1 py-0.5 text-[8px] font-semibold uppercase leading-none text-steel">{mark.tag}</span>
       ) : null}
     </li>
   );
@@ -187,7 +187,7 @@ function DayStrip({ month, days, note }: { month: string; days: Day[]; note: str
   const { ref, inView } = useInView<HTMLDivElement>(0.4, true);
   const current = 2;
   return (
-    <div ref={ref} aria-hidden className="relative flex cursor-default select-none flex-col items-center pt-9">
+    <div ref={ref} aria-hidden inert className="relative flex cursor-default select-none flex-col items-center pt-9">
       <span className="rounded-full bg-[linear-gradient(90deg,transparent,#dbeafe_25%,#dbeafe_75%,transparent)] px-10 py-1 text-base font-medium text-blue-600">{month}</span>
       <div className="mt-2 w-full overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_22%,black_78%,transparent)]">
         <div
@@ -244,10 +244,10 @@ export function OfferSection() {
       <div className="mx-auto max-w-[var(--page-max-width)] border-x border-ash px-4 pb-10 pt-20 sm:px-5">
         <Reveal className="flex flex-col items-center text-center">
           <h2 id="offer-heading" className="max-w-xl text-balance font-satoshi text-3xl font-medium text-charcoal sm:text-4xl md:text-5xl">
-            Zacznij od jednej klasy, rozwiń na całą szkołę
+            Rozpocznij pilotaż w jednej klasie i wdrażaj platformę stopniowo w kolejnych oddziałach
           </h2>
           <p className="mt-3 max-w-xl text-pretty text-base text-fog sm:text-lg">
-            Jedna licencja daje uczniom pełny Examax, a nauczycielom i dyrekcji narzędzia, których nie ma w żadnym planie dla ucznia.
+            Jedna licencja daje uczniom pełny dostęp do Examax oraz narzędzia dla nauczycieli i dyrekcji.
           </p>
         </Reveal>
 
@@ -299,7 +299,7 @@ export function OfferSection() {
           <TermCard
             delay={80}
             chip="Do egzaminu"
-            title="Stała cena do matury"
+            title="Stała licencja na cały okres przygotowania do egzaminu"
             strip={<DayStrip month="Maj 2027" note="matura!" days={[["nd", 2], ["pon", 3], ["wt", 4], ["śr", 5], ["czw", 6]]} />}
           >
             Cenę ustalamy na <strong className="font-semibold text-charcoal">cały rok szkolny</strong> i nie zmieniamy jej aż do egzaminu ósmoklasisty i

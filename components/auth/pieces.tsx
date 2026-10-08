@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { ArrowBigUp, Eye, EyeOff, Mail } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { canRegisterEmail, isAllowedEmailDomain } from "@/lib/emailDomains";

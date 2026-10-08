@@ -27,6 +27,7 @@ export function FeatureSection({
   eyebrowLabel,
   eyebrowBadge,
   heading,
+  wideHeading = false,
   sub,
   ctaLabel,
   ctaHref = "/pricing",
@@ -43,6 +44,8 @@ export function FeatureSection({
   /** A mark after the label, such as the Pro badge on a paid feature. */
   eyebrowBadge?: React.ReactNode;
   heading: string;
+  /** A long heading gets a wider measure, so it sets in three lines or fewer instead of stacking. */
+  wideHeading?: boolean;
   sub: string;
   ctaLabel: string;
   /** Where the intro's button goes; the product sections default to pricing. */
@@ -87,7 +90,7 @@ export function FeatureSection({
             </div>
             <h2
               id={`${id}-heading`}
-              className={cn("mt-3 max-w-lg text-charcoal", SECTION_H2)}
+              className={cn("mt-3 text-charcoal", wideHeading ? "max-w-3xl" : "max-w-lg", SECTION_H2)}
             >
               {heading}
             </h2>

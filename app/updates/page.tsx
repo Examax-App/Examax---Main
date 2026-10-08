@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { Rss } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -61,7 +61,7 @@ export default async function UpdatesPage() {
               <h1 id="updates-heading" className="mt-5 font-satoshi text-4xl font-medium text-charcoal sm:text-5xl sm:leading-[1.15]">
                 Aktualności
               </h1>
-              <p className="mt-6 text-lg text-fog sm:text-xl">Wszystkie nowości, ulepszenia i poprawki w Examaxie</p>
+              <p className="mt-6 text-lg text-fog sm:text-xl">Najnowsze funkcje, aktualizacje i informacje od zespołu Examax</p>
             </div>
             <div className="flex w-fit items-center gap-2">
               <a href="https://x.com/examaxapp" target="_blank" rel="noopener noreferrer" className={`${BUTTON} px-3`}>

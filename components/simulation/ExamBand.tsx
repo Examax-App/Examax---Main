@@ -50,7 +50,7 @@ export function MarkChip({ children }: { children: React.ReactNode }) {
   return (
     <span className="relative block w-fit overflow-hidden rounded-md px-1.5 py-0.5 [box-shadow:0_1px_0_0_#0000001a_inset]">
       <span aria-hidden className="absolute inset-0 bg-black opacity-5 [mask-image:linear-gradient(black,transparent)]" />
-      <span className="relative block whitespace-nowrap text-[0.5rem] font-semibold uppercase leading-tight text-charcoal/60">{children}</span>
+      <span className="relative block whitespace-nowrap text-[0.5rem] font-semibold uppercase leading-tight text-charcoal/65">{children}</span>
     </span>
   );
 }

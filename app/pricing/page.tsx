@@ -38,18 +38,18 @@ export default function PricingPage() {
             id="pricing-heading"
             className="animate-slide-up-fade [--offset:20px] mt-5 text-balance text-left font-satoshi text-4xl font-medium text-charcoal sm:text-5xl sm:leading-[1.15]"
           >
-            Plany, które rosną razem z Tobą
+            Wybierz plan i ucz się we własnym tempie
           </h1>
           <p
             style={{ "--delay": "100ms" } as React.CSSProperties}
             className="animate-slide-up-fade [--offset:10px] mt-4 text-lg text-steel sm:text-xl"
           >
-            Elastyczne plany stworzone dla każdego ucznia.
-            Jedna platforma dla matury i egzaminu ósmoklasisty.{" "}
-            {/* Unlike dub.co's, this second line stays on small screens too:
-                "one price for both exams" is the page's key fact. Only the
+            Trening zadań, arkusze CKE, roadmapa nauki i Korepetytor AI —{" "}
+            {/* Unlike dub.co's, the second half stays on small screens too:
+                "everything in one place" is the page's key fact. Only the
                 break is dropped. */}
             <br className="hidden md:inline" />
+            wszystko w jednym miejscu.
           </p>
         </PricingView>
       </main>

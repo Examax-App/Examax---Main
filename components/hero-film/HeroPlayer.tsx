@@ -46,7 +46,7 @@ function useArmed() {
 
 function Poster({ tab }: { tab: FilmTab }) {
   return (
-    <div className="pointer-events-none h-full w-full select-none overflow-hidden">
+    <div inert className="pointer-events-none h-full w-full select-none overflow-hidden">
       <HeroPoster tab={tab} />
     </div>
   );

@@ -11,7 +11,7 @@ import { JsonLd } from "@/components/layout/JsonLd";
 import { breadcrumbStructuredData, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Korepetytor AI",
+  title: "Korepetytor AI do matury i egzaminu ósmoklasisty",
   description:
     "Zespół agentów AI, który tłumaczy krok po kroku, układa sprawdziany i planuje naukę — ale każde zadanie rozwiązujesz sam.",
   path: "/agents",
@@ -55,8 +55,8 @@ export default function AgentsPage() {
         {/* The reference's empty ruled strip between the last band and the CTA notch */}
         <GridSection innerClassName="h-12" />
         <CtaBand
-          title="Zacznij uczyć się lepiej już dziś"
-          sub="W czasach AI chodzi o to, by pomagało Ci się uczyć, a nie dawało skrótu, z którego nic nie wyniesiesz."
+          title="Ucz się z pomocą AI, nie zamiast siebie"
+          sub="Korepetytor AI tłumaczy, pyta i sprawdza. Rozwiązania i wnioski zostają Twoje — tak jak na egzaminie."
         />
       </main>
       <Footer />

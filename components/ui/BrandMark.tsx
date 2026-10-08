@@ -2,7 +2,7 @@ import { cn } from "@/lib/cn";
 
 /**
  * The Examax brand mark — three offset slabs, the same glyph the favicon set
- * uses (app/icon.svg). The viewBox is cropped tight to the ink so the mark
+ * uses (public/favicon.svg), simplified to straight edges. The viewBox is cropped tight to the ink so the mark
  * fills whatever box it is given; padding is the caller's business.
  *
  * Fill is `currentColor`, so it inverts by setting a text colour.
