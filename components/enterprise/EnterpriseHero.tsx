@@ -276,8 +276,8 @@ const ELLIPSES_LEFT: Array<[number, number]> = [[501.5, 39], [463, 77.5], [418.5
 export function EnterpriseHero() {
   return (
     <section aria-labelledby="enterprise-heading" className="relative overflow-clip border-b border-ash bg-white px-4">
-      <div className="relative mx-auto flex w-full max-w-[var(--page-max-width)] flex-col items-center overflow-clip border-x border-ash bg-gradient-to-b from-white to-canvas-muted px-4 pt-16 lg:h-[976px]">
-        <div className="relative z-10 mx-auto flex w-full max-w-xl flex-col items-center px-4 text-center">
+      <div className="relative mx-auto flex w-full max-w-[var(--page-max-width)] flex-col items-center overflow-clip border-x border-ash bg-gradient-to-b from-white to-canvas-muted px-4 pt-16">
+        <div className="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center px-4 text-center">
           <span
             className="animate-slide-up-fade flex w-fit items-center gap-2 rounded-full border border-ash bg-white px-3 py-1.5 text-xs font-medium leading-tight text-steel"
             style={{ "--offset": "10px" } as React.CSSProperties}
@@ -287,16 +287,16 @@ export function EnterpriseHero() {
           </span>
           <h1
             id="enterprise-heading"
-            className="animate-slide-up-fade mt-6 max-w-md text-balance text-center font-satoshi text-4xl font-medium text-charcoal sm:text-5xl sm:leading-[1.15]"
+            className="animate-slide-up-fade mt-6 max-w-2xl text-balance text-center font-satoshi text-4xl font-medium text-charcoal sm:text-5xl sm:leading-[1.15]"
             style={{ "--offset": "20px" } as React.CSSProperties}
           >
-            Przygotowanie do egzaminów CKE z panelem dla uczniów, nauczycieli i dyrekcji
+            Przygotowanie do egzaminów dla całej szkoły
           </h1>
           <p
-            className="animate-slide-up-fade mt-6 text-balance text-lg text-steel sm:text-xl"
+            className="animate-slide-up-fade mt-6 max-w-xl text-balance text-lg text-steel sm:text-xl"
             style={{ "--offset": "10px", "--delay": "150ms" } as React.CSSProperties}
           >
-            Plan nauki, zadania CKE i wyniki uczniów dostępne dla całej szkoły.{" "}
+            Plan nauki, zadania CKE i wyniki uczniów&nbsp;— z&nbsp;panelem dla nauczycieli i&nbsp;dyrekcji.{" "}
             <span className="font-semibold text-slate">Pierwszy miesiąc pilotażu za darmo.</span>
           </p>
           <div
@@ -312,9 +312,11 @@ export function EnterpriseHero() {
           </div>
         </div>
 
-        <div className="relative mt-14 h-[512px] w-full lg:static lg:mt-0 lg:h-auto">
+        {/* In the flow under the copy at every size, so a longer heading pushes the picture down
+            instead of running into it. Its last 109px (the card's foot) are cut by the section's clip. */}
+        <div className="relative mt-14 h-[512px] w-full lg:mt-20">
           {/* The ellipse field */}
-          <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-[512px] bg-white lg:top-[464px]">
+          <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-[512px] bg-white">
             <svg viewBox="0 0 1081 513" className="absolute inset-0 size-full text-ash" preserveAspectRatio="xMidYMid slice" fill="none">
               {ELLIPSES_LEFT.map(([cx, rx]) => (
                 <g key={cx}>
@@ -328,7 +330,7 @@ export function EnterpriseHero() {
           {/* The four washes */}
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-x-0 -top-[102px] h-[614px] [mask-image:linear-gradient(transparent,black_17%)] lg:top-[362px]"
+            className="pointer-events-none absolute inset-x-0 -top-[102px] h-[614px] [mask-image:linear-gradient(transparent,black_17%)]"
             style={{
               background:
                 "radial-gradient(780px 640px at 8% 58%, rgba(255,153,102,0.2), transparent 72%), radial-gradient(660px 600px at 32% 72%, rgba(255,120,180,0.1), transparent 72%), radial-gradient(720px 620px at 68% 66%, rgba(96,220,160,0.16), transparent 72%), radial-gradient(780px 640px at 94% 58%, rgba(96,160,255,0.2), transparent 72%)",
@@ -336,13 +338,13 @@ export function EnterpriseHero() {
           />
 
           {/* The students, drifting on both sides */}
-          <div aria-hidden className="absolute right-1/2 top-[67px] mr-[173.5px] hidden md:block lg:top-[531px]">
+          <div aria-hidden className="absolute right-1/2 top-[67px] mr-[173.5px] hidden md:block">
             <div className="flex flex-col gap-5">
               <CardRow offset={0} reverse duration={70} />
               <CardRow offset={5} reverse duration={84} />
             </div>
           </div>
-          <div aria-hidden className="absolute left-1/2 top-[67px] ml-[172.5px] hidden md:block lg:top-[531px]">
+          <div aria-hidden className="absolute left-1/2 top-[67px] ml-[172.5px] hidden md:block">
             <div className="flex flex-col gap-5">
               <CardRow offset={3} duration={76} />
               <CardRow offset={8} duration={90} />
@@ -351,7 +353,7 @@ export function EnterpriseHero() {
 
           {/* The frosted column and the school's card */}
           <div
-            className="animate-slide-up-fade absolute left-1/2 top-0 origin-top -translate-x-1/2 border border-ash bg-white/30 p-4 backdrop-blur-md max-[400px]:scale-[0.88] lg:top-[464px]"
+            className="animate-slide-up-fade absolute left-1/2 top-0 origin-top -translate-x-1/2 border border-ash bg-white/30 p-4 backdrop-blur-md max-[400px]:scale-[0.88]"
             style={{ "--offset": "20px", "--delay": "400ms" } as React.CSSProperties}
           >
             <SchoolCard />

@@ -244,7 +244,7 @@ export function OfferSection() {
       <div className="mx-auto max-w-[var(--page-max-width)] border-x border-ash px-4 pb-10 pt-20 sm:px-5">
         <Reveal className="flex flex-col items-center text-center">
           <h2 id="offer-heading" className="max-w-xl text-balance font-satoshi text-3xl font-medium text-charcoal sm:text-4xl md:text-5xl">
-            Rozpocznij pilotaż w jednej klasie i wdrażaj platformę stopniowo w kolejnych oddziałach
+            Zacznij od pilotażu w jednej klasie
           </h2>
           <p className="mt-3 max-w-xl text-pretty text-base text-fog sm:text-lg">
             Jedna licencja daje uczniom pełny dostęp do Examax oraz narzędzia dla nauczycieli i dyrekcji.
