@@ -122,7 +122,9 @@ const TILE = "relative size-[72px] rounded-xl border border-ash sm:size-[94px]";
 export function ExamaxTiles() {
   return (
     <div className="h-full [mask-image:linear-gradient(black_45%,transparent)]">
-      <div className="grid w-fit grid-cols-4 gap-2.5 p-px">
+      {/* Headroom above the top row: a hovered tile lifts, and the cell's
+          frame clips whatever rises past its edge */}
+      <div className="grid w-fit grid-cols-4 gap-2.5 px-px pb-px pt-2.5">
         {TILES.map((tile) => (
           <Link
             key={tile.label}

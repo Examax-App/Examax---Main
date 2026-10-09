@@ -16,19 +16,19 @@ export function PlanSection() {
         id="plan-heading"
         icon={Route}
         eyebrow="Plan nauki"
-        title="Roadmapa dopasowana do Twojego celu"
-        sub="Na podstawie egzaminu, terminu i tempa, jakie możesz utrzymać, Examax pomaga ułożyć plan — temat po temacie, aż do egzaminu."
+        title="Plan dopasowany do Twojego celu"
+        sub="Examax pomaga ułożyć tematy egzaminu w kolejne kroki, tak aby prowadziły do wyniku, który chcesz osiągnąć."
       />
       <div className="h-12 sm:hidden" />
       <PlanBuilder />
       <FeatureGrid
         cells={[
           {
-            title: "Każdy temat to lekcja, przykłady i quiz",
+            title: "Każdy temat łączy lekcję, przykłady i quiz",
             description: (
               <>
-                Wyjaśnienie, przykłady krok po kroku, schematy i <Link href="/training">zadania z arkuszy CKE</Link> w jednym miejscu. Znasz już
-                temat? Zrób sam quiz i idź dalej.
+                Wyjaśnienie, przykłady krok po kroku, schematy i <Link href="/training">zadania z arkuszy CKE</Link> w jednym
+                miejscu.
               </>
             ),
             cta: { label: "Dowiedz się więcej", href: "#schedule" },
@@ -46,10 +46,10 @@ export function PlanSection() {
             visual: <SubjectRows />,
           },
           {
-            title: "Plan z kilku prostych odpowiedzi",
+            title: "Plan nauki w kilku prostych krokach",
             description: (
               <>
-                Wybierasz egzamin, termin i tempo — Examax rozkłada tematy na tygodnie i dni. Zmienisz zdanie? Plan{" "}
+                Wybierasz egzamin, termin i tempo — a plan rozkłada tematy na tygodnie i dni. Zmienisz zdanie? Plan{" "}
                 <Link href="#flexible">przeliczy się na nowo</Link>.
               </>
             ),
@@ -57,11 +57,11 @@ export function PlanSection() {
             visual: <PlanWizard />,
           },
           {
-            title: "Diagnoza ustawia punkt startu",
+            title: "Na początek krótka diagnoza",
             description: (
               <>
-                Krótki <Link href="/training">quiz diagnostyczny</Link> sprawdza, co już umiesz. Tematy do nadrobienia trafiają na początek planu, a te,
-                które już znasz — na jego koniec.
+                Krótki <Link href="/training">quiz diagnostyczny</Link> pokazuje, co już umiesz, a co warto nadrobić — od tego zaczyna się Twój
+                plan.
               </>
             ),
             cta: { label: "Zacznij od diagnozy", href: "/signup" },
@@ -70,13 +70,13 @@ export function PlanSection() {
         ]}
       />
       <MiniFeatures
-        summary="Wszystko to masz od pierwszego dnia — także w darmowym planie."
+        summary="Kolejność, powtórki i termin — wszystko w jednym planie nauki."
         cta={{ label: "Ułóż swój plan", href: "/signup" }}
         items={[
           {
             icon: LockOpen,
             title: "Swobodna kolejność",
-            description: "Każdy temat jest dostępny od pierwszego dnia, więc możesz zacząć od tego, którego najbardziej potrzebujesz.",
+            description: "Zaczynasz od tematu, którego najbardziej potrzebujesz — bez czekania, aż odblokuje się kolejny.",
           },
           {
             icon: RefreshCcw,
@@ -86,7 +86,7 @@ export function PlanSection() {
           {
             icon: CalendarClock,
             title: "Zmiana terminu",
-            description: "Przesuwasz datę albo masz słabszy tydzień? Plan rozkłada pozostałe tematy na nowo.",
+            description: "Przesuwasz datę egzaminu? Plan rozkłada pozostałe tematy na nowo.",
           },
           {
             icon: Smartphone,

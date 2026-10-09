@@ -26,31 +26,31 @@ export const metadata: Metadata = pageMetadata({
 const FAQS = [
   {
     question: "Kto może skorzystać z Examax dla szkół?",
-    answer: "Szkoły podstawowe, licea, technika, szkoły językowe i samorządy — każda placówka, która przygotowuje uczniów do egzaminów CKE.",
+    answer: "Examax jest dla szkół podstawowych, liceów, techników oraz innych placówek przygotowujących uczniów do egzaminów CKE — od egzaminu ósmoklasisty po maturę.",
   },
   {
     question: "Jak wygląda pilotaż?",
-    answer: "Jedna klasa korzysta z pełnej wersji przez 30 dni bez opłat. Nauczyciel dostaje panel i raporty od pierwszego dnia.",
+    answer: "Pilotaż zaczynamy od wybranej klasy lub grupy uczniów. Przez 30 dni szkoła może sprawdzić platformę, pracę uczniów i narzędzia dla nauczycieli przed wdrożeniem na większą skalę.",
   },
   {
     question: "Jak liczona jest cena?",
-    answer: "Cenę ustalamy indywidualnie, według liczby uczniów i klas, na cały rok szkolny — nie zmienia się aż do egzaminu.",
+    answer: "Cena zależy od liczby uczniów, klas oraz zakresu wdrożenia. Przygotowujemy indywidualną ofertę na cały okres przygotowania do egzaminów.",
   },
   {
     question: "Jak chronicie dane uczniów?",
-    answer: "Podpisujemy z placówką umowę powierzenia danych, przechowujemy dane w Unii Europejskiej i szyfrujemy je w spoczynku i w transmisji.",
+    answer: "Dane uczniów przetwarzamy zgodnie z RODO. Zakres danych ograniczamy do informacji potrzebnych do działania platformy, a szkoła zachowuje kontrolę nad dostępem do kont i wyników.",
   },
   {
     question: "Czy uczniowie potrzebują osobnych kont?",
-    answer: "Nie. Importujemy listy klas, a uczniowie logują się kontem szkoły — Microsoft 365 albo Google Workspace.",
+    answer: "Uczniowie korzystają z własnych kont Examax lub kont szkolnych — zależnie od sposobu wdrożenia wybranego przez placówkę.",
   },
   {
     question: "Czy nauczyciel widzi rozmowy ucznia z Korepetytorem AI?",
-    answer: "Nie. Nauczyciel widzi postępy, wyniki i gotowość, ale rozmowy z Korepetytorem AI pozostają prywatne.",
+    answer: "Nie. Nauczyciele widzą wyniki nauki, aktywność i postępy uczniów, ale prywatne rozmowy z Korepetytorem AI pozostają prywatne.",
   },
   {
     question: "Co się dzieje po roku szkolnym?",
-    answer: "Licencję można przedłużyć na kolejny rocznik. Uczniowie, którzy zdali egzamin, zachowują dostęp do swojej historii nauki.",
+    answer: "Po zakończeniu roku szkolnego szkoła może przedłużyć licencję na kolejny okres przygotowań. Historia nauki uczniów pozostaje dostępna zgodnie z zasadami korzystania z platformy.",
   },
 ];
 

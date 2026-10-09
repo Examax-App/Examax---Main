@@ -137,9 +137,9 @@ const COLUMNS: Array<{ heading: string; items: Feature[] }> = [
   {
     heading: "Dla uczniów",
     items: [
-      { icon: Route, label: "Roadmapa do egzaminu", tip: "Cały materiał rozpisany na tygodnie aż do dnia egzaminu." },
-      { icon: Timer, label: "Symulacje bez limitu", tip: "Pełne arkusze na czas, z raportem po każdym." },
-      { icon: Zap, label: "Korepetytor AI", tip: "Tłumaczy zadania krok po kroku i pamięta błędy ucznia." },
+      { icon: Route, label: "Indywidualny plan przygotowania", tip: "Cały materiał rozpisany na tygodnie aż do dnia egzaminu." },
+      { icon: Timer, label: "Zadania i arkusze CKE", tip: "Pełne arkusze na czas, z raportem po każdym." },
+      { icon: Zap, label: "Wsparcie AI podczas nauki", tip: "Tłumaczy zadania krok po kroku i pamięta błędy ucznia." },
       { icon: InfinityIcon, label: "Bez limitu lub własne limity", tip: "Każdy uczeń korzysta ze wszystkiego bez limitu — albo w limitach, które ustala szkoła. Przez cały rok szkolny." },
     ],
   },
@@ -148,16 +148,16 @@ const COLUMNS: Array<{ heading: string; items: Feature[] }> = [
     items: [
       { icon: LayoutDashboard, label: "Panel klasy", tip: "Postępy, słabe działy i gotowość każdego ucznia w jednym widoku." },
       { icon: BarChart3, label: "Raporty klasowe", tip: "Wyniki klasy w podziale na działy wymagań CKE." },
-      { icon: FileText, label: "Sprawdziany od AI", tip: "Zestawy zadań układane pod to, z czym klasa ma trudności." },
-      { icon: RefreshCcw, label: "Przydzielanie powtórek", tip: "Jedno kliknięcie dodaje powtórkę do roadmapy całej klasy." },
+      { icon: FileText, label: "Automatyczne zestawy zadań", tip: "Zestawy zadań układane pod to, z czym klasa ma trudności." },
+      { icon: RefreshCcw, label: "Przydzielanie pracy klasie i uczniom", tip: "Jedno kliknięcie dodaje powtórkę do roadmapy całej klasy." },
     ],
   },
   {
     heading: "Dla dyrekcji",
     items: [
-      { icon: Gauge, label: "Gotowość rocznika", tip: "Jedna liczba dla każdej klasy i całego rocznika, aktualna na bieżąco." },
-      { icon: Building2, label: "Wiele placówek", tip: "Wspólny panel dla sieci szkół i samorządów." },
-      { icon: Download, label: "Eksport wyników", tip: "Raporty do PDF i CSV — na radę pedagogiczną i dla organu prowadzącego." },
+      { icon: Gauge, label: "Wyniki całego rocznika", tip: "Jedna liczba dla każdej klasy i całego rocznika, aktualna na bieżąco." },
+      { icon: Building2, label: "Zarządzanie wieloma klasami", tip: "Wspólny panel dla sieci szkół i samorządów." },
+      { icon: Download, label: "Raporty dla dyrekcji", tip: "Raporty do PDF i CSV — na radę pedagogiczną i dla organu prowadzącego." },
       { icon: KeyRound, label: "Logowanie SSO", tip: "Konta szkolne Google Workspace lub Microsoft 365." },
     ],
   },
@@ -244,10 +244,10 @@ export function OfferSection() {
       <div className="mx-auto max-w-[var(--page-max-width)] border-x border-ash px-4 pb-10 pt-20 sm:px-5">
         <Reveal className="flex flex-col items-center text-center">
           <h2 id="offer-heading" className="max-w-xl text-balance font-satoshi text-3xl font-medium text-charcoal sm:text-4xl md:text-5xl">
-            Zacznij od pilotażu w jednej klasie
+            Zacznij od jednej klasy
           </h2>
           <p className="mt-3 max-w-xl text-pretty text-base text-fog sm:text-lg">
-            Jedna licencja daje uczniom pełny dostęp do Examax oraz narzędzia dla nauczycieli i dyrekcji.
+            Sprawdź wyniki w jednej klasie, a następnie rozszerz wdrożenie na całą szkołę.
           </p>
         </Reveal>
 
@@ -262,7 +262,7 @@ export function OfferSection() {
             </Link>
           </div>
           <h3 className="-mt-1 font-satoshi text-3xl font-medium text-charcoal">Examax dla szkół</h3>
-          <p className="mt-2 text-body text-fog">Nielimitowany dostęp dla każdego ucznia — albo limity, które ustala szkoła — i narzędzia dla całej kadry w jednej rocznej licencji.</p>
+          <p className="mt-2 text-body text-fog">Dostęp dla uczniów oraz narzędzia dla nauczycieli i dyrekcji w jednej licencji dopasowanej do potrzeb szkoły.</p>
           <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {COLUMNS.map((column) => (
               <div key={column.heading}>

@@ -9,7 +9,6 @@ import { ReportSection } from "@/components/simulation/ReportSection";
 import { StepsCarousel } from "@/components/simulation/StepsCarousel";
 import { ToolsSection } from "@/components/simulation/ToolsSection";
 import { CtaBand } from "@/components/sections/CtaBand";
-import { plans } from "@/lib/pricing";
 import { JsonLd } from "@/components/layout/JsonLd";
 import { breadcrumbStructuredData, pageMetadata } from "@/lib/seo";
 
@@ -18,7 +17,7 @@ export const metadata: Metadata = pageMetadata({
   description:
     "Pełny arkusz CKE na czas, z narzędziami jak na sali, sprawdzony według zasad oceniania — i raport, który pokazuje, gdzie tracisz punkty.",
   path: "/simulation",
-  social: { description: "Napisz egzamin, zanim zacznie się liczyć: pełny arkusz CKE, czas jak na sali i raport po każdym podejściu." },
+  social: { description: "Sprawdź się, zanim nadejdzie prawdziwy egzamin: pełny arkusz CKE, czas jak na sali i raport po każdym podejściu." },
 });
 
 /**
@@ -43,8 +42,6 @@ export const metadata: Metadata = pageMetadata({
  * sitting (`components/simulation/sitting.ts`), the same one the landing's
  * film plays: CKE's May 2025 basic maths paper, 42 of 50 points in 141 minutes.
  */
-/** Pro's monthly price, from the price list itself, so the band can never disagree with /pricing. */
-const PRO_MONTHLY = plans.find((plan) => plan.id === "pro")!.monthly;
 
 export default function SimulationPage() {
   return (
@@ -68,7 +65,7 @@ export default function SimulationPage() {
         <GridSection innerClassName="h-12" />
         <CtaBand
           title="Poznaj egzamin, zanim go napiszesz"
-          sub={`Symulacje są w planie Pro za ${PRO_MONTHLY} zł miesięcznie. W planie Free napiszesz jeden próbny arkusz.`}
+          sub="Zrób pierwszy arkusz i zobacz swój poziom przygotowania."
           actions={[{ label: "Zacznij teraz", href: "/signup", primary: true }]}
         />
       </main>

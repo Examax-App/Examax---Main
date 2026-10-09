@@ -76,7 +76,7 @@ export default function Home() {
           eyebrowIcon={PencilLine}
           eyebrowLabel="Trening dopasowany do Twoich wyników"
           heading="Ćwicz na zadaniach z arkuszy CKE"
-          sub="Ćwicz na zadaniach w formacie CKE i od razu sprawdzaj wynik. Każda odpowiedź aktualizuje Twój postęp w danym temacie."
+          sub="Od razu sprawdzasz wynik, a każda odpowiedź aktualizuje Twój postęp w danym temacie."
           ctaLabel="Zobacz zadania"
           ctaHref="/training"
           showcases={[<QuestionRows key="rows" />, <TopicTiles key="tiles" />, <NewSet key="set" />]}
@@ -86,19 +86,19 @@ export default function Home() {
               icon: ScanSearch,
               title: "Zadania z prawdziwych arkuszy",
               description:
-                "Zadania w formacie egzaminu CKE — te same typy zadań i te same polecenia co w arkuszach.",
+                "Te same typy zadań i te same polecenia co w arkuszach CKE.",
             },
             {
               icon: Layers,
               title: "Arkusze z 6 lat",
               description:
-                "Zadania z arkuszy CKE z ostatnich sześciu lat, uporządkowane temat po temacie.",
+                "Arkusze CKE z ostatnich sześciu lat, uporządkowane temat po temacie.",
             },
             {
               icon: QrCode,
               title: "Własne zestawy",
               description:
-                "Ułóż zestaw z wybranym poziomem trudności i tagami, a potem udostępnij go linkiem albo kodem QR.",
+                "Wybierz poziom trudności i tagi, a gotowy zestaw udostępnij linkiem albo kodem QR.",
             },
           ]}
         />
@@ -109,7 +109,7 @@ export default function Home() {
           eyebrowIcon={Route}
           eyebrowLabel="Roadmapa nauki"
           heading="Zawsze wiesz, jaki jest następny krok"
-          sub="Cały materiał egzaminu rozpisany na tematy i kroki. Widzisz, co masz opanowane, nad czym pracujesz i co jeszcze przed Tobą — aż do dnia egzaminu."
+          sub="Cały materiał egzaminu rozpisany na tematy i kroki. Widzisz, co masz opanowane, nad czym pracujesz i co jeszcze przed Tobą."
           ctaLabel="Zobacz roadmapę"
           ctaHref="/roadmap"
           showcases={[<ProgressFunnel key="funnel" />, <LiveProgress key="live" />, <ProgressProfile key="profile" />]}
@@ -119,7 +119,7 @@ export default function Home() {
               icon: Map,
               title: "Postęp w całym materiale",
               description:
-                "Wszystkie tematy egzaminu i to, ile z nich masz już przerobione i opanowane.",
+                "Ile tematów egzaminu masz już przerobionych i opanowanych.",
             },
             {
               icon: ListChecks,
@@ -131,7 +131,7 @@ export default function Home() {
               icon: ScanFace,
               title: "Twój profil postępów",
               description:
-                "Cel, seria, średni wynik i historia nauki — cały Twój postęp w jednym miejscu.",
+                "Cel, seria, średni wynik i historia nauki w jednym miejscu.",
             },
           ]}
         />
@@ -142,7 +142,7 @@ export default function Home() {
           eyebrowIcon={BadgePercent}
           eyebrowLabel="Śledzenie postępów"
           heading="Zobacz, jak rośnie Twoje przygotowanie"
-          sub="Każda odpowiedź uzupełnia obraz Twojego przygotowania: opanowanie tematów, skuteczność i szacowaną gotowość do egzaminu."
+          sub="Każda odpowiedź aktualizuje opanowanie tematów, skuteczność i szacowaną gotowość do egzaminu."
           ctaLabel="Zobacz postępy"
           ctaHref="/progress"
           showcases={[<TopicFeed key="feed" />, <WeakSpots key="spots" />, <ReadinessDashboard key="dashboard" />]}
@@ -158,13 +158,13 @@ export default function Home() {
               icon: Target,
               title: "Wykrywanie słabych punktów",
               description:
-                "Examax wskazuje tematy, w których najczęściej tracisz punkty, żebyś wiedział, co powtórzyć.",
+                "Examax wskazuje tematy, w których najczęściej tracisz punkty.",
             },
             {
               icon: Gauge,
               title: "Wskaźnik gotowości",
               description:
-                "Szacunek oparty na Twoich wynikach z zadań i arkuszy — pomaga ocenić, ile pracy jeszcze przed Tobą.",
+                "Szacunek oparty na Twoich wynikach z zadań i arkuszy.",
             },
           ]}
         />
@@ -176,7 +176,7 @@ export default function Home() {
           eyebrowLabel="Symulacja egzaminu"
           heading="Sprawdź się w warunkach podobnych do prawdziwego egzaminu"
           wideHeading
-          sub="Pełny arkusz na czas, w formacie CKE. Liczysz w brudnopisie jak na sali, a po oddaniu arkusza odpowiedzi są sprawdzane według zasad oceniania CKE. Korepetytor AI pomaga zrozumieć, gdzie pojawił się błąd."
+          sub="Pełny arkusz CKE na czas, z brudnopisem jak na sali. Po oddaniu odpowiedzi są sprawdzane według zasad oceniania CKE, a Korepetytor AI pokazuje, gdzie pojawił się błąd."
           ctaLabel="Zobacz symulację"
           ctaHref="/simulation"
           showcase={<SimulationShowcase />}
@@ -189,8 +189,8 @@ export default function Home() {
           eyebrowLabel="Korepetytor AI"
           eyebrowBadge={<ProMark />}
           heading="Zrozum, dlaczego popełniasz błędy"
-          sub="Korepetytor AI korzysta z Twojej roadmapy i Twoich odpowiedzi. Tłumaczy zadania krok po kroku, pokazuje, skąd wziął się błąd, i podpowiada, co warto przećwiczyć."
-          ctaLabel="Zobacz agentów"
+          sub="Korepetytor AI korzysta z Twojej roadmapy i odpowiedzi. Tłumaczy zadania krok po kroku, pokazuje, skąd wziął się błąd, i podpowiada, co przećwiczyć."
+          ctaLabel="Zobacz więcej"
           ctaHref="/agents"
           showcase={<AgentShowcase />}
         />
@@ -199,9 +199,10 @@ export default function Home() {
           id="platform"
           accent="sapphire"
           eyebrowIcon={Workflow}
-          eyebrowLabel="Jak działa Examax"
+          eyebrowLabel="Jak wygląda nauka w Examax"
           heading="Oficjalne arkusze CKE przekształcone w codzienną naukę"
-          sub="Examax korzysta z oryginalnych zadań CKE, a bazę uzupełniamy o kolejne arkusze po ich publikacji. Twoje odpowiedzi i postępy zapisują się na Twoim koncie — w każdym przedmiocie egzaminu."
+          wideHeading
+          sub="Examax korzysta z oryginalnych zadań CKE, a Twoje odpowiedzi i postępy zapisują się na Twoim koncie."
           ctaLabel="Zobacz, jak to działa"
           ctaHref="/training#sources"
           showcases={[<SheetFlow key="sheets" />, <KnowledgeSync key="sync" />, <SubjectWindow key="subjects" />]}
@@ -211,26 +212,35 @@ export default function Home() {
               icon: FileInput,
               title: "Aktualna baza arkuszy CKE",
               description:
-                "Nowe arkusze CKE — matura podstawowa i rozszerzona oraz egzamin ósmoklasisty — dodajemy do bazy po ich publikacji.",
+                "Nowe arkusze matury i egzaminu ósmoklasisty dodajemy do bazy po ich publikacji.",
             },
             {
               icon: CloudCheck,
               title: "Wszystko na Twoim koncie",
               description:
-                "Rozwiązane zadania i wyniki zapisują się na Twoim koncie, a Examax na bieżąco śledzi postęp w każdym temacie.",
+                "Rozwiązane zadania i wyniki zostają na koncie, a postęp w każdym temacie aktualizuje się na bieżąco.",
             },
             {
               icon: Library,
               title: "Każdy przedmiot egzaminu",
               description:
-                "Matematyka, polski i angielski — na maturze i egzaminie ósmoklasisty, w formacie egzaminu CKE.",
+                "Matematyka, polski i angielski — na maturze i egzaminie ósmoklasisty.",
             },
           ]}
         />
 
         <TutoringCompare />
         <Faq />
-        <CtaBand title="Do egzaminu przygotowujesz się krok po kroku." sub="Zacznij od krótkiej diagnozy i zobacz, nad czym warto pracować." />
+        <CtaBand
+          wide
+          title={
+            <>
+              Do egzaminu przygotowujesz się
+              <br className="max-sm:hidden" /> krok po kroku.
+            </>
+          }
+          sub="Zacznij od krótkiej diagnozy i zobacz, nad czym warto pracować."
+        />
       </main>
       <Footer />
     </>

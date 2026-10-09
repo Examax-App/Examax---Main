@@ -13,9 +13,9 @@ export function GlanceSection() {
       <SectionHeader
         id="glance-heading"
         icon={LineChart}
-        eyebrow="Postępy na żywo"
-        title="Postęp jak na dłoni"
-        sub="Rozwiązane zadania, poprawne odpowiedzi i czas nauki od razu trafiają do statystyk. Możesz porównać, jak idzie Ci teraz, z tym, jak było na początku miesiąca."
+        eyebrow="Postępy na bieżąco"
+        title="Wszystko w jednym miejscu"
+        sub="Rozwiązane zadania, poprawne odpowiedzi i czas nauki zapisują się automatycznie. Możesz sprawdzić, jak zmieniają się Twoje wyniki i które obszary wymagają dalszej pracy."
         actions={[
           { label: "Zacznij za darmo", href: "/signup", variant: "primary" },
           { label: "Zobacz cennik", href: "/pricing", variant: "outline" },
@@ -28,14 +28,14 @@ export function GlanceSection() {
         <FeatureGrid
           cells={[
             {
-              title: "Postępy, które możesz udostępnić",
-              description: "Udostępnij swoje wyniki rodzicowi, korepetytorowi lub nauczycielowi za pomocą linku. Ty decydujesz, komu go wysyłasz, a osoba, która go otworzy, nie musi zakładać konta.",
+              title: "Postępy, które możesz pokazać",
+              description: "Udostępnij swoje wyniki rodzicowi, korepetytorowi lub nauczycielowi przez bezpieczny link. Ty decydujesz, komu pokazujesz swoje postępy.",
               cta: { label: "Załóż konto", href: "/signup" },
               visual: <ShareProgress />,
             },
             {
-              title: "Każdy przedmiot, dział i typ zadania",
-              description: "Widzisz, w którym przedmiocie idzie Ci najlepiej, który dział wymaga jeszcze pracy i na jakim typie zadań tracisz najwięcej punktów.",
+              title: "Każdy przedmiot i każdy temat",
+              description: "Widzisz, które przedmioty opanowałeś, gdzie potrzebujesz więcej pracy i na jakich typach zadań tracisz punkty.",
               cta: { label: "Zobacz trening", href: "/training" },
               visual: <SubjectStack />,
             },
@@ -44,7 +44,7 @@ export function GlanceSection() {
       </div>
       <MiniFeatures
         iconClassName="text-tangerine"
-        summary="Twoja aktywność w Examaxie zapisuje się w postępach automatycznie — nie musisz niczego wpisywać ręcznie."
+        summary="Twoja aktywność w Examaxie zapisuje się automatycznie — bez ręcznego uzupełniania wyników."
         cta={{ label: "Zacznij za darmo", href: "/signup" }}
         items={[
           {
@@ -54,8 +54,8 @@ export function GlanceSection() {
           },
           {
             icon: Download,
-            title: "Raport w PDF",
-            description: "Pobierz podsumowanie postępów i pokaż je w szkole albo na korepetycjach.",
+            title: "Raport postępów",
+            description: "Pobierz podsumowanie nauki i pokaż je nauczycielowi, rodzicowi lub korepetytorowi.",
           },
           {
             icon: Flame,
@@ -65,7 +65,7 @@ export function GlanceSection() {
           {
             icon: Zap,
             title: "Zapytaj Korepetytora AI",
-            description: "„Jak mi poszło w tym tygodniu?” — Korepetytor AI podsumuje Twoje wyniki i podpowie, na czym się skupić.",
+            description: "„Nad czym powinienem teraz pracować?” — Korepetytor AI przeanalizuje Twoje wyniki i pomoże wybrać kolejny krok.",
           },
         ]}
       />

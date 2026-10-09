@@ -10,7 +10,7 @@ Before making implementation decisions, prioritize consistency, maintainability,
 
 # Design First
 
-The `design/` directory is the single source of truth for the project's visual identity.
+The `DesignRules/` directory is the single source of truth for the project's visual identity.
 
 Before implementing any UI, component, animation, page or feature:
 

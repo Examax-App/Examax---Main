@@ -17,12 +17,12 @@ export function TrialBand() {
         <Reveal className="flex flex-col items-center">
           <ShieldCheck className="size-8 text-white" strokeWidth={1.5} aria-hidden />
           <h2 id="trial-heading" className="mt-6 max-w-lg text-balance font-satoshi text-4xl font-medium text-canvas-muted sm:text-5xl">
-            Wypróbuj Examax w swojej szkole
+            Sprawdź Examax w swojej szkole
           </h2>
         </Reveal>
         <Reveal delay={100}>
           <p className="mt-6 max-w-[560px] text-pretty text-lg font-medium text-silver sm:text-xl">
-            Pokażemy panel nauczyciela, ustalimy zakres pilotażu i odpowiemy na pytania o dane uczniów — w ciągu jednego dnia roboczego.
+            Pokażemy platformę, omówimy potrzeby szkoły i zaproponujemy zakres pierwszego pilotażu.
           </p>
         </Reveal>
         <Reveal delay={200}>

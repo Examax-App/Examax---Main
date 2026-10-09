@@ -184,7 +184,7 @@ export function SimulationHero() {
             className="animate-slide-up-fade mt-5 text-balance text-center font-satoshi text-4xl font-medium text-charcoal sm:text-5xl sm:leading-[1.15]"
             style={{ "--offset": "20px" } as React.CSSProperties}
           >
-            Napisz egzamin, zanim zacznie się liczyć
+            Sprawdź się, zanim nadejdzie prawdziwy egzamin
           </h1>
 
           {/* The portrait: the sheet, finished and marked, and the sitting it belongs to */}
@@ -230,7 +230,7 @@ export function SimulationHero() {
             className="animate-slide-up-fade mt-5 text-pretty text-lg font-medium text-fog sm:text-xl"
             style={{ "--offset": "10px", "--delay": "400ms" } as React.CSSProperties}
           >
-            Pełny arkusz CKE na czas, z tymi samymi narzędziami co na sali. Po oddaniu widzisz wynik według zasad oceniania i miejsca, w których tracisz punkty.
+            Pełny arkusz CKE w warunkach prawdziwego egzaminu. Po zakończeniu dostajesz wynik, analizę błędów i wskazówki, co poprawić przed kolejnym podejściem.
           </p>
         </div>
         <div

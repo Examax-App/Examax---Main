@@ -7,7 +7,7 @@ export const SITE_LOCALE = "pl_PL";
 export const X_HANDLE = "@examaxapp";
 /** The landing page's search snippet, and the site's description in structured data. */
 export const SITE_DESCRIPTION =
-  "Examax to kompletny system przygotowań do egzaminu ósmoklasisty i matury: roadmapa nauki, zadania z arkuszy CKE, Korepetytor AI i śledzenie postępów — wszystko w jednym miejscu.";
+  "Examax to system przygotowań do egzaminu ósmoklasisty i matury: roadmapa nauki, zadania z arkuszy CKE, Korepetytor AI i śledzenie postępów w jednym miejscu.";
 
 /**
  * The share card app/opengraph-image.tsx renders. The root layout picks it up

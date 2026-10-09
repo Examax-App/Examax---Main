@@ -64,7 +64,7 @@ export default function ProgressPage() {
         <NextSection />
         {/* The reference's empty ruled strip between the last band and the CTA notch */}
         <GridSection innerClassName="h-12" />
-        <CtaBand />
+        <CtaBand title="Każdy dzień przybliża Cię do egzaminu" />
       </main>
       <Footer />
     </>

@@ -158,7 +158,7 @@ export function StepsCarousel() {
     <SourcesCarousel
       id="steps"
       title="Od arkusza do wyniku"
-      sub="Cztery kroki jednej symulacji — od pierwszej minuty do planu na kolejny tydzień."
+      sub="Cztery kroki: rozpoczęcie arkusza, rozwiązanie, sprawdzenie i plan dalszej nauki."
       stories={STEPS}
       tail={false}
     />

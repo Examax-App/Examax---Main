@@ -18,7 +18,7 @@ import { breadcrumbStructuredData, pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "Trening zadań z arkuszy CKE",
   description:
-    "Trenuj na zadaniach z oficjalnych arkuszy CKE: sprawdzanie od razu według zasad oceniania, Korepetytor AI przy każdym błędzie i zadania dobierane do tego, gdzie tracisz punkty.",
+    "Trenuj na zadaniach z arkuszy CKE: wynik od razu według zasad oceniania, Korepetytor AI przy błędach i zadania dobierane do tego, gdzie tracisz punkty.",
   path: "/training",
   social: { description: "Zadania z arkuszy CKE, sprawdzane od razu i dobierane do tego, gdzie tracisz punkty." },
 });
@@ -64,11 +64,11 @@ export default function TrainingPage() {
         <FeatureTrio
           id="autopilot"
           variant="open"
-          heading="Trening na autopilocie"
-          sub="Examax widzi, gdzie tracisz punkty, i sam układa kolejne zadania. Ty tylko rozwiązujesz."
+          heading="Trening dopasowany do Ciebie"
+          sub="Examax widzi, gdzie tracisz punkty, i dobiera kolejne zadania. Ty tylko rozwiązujesz."
           cards={[
             {
-              title: "Kolejka, która układa się sama",
+              title: "Kolejka zadań na każdy dzień",
               description:
                 "Zadania na dziś, powtórki na za dwa dni i arkusz na weekend — dobrane do tego, co jeszcze Ci nie wychodzi.",
               ctaLabel: "Dowiedz się więcej",
@@ -78,15 +78,15 @@ export default function TrainingPage() {
             {
               title: "Korepetytor AI przy każdym błędzie",
               description:
-                "Tłumaczy, skąd wziął się błąd, i od razu podsuwa podobne zadanie, żeby sprawdzić, czy już wiesz.",
+                "Tłumaczy krok po kroku, skąd wziął się błąd.",
               ctaLabel: "Poznaj Korepetytora AI",
               ctaHref: "/agents",
               visual: <TutorChat />,
             },
             {
-              title: "Gotowość rośnie z każdym zadaniem",
+              title: "Gotowość po każdym zadaniu",
               description:
-                "Każda odpowiedź przelicza Twoją gotowość do egzaminu — widzisz, ile dało dzisiejsze pół godziny.",
+                "Każda odpowiedź aktualizuje szacowaną gotowość do egzaminu — widzisz, ile dało dzisiejsze pół godziny.",
               ctaLabel: "Zobacz postępy",
               ctaHref: "/progress",
               visual: <ReadinessOrbit />,
@@ -98,10 +98,10 @@ export default function TrainingPage() {
           id="checking"
           variant="open"
           heading="Sprawdzanie bez czekania"
-          sub="Każda odpowiedź oceniona w sekundę, według tych samych zasad, których użyje egzaminator."
+          sub="Natychmiastowa informacja zwrotna według zasad oceniania CKE."
           cards={[
             {
-              title: "Wynik w tej samej sekundzie",
+              title: "Punkty zaraz po odpowiedzi",
               description:
                 "Bez odsyłania pracy i bez czekania na sprawdzenie. Odpowiadasz, widzisz punkty, idziesz dalej.",
               ctaLabel: "Zacznij za darmo",
@@ -111,7 +111,7 @@ export default function TrainingPage() {
             {
               title: "Punktacja według zasad CKE",
               description:
-                "Każde zadanie ma przypisane oficjalne zasady oceniania — punkt po punkcie, tak jak na egzaminie.",
+                "Każde zadanie ma przypisane oficjalne zasady oceniania — punkt po punkcie.",
               ctaLabel: "Dowiedz się więcej",
               ctaHref: "#sources",
               visual: <MarkingRules />,
@@ -136,7 +136,7 @@ export default function TrainingPage() {
           sub="Własne zestawy, tryb na czas i gotowy plan na start — bez ustawiania czegokolwiek od zera."
           cards={[
             {
-              title: "Zestawy zadań w kilka sekund",
+              title: "Własny zestaw zadań w kilka sekund",
               description:
                 "Wybierasz egzamin, temat i poziom — Examax składa zestaw z zadań CKE i daje mu własny link.",
               ctaLabel: "Dowiedz się więcej",
@@ -156,7 +156,7 @@ export default function TrainingPage() {
               description: (
                 <>
                   Wybierasz egzamin, robisz quiz diagnostyczny i zaczynasz. Plan
-                  układa się <em>sam</em>, nie wieczorami.
+                  nauki dopasowany do Twoich wyników.
                 </>
               ),
               ctaLabel: "Załóż konto",

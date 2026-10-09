@@ -86,6 +86,9 @@ function Placeholder({ scale }: { scale: number }) {
  * which flash outside the box; that layer is hidden, so all the motion stays
  * inside the pill.
  *
+ * The mark reads as one icon: its label can't be selected and the pointer
+ * stays an arrow over it.
+ *
  * `scale` is the library's own size multiplier on its 45×25 pill; 0.8 sits
  * on the 20px line of a section eyebrow.
  */
@@ -112,7 +115,7 @@ export function ProMark({ scale = 0.8 }: { scale?: number }) {
   }, []);
 
   return (
-    <span ref={ref} className="inline-flex shrink-0 items-center [&_.metal-fx-glow-svg]:hidden" role="img" aria-label="Funkcja Pro">
+    <span ref={ref} className="inline-flex shrink-0 cursor-default select-none items-center [&_*]:cursor-default [&_.metal-fx-glow-svg]:hidden" role="img" aria-label="Funkcja Pro">
       {near ? (
         <MetalBadge theme="light" scale={scale}>
           Pro

@@ -261,7 +261,7 @@ function Cell({ row, value }: { row: CompareRow; value: CompareValue }) {
           <span aria-hidden className="w-3 shrink-0 text-center">
             •
           </span>
-          <span className="sr-only">Niedostępne: </span>
+          <span className="sr-only">Brak w tym planie: </span>
         </>
       )}
       {row.tip ? (

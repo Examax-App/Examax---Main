@@ -287,8 +287,8 @@ export function ScaleSection() {
         <div className="mt-16 divide-y divide-ash border-t border-ash">
           <Cell
             icon={Headset}
-            title="Wsparcie wdrożeniowe"
-            text="Dedykowany opiekun na wspólnym kanale, szkolenie dla rady pedagogicznej i wdrożenie bez ręcznego przepisywania list uczniów."
+            title="Wsparcie podczas wdrożenia"
+            text="Pomagamy uruchomić platformę, przeszkolić nauczycieli i przygotować szkołę do pierwszego użycia."
           >
             <div className="grid gap-5 md:h-[340px] md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
               <SupportThread />

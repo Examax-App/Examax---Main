@@ -102,8 +102,8 @@ export function SecuritySection() {
           id="security-heading"
           icon={Lock}
           eyebrow="Bezpieczeństwo danych"
-          title="Dane uczniów pod ochroną"
-          sub="Przetwarzamy tylko to, czego potrzebuje nauka — z szyfrowaniem w spoczynku i w transmisji, na serwerach w Unii Europejskiej."
+          title="Dane uczniów pod kontrolą szkoły"
+          sub="Szkoła zachowuje kontrolę nad danymi uczniów. Examax wykorzystuje tylko informacje potrzebne do działania platformy i nauki."
         />
         <div className="mx-auto mt-14 grid max-w-3xl grid-cols-1 gap-10 px-4 pb-14 sm:grid-cols-3">
           {PILLARS.map((pillar, i) => (
@@ -116,13 +116,13 @@ export function SecuritySection() {
         </div>
         <div className="grid grid-cols-1 divide-ash border-t border-ash max-md:divide-y md:grid-cols-3 md:divide-x">
           <div className="relative flex h-52 flex-col items-center justify-center font-geist-mono text-lg text-charcoal">
-            <LearnMore href="/contact" />
+            <LearnMore href="/legal/gdpr" />
             <span>RODO</span>
             <span className="my-4 h-px w-16 bg-smoke" />
             <span>DPA</span>
           </div>
           <div className="relative flex h-52 items-center justify-center">
-            <LearnMore href="/contact" />
+            <LearnMore href="/legal/privacy#udostepnianie-danych" />
             <div className="relative grid size-24 place-items-center">
               <StarRing />
               <span className="font-geist-mono text-lg text-charcoal">UE</span>
@@ -212,7 +212,7 @@ export function CommunitySection() {
               {TEACHERS.map((teacher, i) => (
                 <span key={i} className="relative size-10 overflow-hidden rounded-full border-2 border-white shadow-md">
                   {teacher.photo ? (
-                    <Image src={teacher.photo} alt="" fill sizes="40px" className="object-cover object-[center_30%]" />
+                    <Image src={teacher.photo} alt="" fill sizes="40px" draggable={false} className="object-cover object-[center_30%]" />
                   ) : (
                     <span className={cn("grid size-full place-items-center bg-gradient-to-br text-xs font-semibold text-charcoal/70", teacher.tint)}>
                       {teacher.initials}

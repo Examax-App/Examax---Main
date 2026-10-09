@@ -130,7 +130,7 @@ export function SubjectRows() {
         >
           <Gift className="size-4 text-green-800" strokeWidth={1.75} aria-hidden />
           <span className="whitespace-nowrap text-sm font-medium leading-none text-graphite">
-            Pierwsza roadmapa <strong>za darmo</strong>
+            Pierwszy plan nauki <strong>za darmo</strong>
           </span>
         </Link>
       </div>

@@ -17,7 +17,7 @@ export const metadata: Metadata = pageMetadata({
   description:
     "Cały materiał egzaminu CKE rozpisany na tematy i tygodnie — osobisty plan nauki liczony do dnia egzaminu, który wie, co robić dalej.",
   path: "/roadmap",
-  social: { description: "Plan nauki ułożony pod Twój egzamin, termin i tempo — temat po temacie, aż do dnia egzaminu." },
+  social: { description: "Plan nauki dopasowany do Twojego egzaminu, terminu i tempa — temat po temacie." },
 });
 
 /**
@@ -61,7 +61,7 @@ export default function RoadmapPage() {
         <FlexiblePath />
         {/* The reference's empty ruled strip between the last band and the CTA notch */}
         <GridSection innerClassName="h-12" />
-        <CtaBand />
+        <CtaBand title="Każdy dzień przybliża Cię do egzaminu" />
       </main>
       <Footer />
     </>

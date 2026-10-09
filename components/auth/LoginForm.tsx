@@ -105,13 +105,15 @@ export function LoginForm({
               </AuthButton>
               <AuthButton
                 variant="secondary"
-                icon={<Lock className="size-4" strokeWidth={1.75} />}
+                // -ml-px: the padlock's glyph carries extra room on its left, so the
+                // pair sat half a pixel right of centre; this pulls both back.
+                icon={<Lock className="-ml-px size-4" strokeWidth={1.75} />}
                 aria-expanded={showSSO}
                 aria-controls="login-sso"
                 disabled={blocked("sso")}
                 onClick={() => setShowSSO((shown) => !shown)}
               >
-                SSO szkoły
+                Konto szkoły
               </AuthButton>
             </div>
 

@@ -24,7 +24,7 @@ import szymonPhoto from "@/public/mockups/learner-szymon.jpg";
  * pictures with copy and a quiet "Dowiedz się więcej" under each.
  *
  *   Flexible reward structure   → AssignStack   (a review set for the class)
- *   1-click global payouts      → ReportSend    (the weekly report going out)
+ *   1-click global payouts      → AssignmentSend (a task set going out to chosen students)
  *   Embedded referral dashboard → TeacherPanel  (the class panel)
  *   Automated risk monitoring   → AttentionCard (a student who needs help)
  *   Partner referral rewards    → ClassOrbit    (the class goal, together)
@@ -78,20 +78,22 @@ function AssignStack() {
   );
 }
 
-const SENT = [
-  { name: "Rodzice: Julia Nowak", value: "84%" },
-  { name: "Rodzice: Kacper Lewandowski", value: "77%" },
-  { name: "Rodzice: Szymon Wójcik", value: "58%" },
-  { name: "Rodzice: Maja Zielińska", value: "49%" },
+/** The students the set went to, and how many of its tasks each has solved. */
+const ASSIGNED = [
+  { name: "Julia Nowak", done: 12 },
+  { name: "Kacper Lewandowski", done: 9 },
+  { name: "Szymon Wójcik", done: 4 },
+  { name: "Maja Zielińska", done: 0 },
 ];
+const SET_SIZE = 12;
 
-function ReportSend() {
+function AssignmentSend() {
   return (
     <div aria-hidden inert className="flex h-full select-none flex-col items-center [mask-image:linear-gradient(black_70%,transparent)]">
       <div className="flex rounded-xl border border-ash bg-white p-1.5">
         {[
-          { label: "Średnia klasy", value: "71%" },
-          { label: "Zadania w tygodniu", value: "1 248" },
+          { label: "Zestaw", value: "Planimetria" },
+          { label: "Zadania CKE", value: String(SET_SIZE) },
         ].map((stat, i) => (
           <div key={stat.label} className={cn("flex items-center gap-2 px-3 py-1.5", i === 0 && "border-r border-ash")}>
             <span className="text-left text-[11px] leading-tight text-fog">
@@ -106,16 +108,16 @@ function ReportSend() {
         <span className="grid size-5 place-items-center rounded-full bg-white text-charcoal">
           <BrandMark className="h-2.5" />
         </span>
-        Raport wysłany · 24 rodziców
+        Zadanie wysłane · {ASSIGNED.length} uczniów
       </span>
       <div className="h-4 w-px bg-ash" />
       <div className="flex w-[90%] flex-col gap-1.5">
-        {SENT.map((row) => (
+        {ASSIGNED.map((row) => (
           <div key={row.name} className={cn("flex items-center justify-between rounded-lg bg-white px-3 py-2 text-xs text-steel", CARD_SHADOW)}>
             <span>{row.name}</span>
-            <span className="flex items-center gap-1.5 text-fog">
-              <Send className="size-3" strokeWidth={1.75} />
-              {row.value}
+            <span className={cn("flex items-center gap-1.5 tabular-nums", row.done === SET_SIZE ? "text-vivid-green" : "text-fog")}>
+              {row.done === SET_SIZE ? <CircleCheck className="size-3" strokeWidth={2} /> : <Send className="size-3" strokeWidth={1.75} />}
+              {row.done}/{SET_SIZE}
             </span>
           </div>
         ))}
@@ -264,8 +266,8 @@ export function ToolkitSection() {
         id="toolkit-heading"
         icon={LayoutDashboard}
         eyebrow="Panel nauczyciela"
-        title="Narzędzia dla nauczycieli"
-        sub="Widzisz, kto jest gotowy, kto potrzebuje pomocy i co powtórzyć z całą klasą — zanim wyjdzie to na sprawdzianie."
+        title="Panel nauczyciela"
+        sub="Widzisz postępy uczniów, najważniejsze braki i tematy, które warto przećwiczyć z klasą."
       />
       <div className="mt-12">
         <FeatureGrid
@@ -277,10 +279,10 @@ export function ToolkitSection() {
               visual: <AssignStack />,
             },
             {
-              title: "Raport dla rodziców jednym kliknięciem",
-              description: "Co tydzień każdy rodzic dostaje postępy swojego dziecka — bez zebrań o samych liczbach i bez arkuszy kalkulacyjnych.",
-              cta: { label: "Zobacz postępy", href: "/progress" },
-              visual: <ReportSend />,
+              title: "Zadania dla wybranych uczniów",
+              description: "Wysyłasz zestaw zadań CKE konkretnym uczniom i widzisz, kto już go rozwiązał — bez zbierania kartek i sprawdzania ręcznie.",
+              cta: { label: "Zobacz trening", href: "/training" },
+              visual: <AssignmentSend />,
             },
           ]}
         />
@@ -298,7 +300,7 @@ export function ToolkitSection() {
           delay={80}
           cell={{
             title: "Uczniowie, którzy potrzebują uwagi",
-            description: "Examax sam wskazuje, kto przestał się uczyć albo utknął na dziale — zanim przyjdzie sprawdzian.",
+            description: "Examax pomaga znaleźć uczniów, którzy potrzebują dodatkowego wsparcia, zanim problemy pojawią się na egzaminie.",
             cta: { label: "Zobacz trening", href: "/training" },
             visual: <AttentionCard />,
           }}

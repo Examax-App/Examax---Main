@@ -248,11 +248,11 @@ export function CoverageBand() {
                 id="coverage-heading"
                 className="text-balance font-satoshi text-3xl font-medium text-charcoal sm:text-4xl"
               >
-                Cała baza CKE, sprawdzana w sekundę
+                Zadania CKE. Wynik od razu.
               </h2>
               <p className="mt-3 text-pretty text-lg text-fog">
-                Zadania z arkuszy od 2015 roku, każde z zasadami oceniania — i
-                każda odpowiedź sprawdzona od razu,{" "}
+                Zadania z arkuszy od 2015 roku, każde z zasadami oceniania —
+                dostępne{" "}
                 <span className="font-medium italic">o każdej porze</span>.
               </p>
             </Reveal>

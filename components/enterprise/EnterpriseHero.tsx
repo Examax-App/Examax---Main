@@ -65,10 +65,10 @@ const tone = (value: number) => (value >= 80 ? "text-[#16a34a]" : value >= 65 ? 
 function StudentCard({ student, index }: { student: Student; index: number }) {
   const initials = student.name.split(" ").map((part) => part[0]).join("");
   return (
-    <div className="relative flex h-full w-full flex-col items-start gap-2 rounded-xl bg-white p-1 pb-2 shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_2px_-1px_rgba(0,0,0,0.06),0px_2px_4px_0px_rgba(0,0,0,0.04)] transition-[transform,box-shadow] duration-150 ease-out hover:z-10 hover:scale-[1.03] hover:shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_4px_8px_-2px_rgba(0,0,0,0.1),0px_8px_16px_-6px_rgba(0,0,0,0.08)]">
+    <div className="relative flex h-full w-full cursor-default select-none flex-col items-start gap-2 rounded-xl bg-white p-1 pb-2 shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_2px_-1px_rgba(0,0,0,0.06),0px_2px_4px_0px_rgba(0,0,0,0.04)] transition-[transform,box-shadow] duration-150 ease-out hover:z-10 hover:scale-[1.03] hover:shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_4px_8px_-2px_rgba(0,0,0,0.1),0px_8px_16px_-6px_rgba(0,0,0,0.08)]">
       <div className="relative min-h-0 w-full flex-1 overflow-hidden rounded-lg">
         {student.photo ? (
-          <Image src={student.photo} alt="" fill sizes="120px" className="object-cover object-[center_30%]" />
+          <Image src={student.photo} alt="" fill sizes="120px" draggable={false} className="object-cover object-[center_30%]" />
         ) : (
           <div className={cn("grid size-full place-items-center bg-gradient-to-br", TINTS[index % TINTS.length])}>
             <span className="font-satoshi text-3xl font-bold text-charcoal/70">{initials}</span>
@@ -160,7 +160,7 @@ function OfferButton({ icon: Icon, hint }: { icon: IconComponent; hint: string }
 function SchoolCard() {
   const { ref, inView } = useInView<HTMLDivElement>(0.2, true);
   return (
-    <div ref={ref} className="relative flex h-[587px] w-[346px] shrink-0 flex-col rounded-[18px] bg-canvas-muted p-2 shadow-[0px_0px_0px_1px_rgba(0,0,0,0.08),0px_1px_2px_-1px_rgba(0,0,0,0.08),0px_2px_4px_0px_rgba(0,0,0,0.06)]">
+    <div ref={ref} className="relative flex h-[587px] w-[346px] shrink-0 select-none flex-col rounded-[18px] bg-canvas-muted p-2 shadow-[0px_0px_0px_1px_rgba(0,0,0,0.08),0px_1px_2px_-1px_rgba(0,0,0,0.08),0px_2px_4px_0px_rgba(0,0,0,0.06)]">
       {/* The banner: Examax's own spectrum, fanned into rays */}
       <div className="relative h-[123px] shrink-0 overflow-hidden rounded-[13px] border border-black/5">
         <div className="absolute inset-0 bg-[conic-gradient(from_180deg_at_50%_115%,#2563eb,#7c3aed,#db2777,#ea580c,#facc15,#16a34a,#0891b2,#2563eb)]" />
@@ -210,8 +210,8 @@ function SchoolCard() {
           </p>
         </div>
         <div className="absolute right-3.5 top-2 flex items-center gap-1.5">
-          <OfferButton icon={Ticket} hint="Licencja dla 412 uczniów" />
-          <OfferButton icon={Percent} hint="30 dni pilotażu gratis" />
+          <OfferButton icon={Ticket} hint="Pilotaż dla pierwszej klasy" />
+          <OfferButton icon={Percent} hint="30 dni bez zobowiązań" />
         </div>
 
         <div inert className="flex flex-col overflow-hidden rounded-xl bg-white">
@@ -290,24 +290,23 @@ export function EnterpriseHero() {
             className="animate-slide-up-fade mt-6 max-w-2xl text-balance text-center font-satoshi text-4xl font-medium text-charcoal sm:text-5xl sm:leading-[1.15]"
             style={{ "--offset": "20px" } as React.CSSProperties}
           >
-            Przygotowanie do egzaminów dla całej szkoły
+            Przygotowanie do egzaminów w całej szkole
           </h1>
           <p
             className="animate-slide-up-fade mt-6 max-w-xl text-balance text-lg text-steel sm:text-xl"
             style={{ "--offset": "10px", "--delay": "150ms" } as React.CSSProperties}
           >
-            Plan nauki, zadania CKE i wyniki uczniów&nbsp;— z&nbsp;panelem dla nauczycieli i&nbsp;dyrekcji.{" "}
-            <span className="font-semibold text-slate">Pierwszy miesiąc pilotażu za darmo.</span>
+            Jedna platforma dla uczniów, nauczycieli i&nbsp;dyrekcji&nbsp;— zadania CKE, plan nauki i&nbsp;widok postępów każdej klasy w&nbsp;jednym miejscu.
           </p>
           <div
             className="animate-slide-up-fade relative mt-10 flex justify-center gap-2 sm:gap-4"
             style={{ "--offset": "5px", "--delay": "300ms" } as React.CSSProperties}
           >
             <Button href="#trial" variant="primary">
-              Umów rozmowę
+              Umów prezentację
             </Button>
             <Button href="/contact" variant="outline">
-              Umów prezentację
+              Porozmawiaj o pilotażu
             </Button>
           </div>
         </div>

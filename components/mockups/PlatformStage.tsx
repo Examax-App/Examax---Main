@@ -28,7 +28,7 @@ import { cn } from "@/lib/cn";
 import type { IconComponent } from "@/lib/icon";
 
 /**
- * The "Jak działa Examax" section's three pictures, one per sub-feature below
+ * The "Jak wygląda nauka w Examax" section's three pictures, one per sub-feature below
  * the band, each a template copy of the reference's API section (dub.co, read
  * off its live DOM and recorded frame by frame; captures in
  * `DesignRules/API — * _ Dub.png` and `DesignRules/dom-captures/api-section.html`):

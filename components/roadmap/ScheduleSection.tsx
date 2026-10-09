@@ -30,7 +30,7 @@ export function ScheduleSection() {
       <FeatureGrid
         cells={[
           {
-            title: "Cała ścieżka w jednym widoku",
+            title: "Cały plan w jednym widoku",
             description: "Roadmapa pokazuje, gdzie jesteś, co masz już za sobą i co jest następne — bez szukania po zeszytach.",
             cta: { label: "Załóż konto", href: "/signup" },
             visual: <PathStill />,
@@ -42,18 +42,18 @@ export function ScheduleSection() {
             visual: <StageStack />,
           },
           {
-            title: "Każdy temat to pełny moduł",
+            title: "Każdy temat w jednym module",
             description: (
               <>
-                Wprowadzenie, wyjaśnienie, przykłady, schematy, techniki zapamiętywania i <Link href="/training">zadania CKE</Link> — z własnym
-                procentem ukończenia.
+                Materiały tematu i <Link href="/training">zadania CKE</Link> na jednej stronie, z własnym procentem ukończenia — widzisz, ile
+                zostało do końca.
               </>
             ),
             cta: { label: "Zobacz trening", href: "/training" },
             visual: <ModulePage />,
           },
           {
-            title: "Tydzień rozpisany na dni",
+            title: "Każdy tydzień rozpisany na dni",
             description: "Co dziś, co jutro i ile to zajmie. Każda sesja ma temat, rodzaj i czas, więc wiesz, kiedy skończysz.",
             cta: { label: "Ułóż swój plan", href: "/signup" },
             visual: <WeekTable />,

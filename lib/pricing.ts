@@ -137,9 +137,9 @@ export const plans: Plan[] = [
     id: "free",
     name: "Free",
     monthly: 0,
-    description: "Zacznij naukę bez karty płatniczej i sprawdź, jak działa Examax.",
+    description: "Zacznij przygotowania za darmo i sprawdź, jak działa nauka z Examaxem — bez karty płatniczej.",
     cta: { label: "Zacznij za darmo", href: "/signup" },
-    featuresHeading: "Najważniejsze funkcje:",
+    featuresHeading: "Najważniejsze narzędzia na start:",
     features: [
       {
         icon: Route,
@@ -175,11 +175,11 @@ export const plans: Plan[] = [
     id: "pro",
     name: "Pro",
     monthly: 49,
-    description: "Więcej wsparcia AI i regularne przygotowanie do egzaminu.",
+    description: "Pełne przygotowanie z większą pomocą AI i analizą Twoich wyników.",
     cta: { label: "Wybierz Pro", href: "/signup" },
     featuresHeading: "Wszystko z Free, plus:",
     features: [
-      { icon: Zap, label: "150 pytań do AI dziennie", tip: AI_TIP_PRO },
+      { icon: Zap, label: "Wyższy limit rozmów z Korepetytorem AI", tip: AI_TIP_PRO },
       {
         icon: Timer,
         label: "4 symulacje w miesiącu",
@@ -202,7 +202,7 @@ export const plans: Plan[] = [
       },
       {
         icon: RefreshCcw,
-        label: "Inteligentne powtórki",
+        label: "Automatyczne powtórki według Twoich błędów",
         tip: "Materiał wraca dokładnie wtedy, kiedy zaczyna uciekać z pamięci.",
       },
       {
@@ -217,14 +217,14 @@ export const plans: Plan[] = [
     id: "max",
     name: "Max",
     monthly: 79,
-    description: "Pełne wsparcie AI i przygotowanie prowadzone aż do dnia egzaminu.",
+    description: "Najbardziej zaawansowane przygotowanie — z planem, analizą i wsparciem AI aż do egzaminu.",
     cta: { label: "Wybierz Max", href: "/signup" },
     featuresHeading: "Wszystko z Pro, plus:",
     features: [
       { icon: Zap, label: "Najwyższy limit AI", tip: AI_TIP_MAX },
       {
         icon: Brain,
-        label: "AI pamięta Twoje błędy",
+        label: "Pamięć Twoich błędów i postępów",
         tip: "Korepetytor AI pamięta wcześniejsze rozmowy, błędy i Twoją roadmapę, więc nie zaczynasz od zera.",
       },
       {
@@ -244,12 +244,12 @@ export const plans: Plan[] = [
       },
       {
         icon: CalendarDays,
-        label: "Plan do dnia egzaminu",
+        label: "Indywidualny plan nauki aż do egzaminu",
         tip: "Roadmapa rozpisana na tygodnie wstecz od terminu CKE.",
       },
       {
         icon: FileText,
-        label: "Tygodniowy raport",
+        label: "Tygodniowe podsumowania nauki",
         tip: "Podsumowanie tygodnia na e-mail: co poszło do przodu i co przećwiczyć dalej.",
       },
       {
@@ -330,7 +330,7 @@ export type CompareGroup = {
 
 export const compareGroups: CompareGroup[] = [
   {
-    heading: "Egzaminy",
+    heading: "Zakres egzaminów",
     mark: { kind: "exams" },
     rows: [
       {
@@ -366,7 +366,7 @@ export const compareGroups: CompareGroup[] = [
     ],
   },
   {
-    heading: "Trening",
+    heading: "Przygotowanie",
     mark: { kind: "chip", icon: PencilLine, accent: "green" },
     rows: [
       {
@@ -380,7 +380,7 @@ export const compareGroups: CompareGroup[] = [
         values: [true, true, true, true],
       },
       {
-        label: "Inteligentne powtórki",
+        label: "Automatyczne powtórki według Twoich błędów",
         tip: "Materiał wraca dokładnie wtedy, kiedy zaczyna uciekać z pamięci.",
         values: [false, true, true, true],
       },
@@ -415,7 +415,7 @@ export const compareGroups: CompareGroup[] = [
     ],
   },
   {
-    heading: "Korepetytor AI",
+    heading: "Wsparcie AI",
     mark: { kind: "chip", icon: Zap, accent: "yellow" },
     rows: [
       {
@@ -448,7 +448,7 @@ export const compareGroups: CompareGroup[] = [
     ],
   },
   {
-    heading: "Postępy",
+    heading: "Analiza postępów",
     mark: { kind: "chip", icon: BadgePercent, accent: "tangerine" },
     rows: [
       {
@@ -462,17 +462,17 @@ export const compareGroups: CompareGroup[] = [
       },
       { label: "Analiza błędów", values: [false, true, true, true] },
       {
-        label: "Plan do dnia egzaminu",
+        label: "Indywidualny plan nauki aż do egzaminu",
         tip: "Roadmapa rozpisana na tygodnie wstecz od terminu CKE.",
         values: [false, false, true, true],
       },
-      { label: "Tygodniowy raport", values: [false, false, true, true] },
+      { label: "Tygodniowe podsumowania nauki", values: [false, false, true, true] },
       { label: "Podgląd dla rodzica", values: [false, false, true, true] },
       { label: "Raporty klasowe", values: [false, false, false, true] },
     ],
   },
   {
-    heading: "Konto i wsparcie",
+    heading: "Wsparcie i konto",
     mark: { kind: "chip", icon: LifeBuoy, accent: "sapphire" },
     rows: [
       {
@@ -523,7 +523,7 @@ export const tierCompareGroups: CompareGroup[] = compareGroups
  */
 export const enterpriseOffer = {
   subheading: "Indywidualna wycena dla całej placówki",
-  body: "Examax dla całych klas i roczników — konta, panel nauczyciela i raporty z postępów, dopasowane do tego, jak uczy Twoja szkoła.",
+  body: "Examax dla szkół — dostęp dla uczniów, narzędzia dla nauczycieli i raporty, które pokazują gotowość całych klas.",
   listHeading: "Funkcje dla całej szkoły",
   items: [
     { icon: Receipt, label: "Wycena pod liczbę uczniów i klas", tip: "Płacisz za tylu uczniów, ilu faktycznie korzysta — cena rośnie razem ze szkołą." },
@@ -555,41 +555,41 @@ export const pricingFaqs: PricingFaq[] = [
   {
     question: "Który plan wybrać?",
     answer:
-      "Ceny są takie same dla matury i egzaminu ósmoklasisty. Ósmoklasistom zwykle wystarcza Pro: więcej pytań do Korepetytora AI i regularne symulacje. Maturzystom polecamy Max: najwyższy limit pytań do Korepetytora AI, Korepetytora AI z pamięcią Twoich postępów i symulacje bez limitu aż do dnia egzaminu. Jeśli dopiero zaczynasz, zostań przy Free: roadmapa i trening są w nim bez limitu. Enterprise jest dla szkół.",
+      "Jeśli dopiero zaczynasz, Free pozwala sprawdzić Examax bez opłat — masz dostęp do roadmapy i treningu zadań. Pro jest najlepszy dla większości uczniów, którzy regularnie przygotowują się do egzaminu i chcą większego wsparcia AI oraz częstszych symulacji. Max jest dla osób, które chcą pełnego prowadzenia aż do egzaminu: większych limitów AI, pamięci postępów i nieograniczonych symulacji. Enterprise jest przeznaczony dla szkół.",
   },
   {
-    question: "Co się dzieje, gdy wyczerpię dzienny limit pytań do Korepetytora AI?",
+    question: "Co dzieje się po wykorzystaniu limitu Korepetytora AI?",
     answer:
-      "Nic nie znika i nic się nie blokuje. Limit pytań odnawia się następnego dnia, a do tego czasu dalej rozwiązujesz zadania, przerabiasz roadmapę i piszesz symulacje. Jeśli limit regularnie Ci nie wystarcza, przejdź na Pro albo Max.",
+      "Limit odnawia się każdego dnia. Twoja nauka nie zostaje zatrzymana — nadal możesz rozwiązywać zadania, korzystać z roadmapy i wykonywać symulacje. Jeśli potrzebujesz częstszych rozmów z AI, możesz przejść na wyższy plan.",
   },
   {
     question: "Czy jest okres próbny?",
     answer:
-      "Nie potrzebujesz go: plan Free jest darmowy na zawsze i nie wymaga karty. Zamiast kilkunastu dni pełnego dostępu dajemy Ci bezterminowo pełną roadmapę, trening bez limitu i codzienną pulę pytań do Korepetytora AI. Kiedy zaczyna być za ciasno, przechodzisz wyżej.",
+      "Tak — plan Free działa bezterminowo i nie wymaga karty płatniczej. Możesz sprawdzić trening zadań, roadmapę i Korepetytora AI przed wyborem płatnego planu.",
   },
   {
     question: "Czy oferujecie zniżki?",
     answer:
-      "Tak. Przy płatności rocznej płacisz za dziesięć miesięcy, a korzystasz przez dwanaście: Pro kosztuje 490 zł zamiast 588 zł, a Max 790 zł zamiast 948 zł. Szkoły wyceniamy pod liczbę uczniów, więc im większa placówka, tym niższa cena za osobę.",
+      "Tak. Przy płatności rocznej płacisz za 10 miesięcy i korzystasz przez cały rok. Szkoły otrzymują indywidualną wycenę zależną od liczby uczniów i klas.",
   },
   {
-    question: "Czy mogę anulować subskrypcję w każdej chwili?",
+    question: "Czy mogę anulować subskrypcję?",
     answer:
-      "Tak. Plan zmieniasz i anulujesz w ustawieniach konta, bez kontaktu z nami. Po anulowaniu zachowujesz dostęp do końca opłaconego okresu, a potem konto wraca do planu Free. Twoje postępy, wyniki i historia zadań zostają.",
+      "Tak. Możesz anulować lub zmienić plan w ustawieniach konta w dowolnym momencie. Po anulowaniu zachowujesz dostęp do końca opłaconego okresu, a Twoje wyniki i historia nauki pozostają zapisane.",
   },
   {
     question: "Czy zwracacie pieniądze?",
     answer:
-      "Jeśli plan Ci nie odpowiada, napisz do nas w ciągu 14 dni od pierwszej płatności, a zwrócimy całą kwotę. Po tym czasie możesz anulować subskrypcję w każdej chwili, a dostęp zostaje do końca opłaconego okresu.",
+      "Jeżeli plan nie spełnia Twoich oczekiwań, skontaktuj się z nami w ciągu 14 dni od pierwszej płatności. Po anulowaniu subskrypcji dostęp pozostaje aktywny do końca opłaconego okresu.",
   },
   {
     question: "Jak dbacie o prywatność i bezpieczeństwo danych?",
     answer:
-      "Twoje dane należą do Ciebie. Szyfrujemy je w trakcie przesyłania i przechowywania, nie sprzedajemy ich nikomu i działamy zgodnie z RODO. W każdej chwili możesz je wyeksportować albo usunąć konto. Szkołom podpisujemy umowę powierzenia przetwarzania danych.",
+      "Twoje dane pozostają Twoją własnością. Chronimy je zgodnie z RODO, szyfrujemy podczas przesyłania i przechowywania oraz nie sprzedajemy ich podmiotom trzecim. Możesz w każdej chwili poprosić o eksport lub usunięcie danych.",
   },
   {
-    question: "Mam więcej pytań o Examax. Jak się z Wami skontaktować?",
+    question: "Mam więcej pytań o Examax. Jak się skontaktować?",
     answer:
-      "Napisz do nas przez stronę kontaktu. Odpowiadamy w ciągu jednego dnia roboczego, a szkołom pomagamy dobrać plan i przygotować wycenę.",
+      "Napisz do nas przez stronę kontaktu. Odpowiemy na pytania dotyczące działania platformy, wyboru planu oraz oferty dla szkół.",
   },
 ];
