@@ -133,14 +133,14 @@ export function TrainingHero() {
               className="animate-slide-up-fade mt-6 text-center font-satoshi text-4xl font-medium text-charcoal sm:text-5xl sm:leading-[1.15]"
               style={{ "--offset": "20px", "--delay": "100ms" } as React.CSSProperties}
             >
-              Trenuj na zadaniach, które zobaczysz na egzaminie
+              Trenuj na zadaniach z arkuszy CKE
             </h1>
             <p
               className="animate-slide-up-fade mt-6 text-balance text-base text-steel sm:text-xl"
               style={{ "--offset": "10px", "--delay": "200ms" } as React.CSSProperties}
             >
-              Zadania z arkuszy CKE, sprawdzane od razu według zasad oceniania —
-              i dobierane do tego, gdzie tracisz punkty.
+              Zadania sprawdzane od razu według zasad oceniania — i dobierane
+              do tego, gdzie tracisz punkty.
             </p>
           </div>
           <div

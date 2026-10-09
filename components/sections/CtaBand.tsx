@@ -1,5 +1,6 @@
 import Link from "@/components/ui/Link";
 import { Reveal } from "@/components/ui/Reveal";
+import { cn } from "@/lib/cn";
 
 /** Dub's notch piece: a flat top, then a steep S-curve down to the band. */
 const NOTCH = "M50 45C57.3095 56.6952 71.2084 63.9997 85 64V0H0C13.7915 0 26.6905 7.30481 34 19L50 45Z";
@@ -93,26 +94,30 @@ const DEFAULT_ACTIONS: CtaAction[] = [
 /**
  * The landing's closing band. Product pages may pass their own heading,
  * line and actions (/simulation closes on one); the defaults are the landing's.
+ * `wide` gives the heading and line a longer measure, so a long heading sets
+ * in two lines and its line in one.
  */
 export function CtaBand({
   title = "Do egzaminu liczy się każdy dzień",
   sub = <>Zacznij od krótkiego testu i&nbsp;ucz się regularnie — nawet kilka minut dziennie.</>,
   actions = DEFAULT_ACTIONS,
+  wide = false,
 }: {
-  title?: string;
+  title?: React.ReactNode;
   sub?: React.ReactNode;
   actions?: CtaAction[];
+  wide?: boolean;
 } = {}) {
   return (
     <CtaBandFrame labelledBy="cta-heading">
       <div className="relative flex flex-col items-center px-4 pb-32 pt-24 text-center">
         <Reveal>
-          <h2 id="cta-heading" className="max-w-lg text-balance font-satoshi text-4xl font-medium text-canvas-muted sm:text-5xl">
+          <h2 id="cta-heading" className={cn(wide ? "max-w-3xl" : "max-w-lg", "text-balance font-satoshi text-4xl font-medium text-canvas-muted sm:text-5xl")}>
             {title}
           </h2>
         </Reveal>
         <Reveal delay={100}>
-          <p className="mt-6 max-w-[560px] text-pretty text-lg font-medium text-silver sm:text-xl">{sub}</p>
+          <p className={cn("mt-6 text-pretty", wide ? "max-w-2xl" : "max-w-[560px]", "text-lg font-medium text-silver sm:text-xl")}>{sub}</p>
         </Reveal>
         <Reveal delay={200}>
           <div className="mt-10 flex items-center justify-center gap-3">

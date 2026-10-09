@@ -26,11 +26,10 @@ export function StorySection() {
               Czym jest Examax?
             </h2>
             <p className={`mt-8 text-balance text-lg text-slate ${PROSE_LINKS}`}>
-              Examax to platforma do przygotowania do egzaminu ósmoklasisty i matury. Łączy{" "}
-              <Link href="/training">trening z arkuszy CKE</Link>, <Link href="/roadmap">plan nauki</Link>,{" "}
-              <Link href="/progress">śledzenie postępów</Link> i{" "}
-              <Link href="/simulation">symulacje egzaminu</Link> w jedną ścieżkę, a <Link href="/agents">Korepetytor AI</Link> pomaga zrozumieć
-              zadania, z którymi masz problem.
+              Examax pomaga uczniom przygotować się do egzaminu ósmoklasisty i matury. Łączy{" "}
+              <Link href="/training">zadania CKE</Link>, <Link href="/roadmap">plan nauki</Link>,{" "}
+              <Link href="/progress">analizę postępów</Link> i{" "}
+              <Link href="/simulation">symulacje egzaminu</Link> w jedną ścieżkę przygotowań.
             </p>
           </Reveal>
 
@@ -40,7 +39,7 @@ export function StorySection() {
 
           <Reveal delay={100} className="mt-14 flex flex-col items-center px-4 text-center">
             <h3 className="max-w-[600px] text-pretty font-satoshi text-3xl font-medium text-charcoal">
-              Chcemy, żeby wynik egzaminu mówił o tym, co umiesz — nie o tym, czy stać Cię na korepetycje.
+              Chcemy, żeby wynik egzaminu zależał od przygotowania — nie od tego, ile dodatkowych materiałów i korepetycji możesz znaleźć.
             </h3>
             <div className={`mt-6 max-w-lg space-y-6 text-pretty text-base text-fog ${PROSE_LINKS}`}>
               <p>
@@ -48,8 +47,8 @@ export function StorySection() {
                 publiczne, a mimo to wielu uczniów wciąż uczy się z rozproszonych materiałów i kluczy odpowiedzi bez szczegółowych wyjaśnień.
               </p>
               <p>
-                Examax układa to w jedną ścieżkę: krótki test na start, zadania w formacie CKE sprawdzane według kryteriów, pełne arkusze na
-                czas i Korepetytor AI, który tłumaczy błąd krok po kroku, zamiast podawać gotowy wynik. Dzięki temu wiesz nie tylko, ile masz
+                Examax łączy diagnozę, trening i analizę wyników w jedną ścieżkę. Widzisz, co już umiesz, gdzie tracisz punkty i nad czym
+                warto pracować dalej. Dzięki temu wiesz nie tylko, ile masz
                 punktów, ale też dlaczego je straciłeś.
               </p>
             </div>

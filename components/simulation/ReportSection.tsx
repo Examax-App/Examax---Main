@@ -14,8 +14,8 @@ export function ReportSection() {
     <GridSection id="report" labelledBy="report-heading" innerClassName="pb-12 pt-20 sm:pb-16 sm:pt-24">
       <SectionHeader
         id="report-heading"
-        title="Zobacz, gdzie tracisz punkty"
-        sub="Po oddaniu arkusza Examax sprawdza go według zasad oceniania CKE i rozkłada wynik na działy, zadania i minuty."
+        title="Nie tylko wynik. Wiesz, co poprawić."
+        sub="Examax analizuje arkusz według zasad oceniania CKE i pokazuje, które działy, zadania oraz typy błędów zabierają Ci punkty."
       />
       <div className="px-4 pt-12">
         <WalkthroughFilm />

@@ -55,7 +55,7 @@ export default function AboutPage() {
         <PeopleSection />
         <ValuesSection />
         <SourcesSection />
-        <CtaBand title="Zacznij przygotowania już dziś" sub="Załóż darmowe konto i zacznij od krótkiego testu poziomującego." />
+        <CtaBand title="Zacznij przygotowanie do egzaminu" sub="Załóż darmowe konto i sprawdź swój poziom przed rozpoczęciem nauki." />
       </main>
       <Footer />
     </>

@@ -36,7 +36,7 @@ export function RoadmapHero() {
           </div>
         </div>
 
-        <div className="relative mx-auto flex w-full max-w-lg flex-col items-center px-4">
+        <div className="relative mx-auto flex w-full max-w-3xl flex-col items-center px-4">
           <span
             className="animate-slide-up-fade relative flex w-fit items-center gap-2 overflow-hidden rounded-full border border-ash bg-white px-3 py-1.5 text-xs font-medium leading-tight text-steel"
             style={{ "--offset": "10px" } as React.CSSProperties}
@@ -46,16 +46,16 @@ export function RoadmapHero() {
           </span>
           <h1
             id="roadmap-heading"
-            className="animate-slide-up-fade mt-5 text-center font-satoshi text-4xl font-medium text-charcoal sm:text-5xl sm:leading-[1.15]"
+            className="animate-slide-up-fade mt-5 text-balance text-center font-satoshi text-4xl font-medium text-charcoal sm:text-5xl sm:leading-[1.15]"
             style={{ "--offset": "20px", "--delay": "100ms" } as React.CSSProperties}
           >
-            Plan nauki ułożony pod Twój egzamin
+            Plan nauki dopasowany do Twojego egzaminu
           </h1>
           <p
             className="animate-slide-up-fade mt-5 text-pretty text-base text-steel sm:text-xl"
             style={{ "--offset": "10px", "--delay": "200ms" } as React.CSSProperties}
           >
-            Wymagania egzaminu CKE rozpisane na tematy i&nbsp;tygodnie — zamiast notatek i&nbsp;plików PDF masz jeden plan od dziś do dnia egzaminu.
+            Wymagania egzaminacyjne rozpisane na tematy i&nbsp;tygodnie. W&nbsp;jednym planie widzisz, czego się uczyć, co już umiesz i&nbsp;nad czym pracować dalej.
           </p>
         </div>
         <div

@@ -23,29 +23,29 @@ type Option = { icon: IconComponent; title: string; description: string; cta: st
 const OPTIONS: Option[] = [
   {
     icon: ShieldUser,
-    title: "Sprzedaż",
-    description: "Porozmawiaj z nami o dostępie dla szkoły lub klasy, cenach dla grup i wdrożeniu.",
+    title: "Szkoły i współpraca",
+    description: "Porozmawiaj z nami o dostępie dla uczniów, licencji szkolnej, cenach dla grup i wdrożeniu.",
     cta: "Porozmawiaj z nami",
     href: "/contact/sales",
   },
   {
     icon: MessagesSquare,
-    title: "Wsparcie",
-    description: "Napisz do nas w sprawie konta, logowania lub płatności albo podziel się opinią.",
+    title: "Pomoc techniczna",
+    description: "Napisz do nas w sprawie konta, logowania, płatności lub problemów z platformą.",
     cta: "Uzyskaj pomoc",
     href: "/contact/support",
   },
   {
     icon: FileText,
-    title: "Dokumentacja",
-    description: "Sprawdź przewodniki po platformie i odpowiedzi na najczęstsze pytania dotyczące Examax.",
-    cta: "Przejdź do dokumentacji",
+    title: "Centrum pomocy",
+    description: "Znajdź odpowiedzi na najczęstsze pytania i przewodniki dotyczące korzystania z Examax.",
+    cta: "Przejdź do centrum pomocy",
     href: "/docs",
   },
   {
     icon: WarningIcon,
-    title: "Znalazłeś błąd?",
-    description: "Powiedz nam, gdzie go zauważyłeś — w zadaniu, rozwiązaniu albo aplikacji. Sprawdzimy to i poprawimy.",
+    title: "Zgłoś problem",
+    description: "Znalazłeś błąd w zadaniu, rozwiązaniu lub aplikacji? Napisz do nas — sprawdzimy go i poprawimy.",
     cta: "Zgłoś problem",
     href: "/contact/support?temat=techniczny",
   },
@@ -76,7 +76,7 @@ export default function ContactPage() {
       </a>
       <Navbar />
       <main id="main" className="flex-1 bg-white">
-        <ContactHero title="W czym możemy pomóc?" sub="Skontaktuj się z nami w sprawie szkoły, konta, płatności lub dowolnego pytania dotyczącego Examax.">
+        <ContactHero title="W czym możemy pomóc?" sub="Skontaktuj się z nami w sprawie szkoły, konta, płatności lub działania platformy Examax.">
           <SystemsPill />
         </ContactHero>
 

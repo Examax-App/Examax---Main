@@ -16,8 +16,8 @@ export function WorkSection() {
         id="work-heading"
         icon={Workflow}
         eyebrow="Jak pracują"
-        title="Znają Twój plan, więc nie zaczynasz od zera"
-        sub="Agenci korzystają z Twojego treningu, roadmapy i postępów, więc nie musisz za każdym razem tłumaczyć, gdzie jesteś. Zadania nadal rozwiązujesz sam."
+        title="Znają Twój postęp, więc od razu wiedzą, gdzie jesteś"
+        sub="Pomocnicy korzystają z Twojego treningu, roadmapy i postępów, więc nie musisz za każdym razem zaczynać od początku. Zadania nadal rozwiązujesz sam."
       />
       <div className="mt-14">
         <FeatureGrid
@@ -34,11 +34,11 @@ export function WorkSection() {
               visual: <ConnectedHub />,
             },
             {
-              title: "Pomaga utrzymać rytm",
+              title: "Pomaga uczyć się regularnie",
               description: (
                 <>
-                  Ustal raz, kiedy się uczysz. Agent przygotuje zadania na każdą sesję i zaproponuje zmianę <Link href="/roadmap">roadmapy</Link>, gdy
-                  coś wypadnie.
+                  Ustal czas nauki, a Examax pomoże przygotować kolejne sesje i dopasować <Link href="/roadmap">plan</Link>, gdy coś się
+                  zmieni.
                 </>
               ),
               cta: { label: "Zobacz roadmapę", href: "/roadmap" },

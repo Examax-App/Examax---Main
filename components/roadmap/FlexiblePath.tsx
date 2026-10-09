@@ -45,8 +45,8 @@ type Tab = { icon: IconComponent; title: string; description: string; cta: { lab
 const TABS: Tab[] = [
   {
     icon: LockOpen,
-    title: "Każdy temat otwarty",
-    description: "Kolejność w planie to sugestia, nie obowiązek. Możesz zacząć od dowolnego tematu i wrócić do niego później.",
+    title: "Każdy temat dostępny od początku",
+    description: "Możesz zacząć od dowolnego tematu i wrócić do niego później.",
     cta: { label: "Ułóż roadmapę", href: "/signup" },
   },
   {
@@ -58,7 +58,7 @@ const TABS: Tab[] = [
   {
     icon: RefreshCcw,
     title: "Plan reaguje na wyniki",
-    description: "Słabszy wynik w quizie? Examax dodaje powtórkę tematu i odpowiednio przesuwa resztę tygodnia.",
+    description: "Słabszy wynik w quizie? Plan proponuje powtórkę tematu i odpowiednio przesuwa resztę tygodnia.",
     cta: { label: "Poznaj Korepetytora AI", href: "/agents" },
   },
 ];
@@ -98,8 +98,8 @@ export function FlexiblePath() {
       <SectionHeader
         id="flexible-heading"
         icon={Waypoints}
-        eyebrow="Elastyczna ścieżka"
-        title="Ty wybierasz, którędy idziesz"
+        eyebrow="Elastyczny plan nauki"
+        title="Ty decydujesz, od czego zaczniesz"
         sub="Roadmapa podpowiada kolejność, ale nie blokuje tematów. Przeskakujesz, wracasz i zmieniasz plan, kiedy chcesz."
       />
       <div ref={ref} className="mt-12 border-y border-ash bg-canvas-muted px-4 pb-10 pt-12">
@@ -311,7 +311,7 @@ function QuizWindow() {
 /* ── Stage 3: a plan that reacts ─────────────────────────────────────────── */
 
 /*
- * The landing page's "Jak działa Examax" flow, reused as it is: results roll
+ * The landing page's "Jak wygląda nauka w Examax" flow, reused as it is: results roll
  * through the carousel, the newest one passes through the card into Examax,
  * and fans out to the three things that reshape the week.
  * PLACEHOLDER DATA — illustrative results.

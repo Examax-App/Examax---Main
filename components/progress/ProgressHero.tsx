@@ -57,13 +57,13 @@ export function ProgressHero() {
             className="animate-slide-up-fade mt-5 text-left font-satoshi text-4xl font-medium text-charcoal sm:text-5xl sm:leading-[1.15]"
             style={{ "--offset": "20px", "--delay": "100ms" } as React.CSSProperties}
           >
-            Wiesz, na czym stoisz przed egzaminem
+            Widzisz, jak rośnie Twoje przygotowanie
           </h1>
           <p
             className="animate-slide-up-fade mt-5 text-pretty text-base text-steel sm:text-xl"
             style={{ "--offset": "10px", "--delay": "200ms" } as React.CSSProperties}
           >
-            Zadania, quizy, lekcje i&nbsp;arkusze składają się na Twoją historię nauki. Widzisz mocne strony, tematy do poprawy i&nbsp;to, co warto przećwiczyć dalej.
+            Zadania, quizy, lekcje i&nbsp;arkusze tworzą historię Twojej nauki. Widzisz swoje mocne strony, tematy do poprawy i&nbsp;kolejny krok przygotowań.
           </p>
         </div>
         <div

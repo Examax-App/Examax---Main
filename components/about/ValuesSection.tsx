@@ -23,24 +23,24 @@ type Value = { title: string; body: string };
 
 const VALUES: Value[] = [
   {
-    title: "Nauka szyta na miarę",
-    body: "Nauka dopasowana do ucznia: zaczynasz od tego, co już umiesz, i ćwiczysz to, co wymaga poprawy. Chcemy, żebyś rozumiał nie tylko swój wynik, ale też to, co już opanowałeś i nad czym warto jeszcze popracować.",
+    title: "Indywidualna ścieżka nauki",
+    body: "Każdy zaczyna z innego miejsca. Examax pomaga skupić się na tematach, które wymagają największej pracy, zamiast powtarzać wszystko od początku.",
   },
   {
-    title: "Zero reklam",
-    body: "Nie budujemy Examaxu wokół reklam. Liczy się Twoja wygoda i to, żebyś naprawdę czegoś się nauczył. Chcemy, żeby Examax rósł dzięki uczniom, którzy polecają go dalej — a nie dzięki reklamodawcom.",
+    title: "Bez reklam",
+    body: "Nie chcemy przerywać nauki reklamami. Budujemy produkt, który rozwija się dzięki użytkownikom i jakości doświadczenia.",
   },
   {
-    title: "Zrozumieć, nie przepisać",
-    body: "Korepetytor AI prowadzi krok po kroku i pyta o Twój następny ruch, zamiast podawać gotowe rozwiązanie. Na egzaminie nie będzie czatu — zostanie to, co naprawdę rozumiesz.",
+    title: "Rozumieć, nie kopiować",
+    body: "Najważniejsze jest zrozumienie rozwiązania. AI pomaga znaleźć drogę, ale to uczeń wykonuje pracę i buduje własne umiejętności.",
   },
   {
-    title: "Ciągle poprawiamy",
-    body: "Examax cały czas się rozwija. Ważne zmiany opisujemy w aktualnościach, a uwagi użytkowników pomagają nam ulepszać platformę. Zgłoszone błędy w zadaniach poprawiamy w pierwszej kolejności.",
+    title: "Ciągle rozwijamy",
+    body: "Examax rozwija się razem z użytkownikami. Opinie uczniów i nauczycieli pomagają nam poprawiać platformę i budować kolejne funkcje.",
   },
   {
-    title: "Oryginalne zadania CKE",
-    body: "Korzystamy z oficjalnych materiałów egzaminacyjnych Centralnej Komisji Egzaminacyjnej i nie przypisujemy sobie do nich praw. Nasza wartość to wszystko, co budujemy wokół nich: środowisko nauki, wyjaśnienia i narzędzia, które pomagają zrozumieć, czego wymaga egzamin.",
+    title: "Materiały zgodne z CKE",
+    body: "Korzystamy z oficjalnych materiałów egzaminacyjnych CKE. Naszą wartością są narzędzia wokół nich: plan nauki, analiza wyników i środowisko pomagające lepiej przygotować się do egzaminu.",
   },
 ];
 

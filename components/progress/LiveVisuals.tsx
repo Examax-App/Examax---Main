@@ -118,15 +118,14 @@ export function TutorNote() {
           <span className="font-satoshi text-xl font-bold tracking-tight text-charcoal">Korepetytor AI</span>
         </span>
         <blockquote className="mt-10 text-pretty text-base text-steel sm:text-[17px] sm:leading-7">
-          <strong className="font-semibold text-charcoal">Funkcja kwadratowa idzie Ci coraz lepiej</strong> — 9 z 10 punktów w ostatnim quizie. W
-          trygonometrii trzy z czterech ostatnich błędów to{" "}
+          <strong className="font-semibold text-charcoal">Analizuje Twoje wyniki</strong> i pomaga wybrać kolejny krok. Wskazuje{" "}
           <Link
             href="/training"
             className="font-medium text-slate underline decoration-dotted underline-offset-2 transition-colors hover:text-charcoal"
           >
-            wzory redukcyjne
-          </Link>
-          , więc dziś proponuję 15 minut powtórki i dwa zadania z arkusza 2024.
+            tematy wymagające powtórki
+          </Link>{" "}
+          oraz proponuje zadania dopasowane do Twoich błędów.
         </blockquote>
       </div>
       <div className="relative flex items-center gap-3">

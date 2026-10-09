@@ -14,7 +14,7 @@ export function JourneySection() {
         id="journey-heading"
         icon={Filter}
         eyebrow="Opanowanie tematów"
-        title="Od pierwszej próby do opanowania"
+        title="Od pierwszego zadania do pełnego przygotowania"
         sub="Widzisz, ile tematów z roadmapy już przerobiłeś, ile masz opanowanych i co jeszcze zostało."
         actions={[
           { label: "Zacznij za darmo", href: "/signup", variant: "primary" },
@@ -25,13 +25,13 @@ export function JourneySection() {
       <FeatureGrid
         cells={[
           {
-            title: "Cała historia nauki w profilu",
+            title: "Cała historia przygotowań w profilu",
             description: "Ile dni od diagnozy do pierwszego arkusza, jaki masz średni wynik i co zrobiłeś ostatnio — w jednym miejscu.",
             cta: { label: "Załóż konto", href: "/signup" },
             visual: <LearnerInsight />,
           },
           {
-            title: "Cała nauka w jednym miejscu",
+            title: "Wszystkie wyniki w jednym miejscu",
             description: "Wyniki z treningu, roadmapy i symulacji trafiają do tych samych statystyk — nic nie trzeba przepisywać.",
             cta: { label: "Poznaj Examax", href: "/" },
             visual: <ExamaxTiles />,

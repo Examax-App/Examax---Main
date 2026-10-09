@@ -32,10 +32,10 @@ type SkillKey = "explain" | "check" | "test" | "pick" | "plan" | "review";
 const SKILLS: Array<{ key: SkillKey; label: string; icon: IconComponent; detail: string }> = [
   { key: "explain", label: "Tłumaczy krok po kroku", icon: BookOpenCheck, detail: "Pyta o Twój następny ruch, zamiast podawać gotowy wynik." },
   { key: "check", label: "Sprawdza rozwiązania", icon: ScanSearch, detail: "Przechodzi przez rozwiązanie i wskazuje, gdzie jest błąd." },
-  { key: "test", label: "Układa sprawdziany", icon: FileCheck2, detail: "Z działów, które wymagają pracy, oceniane według zasad CKE." },
+  { key: "test", label: "Tworzy zestawy ćwiczeń", icon: FileCheck2, detail: "Dobiera zadania do tematów, które wymagają najwięcej pracy." },
   { key: "pick", label: "Dobiera zadania CKE", icon: Search, detail: "Z oryginalnych arkuszy, do tematu, który właśnie ćwiczysz." },
-  { key: "plan", label: "Zmienia roadmapę", icon: CalendarClock, detail: "Proponuje zmiany, gdy masz mniej czasu — wprowadza je za Twoją zgodą." },
-  { key: "review", label: "Planuje powtórki", icon: RefreshCcw, detail: "Przypomina o tematach, do których warto wrócić." },
+  { key: "plan", label: "Pomaga dostosować roadmapę", icon: CalendarClock, detail: "Proponuje zmiany, gdy zmienia się Twój cel lub dostępny czas." },
+  { key: "review", label: "Przypomina o powtórkach", icon: RefreshCcw, detail: "Pomaga wrócić do tematów, które warto utrwalić." },
 ];
 const SKILL = Object.fromEntries(SKILLS.map((skill) => [skill.key, skill])) as Record<SkillKey, (typeof SKILLS)[number]>;
 
@@ -141,7 +141,7 @@ function Preview({ face, name, brief, skills }: { face: Face; name: string; brie
 function Builder({ onCreate }: { onCreate: (agent: Omit<MyAgent, "id">) => void }) {
   const [face, setFace] = useState<Face>(FACES[0]);
   const [name, setName] = useState("Trener ciągów");
-  const [brief, setBrief] = useState("Ćwiczy ze mną ciągi po 10 minut dziennie. Najpierw pyta, potem podpowiada, a na końcu sprawdza moje rozwiązanie.");
+  const [brief, setBrief] = useState("Codziennie ćwiczy ze mną ciągi przez 10 minut. Najpierw pyta, potem pomaga znaleźć rozwiązanie, a na końcu sprawdza mój tok myślenia.");
   const [skills, setSkills] = useState<SkillKey[]>(["explain", "check", "review"]);
   const ready = name.trim().length > 0 && skills.length > 0;
 
@@ -292,8 +292,8 @@ export function TeamSection() {
         id="team-heading"
         icon={Users}
         eyebrow="Twoi agenci"
-        title="Stwórz agenta do konkretnego celu"
-        sub="Agent to Twój pomocnik do jednej rzeczy: ćwiczenia matematyki, uwag do wypracowań, nauki angielskiego albo powtórek. Nadajesz mu imię i zadanie, a potem decydujesz, w czym może pomagać."
+        title="Stwórz własnego pomocnika do nauki"
+        sub="Tworzysz pomocnika do konkretnego celu: matematyki, wypracowań, angielskiego albo powtórek. Nadajesz mu zadanie, a on pomaga Ci regularnie pracować."
       />
 
       <div className="mt-14 border-t border-ash px-4 py-10 sm:px-12 sm:py-14">

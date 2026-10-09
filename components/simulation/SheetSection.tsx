@@ -12,20 +12,20 @@ export function SheetSection() {
       <SectionHeader
         id="sheet-heading"
         title="Pełny arkusz, nie kolejny quiz"
-        sub="Ten sam arkusz, ten sam czas i te same narzędzia co na sali — żeby w dniu egzaminu format był Ci już znany."
+        sub="Ten sam format, czas i zasady, które poznasz na egzaminie — żeby dzień egzaminu nie był pierwszym razem."
       />
       <div className="mt-12">
         <FeatureGrid
           cells={[
             {
               title: "Zegar jak na sali",
-              description: "Czas biegnie tak jak na egzaminie — 180 minut na maturze z matematyki. Po oddaniu widzisz, jak zbierałeś punkty minuta po minucie.",
+              description: "Czas dokładnie jak na egzaminie. Od pierwszej do ostatniej minuty pracujesz w tych samych ramach czasowych, a po zakończeniu widzisz przebieg swojego arkusza.",
               cta: { label: "Zobacz raport", href: "#report" },
               visual: <PaceChart />,
             },
             {
               title: "Narzędzia, których wolno używać",
-              description: "Pióro, gumka, brudnopis, karta wzorów i prosty kalkulator — dokładnie to, co masz na sali, i nic ponad to.",
+              description: "Korzystasz tylko z narzędzi dostępnych podczas prawdziwego egzaminu — bez dodatkowych podpowiedzi i skrótów.",
               cta: { label: "Zobacz narzędzia", href: "#tools" },
               visual: <ToolScroll />,
             },
@@ -37,7 +37,7 @@ export function SheetSection() {
             },
             {
               title: "Każdy ruch zapisany",
-              description: "Odpowiedzi, notatki i rysunki zapisują się automatycznie, a dziennik arkusza pokazuje, co i kiedy zrobiłeś — nawet gdy zamkniesz kartę.",
+              description: "Twoje odpowiedzi, czas pracy i wyniki zapisują się automatycznie, tworząc historię podejść i pokazując Twój progres.",
               cta: { label: "Zobacz postępy", href: "/progress" },
               visual: <AnswerLog />,
             },

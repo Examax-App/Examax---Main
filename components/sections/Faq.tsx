@@ -7,58 +7,78 @@ import { Reveal } from "@/components/ui/Reveal";
 
 type FaqItem = { question: string; answer: React.ReactNode };
 
+const strong = (label: string) => <strong className="font-semibold text-charcoal">{label}</strong>;
+
 const faqs: FaqItem[] = [
   {
-    question: "Do których egzaminów przygotowuje Examax?",
+    question: "Do jakich egzaminów przygotowuje Examax?",
     answer:
-      "Do egzaminu ósmoklasisty oraz matury — na poziomie podstawowym i rozszerzonym. Zaczynamy od matematyki, języka polskiego i języka angielskiego, a lista przedmiotów rośnie.",
+      "Do egzaminu ósmoklasisty oraz matury — na poziomie podstawowym i rozszerzonym. Zaczynamy od matematyki, języka polskiego i języka angielskiego, a kolejne przedmioty będziemy dodawać.",
   },
   {
-    question: "Czy zadania naprawdę pochodzą z arkuszy CKE?",
+    question: "Czy zadania w Examax naprawdę pochodzą z arkuszy CKE?",
     answer:
-      "Tak. Trenujesz na zadaniach z oficjalnych arkuszy egzaminacyjnych CKE z poprzednich lat. Każde zadanie ma podane źródło i jest punktowane według oficjalnych zasad oceniania.",
+      "Tak. Trenujesz na zadaniach z oficjalnych arkuszy egzaminacyjnych CKE z poprzednich lat. Każde zadanie ma przypisane źródło i jest oceniane zgodnie z zasadami punktacji egzaminacyjnej.",
   },
   {
-    question: "Czym Examax różni się od aplikacji z quizami?",
+    question: "Czym Examax różni się od zwykłej aplikacji z quizami?",
     answer:
-      "Quiz sprawdza, co umiesz — Examax dodatkowo mówi, co dalej. Roadmapa układa cały materiał w kolejne kroki, trening wzmacnia słabe punkty, a Korepetytor AI tłumaczy błędy. To system przygotowań, nie zbiór pytań.",
+      "Quiz pokazuje wynik. Examax pomaga zrozumieć, co zrobić dalej. Roadmapa prowadzi przez cały materiał, trening wzmacnia słabe obszary, a Korepetytor AI pomaga zrozumieć błędy.",
   },
   {
     question: "Jak działa Korepetytor AI?",
-    answer:
-      "Korepetytor AI widzi Twoją roadmapę, Twoje odpowiedzi i Twoje wcześniejsze błędy. Kiedy pytasz o zadanie, tłumaczy je krok po kroku i podpowiada, co przećwiczyć dalej. Jak każde AI może się mylić — dlatego jego wyjaśnienia opieramy na oficjalnych zasadach oceniania CKE.",
+    answer: (
+      <>
+        <p>
+          Korepetytor AI korzysta z Twoich wyników, postępów i rozwiązywanych zadań, aby lepiej dopasować wyjaśnienia. Pokazuje rozwiązanie krok po kroku i
+          pomaga zdecydować, co warto przećwiczyć dalej.
+        </p>
+        <p>
+          Jak każde AI może popełnić błąd — dlatego traktuj jego odpowiedzi jako pomoc w nauce, a nie zastępstwo oficjalnych materiałów egzaminacyjnych.
+        </p>
+      </>
+    ),
   },
   {
     question: "Czy Examax zastępuje korepetycje?",
     answer:
-      "Nie zawsze — i nie musi. Examax daje Ci plan, zadania i wyjaśnienia dostępne o każdej porze. Część osób uczy się tylko z nim; innym pomaga wyciągnąć więcej z korepetycji, bo na zajęcia przychodzą z konkretnymi pytaniami.",
+      "Nie musi. Examax daje Ci plan nauki, zadania i pomoc wtedy, kiedy jej potrzebujesz. Możesz uczyć się samodzielnie albo korzystać z niego razem z korepetycjami.",
   },
   {
     question: "Ile kosztuje Examax?",
     answer: (
       <>
-        Plan{" "}
-        <strong className="font-semibold text-charcoal">Free</strong> jest
-        darmowy i nie wymaga karty — roadmapa i trening są w nim bez
-        limitu. Plan{" "}
-        <strong className="font-semibold text-charcoal">Pro</strong> kosztuje
-        49 zł miesięcznie, a{" "}
-        <strong className="font-semibold text-charcoal">Max</strong> 79 zł
-        miesięcznie; przy płatności rocznej płacisz za dziesięć miesięcy, a
-        korzystasz przez dwanaście. Ceny są takie same dla matury i egzaminu
-        ósmoklasisty.
+        <p>
+          Plan {strong("Free")} jest darmowy i nie wymaga podawania karty. Obejmuje roadmapę oraz trening zadań.
+        </p>
+        <p>
+          Plan {strong("Pro")} kosztuje 49 zł miesięcznie, a {strong("Max")} 79 zł miesięcznie. Przy płatności rocznej oszczędzasz równowartość dwóch
+          miesięcy. Wszystkie plany działają zarówno dla egzaminu ósmoklasisty, jak i matury.
+        </p>
       </>
     ),
   },
   {
     question: "Kiedy pojawią się symulacje egzaminu?",
-    answer:
-      "Pracujemy nad nimi teraz — z pełnym formatem arkusza, czasem liczonym jak na sali i raportem gotowości po zakończeniu. W planie Free napiszesz jeden próbny arkusz, w Pro cztery symulacje w miesiącu, a w Max bez limitu. Ogłosimy start na tej stronie i w aplikacji.",
+    answer: (
+      <>
+        <p>
+          Pracujemy nad symulacjami pełnych arkuszy w warunkach zbliżonych do prawdziwego egzaminu — z limitem czasu i raportem wyników.
+        </p>
+        <p>Po uruchomieniu będą dostępne zgodnie z wybranym planem. Informacje o premierze pojawią się w Aktualnościach.</p>
+      </>
+    ),
   },
   {
-    question: "Co z moimi danymi?",
-    answer:
-      "Twoje dane należą do Ciebie. Nie sprzedajemy ich i przetwarzamy je zgodnie z RODO. Możesz poprosić o kopię swoich danych albo o usunięcie konta.",
+    question: "Jak dbacie o moje dane?",
+    answer: (
+      <>
+        <p>
+          Twoje dane należą do Ciebie. Nie sprzedajemy ich i przetwarzamy je zgodnie z obowiązującymi przepisami o ochronie danych, w tym RODO.
+        </p>
+        <p>Możesz w każdej chwili zarządzać swoim kontem, poprosić o dostęp do danych lub usunąć konto.</p>
+      </>
+    ),
   },
 ];
 
@@ -138,7 +158,7 @@ export function Faq({
                     )}
                   >
                     <div className="min-h-0 overflow-hidden">
-                      <p className="pb-4 pr-11 text-body-sm text-fog sm:text-body-lg">{faq.answer}</p>
+                      <div className="space-y-3 pb-4 pr-11 text-body-sm text-fog sm:text-body-lg">{faq.answer}</div>
                     </div>
                   </div>
                 </div>

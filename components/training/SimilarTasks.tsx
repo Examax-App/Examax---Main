@@ -191,7 +191,7 @@ export function SimilarTasks() {
             id="similar-heading"
             className="text-balance font-satoshi text-3xl font-medium text-charcoal sm:text-4xl md:text-5xl"
           >
-            Zadania podobne do Twoich błędów
+            Zadania dopasowane do Twoich błędów
           </h2>
           <p className="mt-3 text-pretty text-lg text-fog">
             Pomyliłeś się? Examax znajdzie zadania, które sprawdzają tę samą

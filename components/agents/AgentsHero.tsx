@@ -88,7 +88,7 @@ export function AgentsHero() {
             className="animate-slide-up-fade mt-5 text-pretty text-lg font-medium text-fog sm:text-xl"
             style={{ "--offset": "10px", "--delay": "150ms" } as React.CSSProperties}
           >
-            Korepetytor AI tłumaczy zadania krok po kroku, sprawdza Twój tok rozumowania i&nbsp;pomaga zaplanować powtórki. Każde zadanie rozwiązujesz sam — dlatego wiedza zostaje z&nbsp;Tobą.
+            Korepetytor AI prowadzi Cię krok po kroku, pomaga znaleźć błąd i&nbsp;pokazuje, co warto przećwiczyć dalej. Ty rozwiązujesz zadanie — AI pomaga Ci lepiej zrozumieć.
           </p>
         </div>
         <div

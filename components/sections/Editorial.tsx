@@ -600,6 +600,14 @@ function LearnerCard({
 /* Scenes ------------------------------------------------------------------ */
 
 /**
+ * Scene furniture lifts toward the pointer. Only the visible scene takes
+ * hover — the overlay stays click-through, so the copy and its chips
+ * underneath are never blocked.
+ */
+const POP =
+  "pointer-events-none transition-[translate,scale,filter] duration-300 ease-out group-data-[active=true]/scene:pointer-events-auto hover:-translate-y-1.5 hover:scale-[1.03] hover:drop-shadow-[0_10px_16px_rgba(0,0,0,0.08)] motion-reduce:transition-none";
+
+/**
  * Which scene each chip reveals. The roadmap chip shows the learner and the
  * mastery funnel, and the green practice chip shows the topic cards and the
  * step builder — assigned this way round at the user's request.
@@ -609,18 +617,18 @@ const SCENES: Record<Product, () => React.ReactNode> = {
     <Gutters
       left={
         <>
-          <IconTile icon={ScanFace} className="right-40 top-1/4 rotate-15" />
-          <IconTile icon={ChartNoAxesColumn} className="right-20 top-[28%] -rotate-10" />
-          <div className="absolute right-10 top-[38%] -rotate-7">
+          <IconTile icon={ScanFace} className={cn(POP, "right-40 top-1/4 rotate-15")} />
+          <IconTile icon={ChartNoAxesColumn} className={cn(POP, "right-20 top-[28%] -rotate-10")} />
+          <div className={cn(POP, "absolute right-10 top-[38%] -rotate-7")}>
             <StudentCard />
           </div>
         </>
       }
       right={
         <>
-          <IconTile icon={Target} className="left-20 top-1/4 rotate-10" />
-          <IconTile icon={Table2} className="left-40 top-[23%] -rotate-15" />
-          <FunnelCard className="absolute left-6 top-[37%] rotate-7" />
+          <IconTile icon={Target} className={cn(POP, "left-20 top-1/4 rotate-10")} />
+          <IconTile icon={Table2} className={cn(POP, "left-40 top-[23%] -rotate-15")} />
+          <FunnelCard className={cn(POP, "absolute left-6 top-[37%] rotate-7")} />
         </>
       }
     />
@@ -629,18 +637,18 @@ const SCENES: Record<Product, () => React.ReactNode> = {
     <Gutters
       left={
         <>
-          <IconTile icon={Map} className="right-40 top-[30%] -rotate-15" />
-          <IconTile icon={Milestone} className="right-20 top-1/4 rotate-10" />
-          <TopicCard topic="Ciągi arytmetyczne" tasks="36" correct="29" time="1,5h" className="right-12 top-[51%] -rotate-3" />
-          <TopicCard topic="Równania kwadratowe" tasks="52" correct="44" time="3h" className="right-8 top-[45%] -rotate-10" />
-          <TopicCard topic="Funkcja liniowa" tasks="48" correct="41" time="2h" className="right-16 top-[40%] -rotate-5" />
+          <IconTile icon={Map} className={cn(POP, "right-40 top-[30%] -rotate-15")} />
+          <IconTile icon={Milestone} className={cn(POP, "right-20 top-1/4 rotate-10")} />
+          <TopicCard topic="Ciągi arytmetyczne" tasks="36" correct="29" time="1,5h" className={cn(POP, "right-12 top-[51%] -rotate-3")} />
+          <TopicCard topic="Równania kwadratowe" tasks="52" correct="44" time="3h" className={cn(POP, "right-8 top-[45%] -rotate-10")} />
+          <TopicCard topic="Funkcja liniowa" tasks="48" correct="41" time="2h" className={cn(POP, "right-16 top-[40%] -rotate-5")} />
         </>
       }
       right={
         <>
-          <IconTile icon={Signpost} className="left-20 top-[20%] -rotate-10" />
-          <IconTile icon={CalendarCheck} className="left-40 top-1/4 rotate-15" />
-          <StepBuilderMini className="left-8 top-[35%] rotate-7" />
+          <IconTile icon={Signpost} className={cn(POP, "left-20 top-[20%] -rotate-10")} />
+          <IconTile icon={CalendarCheck} className={cn(POP, "left-40 top-1/4 rotate-15")} />
+          <StepBuilderMini className={cn(POP, "left-8 top-[35%] rotate-7")} />
         </>
       }
     />
@@ -649,18 +657,18 @@ const SCENES: Record<Product, () => React.ReactNode> = {
     <Gutters
       left={
         <>
-          <IconTile icon={TrendingUp} className="right-40 top-[32%] rotate-15" />
-          <IconTile icon={Gauge} className="right-20 top-[27%] -rotate-10" />
-          <LearnerCard name="Zuzanna Nowak" exam="matura" mastery="78%" streak="34 dni" photo={zuzannaPhoto} className="right-20 top-[49%] -rotate-3" />
-          <LearnerCard name="Kacper Lewandowski" exam="e8" mastery="64%" streak="12 dni" photo={kacperPhoto} className="right-10 top-[42%] rotate-8" />
+          <IconTile icon={TrendingUp} className={cn(POP, "right-40 top-[32%] rotate-15")} />
+          <IconTile icon={Gauge} className={cn(POP, "right-20 top-[27%] -rotate-10")} />
+          <LearnerCard name="Zuzanna Nowak" exam="matura" mastery="78%" streak="34 dni" photo={zuzannaPhoto} className={cn(POP, "right-20 top-[49%] -rotate-3")} />
+          <LearnerCard name="Kacper Lewandowski" exam="e8" mastery="64%" streak="12 dni" photo={kacperPhoto} className={cn(POP, "right-10 top-[42%] rotate-8")} />
         </>
       }
       right={
         <>
-          <IconTile icon={Target} className="left-20 top-[28%] rotate-10" />
-          <IconTile icon={ChartNoAxesColumn} className="left-40 top-1/4 -rotate-15" />
-          <LearnerCard name="Maja Zielińska" exam="matura" mastery="86%" streak="51 dni" photo={majaPhoto} className="left-4 top-[45%] rotate-6" />
-          <LearnerCard name="Szymon Wójcik" exam="e8" mastery="71%" streak="19 dni" photo={szymonPhoto} className="left-8 top-[38%] -rotate-4" />
+          <IconTile icon={Target} className={cn(POP, "left-20 top-[28%] rotate-10")} />
+          <IconTile icon={ChartNoAxesColumn} className={cn(POP, "left-40 top-1/4 -rotate-15")} />
+          <LearnerCard name="Maja Zielińska" exam="matura" mastery="86%" streak="51 dni" photo={majaPhoto} className={cn(POP, "left-4 top-[45%] rotate-6")} />
+          <LearnerCard name="Szymon Wójcik" exam="e8" mastery="71%" streak="19 dni" photo={szymonPhoto} className={cn(POP, "left-8 top-[38%] -rotate-4")} />
         </>
       }
     />
@@ -794,14 +802,14 @@ export function Editorial() {
               <p>
                 Examax łączy plan nauki {chip("roadmap")}, zadania egzaminacyjne{" "}
                 {chip("practice")} i historię Twoich wyników {chip("progress")} w jedno
-                miejsce przygotowań.
+                miejsce do codziennej nauki.
               </p>
               <p>
                 Od pierwszego zadania do egzaminu widzisz, czego się uczyć, co już
                 umiesz i nad czym pracować dalej.
               </p>
               <p>
-                Lepszy wynik zaczyna się od regularnej pracy i jasnego planu.
+                Wszystko oparte na oryginalnych zadaniach z arkuszy CKE.
               </p>
             </div>
           </div>
@@ -815,8 +823,9 @@ export function Editorial() {
           {PRODUCTS.map((product) => (
             <div
               key={product}
+              data-active={active === product}
               className={cn(
-                "absolute inset-0 transition-[translate,opacity] duration-500 motion-reduce:transition-none",
+                "group/scene absolute inset-0 transition-[translate,opacity] duration-500 motion-reduce:transition-none",
                 active === product ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0",
               )}
             >

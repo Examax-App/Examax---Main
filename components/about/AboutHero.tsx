@@ -59,14 +59,14 @@ export function AboutHero() {
               className="animate-slide-up-fade mt-5 text-pretty text-center font-satoshi text-4xl font-medium !leading-tight text-charcoal sm:text-5xl"
               style={{ "--offset": "20px" } as React.CSSProperties}
             >
-              Przygotuj się <HeadingChip chip={CHIPS.learner} /> do egzaminów CKE w&nbsp;jednym miejscu — <HeadingChip chip={CHIPS.exam} /> ćwicz
-              zadania, <HeadingChip chip={CHIPS.result} /> śledź postępy i&nbsp;ucz się na błędach.
+              Przygotuj się <HeadingChip chip={CHIPS.learner} /> do egzaminów CKE w&nbsp;jednym miejscu — <HeadingChip chip={CHIPS.exam} /> rozwiązuj
+              zadania, <HeadingChip chip={CHIPS.result} /> rozumiej swoje błędy i&nbsp;widzisz, co zrobić dalej.
             </h1>
             <p
               className="animate-slide-up-fade mx-auto mt-5 w-full max-w-md text-pretty text-xl text-fog"
               style={{ "--delay": "100ms" } as React.CSSProperties}
             >
-              Budujemy jedno miejsce do nauki na egzaminy CKE — od pierwszego testu do dnia egzaminu.
+              Budujemy miejsce, w którym każdy uczeń może przygotować się do egzaminu z jasnym planem — od pierwszej diagnozy do ostatniego arkusza.
             </p>
             <div
               className="animate-slide-up-fade relative mx-auto mt-10 flex max-w-fit"

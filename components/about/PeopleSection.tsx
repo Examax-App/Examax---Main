@@ -114,10 +114,10 @@ export function PeopleSection() {
               Ludzie
             </div>
             <h2 id="people-heading" className="mx-auto mt-3 max-w-xl text-pretty font-satoshi text-3xl font-medium text-charcoal sm:text-4xl sm:leading-tight">
-              Robione w Polsce, pod polski egzamin
+              Tworzone w Polsce, dla polskich uczniów
             </h2>
             <p className="mt-3 text-pretty text-lg text-fog">
-              Examax to młody, niezależny projekt. Pracujemy w małym składzie — blisko arkuszy CKE i blisko uczniów, którzy się z nich uczą.
+              Examax to niezależny projekt tworzony w Polsce. Budujemy go blisko uczniów, nauczycieli i wymagań współczesnych egzaminów.
             </p>
           </Reveal>
 

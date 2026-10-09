@@ -217,7 +217,7 @@ export function DiagnosticBand() {
             </h2>
             <p className="mx-auto max-w-[564px] text-pretty text-lg tracking-[-0.02em] text-fog">
               Dwadzieścia zadań z całego materiału. Po ostatnim Examax wie, od
-              czego zacząć — i układa pierwszy tydzień pod Twoje słabe tematy.
+              czego zacząć — i proponuje pierwszy tydzień pod Twoje słabe tematy.
             </p>
           </div>
           <Button href="/signup" variant="outline" className="mt-8">
