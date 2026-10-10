@@ -50,7 +50,8 @@ function SidePanel() {
   );
 }
 
-export function AuthLayout({ children }: { children: React.ReactNode }) {
+/** `terms`: the consent line under the form — for screens where someone is about to sign in or sign up, not for an account they are already in. */
+export function AuthLayout({ children, terms = true }: { children: React.ReactNode; terms?: boolean }) {
   return (
     <div className="relative grid min-h-dvh grid-cols-1 min-[900px]:grid-cols-[minmax(0,1fr)_440px] lg:grid-cols-[minmax(0,1fr)_595px]">
       <div className="relative">
@@ -79,17 +80,21 @@ export function AuthLayout({ children }: { children: React.ReactNode }) {
             </div>
             <ClientOnly className="relative flex w-full flex-col items-center justify-center px-4">{children}</ClientOnly>
             <div className="flex grow basis-0 flex-col justify-end">
-              <p className="px-20 py-8 text-center text-xs font-medium text-fog md:px-0">
-                Kontynuując, akceptujesz{" "}
-                <Link href="/legal/terms" className="font-semibold text-steel transition-colors hover:text-graphite">
-                  Regulamin
-                </Link>{" "}
-                i{" "}
-                <Link href="/legal/privacy" className="font-semibold text-steel transition-colors hover:text-graphite">
-                  Politykę prywatności
-                </Link>{" "}
-                Examax
-              </p>
+              {terms ? (
+                <p className="px-20 py-8 text-center text-xs font-medium text-fog md:px-0">
+                  Kontynuując, akceptujesz{" "}
+                  <Link href="/legal/terms" className="font-semibold text-steel transition-colors hover:text-graphite">
+                    Regulamin
+                  </Link>{" "}
+                  i{" "}
+                  <Link href="/legal/privacy" className="font-semibold text-steel transition-colors hover:text-graphite">
+                    Politykę prywatności
+                  </Link>{" "}
+                  Examax
+                </p>
+              ) : (
+                <div className="h-24" />
+              )}
             </div>
           </main>
         </div>

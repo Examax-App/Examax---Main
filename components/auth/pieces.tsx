@@ -13,18 +13,22 @@ import type { IconComponent } from "@/lib/icon";
  * neutral-500/400/300/200 → fog/silver/smoke/ash, red-600 → alert-red.
  */
 
-function buttonClass(variant: "primary" | "secondary", inert: boolean) {
+type ButtonVariant = "primary" | "secondary" | "danger";
+
+function buttonClass(variant: ButtonVariant, inert: boolean) {
   return cn(
     "group flex h-10 w-full cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-lg border px-3 text-sm transition-all",
     inert
       ? "cursor-not-allowed border-ash bg-paper-mist text-silver"
       : variant === "primary"
         ? "border-charcoal bg-charcoal text-white hover:bg-graphite hover:ring-4 hover:ring-ash"
-        : "border-ash bg-white text-charcoal outline-none hover:bg-canvas-muted focus-visible:border-fog aria-expanded:border-smoke aria-expanded:bg-canvas-muted",
+        : variant === "danger"
+          ? "border-alert-red bg-alert-red text-white hover:bg-[#b91c1c] hover:ring-4 hover:ring-[#fee2e2]"
+          : "border-ash bg-white text-charcoal outline-none hover:bg-canvas-muted focus-visible:border-fog aria-expanded:border-smoke aria-expanded:bg-canvas-muted",
   );
 }
 
-/** Dub's auth button: 40px, rounded-lg; black primary with a ring on hover, white secondary. */
+/** Dub's auth button: 40px, rounded-lg; black primary with a ring on hover, white secondary, red for what cannot be undone. */
 export function AuthButton({
   variant = "primary",
   icon,
@@ -34,7 +38,7 @@ export function AuthButton({
   children,
   ...props
 }: React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: "primary" | "secondary";
+  variant?: ButtonVariant;
   icon?: React.ReactNode;
   loading?: boolean;
 }) {
@@ -390,11 +394,23 @@ export function useEmailField(initial = "", { strict = false, onRejected }: { st
 
 /* ─── Resending ─────────────────────────────────────────────────────────── */
 
-const RESEND_AFTER = 30;
+/** Supabase's own minimum gap between two e-mails to one address (Auth → Rate Limits, 60 s by default); a shorter wait here only earns a refusal. */
+const RESEND_AFTER = 60;
 
-/** "Wyślij ponownie", held back for 30 seconds after each send, as a real mailer would. */
-export function ResendLine({ prompt, onResend }: { prompt: string; onResend: () => void }) {
+/**
+ * "Wyślij ponownie", held back for a minute after each send, as Supabase
+ * would refuse anything sooner. `onResend` may be async; returning false (the send failed)
+ * leaves the button ready instead of starting the wait.
+ */
+export function ResendLine({
+  prompt,
+  onResend,
+}: {
+  prompt: string;
+  onResend: () => boolean | void | Promise<boolean | void>;
+}) {
   const [left, setLeft] = useState(RESEND_AFTER);
+  const [sending, setSending] = useState(false);
 
   useEffect(() => {
     if (left <= 0) return;
@@ -406,17 +422,22 @@ export function ResendLine({ prompt, onResend }: { prompt: string; onResend: () 
     <p className="text-center text-sm text-fog">
       {prompt}{" "}
       {left > 0 ? (
-        <span className="font-medium tabular-nums text-silver">Wyślij ponownie za 0:{String(left).padStart(2, "0")}</span>
+        <span className="font-medium tabular-nums text-silver">
+          Wyślij ponownie za {Math.floor(left / 60)}:{String(left % 60).padStart(2, "0")}
+        </span>
       ) : (
         <button
           type="button"
-          onClick={() => {
-            onResend();
-            setLeft(RESEND_AFTER);
+          disabled={sending}
+          onClick={async () => {
+            setSending(true);
+            const sent = await onResend();
+            setSending(false);
+            if (sent !== false) setLeft(RESEND_AFTER);
           }}
-          className="cursor-pointer font-semibold text-slate transition-colors hover:text-charcoal"
+          className="cursor-pointer font-semibold text-slate transition-colors hover:text-charcoal disabled:cursor-not-allowed disabled:text-silver"
         >
-          Wyślij ponownie
+          {sending ? "Wysyłanie…" : "Wyślij ponownie"}
         </button>
       )}
     </p>
@@ -461,7 +482,26 @@ export function MicrosoftGlyph({ className = "size-4" }: { className?: string })
   );
 }
 
-/* ─── Preview feedback ──────────────────────────────────────────────────── */
+/* ─── Methods that are not available yet ───────────────────────────────── */
 
-/** What a UI-only method does when used: a moment of loading, as the real one would show. */
-export const PREVIEW_DELAY = 1400;
+/** How long Facebook, passkey and school account "check" before saying they are not available yet. */
+export const UNAVAILABLE_DELAY = 1200;
+
+/**
+ * Clears a "leaving for the provider" spinner when the page comes back from
+ * the browser's back-forward cache — someone pressed Back on Google's or
+ * Microsoft's page — so the button is ready again instead of spinning on.
+ */
+export function useResetOnReturn(reset: () => void) {
+  const resetRef = useRef(reset);
+  useEffect(() => {
+    resetRef.current = reset;
+  });
+  useEffect(() => {
+    const onPageShow = (event: PageTransitionEvent) => {
+      if (event.persisted) resetRef.current();
+    };
+    window.addEventListener("pageshow", onPageShow);
+    return () => window.removeEventListener("pageshow", onPageShow);
+  }, []);
+}

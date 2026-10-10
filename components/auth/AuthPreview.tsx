@@ -145,7 +145,10 @@ export function AuthPreview() {
         </div>
       </div>
 
-      <div aria-hidden className="relative mt-10 grow overflow-hidden">
+      {/* The still is a picture of the product, not the product: nothing in it
+          can be selected, copied, hovered or clicked. The copy and bars above
+          stay interactive. */}
+      <div aria-hidden className="pointer-events-none relative mt-10 grow select-none overflow-hidden">
         {/* Rests on the panel's foot; in a short panel it hangs from the top of its area and the foot is cut */}
         <div
           className="animate-auth-rise absolute left-8 top-[max(0px,calc(100%-var(--still-h)))] [animation-delay:120ms] lg:left-14"

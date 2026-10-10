@@ -38,6 +38,7 @@ import { Logo } from "@/components/ui/Logo";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/cn";
 import { prefetchFor } from "@/lib/routes";
+import { useSignedIn } from "@/lib/auth/useSignedIn";
 import type { IconComponent } from "@/lib/icon";
 import { AccentTile, type Accent } from "@/components/ui/FeaturePill";
 import { ACCENT_VAR } from "@/lib/glow";
@@ -527,6 +528,7 @@ function ColumnsPanel({
 }
 
 export function Navbar() {
+  const signedIn = useSignedIn();
   const [mobileOpen, setMobileOpen] = useState(false);
   // The dropdown pictures load the first time a visitor reaches for the menus.
   const [previewsWanted, setPreviewsWanted] = useState(false);
@@ -814,12 +816,20 @@ export function Navbar() {
         </nav>
 
         <div className="hidden items-center gap-2 lg:flex">
-          <Button href="/login" variant="outline" size="nav">
-            Zaloguj się
-          </Button>
-          <Button href="/signup" variant="primary" size="nav">
-            Zacznij teraz
-          </Button>
+          {signedIn ? (
+            <Button href="/welcome" variant="primary" size="nav">
+              Przejdź do panelu
+            </Button>
+          ) : (
+            <>
+              <Button href="/login" variant="outline" size="nav">
+                Zaloguj się
+              </Button>
+              <Button href="/signup" variant="primary" size="nav">
+                Zacznij teraz
+              </Button>
+            </>
+          )}
         </div>
 
         {/* Below the desktop bar: the mark on the left, the menu button on the right — nothing else. */}
@@ -893,6 +903,7 @@ function MobileTile({ item }: { item: MobileEntry }) {
  * their links, sitting in the viewport at zero opacity, would be prefetched.
  */
 function MobileMenu({ open, built, onClose }: { open: boolean; built: boolean; onClose: () => void }) {
+  const signedIn = useSignedIn();
   const [expanded, setExpanded] = useState<MenuKey | null>(null);
 
   useEffect(() => {
@@ -991,12 +1002,20 @@ function MobileMenu({ open, built, onClose }: { open: boolean; built: boolean; o
           </ul>
 
           <div className="mt-auto grid grid-cols-2 gap-2 border-t border-ash pt-5">
-            <Button href="/login" variant="outline" className="h-10">
-              Zaloguj się
-            </Button>
-            <Button href="/signup" variant="primary" className="h-10">
-              Zacznij teraz
-            </Button>
+            {signedIn ? (
+              <Button href="/welcome" variant="primary" className="col-span-2 h-10">
+                Przejdź do panelu
+              </Button>
+            ) : (
+              <>
+                <Button href="/login" variant="outline" className="h-10">
+                  Zaloguj się
+                </Button>
+                <Button href="/signup" variant="primary" className="h-10">
+                  Zacznij teraz
+                </Button>
+              </>
+            )}
           </div>
         </nav>
       ) : null}
