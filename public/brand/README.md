@@ -36,6 +36,7 @@ After regenerating, bump the `?v=` in `app/layout.tsx`.
 | `exam-matura-source.png` | The 1536x1024 original it is derived from. Not referenced by any code. |
 | `exam-cke.png` | The Centralna Komisja Egzaminacyjna mark (yellow block, white "CKE"), via `components/ui/CkeIcon.tsx`. |
 | `exam-cke-source.png` | The 512x705 original from cke.gov.pl (`logo-cke-strona.png`). Not referenced by any code. |
+| `email-logo.png` | The logo for transactional emails (Supabase auth templates): the favicon square plus "Examax" in Satoshi Bold on solid white (so dark-mode inboxes cannot swallow the black text), 379×96, shown at 126×32. An image because email clients cannot load the site's fonts. Not referenced by any code. |
 
 `agent-icon.png`, `exam-e8.png`, `exam-matura.png` and `exam-cke.png` are all **derived**:
 cropped to the artwork's alpha bounds, so the mark fills its box instead of

@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import { projectId as sanityProjectId } from "./lib/sanity/env";
+import { supabaseOrigin } from "./lib/supabase/env";
 
 const isDev = process.env.NODE_ENV !== "production";
 
@@ -12,21 +13,26 @@ const isDev = process.env.NODE_ENV !== "production";
  * adds what React's dev tooling and hot reload need ('unsafe-eval', the HMR
  * websocket, and the debug build of Vercel Analytics, which only development
  * loads from Vercel's CDN; in production it is served from this origin).
- * The one outside source is Sanity: its image CDN, and the project's API for
- * live content updates (lib/sanity/live.ts).
+ * The outside sources: Sanity (its image CDN, and the project's API for live
+ * content updates, lib/sanity/live.ts); Supabase, which the auth forms call
+ * from the browser (lib/supabase/client.ts) and whose Storage holds the
+ * e-mail logo the dev panel's previews show; and Cloudflare Turnstile, whose
+ * script and challenge frame guard those forms (components/auth/Turnstile.tsx).
  */
 const sanityApi = ` https://${sanityProjectId}.api.sanity.io https://${sanityProjectId}.apicdn.sanity.io`;
+const supabaseApi = supabaseOrigin ? ` ${supabaseOrigin}` : "";
+const turnstile = "https://challenges.cloudflare.com";
 
 const csp = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval' https://va.vercel-scripts.com" : ""}`,
+  `script-src 'self' 'unsafe-inline' ${turnstile}${isDev ? " 'unsafe-eval' https://va.vercel-scripts.com" : ""}`,
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob: https://cdn.sanity.io",
+  `img-src 'self' data: blob: https://cdn.sanity.io${supabaseApi}`,
   "font-src 'self' data:",
   "media-src 'self' blob:",
-  `connect-src 'self'${sanityApi}${isDev ? " ws: wss:" : ""}`,
+  `connect-src 'self'${sanityApi}${supabaseApi}${isDev ? " ws: wss:" : ""}`,
   "worker-src 'self' blob:",
-  "frame-src 'none'",
+  `frame-src ${turnstile}`,
   "frame-ancestors 'none'",
   "object-src 'none'",
   "base-uri 'self'",
@@ -67,6 +73,14 @@ const nextConfig: NextConfig = {
       { source: "/cookies", destination: "/legal/cookies", permanent: true },
       { source: "/gdpr", destination: "/legal/gdpr", permanent: true },
     ];
+  },
+  /**
+   * Microsoft's publisher-domain check (Entra → Branding & properties) asks
+   * for /.well-known/microsoft-identity-association without the extension
+   * as well as with it; both answer with the same JSON file in public/.
+   */
+  async rewrites() {
+    return [{ source: "/.well-known/microsoft-identity-association", destination: "/.well-known/microsoft-identity-association.json" }];
   },
   async headers() {
     return [
