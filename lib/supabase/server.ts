@@ -13,8 +13,11 @@ import { sessionCookieOptions, supabaseEnv } from "@/lib/supabase/env";
  * the proxy (proxy.ts) has already refreshed the session for the request.
  */
 export async function createClient() {
-  const { url, publishableKey } = supabaseEnv();
+  // Cookies first: it marks the page as per-request, so a build without the
+  // Supabase variables (CI, a preview without them) skips prerendering it
+  // instead of failing on the check below.
   const cookieStore = await cookies();
+  const { url, publishableKey } = supabaseEnv();
 
   return createServerClient(url, publishableKey, {
     cookieOptions: sessionCookieOptions,
