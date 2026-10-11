@@ -1,8 +1,16 @@
 import type { NextConfig } from "next";
 import { projectId as sanityProjectId } from "./lib/sanity/env";
-import { supabaseOrigin } from "./lib/supabase/env";
+import { supabaseEnv, supabaseOrigin } from "./lib/supabase/env";
 
 const isDev = process.env.NODE_ENV !== "production";
+
+/**
+ * A production deployment without the Supabase project would ship a sign-in
+ * that cannot start (the browser client throws on every click), so Vercel's
+ * production builds stop here and name the missing variable. CI and local
+ * builds without it still pass.
+ */
+if (process.env.VERCEL_ENV === "production") supabaseEnv();
 
 /**
  * Content Security Policy. Everything the site loads is its own: fonts are

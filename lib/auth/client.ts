@@ -26,15 +26,19 @@ export const emailRedirect = (next: string, intent?: "login") =>
  * Resolves only if the redirect could not start.
  */
 export async function startOAuth(provider: OAuthProvider, next: string) {
-  const supabase = createClient();
-  const { error } = await supabase.auth.signInWithOAuth({
-    provider,
-    options: {
-      redirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(next)}`,
-      scopes: provider === "azure" ? "email" : undefined,
-    },
-  });
-  return error;
+  try {
+    const { error } = await createClient().auth.signInWithOAuth({
+      provider,
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(next)}`,
+        scopes: provider === "azure" ? "email" : undefined,
+      },
+    });
+    return error;
+  } catch (error) {
+    // No client (a missing env variable): an answer the button can show, not a spinner that never stops.
+    return error instanceof Error ? error : new Error(String(error));
+  }
 }
 
 type PasswordCredentialConstructor = new (data: { id: string; password: string; name?: string }) => Credential;

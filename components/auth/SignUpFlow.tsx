@@ -146,11 +146,20 @@ function SignUpForm({
       notify(turnstileMessage(error), "error");
       return;
     }
-    const { data, error } = await createClient().auth.signUp({
-      email: email.value,
-      password,
-      options: { captchaToken, emailRedirectTo: emailRedirect(next) },
-    });
+    let result;
+    try {
+      result = await createClient().auth.signUp({
+        email: email.value,
+        password,
+        options: { captchaToken, emailRedirectTo: emailRedirect(next) },
+      });
+    } catch {
+      // No client (a missing env variable): say so rather than spin forever.
+      setCreating(false);
+      notify(authErrorMessage(null), "error");
+      return;
+    }
+    const { data, error } = result;
     setCreating(false);
     // Anything but the inbox step spent the token for nothing: check again.
     if (error || data.user?.identities?.length === 0) turnstile.current?.reset();
