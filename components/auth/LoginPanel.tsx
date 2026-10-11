@@ -1,52 +1,86 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "@/components/ui/Link";
-import { MailCheck } from "lucide-react";
 import { LoginForm } from "@/components/auth/LoginForm";
-import { AuthButton, AuthHeading, InstitutionBanner, NoticeIcon, ResendLine } from "@/components/auth/pieces";
+import { InboxNotice } from "@/components/auth/InboxNotice";
+import { AuthHeading, InstitutionBanner } from "@/components/auth/pieces";
 import { Toast, useToast } from "@/components/ui/Toast";
+import { createClient } from "@/lib/supabase/client";
+import { emailRedirect } from "@/lib/auth/client";
+import { authErrorMessage } from "@/lib/auth/errors";
+import type { ProviderStatus } from "@/lib/auth/providers";
 
 /**
  * Dub's login page body (dubinc/dub: (auth-marketing)/login/page.tsx), in
  * Polish: the form, the sign-up link and the institution banner — or, once
- * an e-mail has "gone out" (a sign-in link or a password reset), the
- * check-your-inbox step, which leads back to the form with the address kept.
+ * an e-mail has gone out (a sign-in link, a password reset, a new
+ * confirmation link), the check-your-inbox step, which can send it again
+ * and leads back to the form with the address kept.
  */
-export function LoginPanel() {
-  const [inbox, setInbox] = useState<{ reason: "link" | "reset"; email: string } | null>(null);
+
+const LEADS = {
+  link: "Wysłaliśmy link do logowania na",
+  reset: "Wysłaliśmy link do ustawienia nowego hasła na",
+  confirm: "Wysłaliśmy nowy link aktywacyjny na",
+} as const;
+
+export function LoginPanel({
+  next,
+  providers,
+  notice,
+}: {
+  next: string;
+  providers: ProviderStatus;
+  /** A message the page arrived with — a failed OAuth return, a confirmed address. */
+  notice?: { message: string; tone: "success" | "error" };
+}) {
+  const [inbox, setInbox] = useState<{ reason: keyof typeof LEADS; email: string } | null>(null);
   const [email, setEmail] = useState("");
   const { toast, show } = useToast();
+
+  useEffect(() => {
+    if (notice) show(notice.message, notice.tone);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- once, on arrival
+  }, []);
+
+  const resend = async (captchaToken: string) => {
+    if (!inbox) return false;
+    const auth = createClient().auth;
+    const { error } =
+      inbox.reason === "reset"
+        ? await auth.resetPasswordForEmail(inbox.email, { captchaToken, redirectTo: emailRedirect("/reset-password") })
+        : inbox.reason === "link"
+          ? await auth.signInWithOtp({ email: inbox.email, options: { captchaToken, shouldCreateUser: false, emailRedirectTo: emailRedirect(next, "login") } })
+          : await auth.resend({ type: "signup", email: inbox.email, options: { captchaToken, emailRedirectTo: emailRedirect(next) } });
+    if (error && error.code !== "otp_disabled") {
+      show(authErrorMessage(error), "error");
+      return false;
+    }
+    show(`Wysłaliśmy nową wiadomość na ${inbox.email}.`, "success");
+    return true;
+  };
 
   return (
     <div className="w-full max-w-sm">
       {inbox ? (
-        <div className="animate-auth-rise">
-          <NoticeIcon icon={MailCheck} />
-          <AuthHeading
-            description={
-              <>
-                {inbox.reason === "link" ? "Wysłaliśmy link do logowania na" : "Wysłaliśmy link do ustawienia nowego hasła na"}{" "}
-                <strong className="font-semibold text-steel">{inbox.email}</strong>.
-                <span className="mt-2 block">Jeśli go nie widzisz, sprawdź folder Spam lub Wiadomości-śmieci.</span>
-              </>
-            }
-          >
-            Sprawdź skrzynkę
-          </AuthHeading>
-          <div className="mt-8 flex flex-col gap-6">
-            <AuthButton variant="secondary" onClick={() => setInbox(null)}>
-              Wróć do logowania
-            </AuthButton>
-            <ResendLine prompt="Nie ma wiadomości?" onResend={() => show(`Wysłaliśmy nową wiadomość na ${inbox.email}.`, "success")} />
-          </div>
-        </div>
+        <InboxNotice
+          email={inbox.email}
+          lead={LEADS[inbox.reason]}
+          backLabel="Wróć do logowania"
+          onBack={() => setInbox(null)}
+          onResend={resend}
+          action={`resend-${inbox.reason}`}
+          notify={show}
+        />
       ) : (
         <>
           <AuthHeading>Zaloguj się do Examax</AuthHeading>
           <div className="mt-8">
             <LoginForm
               initialEmail={email}
+              next={next}
+              providers={providers}
               notify={show}
               onInbox={(reason, address) => {
                 setEmail(address);

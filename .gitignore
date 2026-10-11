@@ -38,8 +38,10 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files: none is ever committed (.env.local holds the real values)
+# env files: none is ever committed (.env.local holds the real values);
+# .env.example lists the names with placeholders only
 .env*
+!.env.example
 
 # vercel
 .vercel

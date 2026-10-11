@@ -9,7 +9,8 @@ import { cn } from "@/lib/cn";
  * Dub's toast (sonner), without the library: one message at a time, bottom
  * centre, a white card with a hairline and a soft shadow, gone after four
  * seconds. A green check marks something that worked, a red X something that
- * didn't.
+ * didn't. It sits above everything, dialogs included (z-60 over the modal's
+ * z-50), so a message never lands behind a modal's blurred backdrop.
  */
 
 export type ToastTone = "success" | "error";
@@ -40,7 +41,7 @@ export function Toast({ toast, raised = false }: { toast: ToastState; raised?: b
   return (
     <div
       aria-live="polite"
-      className={cn("pointer-events-none fixed inset-x-0 z-50 flex justify-center px-4", raised ? "bottom-24" : "bottom-6")}
+      className={cn("pointer-events-none fixed inset-x-0 z-[60] flex justify-center px-4", raised ? "bottom-24" : "bottom-6")}
     >
       {toast && (
         <p

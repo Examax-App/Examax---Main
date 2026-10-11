@@ -96,7 +96,11 @@ export const viewport: Viewport = {
   themeColor: "#ffffff",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  // The Examax dev panel (components/dev/DevTools.tsx), imported only in
+  // development so a production build neither renders nor contains it.
+  const DevToolsLoader = process.env.NODE_ENV === "development" ? (await import("@/components/dev/DevToolsLoader")).DevToolsLoader : null;
+
   for (const href of INTER_PRELOADS) preload(href, { as: "font", type: "font/woff2", crossOrigin: "anonymous" });
   return (
     <html
@@ -107,6 +111,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         {children}
         {/* A toast one page leaves for the next (e.g. "account created") */}
         <FlashToast />
+        {/* The Examax dev panel: localhost only (components/dev/DevTools.tsx). */}
+        {DevToolsLoader ? <DevToolsLoader /> : null}
         {/* Vercel Web Analytics: cookieless page views, served from this origin
             (/_vercel/insights). That route exists only on Vercel, so builds made
             anywhere else (local `pnpm start`, CI) leave it out instead of 404ing. */}

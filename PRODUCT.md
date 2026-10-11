@@ -13,8 +13,9 @@ This file describes **what the product is and why it exists**. For engineering c
 Examax is in **public preview**. The marketing site is live; the learning platform itself is not open yet.
 
 - **What is live:** every product page (Trening, Roadmapa, Postępy, Symulacja, Korepetytor AI), the subject pages (Matematyka, Język polski, Język angielski), pricing, the enterprise page for schools, About, the changelog (Aktualności) and Contact.
-- **What is a preview:** the login and sign-up screens. A visitor can walk through sign-up — e-mail, password and the six-digit code — but the last step says accounts cannot be created yet. Login methods say they are not available yet.
-- **What does not exist publicly:** the dashboard. It was removed from the build before the preview went live, so there is nothing behind the auth screens to reach, overload or probe.
+- **Accounts:** sign-up and login work — e-mail and password (confirmed by an activation link), a sign-in link by e-mail, Google and Microsoft. Facebook is listed but unavailable until Meta's verification is done; passkeys and school SSO still say they are not available yet. Every form is protected by Cloudflare Turnstile.
+- **After signing in:** a temporary page (`/welcome`) greets the student and says the dashboard is still being prepared. It holds the account settings: change e-mail, change or set the password, log out, delete the account.
+- **What does not exist publicly:** the dashboard. It was removed from the build before the preview went live and returns once the learning platform opens.
 - **Not built yet, linked on purpose:** Documentation, Help Center, Reviews, Careers, the tutors page and the legal pages. Their links land on the site's 404 until each page exists.
 
 When the platform opens, the changelog (`/updates`) announces it first.
