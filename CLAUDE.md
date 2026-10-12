@@ -16,7 +16,7 @@ Before implementing any UI, component, animation, page or feature:
 
 - Read the relevant `design.md` files.
 - Review every available screenshot.
-- Review any UI references.
+- Review any UI references. 
 - Review typography, spacing, layout and animation references.
 - Follow the design language as closely as possible.
 
