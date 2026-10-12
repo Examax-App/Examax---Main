@@ -61,6 +61,7 @@ declare global {
 }
 
 const SCRIPT_SRC = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+// Public by design: only the secret key, kept on the servers, can verify a token.
 const SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
 let scriptPromise: Promise<void> | null = null;
