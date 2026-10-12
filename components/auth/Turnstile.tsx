@@ -261,7 +261,7 @@ export function Turnstile({
   if (process.env.NODE_ENV === "development" && visible && isUiPreview()) {
     // The dev panel (development only): where the widget would be, without Cloudflare.
     return (
-      <div className="flex h-[65px] w-[300px] max-w-full items-center rounded-md border border-ash bg-canvas-muted px-4 text-sm text-fog">
+      <div className="mx-auto flex h-[65px] w-[300px] max-w-full items-center rounded-md border border-ash bg-canvas-muted px-4 text-sm text-fog">
         Weryfikacja Cloudflare (podgląd)
       </div>
     );
@@ -269,10 +269,10 @@ export function Turnstile({
 
   if (visible) {
     // Cloudflare's own 300 × 65 frame — its border and links intact — with the
-    // corners eased to the fields' radius. The box is reserved, so the form
-    // does not jump while the widget loads.
+    // corners eased to the fields' radius, centred under the full-width fields.
+    // The box is reserved, so the form does not jump while the widget loads.
     return (
-      <div className="relative h-[65px] w-[300px] max-w-full overflow-hidden rounded-md border border-ash bg-canvas-muted">
+      <div className="relative mx-auto h-[65px] w-[300px] max-w-full overflow-hidden rounded-md border border-ash bg-canvas-muted">
         <span aria-hidden className="absolute inset-0 flex items-center gap-2.5 px-4 text-sm text-fog">
           <span className="size-4 animate-spin rounded-full border-2 border-smoke border-t-fog" />
           Weryfikacja…
