@@ -15,7 +15,15 @@ import { breadcrumbStructuredData, pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "Roadmapa nauki do matury i egzaminu ósmoklasisty",
   description:
-    "Cały materiał egzaminu CKE rozpisany na tematy i tygodnie — osobisty plan nauki liczony do dnia egzaminu, który wie, co robić dalej.",
+    "Plan nauki krok po kroku: cały materiał CKE temat po temacie, rozłożony do dnia egzaminu. Słabe tematy idą na początek, a roadmapa jest w planie Free.",
+  keywords: [
+    "plan nauki do matury",
+    "plan nauki do egzaminu ósmoklasisty",
+    "nauka krok po kroku",
+    "harmonogram nauki do matury",
+    "nadrabianie zaległości z matematyki",
+    "roadmapa nauki",
+  ],
   path: "/roadmap",
   social: { description: "Plan nauki dopasowany do Twojego egzaminu, terminu i tempa — temat po temacie." },
 });

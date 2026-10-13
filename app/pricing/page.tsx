@@ -4,13 +4,22 @@ import { Footer } from "@/components/layout/Footer";
 import { PricingView } from "@/components/pricing/PricingView";
 import { JsonLd } from "@/components/layout/JsonLd";
 import { breadcrumbStructuredData, faqStructuredData, pageMetadata } from "@/lib/seo";
-import { pricingFaqs } from "@/lib/pricing";
+import { pricingFaqs, tierPlans } from "@/lib/pricing";
+
+/** "Free 0 zł, Pro 49 zł, Max 79 zł", read from lib/pricing so the snippet follows a price change. */
+const PRICE_LIST = tierPlans.map((plan) => `${plan.name} ${plan.monthly} zł`).join(", ");
 
 export const metadata: Metadata = pageMetadata({
-  title: "Cennik",
-  description:
-    "Plany Examax — Free, Pro, Max i Enterprise, w tych samych cenach dla matury i egzaminu ósmoklasisty. Zacznij za darmo i zmień plan, gdy potrzebujesz więcej.",
+  title: `Cennik: ${PRICE_LIST}`,
+  description: `Plany Examax: ${PRICE_LIST} miesięcznie, Free bez karty i Enterprise dla szkół. Te same ceny dla matury i egzaminu ósmoklasisty.`,
   path: "/pricing",
+  keywords: [
+    "cennik Examax",
+    "aplikacja do nauki do matury cena",
+    "darmowa aplikacja do matury",
+    "przygotowanie do egzaminu ósmoklasisty cena",
+    "alternatywa dla korepetycji",
+  ],
 });
 
 /**

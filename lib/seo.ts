@@ -115,7 +115,8 @@ const OPEN_GRAPH_BASE = { siteName: SITE_NAME, locale: SITE_LOCALE, type: "websi
  * URL, and the Open Graph and X cards built from them. `social` overrides
  * the cards' title and description where a page words its share card
  * differently from its search snippet; `image` replaces the site-wide
- * share image (a changelog post uses its cover).
+ * share image (a changelog post uses its cover). `keywords` replaces the
+ * root layout's list with the searches this page answers.
  */
 export function pageMetadata({
   title,
@@ -123,6 +124,7 @@ export function pageMetadata({
   path,
   social = {},
   image = SHARE_IMAGE,
+  keywords,
 }: {
   title: string;
   description: string;
@@ -130,12 +132,14 @@ export function pageMetadata({
   path: string;
   social?: { title?: string; description?: string };
   image?: { url: string; width: number; height: number; alt: string; type?: string };
+  keywords?: string[];
 }): Metadata {
   const cardTitle = social.title ?? `${title} — ${SITE_NAME}`;
   const cardDescription = social.description ?? description;
   return {
     title,
     description,
+    ...(keywords ? { keywords } : {}),
     alternates: { canonical: path },
     openGraph: { ...OPEN_GRAPH_BASE, url: path, title: cardTitle, description: cardDescription, images: [image] },
     twitter: { card: "summary_large_image", site: X_HANDLE, title: cardTitle, description: cardDescription, images: [image] },

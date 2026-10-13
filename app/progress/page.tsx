@@ -14,9 +14,17 @@ import { JsonLd } from "@/components/layout/JsonLd";
 import { breadcrumbStructuredData, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Śledzenie postępów",
+  title: "Postępy w nauce i słabe tematy do egzaminu",
   description:
-    "Każde zadanie, lekcja i quiz trafia do statystyk od razu — opanowanie tematów, skuteczność, seria nauki i gotowość do egzaminu CKE w jednym miejscu.",
+    "Raport postępów temat po temacie: opanowanie, skuteczność i najsłabsze działy przed maturą lub egzaminem ósmoklasisty. Rodzic widzi postępy w planie Max.",
+  keywords: [
+    "postępy w nauce",
+    "słabe tematy z matematyki",
+    "raport postępów ucznia",
+    "gotowość do matury",
+    "gotowość do egzaminu ósmoklasisty",
+    "diagnoza wiedzy",
+  ],
   path: "/progress",
   social: { description: "Zobacz, ile już umiesz, co się poprawiło i co ćwiczyć dalej — od pierwszego zadania do dnia egzaminu." },
 });

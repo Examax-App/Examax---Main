@@ -16,9 +16,17 @@ import { JsonLd } from "@/components/layout/JsonLd";
 import { breadcrumbStructuredData, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Trening zadań z arkuszy CKE",
+  title: "Zadania z arkuszy CKE z wyjaśnieniem krok po kroku",
   description:
-    "Trenuj na zadaniach z arkuszy CKE: wynik od razu według zasad oceniania, Korepetytor AI przy błędach i zadania dobierane do tego, gdzie tracisz punkty.",
+    "Oryginalne zadania z arkuszy CKE według działów, sprawdzane według zasad oceniania, z wyjaśnieniem krok po kroku od Korepetytora AI. Trening za darmo.",
+  keywords: [
+    "zadania z arkuszy CKE",
+    "zadania maturalne z rozwiązaniami",
+    "zadania z egzaminu ósmoklasisty",
+    "arkusze CKE online",
+    "zadania CKE według działów",
+    "darmowe zadania maturalne",
+  ],
   path: "/training",
   social: { description: "Zadania z arkuszy CKE, sprawdzane od razu i dobierane do tego, gdzie tracisz punkty." },
 });
