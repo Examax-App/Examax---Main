@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { isValidElement, type ReactNode } from "react";
+import { tierPlans } from "@/lib/pricing";
 
 export const SITE_URL = "https://examax.app";
 export const SITE_NAME = "Examax";
@@ -25,7 +26,10 @@ export const SHARE_IMAGE = {
 /**
  * Who publishes the site and what it is called, for search engines: the
  * Organization gives results their logo and profiles, the WebSite gives them
- * the site name. Rendered once, on the landing page.
+ * the site name, and the WebApplication tells search and AI answer engines
+ * what Examax is, who it is for and what each plan costs (prices read from
+ * lib/pricing, the same the pricing page shows). Rendered once, on the
+ * landing page.
  */
 export function siteStructuredData({ email, sameAs }: { email: string; sameAs: string[] }) {
   const organization = `${SITE_URL}/#organization`;
@@ -51,6 +55,35 @@ export function siteStructuredData({ email, sameAs }: { email: string; sameAs: s
         description: SITE_DESCRIPTION,
         inLanguage: "pl-PL",
         publisher: { "@id": organization },
+      },
+      {
+        "@type": "WebApplication",
+        "@id": `${SITE_URL}/#app`,
+        name: SITE_NAME,
+        url: `${SITE_URL}/`,
+        description: SITE_DESCRIPTION,
+        applicationCategory: "EducationalApplication",
+        operatingSystem: "Web",
+        inLanguage: "pl-PL",
+        isAccessibleForFree: true,
+        publisher: { "@id": organization },
+        audience: { "@type": "EducationalAudience", educationalRole: "student", audienceType: "Uczniowie przed egzaminem ósmoklasisty i maturą" },
+        about: ["Egzamin ósmoklasisty", "Matura podstawowa", "Matura rozszerzona", "Matematyka", "Język polski", "Język angielski"],
+        featureList: [
+          "Trening na oryginalnych zadaniach z arkuszy CKE, według działów",
+          "Roadmapa nauki krok po kroku do dnia egzaminu",
+          "Śledzenie postępów i słabych tematów",
+          "Symulacja pełnego arkusza CKE z limitem czasu",
+          "Korepetytor AI, który tłumaczy krok po kroku",
+        ],
+        offers: tierPlans.map((plan) => ({
+          "@type": "Offer",
+          name: plan.name,
+          price: plan.monthly,
+          priceCurrency: "PLN",
+          url: `${SITE_URL}/pricing`,
+          ...(plan.monthly ? { priceSpecification: { "@type": "UnitPriceSpecification", price: plan.monthly, priceCurrency: "PLN", unitCode: "MON" } } : {}),
+        })),
       },
     ],
   };
