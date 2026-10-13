@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { ChevronLeft } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { EXAMAX_SOCIALS, FacebookIcon, TikTokIcon, XIcon, type SocialIcon } from "@/components/ui/SocialIcons";
+import { EXAMAX_SOCIALS, InstagramIcon, TikTokIcon, XIcon, type SocialIcon } from "@/components/ui/SocialIcons";
 import { formatDate } from "@/components/updates/format";
 import { PostBody } from "@/components/updates/PostBody";
 import { PostCover } from "@/components/updates/PostCover";
@@ -53,17 +53,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const TIKTOK_PROFILE = EXAMAX_SOCIALS.find((social) => social.icon === TikTokIcon)?.href ?? "https://www.tiktok.com/@examax.app";
+const INSTAGRAM_PROFILE = EXAMAX_SOCIALS.find((social) => social.icon === InstagramIcon)?.href ?? "https://www.instagram.com/examaxofficial/";
 
 /**
- * Dub's share row, 20px, growing a little on hover: X and Facebook share the
- * post; TikTok has no share link, so it opens Examax's own profile. (No
- * LinkedIn: Examax has no page there yet.)
+ * Dub's share row, 20px, growing a little on hover: X shares the post;
+ * TikTok and Instagram have no web share link, so they open Examax's own
+ * profiles. (No LinkedIn: Examax has no page there yet.)
  */
 function ShareLinks({ title, url, className }: { title: string; url: string; className: string }) {
   const links: Array<{ label: string; href: string; icon: SocialIcon }> = [
     { label: "Udostępnij na X", href: `https://x.com/intent/post?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`, icon: XIcon },
     { label: "Examax na TikToku", href: TIKTOK_PROFILE, icon: TikTokIcon },
-    { label: "Udostępnij na Facebooku", href: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, icon: FacebookIcon },
+    { label: "Examax na Instagramie", href: INSTAGRAM_PROFILE, icon: InstagramIcon },
   ];
   return (
     <div className={className}>
