@@ -1,0 +1,51 @@
+# Examax
+
+> Examax (https://examax.app) to polska platforma do nauki z AI, zbudowana wyłącznie pod egzaminy CKE: egzamin ósmoklasisty, maturę podstawową i maturę rozszerzoną. Łączy trening na oryginalnych zadaniach z arkuszy CKE, roadmapę nauki krok po kroku, śledzenie postępów, symulacje pełnych arkuszy i Korepetytora AI, który tłumaczy, ale nie rozwiązuje za ucznia.
+
+Status: publiczna wersja zapoznawcza. Strona i zakładanie kont działają; sama platforma do nauki otwiera się wkrótce, a start ogłosimy w Aktualnościach (https://examax.app/updates).
+
+## Dla kogo
+
+- Uczniowie przygotowujący się do egzaminu ósmoklasisty (E8) i matury (poziom podstawowy i rozszerzony).
+- Przedmioty: matematyka, język polski, język angielski (w tym matura ustna z polskiego i angielskiego). Biologia, chemia i historia pojawią się później.
+- Szkoły i placówki: licencja Enterprise z panelem nauczyciela.
+
+## Co robi Examax
+
+- [Trening zadań](https://examax.app/training): oryginalne, niezmienione zadania z arkuszy CKE, zawsze ze źródłem, ułożone według działów i trudności, sprawdzane według zasad oceniania. Examax nie pisze własnych zadań egzaminacyjnych.
+- [Roadmapa nauki](https://examax.app/roadmap): cały materiał egzaminu temat po temacie, rozłożony do dnia egzaminu i tempa ucznia. Tematy nigdy nie są zablokowane; quiz diagnostyczny przesuwa słabe tematy na początek, a plan przelicza się po zmianie daty egzaminu.
+- [Postępy](https://examax.app/progress): opanowanie każdego tematu, skuteczność i najsłabsze działy; w planie Max widok dla rodzica.
+- [Symulacja egzaminu](https://examax.app/simulation): pełny arkusz CKE z prawdziwym limitem czasu, oceniony według klucza CKE, z raportem, gdzie uczeń traci punkty.
+- [Korepetytor AI](https://examax.app/agents): tłumaczy krok po kroku i pyta o następny krok zamiast podawać wynik; układa sprawdziany i planuje naukę, a zmiany w planie czekają na zgodę ucznia.
+
+## Ceny
+
+Szczegóły: https://examax.app/pricing. Te same ceny dla matury i egzaminu ósmoklasisty; płatność roczna to 10 miesięcy za 12.
+
+- Free, 0 zł, bez karty: roadmapa, trening bez limitu zadań, oficjalne arkusze CKE, quiz diagnostyczny, 15 pytań do AI dziennie, próbna symulacja.
+- Pro, 49 zł miesięcznie: 150 pytań do AI dziennie, 4 symulacje miesięcznie, quizy AI, ocena wypracowań przez AI, wskaźnik gotowości, powtórki, analiza błędów.
+- Max, 79 zł miesięcznie: najwyższy limit AI, pamięć błędów ucznia, najmocniejszy model, nielimitowane symulacje, sesje nauki z AI, plan do dnia egzaminu, raporty tygodniowe, widok dla rodzica.
+- Enterprise dla szkół: indywidualna wycena (https://examax.app/enterprise).
+
+## Zasady
+
+- Bez reklam i treści sponsorowanych, w każdym planie.
+- Nauka nie jest blokowana limitem treści; płatne plany dodają funkcje, nie dostęp do materiału.
+- Uczciwe liczby: Examax nie podaje użytkowników, wyników ani opinii, których nie ma.
+
+## Przedmioty
+
+- [Matematyka](https://examax.app/math)
+- [Język polski](https://examax.app/polish)
+- [Język angielski](https://examax.app/english)
+
+## Więcej
+
+- [O nas](https://examax.app/about)
+- [Dla szkół i placówek](https://examax.app/enterprise)
+- [Aktualności](https://examax.app/updates)
+- [Kontakt](https://examax.app/contact)
+
+## In English
+
+Examax is a Polish, AI-assisted exam-prep web app built only for the official Polish CKE exams: the eighth-grade exam (egzamin ósmoklasisty) and the matura at basic and extended level, in maths, Polish and English. Students practise on original, unmodified tasks from past CKE papers, organised by topic and marked by CKE's scoring rules; follow a step-by-step study roadmap planned to their exam date; track mastery and weak topics; sit full-length timed CKE mock exams with a report; and get help from an AI tutor that explains step by step instead of giving answers. The Free plan (0 zł, no card) includes the roadmap, unlimited practice, official CKE papers, a diagnostic quiz, 15 AI questions a day and a trial simulation; Pro is 49 zł a month and Max 79 zł a month. The site is in Polish. Status: public preview; accounts can be created and the learning platform opens soon.

@@ -13,9 +13,16 @@ import { JsonLd } from "@/components/layout/JsonLd";
 import { breadcrumbStructuredData, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Symulacja matury i egzaminu ósmoklasisty",
+  title: "Próbna matura i egzamin ósmoklasisty online",
   description:
-    "Pełny arkusz CKE na czas, z narzędziami jak na sali, sprawdzony według zasad oceniania — i raport, który pokazuje, gdzie tracisz punkty.",
+    "Pełny arkusz CKE z limitem czasu jak na sali, sprawdzony według zasad oceniania, z raportem, gdzie tracisz punkty. Próbną symulację masz w planie Free.",
+  keywords: [
+    "próbna matura online",
+    "próbny egzamin ósmoklasisty",
+    "symulacja matury",
+    "arkusz maturalny na czas",
+    "symulacja egzaminu CKE",
+  ],
   path: "/simulation",
   social: { description: "Sprawdź się, zanim nadejdzie prawdziwy egzamin: pełny arkusz CKE, czas jak na sali i raport po każdym podejściu." },
 });

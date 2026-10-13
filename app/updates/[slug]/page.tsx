@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { ChevronLeft } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { EXAMAX_SOCIALS, FacebookIcon, TikTokIcon, XIcon, type SocialIcon } from "@/components/ui/SocialIcons";
+import { InstagramIcon, TikTokIcon, XIcon, type SocialIcon } from "@/components/ui/SocialIcons";
 import { formatDate } from "@/components/updates/format";
 import { PostBody } from "@/components/updates/PostBody";
 import { PostCover } from "@/components/updates/PostCover";
@@ -52,18 +52,25 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return pageMetadata({ title: post.title, description: post.summary ?? "", path, image });
 }
 
-const TIKTOK_PROFILE = EXAMAX_SOCIALS.find((social) => social.icon === TikTokIcon)?.href ?? "https://www.tiktok.com/@examax.app";
+/*
+ * TikTok and Instagram have no web share link that takes a URL, so their
+ * buttons open each one's own "create" page, as X's opens its composer:
+ * TikTok's upload, Instagram's new post. A signed-out visitor logs in first
+ * and lands there.
+ */
+const TIKTOK_CREATE = "https://www.tiktok.com/upload";
+const INSTAGRAM_CREATE = "https://www.instagram.com/create/select/";
 
 /**
- * Dub's share row, 20px, growing a little on hover: X and Facebook share the
- * post; TikTok has no share link, so it opens Examax's own profile. (No
+ * Dub's share row, 20px, growing a little on hover: X opens a post with this
+ * one's title and link; TikTok and Instagram open their create pages. (No
  * LinkedIn: Examax has no page there yet.)
  */
 function ShareLinks({ title, url, className }: { title: string; url: string; className: string }) {
   const links: Array<{ label: string; href: string; icon: SocialIcon }> = [
     { label: "Udostępnij na X", href: `https://x.com/intent/post?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`, icon: XIcon },
-    { label: "Examax na TikToku", href: TIKTOK_PROFILE, icon: TikTokIcon },
-    { label: "Udostępnij na Facebooku", href: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, icon: FacebookIcon },
+    { label: "Udostępnij na TikToku", href: TIKTOK_CREATE, icon: TikTokIcon },
+    { label: "Udostępnij na Instagramie", href: INSTAGRAM_CREATE, icon: InstagramIcon },
   ];
   return (
     <div className={className}>

@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { isValidElement, type ReactNode } from "react";
+import { tierPlans } from "@/lib/pricing";
 
 export const SITE_URL = "https://examax.app";
 export const SITE_NAME = "Examax";
@@ -7,7 +9,7 @@ export const SITE_LOCALE = "pl_PL";
 export const X_HANDLE = "@examaxapp";
 /** The landing page's search snippet, and the site's description in structured data. */
 export const SITE_DESCRIPTION =
-  "Examax to system przygotowań do egzaminu ósmoklasisty i matury: roadmapa nauki, zadania z arkuszy CKE, Korepetytor AI i śledzenie postępów w jednym miejscu.";
+  "Przygotowanie do egzaminu ósmoklasisty i matury: zadania z arkuszy CKE, plan nauki krok po kroku, Korepetytor AI i postępy. Zacznij za darmo.";
 
 /**
  * The share card app/opengraph-image.tsx renders. The root layout picks it up
@@ -24,7 +26,10 @@ export const SHARE_IMAGE = {
 /**
  * Who publishes the site and what it is called, for search engines: the
  * Organization gives results their logo and profiles, the WebSite gives them
- * the site name. Rendered once, on the landing page.
+ * the site name, and the WebApplication tells search and AI answer engines
+ * what Examax is, who it is for and what each plan costs (prices read from
+ * lib/pricing, the same the pricing page shows). Rendered once, on the
+ * landing page.
  */
 export function siteStructuredData({ email, sameAs }: { email: string; sameAs: string[] }) {
   const organization = `${SITE_URL}/#organization`;
@@ -51,6 +56,35 @@ export function siteStructuredData({ email, sameAs }: { email: string; sameAs: s
         inLanguage: "pl-PL",
         publisher: { "@id": organization },
       },
+      {
+        "@type": "WebApplication",
+        "@id": `${SITE_URL}/#app`,
+        name: SITE_NAME,
+        url: `${SITE_URL}/`,
+        description: SITE_DESCRIPTION,
+        applicationCategory: "EducationalApplication",
+        operatingSystem: "Web",
+        inLanguage: "pl-PL",
+        isAccessibleForFree: true,
+        publisher: { "@id": organization },
+        audience: { "@type": "EducationalAudience", educationalRole: "student", audienceType: "Uczniowie przed egzaminem ósmoklasisty i maturą" },
+        about: ["Egzamin ósmoklasisty", "Matura podstawowa", "Matura rozszerzona", "Matematyka", "Język polski", "Język angielski"],
+        featureList: [
+          "Trening na oryginalnych zadaniach z arkuszy CKE, według działów",
+          "Roadmapa nauki krok po kroku do dnia egzaminu",
+          "Śledzenie postępów i słabych tematów",
+          "Symulacja pełnego arkusza CKE z limitem czasu",
+          "Korepetytor AI, który tłumaczy krok po kroku",
+        ],
+        offers: tierPlans.map((plan) => ({
+          "@type": "Offer",
+          name: plan.name,
+          price: plan.monthly,
+          priceCurrency: "PLN",
+          url: `${SITE_URL}/pricing`,
+          ...(plan.monthly ? { priceSpecification: { "@type": "UnitPriceSpecification", price: plan.monthly, priceCurrency: "PLN", unitCode: "MON" } } : {}),
+        })),
+      },
     ],
   };
 }
@@ -74,6 +108,34 @@ export function breadcrumbStructuredData(trail: Array<{ name: string; path: stri
   };
 }
 
+/** An answer's words without its markup: paragraphs become spaces, emphasis plain text. */
+function plainText(node: ReactNode): string {
+  if (node === null || node === undefined || typeof node === "boolean") return "";
+  if (typeof node === "string" || typeof node === "number") return String(node);
+  if (Array.isArray(node)) return node.map(plainText).join("");
+  if (isValidElement<{ children?: ReactNode }>(node)) return `${plainText(node.props.children)} `;
+  return "";
+}
+
+/**
+ * A FAQ's questions and answers for search engines and AI answer engines.
+ * Only for a FAQ the page shows (an accordion's closed answers still count,
+ * they are in the HTML): marking up questions the reader cannot see breaks
+ * Google's structured-data rules.
+ */
+export function faqStructuredData(items: Array<{ question: string; answer: ReactNode }>) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    inLanguage: "pl-PL",
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: { "@type": "Answer", text: plainText(item.answer).replace(/\s+/g, " ").trim() },
+    })),
+  };
+}
+
 /**
  * The share card's fields every page repeats. A page that sets `openGraph`
  * replaces the root layout's object whole (metadata merges shallowly), so
@@ -86,7 +148,8 @@ const OPEN_GRAPH_BASE = { siteName: SITE_NAME, locale: SITE_LOCALE, type: "websi
  * URL, and the Open Graph and X cards built from them. `social` overrides
  * the cards' title and description where a page words its share card
  * differently from its search snippet; `image` replaces the site-wide
- * share image (a changelog post uses its cover).
+ * share image (a changelog post uses its cover). `keywords` replaces the
+ * root layout's list with the searches this page answers.
  */
 export function pageMetadata({
   title,
@@ -94,6 +157,7 @@ export function pageMetadata({
   path,
   social = {},
   image = SHARE_IMAGE,
+  keywords,
 }: {
   title: string;
   description: string;
@@ -101,12 +165,14 @@ export function pageMetadata({
   path: string;
   social?: { title?: string; description?: string };
   image?: { url: string; width: number; height: number; alt: string; type?: string };
+  keywords?: string[];
 }): Metadata {
   const cardTitle = social.title ?? `${title} — ${SITE_NAME}`;
   const cardDescription = social.description ?? description;
   return {
     title,
     description,
+    ...(keywords ? { keywords } : {}),
     alternates: { canonical: path },
     openGraph: { ...OPEN_GRAPH_BASE, url: path, title: cardTitle, description: cardDescription, images: [image] },
     twitter: { card: "summary_large_image", site: X_HANDLE, title: cardTitle, description: cardDescription, images: [image] },

@@ -13,7 +13,15 @@ import { breadcrumbStructuredData, pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "Korepetytor AI do matury i egzaminu ósmoklasisty",
   description:
-    "Zespół agentów AI, który tłumaczy krok po kroku, układa sprawdziany i planuje naukę — ale każde zadanie rozwiązujesz sam.",
+    "Korepetytor AI tłumaczy krok po kroku, układa sprawdziany i planuje naukę, ale zadania rozwiązujesz sam. Pytania do AI masz też w planie Free.",
+  keywords: [
+    "korepetytor AI",
+    "korepetycje online",
+    "matura bez korepetytora",
+    "pomoc w nauce do matury",
+    "AI do nauki matematyki",
+    "alternatywa dla korepetycji",
+  ],
   path: "/agents",
   social: { description: "Korepetytor, który nie odrabia za Ciebie: prowadzi krok po kroku, aż umiesz to zrobić sam." },
 });

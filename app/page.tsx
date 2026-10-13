@@ -27,12 +27,13 @@ import { Editorial } from "@/components/sections/Editorial";
 import { FeatureSection } from "@/components/sections/FeatureSection";
 import { TutoringCompare } from "@/components/sections/TutoringCompare";
 import { Faq } from "@/components/sections/Faq";
+import { landingFaqs } from "@/components/sections/faqs";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { ProMark } from "@/components/ui/ProMark";
 import { EXAMAX_SOCIALS } from "@/components/ui/SocialIcons";
 import { JsonLd } from "@/components/layout/JsonLd";
 import { CONTACT_EMAIL } from "@/lib/contact";
-import { siteStructuredData } from "@/lib/seo";
+import { faqStructuredData, siteStructuredData } from "@/lib/seo";
 // The pictures load as lazy islands — see components/landing/LazyVisuals.
 import {
   AgentShowcase,
@@ -58,6 +59,7 @@ export default function Home() {
   return (
     <>
       <JsonLd data={siteStructuredData({ email: CONTACT_EMAIL, sameAs: EXAMAX_SOCIALS.map((social) => social.href) })} />
+      <JsonLd data={faqStructuredData(landingFaqs)} />
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-buttons focus:bg-midnight-ink focus:px-4 focus:py-2 focus:text-white"
