@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { isValidElement, type ReactNode } from "react";
 
 export const SITE_URL = "https://examax.app";
 export const SITE_NAME = "Examax";
@@ -70,6 +71,34 @@ export function breadcrumbStructuredData(trail: Array<{ name: string; path: stri
       position: index + 1,
       name: crumb.name,
       item: crumb.path === "/" ? `${SITE_URL}/` : `${SITE_URL}${crumb.path}`,
+    })),
+  };
+}
+
+/** An answer's words without its markup: paragraphs become spaces, emphasis plain text. */
+function plainText(node: ReactNode): string {
+  if (node === null || node === undefined || typeof node === "boolean") return "";
+  if (typeof node === "string" || typeof node === "number") return String(node);
+  if (Array.isArray(node)) return node.map(plainText).join("");
+  if (isValidElement<{ children?: ReactNode }>(node)) return `${plainText(node.props.children)} `;
+  return "";
+}
+
+/**
+ * A FAQ's questions and answers for search engines and AI answer engines.
+ * Only for a FAQ the page shows (an accordion's closed answers still count,
+ * they are in the HTML): marking up questions the reader cannot see breaks
+ * Google's structured-data rules.
+ */
+export function faqStructuredData(items: Array<{ question: string; answer: ReactNode }>) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    inLanguage: "pl-PL",
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: { "@type": "Answer", text: plainText(item.answer).replace(/\s+/g, " ").trim() },
     })),
   };
 }

@@ -3,7 +3,8 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { PricingView } from "@/components/pricing/PricingView";
 import { JsonLd } from "@/components/layout/JsonLd";
-import { breadcrumbStructuredData, pageMetadata } from "@/lib/seo";
+import { breadcrumbStructuredData, faqStructuredData, pageMetadata } from "@/lib/seo";
+import { pricingFaqs } from "@/lib/pricing";
 
 export const metadata: Metadata = pageMetadata({
   title: "Cennik",
@@ -25,6 +26,7 @@ export default function PricingPage() {
   return (
     <>
       <JsonLd data={breadcrumbStructuredData([{ name: "Cennik", path: "/pricing" }])} />
+      <JsonLd data={faqStructuredData(pricingFaqs)} />
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-buttons focus:bg-midnight-ink focus:px-4 focus:py-2 focus:text-white"
