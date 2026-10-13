@@ -27,6 +27,12 @@ const PAGES: Array<{ path: string; priority: number }> = [
   { path: "/legal/gdpr", priority: 0.3 },
 ];
 
+/*
+ * Rebuilt hourly: the sitemap is outside /updates, so the live refresh that
+ * picks up a newly published post there never reaches it.
+ */
+export const revalidate = 3600;
+
 /** /sitemap.xml — the pages above, then every changelog post from Sanity. */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const { data: posts } = await sanityFetch({ query: UPDATES_QUERY, perspective: "published", stega: false });
